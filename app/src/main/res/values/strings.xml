@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Power Slave</string>
+    <string name="app_subname">The Political Simulator</string>
+    <string name="app_author">Developer: Antipope</string>
+    <string name="app_version">Version: 0.01</string>
+    <string name="app_about">Welcome to Power Slave, a political simulator that will make you face the challenges of governing the country. I hope you enjoy the game!</string>
+</resources>
