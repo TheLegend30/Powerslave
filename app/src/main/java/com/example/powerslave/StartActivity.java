@@ -10,6 +10,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 public class StartActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -17,6 +18,7 @@ public class StartActivity extends AppCompatActivity implements View.OnClickList
     ImageButton backArrowStart;
     Spinner countrySpinnerStart;
     ImageView flagViewStart;
+    TextView textCapitalStart;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +29,7 @@ public class StartActivity extends AppCompatActivity implements View.OnClickList
         backArrowStart = findViewById(R.id.backArrowStart);
         flagViewStart = findViewById(R.id.flagViewStart);
         countrySpinnerStart = (Spinner) findViewById(R.id.countrySpinnerStart);
+        textCapitalStart = findViewById(R.id.textCapitalStart);
 
         //OnClick methods
         backArrowStart.setOnClickListener(this);
@@ -48,7 +51,10 @@ public class StartActivity extends AppCompatActivity implements View.OnClickList
         countrySpinnerStart.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                flagViewStart.setImageResource(MainActivity.countries.get(i).getFlagSrc());
+                MainActivity.Country country = MainActivity.countries.get(i);
+
+                flagViewStart.setImageResource(country.getFlagSrc());
+                textCapitalStart.setText("Capital: " + country.getCapitalName());
             }
 
             @Override

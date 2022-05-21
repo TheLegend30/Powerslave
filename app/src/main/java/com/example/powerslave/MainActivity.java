@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -12,8 +13,7 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-    //TODO: Settings
-    //TODO: Music
+    //TODO: Settings + Finish Music
     //TODO: More Pics
 
     //Main button on main activity
@@ -21,6 +21,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     Button buttonLoad;
     Button buttonAbout;
     Button buttonExit;
+
+    public MediaPlayer mediaPlayer;
 
     //Static arraylist of all game countries
     public static final ArrayList<Country> countries = new ArrayList<>();
@@ -32,6 +34,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
 
         initCountries();
+        startMusic();
 
         //Assigning values to buttons
         buttonStart = findViewById(R.id.buttonStart);
@@ -45,6 +48,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         buttonAbout.setOnClickListener(this);
         buttonExit.setOnClickListener(this);
 
+    }
+
+    private void startMusic() {
+        mediaPlayer = MediaPlayer.create(getApplicationContext(),R.raw.bossantigua);
+        mediaPlayer.setLooping(true);
+        //mediaPlayer.start();
     }
 
     private void initCountries() {
@@ -82,6 +91,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         private int flagSrc;
         private ArrayList<String> cities;
         private GovernmentType governmentType;
+        private String desc;
 
         private String adjective;
         private String culture;
@@ -100,6 +110,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             this.key = key;
             this.name = getResources().getStringArray(R.array.countries)[key];
             this.flagSrc = getResources().getIntArray(R.array.flag_src)[key];
+            this.capitalName = getResources().getStringArray(R.array.capitals)[key];
 
         }
 
@@ -110,6 +121,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         public int getFlagSrc() {
             return flagSrc;
+        }
+
+        public String getCapitalName() {
+            return capitalName;
         }
     }
 

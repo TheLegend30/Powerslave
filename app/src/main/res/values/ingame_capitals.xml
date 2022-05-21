@@ -1,25 +1,93 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+<string-array name="capitals">
+    <item>Griroca</item>
+    <item>Kaspolatsk</item>
+    <item>Kiela</item>
+    <item>Merest</item>
+    <item>Byeratlava</item>
+    <item>Valochow</item>
+    <item>Pogoalan</item>
+    <item>Bardenec</item>
+    <item>Droșova</item>
+    <item>Kieworzno</item>
+    <item>Třiměřice</item>
+    <item>Klihorsk</item>
 
-    <string name="dob_cap">Hradek</string>
-    <string name="yuf_cap">Będca</string>
-    <string name="fop_cap">Miyonsk</string>
-    <string name="tet_cap">Tagara</string>
-    <string name="wes_cap">Kapulint</string>
-    <string name="efr_cap">Shklono</string>
-    <string name="voc_cap">Kaloros</string>
-    <string name="zus_cap">Brăivița</string>
-    <string name="mub_cap">Będca</string>
-    <string name="tro_cap">Jaworbrzeg</string>
-    <string name="ugr_cap">Skača</string>
-    <string name="tap_cap">Dunacel</string>
+    <item>Moshammer</item>
+    <item>Gjøberg</item>
+    <item>Esholm</item>
+    <item>Cetne</item>
+    <item>Kolvesund</item>
+    <item>Moltena</item>
+    <item>Keiga</item>
 
-    <string name="tha_cap">Norora</string>
-    <string name="apr_cap">Hvall</string>
-    <string name="tri_cap">Gnupar</string>
-    <string name="thu_cap">Mjola</string>
-    <string name="bup_cap">Ballara</string>
-    <string name="gle_cap">Arastaoir</string>
-    <string name="she_cap">Grjota</string>
+    <item>Novzin</item>
+    <item>Lesrevska</item>
+    <item>Osivac</item>
+    <item>Četin</item>
+    <item>Karnofia</item>
+    <item>Gadă</item>
+    <item>Vejba</item>
+    <item>Oraoden</item>
 
+    <item>Kilgal</item>
+    <item>Knokren</item>
+    <item>Schwarzenstedt</item>
+    <item>Lenzbach</item>
+    <item>Sauzieu</item>
+    <item>Eekmonde</item>
+    <item>Tilnep</item>
+
+    <item>Saracia</item>
+    <item>Cartamar</item>
+    <item>Atetan</item>
+    <item>Trinixha</item>
+    <item>La Marique</item>
+    <item>Rebulco</item>
+    <item>Boatosi</item>
+    <item>Acaros</item>
+    <item>Cuculanga</item>
+
+    <item>Tapadalgo</item>
+    <item>Beresholm</item>
+    <item>Canmira</item>
+    <item>Celasave</item>
+    <item>Esfolk</item>
+    <item>Vertrie</item>
+    <item>Kinison</item>
+    <item>Tanlicias</item>
+
+    <item>Jandesar</item>
+    <item>Uppotota</item>
+    <item>Bhaktakha</item>
+    <item>Larbia</item>
+    <item>Haka</item>
+    <item>Saggarh</item>
+    <item>Abedjabad</item>
+    <item>Pamak</item>
+
+    <item>Enbiro</item>
+    <item>Tengmay</item>
+    <item>Tailiang</item>
+    <item>Uratoro</item>
+    <item>Pohung</item>
+    <item>Nomkh</item>
+    <item>Shindaka</item>
+    <item>Minanai</item>
+
+    <item>Zotenga</item>
+    <item>Santza</item>
+    <item>Gotick</item>
+    <item>Dindam</item>
+    <item>Glaba</item>
+    <item>Galoa</item>
+    <item>Zala</item>
+    <item>Abasam</item>
+
+    <item>Piralla</item>
+    <item>Begatta</item>
+    <item>Toonarra</item>
+    <item>Parigal</item>
+</string-array>
 </resources>

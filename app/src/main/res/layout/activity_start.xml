@@ -45,11 +45,33 @@
     <ImageView
         android:id="@+id/flagViewStart"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="200dp"
         android:layout_marginTop="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/countrySpinnerStart"
         app:srcCompat="@drawable/flag_abr" />
+
+    <TextView
+        android:id="@+id/textCapitalStart"
+        android:layout_width="357dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="10dp"
+        android:hint="CountryDesc"
+        android:text="Capital: "
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/flagViewStart" />
+
+    <TextView
+        android:id="@+id/textGovernmentStart"
+        android:layout_width="357dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="10dp"
+        android:hint="CountryDesc"
+        android:text="Government: "
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textCapitalStart" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
