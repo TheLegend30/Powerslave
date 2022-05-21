@@ -4,12 +4,13 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 
 public class AboutActivity extends AppCompatActivity implements View.OnClickListener {
 
     //Creating necessary objects;
-    ImageView backArrowAbout;
+    ImageButton backArrowAbout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

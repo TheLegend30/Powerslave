@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer-array name="flag_src">
+        <item>2131230886</item>
+        <item>2131230954</item>
+        <item>2131230895</item>
+        <item>2131230934</item>
+        <item>2131230949</item>
+        <item>2131230890</item>
+        <item>2131230947</item>
+        <item>2131230956</item>
+        <item>2131230910</item>
+        <item>2131230938</item>
+        <item>2131230941</item>
+        <item>2131230933</item>
+
+        <item>2131230935</item>
+        <item>2131230880</item>
+        <item>2131230937</item>
+        <item>2131230936</item>
+        <item>2131230882</item>
+        <item>2131230898</item>
+        <item>2131230922</item>
+
+        <item>2131230944</item>
+        <item>2131230917</item>
+        <item>2131230891</item>
+        <item>2131230927</item>
+        <item>2131230920</item>
+        <item>2131230879</item>
+        <item>2131230878</item>
+        <item>2131230950</item>
+
+        <item>2131230883</item>
+        <item>2131230926</item>
+        <item>2131230955</item>
+        <item>2131230903</item>
+        <item>2131230884</item>
+        <item>2131230953</item>
+        <item>2131230904</item>
+
+        <item>2131230909</item>
+        <item>2131230951</item>
+        <item>2131230928</item>
+        <item>2131230928</item>
+        <item>2131230894</item>
+        <item>2131230930</item>
+        <item>2131230939</item>
+        <item>2131230887</item>
+        <item>2131230931</item>
+
+        <item>2131230918</item>
+        <item>2131230897</item>
+        <item>2131230946</item>
+        <item>2131230896</item>
+        <item>2131230910</item>
+        <item>2131230916</item>
+        <item>2131230913</item>
+        <item>2131230925</item>
+
+        <item>2131230892</item>
+        <item>2131230901</item>
+        <item>2131230912</item>
+        <item>2131230945</item>
+        <item>2131230885</item>
+        <item>2131230900</item>
+        <item>2131230908</item>
+        <item>2131230905</item>
+
+        <item>2131230952</item>
+        <item>2131230923</item>
+        <item>2131230911</item>
+        <item>2131230888</item>
+        <item>2131230890</item>
+        <item>2131230881</item>
+        <item>2131230914</item>
+        <item>2131230924</item>
+
+        <item>2131230929</item>
+        <item>2131230921</item>
+        <item>2131230919</item>
+        <item>2131230915</item>
+        <item>2131230942</item>
+        <item>2131230902</item>
+        <item>2131230899</item>
+        <item>2131230948</item>
+
+        <item>2131230893</item>
+        <item>2131230932</item>
+        <item>2131230906</item>
+        <item>2131230943</item>
+    </integer-array>
+</resources>

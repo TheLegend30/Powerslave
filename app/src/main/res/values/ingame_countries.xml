@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string-array name="eyut_countries">
+
+    <string-array name="countries">
         <item>Dobrouze</item>
         <item>Yuflistan</item>
         <item>Foplia</item>
@@ -13,9 +14,7 @@
         <item>Troaton</item>
         <item>Ugristan</item>
         <item>Taprar</item>
-    </string-array>
 
-    <string-array name="nyut_countries">
         <item>Thargo</item>
         <item>Aprea</item>
         <item>Triaria</item>
@@ -23,9 +22,7 @@
         <item>Buplain</item>
         <item>Gleay Ska</item>
         <item>Sheac Trington</item>
-    </string-array>
 
-    <string-array name="syut_countries">
         <item>Uspuoji</item>
         <item>Preaque</item>
         <item>Esnana</item>
@@ -34,19 +31,15 @@
         <item>Aclua</item>
         <item>Abros</item>
         <item>Woplax</item>
-    </string-array>
 
-    <string-array name="wyut_countries">
         <item>Casteland</item>
         <item>Skoystein</item>
         <item>Zoblaisil</item>
         <item>Josneustein</item>
         <item>Cliutho</item>
         <item>Yethaetho</item>
-        <item>Jotrya</item>
-    </string-array>
+        <item>Jotria</item>
 
-    <string-array name="ibru_countries">
         <item>Moprea</item>
         <item>Xatros</item>
         <item>Sosmaosil</item>
@@ -56,9 +49,7 @@
         <item>Truarus</item>
         <item>Draeq Dror</item>
         <item>Swosil</item>
-    </string-array>
 
-    <string-array name="obru_countries">
         <item>Qastreonga</item>
         <item>Gatrya</item>
         <item>Vaglar</item>
@@ -67,9 +58,7 @@
         <item>Ofrax</item>
         <item>Notra</item>
         <item>Sheyna</item>
-    </string-array>
 
-    <string-array name="cadu_countries">
         <item>Espax</item>
         <item>Hecrad</item>
         <item>Nodros</item>
@@ -78,9 +67,7 @@
         <item>Hashea</item>
         <item>Meshoca</item>
         <item>Keplar</item>
-    </string-array>
 
-    <string-array name="fadu_countries">
         <item>Yathal</item>
         <item>Shiyque</item>
         <item>Negreyji</item>
@@ -89,9 +76,7 @@
         <item>Bochiunia</item>
         <item>Nustijan</item>
         <item>Shiesia</item>
-    </string-array>
 
-    <string-array name="mehe_countries">
         <item>Stredor</item>
         <item>Saglar</item>
         <item>Qoscutho</item>
@@ -100,9 +85,7 @@
         <item>Jatrain</item>
         <item>Gathoaca</item>
         <item>Wablaria</item>
-    </string-array>
 
-    <string-array name="gewi_countries">
         <item>Ewira</item>
         <item>Tableunia</item>
         <item>Mafraria</item>
