@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="dob_cap">Hradek</string>
+    <string name="yuf_cap">Będca</string>
+    <string name="fop_cap">Miyonsk</string>
+    <string name="tet_cap">Tagara</string>
+    <string name="wes_cap">Kapulint</string>
+    <string name="efr_cap">Shklono</string>
+    <string name="voc_cap">Kaloros</string>
+    <string name="zus_cap">Brăivița</string>
+    <string name="mub_cap">Będca</string>
+    <string name="tro_cap">Jaworbrzeg</string>
+    <string name="ugr_cap">Skača</string>
+    <string name="tap_cap">Dunacel</string>
+
+    <string name="tha_cap">Norora</string>
+    <string name="apr_cap">Hvall</string>
+    <string name="tri_cap">Gnupar</string>
+    <string name="thu_cap">Mjola</string>
+    <string name="bup_cap">Ballara</string>
+    <string name="gle_cap">Arastaoir</string>
+    <string name="she_cap">Grjota</string>
+
+</resources>

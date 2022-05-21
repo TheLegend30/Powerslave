@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="eyut">Eastern Yutrera</string>
+    <string name="eyut_adj">east-yutrerian</string>
+    <string name="nyut">Northern Yutrera</string>
+    <string name="nyut_adj">north-yutrerian</string>
+    <string name="syut">Southern Yutrera</string>
+    <string name="syut_adj">south-yutrerian</string>
+    <string name="wyut">Western Yutrera</string>
+    <string name="wyut_adj">west-yutrerian</string>
+
+    <string name="ibru">Inner Brumane</string>
+    <string name="ibru_adj">inner-brumanian</string>
+    <string name="obru">Outer Brumane</string>
+    <string name="obru_adj">outer-brumanian</string>
+
+    <string name="cadu">Central Adus</string>
+    <string name="cadu_adj">central-adusan</string>
+    <string name="fadu">Far Adus</string>
+    <string name="fadu_adj">far-adusan</string>
+
+    <string name="mehe">Mehela</string>
+    <string name="mehe_adj">mehelan</string>
+
+    <string name="gewi">Great Ewira</string>
+    <string name="gewi_adj">great_ewiran</string>
+</resources>
