@@ -3,7 +3,6 @@ package com.example.powerslave;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
@@ -90,6 +89,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         private String capitalName;
         private int flagSrc;
         private ArrayList<String> cities;
+        private RegionalForm regionalForm;
         private GovernmentType governmentType;
         private String desc;
 
@@ -109,9 +109,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Country(int key) {
             this.key = key;
             this.name = getResources().getStringArray(R.array.countries)[key];
-            this.flagSrc = getResources().getIntArray(R.array.flag_src)[key];
             this.capitalName = getResources().getStringArray(R.array.capitals)[key];
-
+            this.flagSrc = getResources().getIntArray(R.array.flag_src)[key];
+            this.regionalForm = RegionalForm.valueOf(getResources().getStringArray(R.array.regional)[key]);
+            this.governmentType = GovernmentType.valueOf(getResources().getStringArray(R.array.government)[key]);
         }
 
         @Override
@@ -125,6 +126,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         public String getCapitalName() {
             return capitalName;
+        }
+
+        public GovernmentType getGovernmentType() {
+            return governmentType;
+        }
+
+        public RegionalForm getRegionalForm() {
+            return regionalForm;
         }
     }
 

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="government">
+        <item>PRE_REP</item>
+        <item>PRE_REP</item>
+        <item>MIX_REP</item>
+        <item>PER_DIC</item>
+        <item>HYC_REP</item>
+        <item>PRE_REP</item>
+        <item>ABS_MON</item>
+        <item>ABS_MON</item>
+        <item>REL_STA</item>
+        <item>MIX_REP</item>
+        <item>MIL_DIC</item>
+        <item>PER_DIC</item>
+
+        <item>CON_MON</item>
+        <item>PAR_REP</item>
+        <item>ZOW_REP</item>
+        <item>MIX_REP</item>
+        <item>CON_MON</item>
+        <item>MIX_REP</item>
+        <item>PRE_REP</item>
+
+        <item>MIL_DIC</item>
+        <item>PER_DIC</item>
+        <item>PER_DIC</item>
+        <item>PAR_REP</item>
+        <item>MIX_REP</item>
+        <item>HYC_REP</item>
+        <item>HYC_REP</item>
+        <item>HYC_REP</item>
+
+        <item>PRE_REP</item>
+        <item>CON_MON</item>
+        <item>CON_MON</item>
+        <item>PAR_REP</item>
+        <item>MIX_REP</item>
+        <item>PAR_REP</item>
+        <item>ABS_MON</item>
+
+        <item>PRE_REP</item>
+        <item>ARE_STA</item>
+        <item>HYC_REP</item>
+        <item>PER_DIC</item>
+        <item>ABS_MON</item>
+        <item>PRE_REP</item>
+        <item>PRE_REP</item>
+        <item>HYC_REP</item>
+        <item>PER_DIC</item>
+
+        <item>MIL_DIC</item>
+        <item>VYH_STA</item>
+        <item>VYH_STA</item>
+        <item>MIX_REP</item>
+        <item>HYC_REP</item>
+        <item>MIL_DIC</item>
+        <item>ZOW_REP</item>
+        <item>PRE_REP</item>
+
+        <item>ABS_MON</item>
+        <item>ZOW_REP</item>
+        <item>ZOW_REP</item>
+        <item>PER_DIC</item>
+        <item>MIX_REP</item>
+        <item>MIL_DIC</item>
+        <item>VYH_STA</item>
+        <item>ARE_STA</item>
+
+        <item>MIX_REP</item>
+        <item>ARE_STA</item>
+        <item>ARE_STA</item>
+        <item>ARE_STA</item>
+        <item>VYH_STA</item>
+        <item>CON_MON</item>
+        <item>ARE_STA</item>
+        <item>PER_DIC</item>
+
+        <item>PAR_REP</item>
+        <item>TRI_STA</item>
+        <item>MIL_DIC</item>
+        <item>TRI_STA</item>
+        <item>PER_DIC</item>
+        <item>PRE_REP</item>
+        <item>MIX_REP</item>
+        <item>CON_MON</item>
+
+        <item>PLY_EMP</item>
+        <item>PLY_EMP</item>
+        <item>ABS_MON</item>
+        <item>PRE_REP</item>
+    </string-array>
+</resources>

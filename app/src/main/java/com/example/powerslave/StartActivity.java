@@ -19,6 +19,7 @@ public class StartActivity extends AppCompatActivity implements View.OnClickList
     Spinner countrySpinnerStart;
     ImageView flagViewStart;
     TextView textCapitalStart;
+    TextView textGovernmentStart;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +31,7 @@ public class StartActivity extends AppCompatActivity implements View.OnClickList
         flagViewStart = findViewById(R.id.flagViewStart);
         countrySpinnerStart = (Spinner) findViewById(R.id.countrySpinnerStart);
         textCapitalStart = findViewById(R.id.textCapitalStart);
+        textGovernmentStart = findViewById(R.id.textGovernmentStart);
 
         //OnClick methods
         backArrowStart.setOnClickListener(this);
@@ -55,6 +57,7 @@ public class StartActivity extends AppCompatActivity implements View.OnClickList
 
                 flagViewStart.setImageResource(country.getFlagSrc());
                 textCapitalStart.setText("Capital: " + country.getCapitalName());
+                textGovernmentStart.setText("Government: " + country.getRegionalForm() + " " + country.getGovernmentType());
             }
 
             @Override

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="regional">
+        <item>UNI</item>
+        <item>UNI</item>
+        <item>UNI</item>
+        <item>UNI</item>
+        <item>UNI</item>
+        <item>CNF</item>
+        <item>UNI</item>
+        <item>FED</item>
+        <item>FED</item>
+        <item>UNI</item>
+        <item>UNI</item>
+        <item>UNI</item>
+
+        <item>UNI</item>
+        <item>UNI</item>
+        <item>FED</item>
+        <item>UNI</item>
+        <item>FED</item>
+        <item>FED</item>
+        <item>UNI</item>
+
+        <item>UNI</item>
+        <item>UNI</item>
+        <item>FED</item>
+        <item>UNI</item>
+        <item>UNI</item>
+        <item>UNI</item>
+        <item>UNI</item>
+        <item>FED</item>
+
+        <item>FED</item>
+        <item>UNI</item>
+        <item>UNI</item>
+        <item>UNI</item>
+        <item>UNI</item>
+        <item>UNI</item>
+        <item>CNF</item>
+
+        <item>UNI</item>
+        <item>FED</item>
+        <item>UNI</item>
+        <item>UNI</item>
+        <item>UNI</item>
+        <item>UNI</item>
+        <item>UNI</item>
+        <item>UNI</item>
+        <item>UNI</item>
+
+        <item>FED</item>
+        <item>UNI</item>
+        <item>UNI</item>
+        <item>UNI</item>
+        <item>UNI</item>
+        <item>UNI</item>
+        <item>UNI</item>
+        <item>FED</item>
+
+        <item>UNI</item>
+        <item>UNI</item>
+        <item>FED</item>
+        <item>UNI</item>
+        <item>UNI</item>
+        <item>UNI</item>
+        <item>UNI</item>
+        <item>UNI</item>
+
+        <item>UNI</item>
+        <item>UNI</item>
+        <item>UNI</item>
+        <item>UNI</item>
+        <item>UNI</item>
+        <item>UNI</item>
+        <item>FED</item>
+        <item>CNF</item>
+
+        <item>UNI</item>
+        <item>UNI</item>
+        <item>UNI</item>
+        <item>UNI</item>
+        <item>UNI</item>
+        <item>UNI</item>
+        <item>UNI</item>
+        <item>UNI</item>
+
+        <item>UNI</item>
+        <item>UNI</item>
+        <item>UNI</item>
+        <item>FED</item>
+    </string-array>
+</resources>
