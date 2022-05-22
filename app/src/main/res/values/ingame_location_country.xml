@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="location">
+        <item>EY</item>
+        <item>EY</item>
+        <item>EY</item>
+        <item>EY</item>
+        <item>EY</item>
+        <item>EY</item>
+        <item>EY</item>
+        <item>EY</item>
+        <item>EY</item>
+        <item>EY</item>
+        <item>EY</item>
+        <item>EY</item>
+
+        <item>NY</item>
+        <item>NY</item>
+        <item>NY</item>
+        <item>NY</item>
+        <item>NY</item>
+        <item>NY</item>
+        <item>NY</item>
+
+        <item>SY</item>
+        <item>SY</item>
+        <item>SY</item>
+        <item>SY</item>
+        <item>SY</item>
+        <item>SY</item>
+        <item>SY</item>
+        <item>SY</item>
+
+        <item>WY</item>
+        <item>WY</item>
+        <item>WY</item>
+        <item>WY</item>
+        <item>WY</item>
+        <item>WY</item>
+        <item>WY</item>
+
+        <item>IB</item>
+        <item>IB</item>
+        <item>IB</item>
+        <item>IB</item>
+        <item>IB</item>
+        <item>IB</item>
+        <item>IB</item>
+        <item>IB</item>
+        <item>IB</item>
+
+        <item>OB</item>
+        <item>OB</item>
+        <item>OB</item>
+        <item>OB</item>
+        <item>OB</item>
+        <item>OB</item>
+        <item>OB</item>
+        <item>OB</item>
+
+        <item>CA</item>
+        <item>CA</item>
+        <item>CA</item>
+        <item>CA</item>
+        <item>CA</item>
+        <item>CA</item>
+        <item>CA</item>
+        <item>CA</item>
+
+        <item>FA</item>
+        <item>FA</item>
+        <item>FA</item>
+        <item>FA</item>
+        <item>FA</item>
+        <item>FA</item>
+        <item>FA</item>
+        <item>FA</item>
+
+        <item>ME</item>
+        <item>ME</item>
+        <item>ME</item>
+        <item>ME</item>
+        <item>ME</item>
+        <item>ME</item>
+        <item>ME</item>
+        <item>ME</item>
+
+        <item>GE</item>
+        <item>GE</item>
+        <item>GE</item>
+        <item>GE</item>
+    </string-array>
+</resources>

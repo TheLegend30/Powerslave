@@ -1,8 +1,13 @@
 package com.example.powerslave;
 
+import androidx.annotation.AnyRes;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.ContentResolver;
+import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -12,6 +17,8 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import java.io.InputStream;
+
 public class StartActivity extends AppCompatActivity implements View.OnClickListener {
 
     //Buttons in StartActivity
@@ -20,6 +27,7 @@ public class StartActivity extends AppCompatActivity implements View.OnClickList
     ImageView flagViewStart;
     TextView textCapitalStart;
     TextView textGovernmentStart;
+    TextView textLocationStart;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +40,7 @@ public class StartActivity extends AppCompatActivity implements View.OnClickList
         countrySpinnerStart = (Spinner) findViewById(R.id.countrySpinnerStart);
         textCapitalStart = findViewById(R.id.textCapitalStart);
         textGovernmentStart = findViewById(R.id.textGovernmentStart);
+        textLocationStart = findViewById(R.id.textLocationStart);
 
         //OnClick methods
         backArrowStart.setOnClickListener(this);
@@ -55,9 +64,10 @@ public class StartActivity extends AppCompatActivity implements View.OnClickList
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 MainActivity.Country country = MainActivity.countries.get(i);
 
-                flagViewStart.setImageResource(country.getFlagSrc());
+                flagViewStart.setImageURI(country.getFlagSrc());
                 textCapitalStart.setText("Capital: " + country.getCapitalName());
                 textGovernmentStart.setText("Government: " + country.getRegionalForm() + " " + country.getGovernmentType());
+                textLocationStart.setText("Location: " + country.getContinent());
             }
 
             @Override
@@ -73,4 +83,7 @@ public class StartActivity extends AppCompatActivity implements View.OnClickList
             StartActivity.this.finish();
         }
     }
+
+
+
 }

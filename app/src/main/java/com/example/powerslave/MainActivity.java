@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -14,6 +15,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     //TODO: Settings + Finish Music
     //TODO: More Pics
+    //One
 
     //Main button on main activity
     Button buttonStart;
@@ -82,37 +84,156 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //TODO: Inner classes Economy, Army,
         //TODO: Person class
         //TODO: Parliament class
-        //TODO: Finish ideology descriptions
         private int key;
 
         private String name;
         private String capitalName;
-        private int flagSrc;
-        private ArrayList<String> cities;
+        private Uri flagSrc;
         private RegionalForm regionalForm;
         private GovernmentType governmentType;
         private String desc;
-
         private String adjective;
-        private String culture;
         private Religion religion;
         private Continent continent;
-        private Currency currency;
 
-        private int developmentIndex;
-        private long population;
-        private long area;
-        private long gdp;
-        private long debt;
-        private long armyPower;
+        private Economy economy;
 
-        Country(int key) {
+        public class Economy {
+
+            private long population;
+            private long area;
+            private float density;
+
+            private long gdp;
+            private float gdp_per_person;
+            private long debt;
+            private Currency currency;
+            private ArrayList<City> cities;
+
+            private float developmentIndex;
+            private float literacy;
+            private float life_expectancy;
+
+            private Economy(int key){
+                this.area = getResources().getIntArray(R.array.area)[key];
+                this.population = getResources().getIntArray(R.array.population)[key];
+                this.density = (float)population/area;
+
+                this.gdp = getResources().getIntArray(R.array.gdp)[key];
+                this.gdp_per_person = ((float)gdp/population);
+
+            }
+
+            public long getPopulation() {
+                return population;
+            }
+
+            public void setPopulation(long population) {
+                this.population = population;
+            }
+
+            public long getArea() {
+                return area;
+            }
+
+            public void setArea(long area) {
+                this.area = area;
+            }
+
+            public float getDensity() {
+                return density;
+            }
+
+            public String getDensityString() {
+                return String.format("%.2f", density);
+            }
+
+            public void setDensity(float density) {
+                this.density = density;
+            }
+
+            public long getGdp() {
+                return gdp;
+            }
+
+            public void setGdp(long gdp) {
+                this.gdp = gdp;
+            }
+
+            public float getGdp_per_person() {
+                return gdp_per_person;
+            }
+
+            public String getGdp_per_person_String() {
+                return String.format("%.2f", gdp_per_person);
+            }
+
+            public void setGdp_per_person(long gdp_per_person) {
+                this.gdp_per_person = gdp_per_person;
+            }
+
+            public long getDebt() {
+                return debt;
+            }
+
+            public void setDebt(long debt) {
+                this.debt = debt;
+            }
+
+            public Currency getCurrency() {
+                return currency;
+            }
+
+            public void setCurrency(Currency currency) {
+                this.currency = currency;
+            }
+
+            public ArrayList<City> getCities() {
+                return cities;
+            }
+
+            public void setCities(ArrayList<City> cities) {
+                this.cities = cities;
+            }
+
+            public float getDevelopmentIndex() {
+                return developmentIndex;
+            }
+
+            public void setDevelopmentIndex(float developmentIndex) {
+                this.developmentIndex = developmentIndex;
+            }
+
+            public float getLiteracy() {
+                return literacy;
+            }
+
+            public void setLiteracy(float literacy) {
+                this.literacy = literacy;
+            }
+
+            public float getLife_expectancy() {
+                return life_expectancy;
+            }
+
+            public void setLife_expectancy(float life_expectancy) {
+                this.life_expectancy = life_expectancy;
+            }
+        }
+
+        private Military military;
+
+        private Government government;
+
+        private Country(int key) {
             this.key = key;
             this.name = getResources().getStringArray(R.array.countries)[key];
             this.capitalName = getResources().getStringArray(R.array.capitals)[key];
-            this.flagSrc = getResources().getIntArray(R.array.flag_src)[key];
+            this.flagSrc = Uri.parse(getResources().getStringArray(R.array.flag_src)[key]);
             this.regionalForm = RegionalForm.valueOf(getResources().getStringArray(R.array.regional)[key]);
             this.governmentType = GovernmentType.valueOf(getResources().getStringArray(R.array.government)[key]);
+            this.continent = Continent.valueOf(getResources().getStringArray(R.array.location)[key]);
+            this.economy = new Economy(key);
         }
 
         @Override
@@ -120,7 +241,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             return name;
         }
 
-        public int getFlagSrc() {
+        public Uri getFlagSrc() {
             return flagSrc;
         }
 
@@ -134,6 +255,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         public RegionalForm getRegionalForm() {
             return regionalForm;
+        }
+
+        public Continent getContinent() {
+            return continent;
+        }
+
+        public Economy getEconomy() {
+            return economy;
         }
     }
 

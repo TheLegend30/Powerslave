@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer-array name="area">
+        <item>207600</item>
+        <item>131500</item>
+        <item>208830</item>
+        <item>323076</item>
+        <item>37423</item>
+        <item>632435</item>
+        <item>40250</item>
+        <item>326040</item>
+        <item>256870</item>
+        <item>110424</item>
+        <item>267090</item>
+        <item>34521</item>
+
+        <item>567322</item>
+        <item>389670</item>
+        <item>785989</item>
+        <item>98060</item>
+        <item>345210</item>
+        <item>376215</item>
+        <item>216032</item>
+
+        <item>213454</item>
+        <item>38454</item>
+        <item>601300</item>
+        <item>75434</item>
+        <item>200467</item>
+        <item>187678</item>
+        <item>246780</item>
+        <item>230653</item>
+
+        <item>1103440</item>
+        <item>543122</item>
+        <item>435678</item>
+        <item>367400</item>
+        <item>387500</item>
+        <item>189678</item>
+        <item>210100</item>
+
+        <item>206896</item>
+        <item>316467</item>
+        <item>213450</item>
+        <item>102356</item>
+        <item>79670</item>
+        <item>19233</item>
+        <item>18765</item>
+        <item>178688</item>
+        <item>20123</item>
+
+        <item>140560</item>
+        <item>7809</item>
+        <item>87660</item>
+        <item>65000</item>
+        <item>16754</item>
+        <item>12350</item>
+        <item>17566</item>
+        <item>6787</item>
+
+        <item>206505</item>
+        <item>235200</item>
+        <item>489662</item>
+        <item>500128</item>
+        <item>517489</item>
+        <item>493000</item>
+        <item>630129</item>
+        <item>567489</item>
+
+        <item>342544</item>
+        <item>332109</item>
+        <item>456922</item>
+        <item>267899</item>
+        <item>256848</item>
+        <item>215676</item>
+        <item>224555</item>
+        <item>1656898</item>
+
+        <item>4596</item>
+        <item>3567</item>
+        <item>47895</item>
+        <item>67845</item>
+        <item>342456</item>
+        <item>189760</item>
+        <item>203565</item>
+        <item>320576</item>
+
+        <item>2378135</item>
+        <item>785634</item>
+        <item>567423</item>
+        <item>658004</item>
+    </integer-array>
+
+    <integer-array name="population">
+        <item>7800200</item>
+        <item>3500234</item>
+        <item>5670400</item>
+        <item>8796050</item>
+        <item>1200500</item>
+        <item>14345000</item>
+        <item>687900</item>
+        <item>3578609</item>
+        <item>869704</item>
+        <item>2978500</item>
+        <item>1249390</item>
+        <item>248693</item>
+
+        <item>2364700</item>
+        <item>17465805</item>
+        <item>32069400</item>
+        <item>1506981</item>
+        <item>4564800</item>
+        <item>3684920</item>
+        <item>5406850</item>
+
+        <item>2314800</item>
+        <item>1275836</item>
+        <item>28674943</item>
+        <item>235420</item>
+        <item>4570979</item>
+        <item>5768493</item>
+        <item>2364738</item>
+        <item>8948300</item>
+
+        <item>78943865</item>
+        <item>7483729</item>
+        <item>6435463</item>
+        <item>11033583</item>
+        <item>21598375</item>
+        <item>3546382</item>
+        <item>6749496</item>
+
+        <item>8573732</item>
+        <item>18942400</item>
+        <item>11584999</item>
+        <item>6748327</item>
+        <item>1038000</item>
+        <item>474852</item>
+        <item>1364673</item>
+        <item>3958372</item>
+        <item>1267850</item>
+
+        <item>1020300</item>
+        <item>786494</item>
+        <item>1030204</item>
+        <item>675839</item>
+        <item>2647395</item>
+        <item>949340</item>
+        <item>789402</item>
+        <item>1029392</item>
+
+        <item>2394930</item>
+        <item>2646289</item>
+        <item>8903049</item>
+        <item>6503050</item>
+        <item>7849285</item>
+        <item>14053050</item>
+        <item>17839003</item>
+        <item>20104059</item>
+
+        <item>657385</item>
+        <item>203595</item>
+        <item>3595940</item>
+        <item>1374730</item>
+        <item>980799</item>
+        <item>1374830</item>
+        <item>1039405</item>
+        <item>13506486</item>
+
+        <item>129385</item>
+        <item>8576</item>
+        <item>93853</item>
+        <item>674869</item>
+        <item>1240500</item>
+        <item>9806049</item>
+        <item>8458924</item>
+        <item>11246883</item>
+
+        <item>125845040</item>
+        <item>15462900</item>
+        <item>8795045</item>
+        <item>6785940</item>
+    </integer-array>
+
+    <integer-array name="gdp">
+        <item>410230</item>
+        <item>234050</item>
+        <item>345000</item>
+        <item>879600</item>
+        <item>364500</item>
+        <item>1354000</item>
+        <item>73440</item>
+        <item>345000</item>
+        <item>67000</item>
+        <item>123040</item>
+        <item>809690</item>
+        <item>789000</item>
+
+        <item>945000</item>
+        <item>7890030</item>
+        <item>15567900</item>
+        <item>786900</item>
+        <item>1230490</item>
+        <item>1109080</item>
+        <item>1450030</item>
+
+        <item>767800</item>
+        <item>570000</item>
+        <item>9400500</item>
+        <item>456700</item>
+        <item>768030</item>
+        <item>1239000</item>
+        <item>678900</item>
+        <item>2340900</item>
+
+        <item>66890030</item>
+        <item>6789090</item>
+        <item>5890600</item>
+        <item>12359000</item>
+        <item>23049090</item>
+        <item>4900500</item>
+        <item>6090340</item>
+
+        <item>639400</item>
+        <item>1649500</item>
+        <item>2930590</item>
+        <item>194030</item>
+        <item>97800</item>
+        <item>67890</item>
+        <item>123000</item>
+        <item>450920</item>
+        <item>576800</item>
+
+        <item>376800</item>
+        <item>250900</item>
+        <item>309090</item>
+        <item>120390</item>
+        <item>567800</item>
+        <item>169000</item>
+        <item>190500</item>
+        <item>349090</item>
+
+        <item>356700</item>
+        <item>405900</item>
+        <item>2690490</item>
+        <item>1457800</item>
+        <item>1368790</item>
+        <item>2350970</item>
+        <item>3186090</item>
+        <item>3678080</item>
+
+        <item>79040</item>
+        <item>18900</item>
+        <item>197890</item>
+        <item>100900</item>
+        <item>80060</item>
+        <item>1409000</item>
+        <item>90650</item>
+        <item>7809040</item>
+
+        <item>37890</item>
+        <item>360</item>
+        <item>23480</item>
+        <item>89500</item>
+        <item>345700</item>
+        <item>1295000</item>
+        <item>1090400</item>
+        <item>6607900</item>
+
+        <item>98904000</item>
+        <item>1385900</item>
+        <item>908960</item>
+        <item>687940</item>
+    </integer-array>
+
+    <integer-array name="debt">
+
+    </integer-array>
+
+    <string-array name="currency">
+
+    </string-array>
+
+    <integer-array name="live_expectancy">
+
+    </integer-array>
+
+    <integer-array name="literacy">
+
+    </integer-array>
+</resources>

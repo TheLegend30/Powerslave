@@ -6,5 +6,6 @@ public enum Religion {
     Rovano,
     Brosito,
     Ilokritism,
-    Phokhi;
+    Phokhi,
+    Atheism;
 }
