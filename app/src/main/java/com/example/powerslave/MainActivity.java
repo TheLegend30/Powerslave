@@ -10,18 +10,19 @@ import android.view.View;
 import android.widget.Button;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.stream.Stream;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     //TODO: Settings + Finish Music
     //TODO: More Pics
-    //One
 
     //Main button on main activity
-    Button buttonStart;
-    Button buttonLoad;
-    Button buttonAbout;
-    Button buttonExit;
+    private Button buttonStart;
+    private Button buttonLoad;
+    private Button buttonAbout;
+    private Button buttonExit;
 
     public MediaPlayer mediaPlayer;
 
@@ -52,12 +53,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void startMusic() {
-        mediaPlayer = MediaPlayer.create(getApplicationContext(),R.raw.bossantigua);
+        mediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.bossantigua);
         mediaPlayer.setLooping(true);
         //mediaPlayer.start();
     }
 
-    private void initCountries() {
+    public void initCountries() {
         int length = getResources().getStringArray(R.array.countries).length;
         for (int i = 0; i < length; i++) {
             countries.add(new Country(i));
@@ -107,21 +108,29 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             private long gdp;
             private float gdp_per_person;
             private long debt;
-            private Currency currency;
+            private float inflation;
+            private String currency;
             private ArrayList<City> cities;
 
             private float developmentIndex;
-            private float literacy;
             private float life_expectancy;
+            private float literacy;
 
-            private Economy(int key){
+            private Economy(int key) {
                 this.area = getResources().getIntArray(R.array.area)[key];
                 this.population = getResources().getIntArray(R.array.population)[key];
-                this.density = (float)population/area;
+                this.density = (float) population / area;
 
-                this.gdp = getResources().getIntArray(R.array.gdp)[key];
-                this.gdp_per_person = ((float)gdp/population);
+                this.gdp = getResources().getIntArray(R.array.gdp)[key] * 100L;
+                this.gdp_per_person = ((float) gdp / population);
+                this.debt = (long) (gdp * (Float.parseFloat(getResources().getStringArray(R.array.debt)[key]) / 100));
 
+                this.inflation = Float.parseFloat(getResources().getStringArray(R.array.inflation)[key]);
+                this.currency = getResources().getStringArray(R.array.currency)[key];
+
+                this.life_expectancy = Float.parseFloat(getResources().getStringArray(R.array.live_expectancy)[key]);
+                this.literacy = Float.parseFloat(getResources().getStringArray(R.array.literacy)[key]);
+                this.developmentIndex = (life_expectancy * literacy * gdp_per_person) / 1000;
             }
 
             public long getPopulation() {
@@ -136,6 +145,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 return area;
             }
 
+            public String getAreaString() {
+                return area + " km^2";
+            }
+
             public void setArea(long area) {
                 this.area = area;
             }
@@ -145,7 +158,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
 
             public String getDensityString() {
-                return String.format("%.2f", density);
+                return String.format("%.2f", density) + "/km^2";
             }
 
             public void setDensity(float density) {
@@ -156,16 +169,37 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 return gdp;
             }
 
+            public String getGdpString() {
+                return gdp + " ƒ";
+            }
+
             public void setGdp(long gdp) {
                 this.gdp = gdp;
+            }
+
+
+            public float getInflation() {
+                return inflation;
+            }
+
+            public String getInflationString() {
+                return String.format("%.2f", inflation) + " %";
+            }
+
+            public void setInflation(float inflation) {
+                this.inflation = inflation;
             }
 
             public float getGdp_per_person() {
                 return gdp_per_person;
             }
 
+            public void setGdp_per_person(float gdp_per_person) {
+                this.gdp_per_person = gdp_per_person;
+            }
+
             public String getGdp_per_person_String() {
-                return String.format("%.2f", gdp_per_person);
+                return String.format("%.2f", gdp_per_person) + " ƒ";
             }
 
             public void setGdp_per_person(long gdp_per_person) {
@@ -176,15 +210,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 return debt;
             }
 
+            public String getDebtString() {
+                Float debtFloat = (((float) debt / gdp) * 100);
+                String debtPercent = String.format("( %.2f", debtFloat).concat(" %)");
+                return debt + " ƒ " + debtPercent;
+            }
+
             public void setDebt(long debt) {
                 this.debt = debt;
             }
 
-            public Currency getCurrency() {
-                return currency;
+            public String getCurrency() {
+                return adjective + " " + currency;
             }
 
-            public void setCurrency(Currency currency) {
+            public void setCurrency(String currency) {
                 this.currency = currency;
             }
 
@@ -200,6 +240,29 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 return developmentIndex;
             }
 
+            public String getDevelopmentIndexString() {
+                float ave_di = 0f;
+                String devString = "(Middle)";
+                for (Country country : countries) {
+                    ave_di += country.economy.developmentIndex;
+                }
+                ave_di /= countries.size();
+                if (developmentIndex <= ave_di) {
+                    if (developmentIndex <= ave_di - (ave_di*0.75)) {
+                        devString = "(Very Low)";
+                    } else if (developmentIndex <= ave_di - (ave_di * 0.5)) {
+                        devString = "(Low)";
+                    }
+                } else {
+                    if (developmentIndex >= ave_di + (ave_di * 0.75)) {
+                        devString = "(Very High)";
+                    } else if (developmentIndex >= ave_di + (ave_di * 0.5)) {
+                        devString = "(High)";
+                    }
+                }
+                return String.format("%.2f", developmentIndex) + " " + devString;
+            }
+
             public void setDevelopmentIndex(float developmentIndex) {
                 this.developmentIndex = developmentIndex;
             }
@@ -208,12 +271,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 return literacy;
             }
 
+            public String getLiteracyString() {
+                return String.format("%.2f", literacy) + " %";
+            }
+
             public void setLiteracy(float literacy) {
                 this.literacy = literacy;
             }
 
             public float getLife_expectancy() {
                 return life_expectancy;
+            }
+
+            public String getLife_expectancyString() {
+                return String.format("%.2f", life_expectancy) + " years";
             }
 
             public void setLife_expectancy(float life_expectancy) {
@@ -233,6 +304,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             this.regionalForm = RegionalForm.valueOf(getResources().getStringArray(R.array.regional)[key]);
             this.governmentType = GovernmentType.valueOf(getResources().getStringArray(R.array.government)[key]);
             this.continent = Continent.valueOf(getResources().getStringArray(R.array.location)[key]);
+            this.adjective = getResources().getStringArray(R.array.adjectives)[key];
             this.economy = new Economy(key);
         }
 

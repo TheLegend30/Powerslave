@@ -57,7 +57,7 @@
         android:id="@+id/textCapitalStart"
         android:layout_width="357dp"
         android:layout_height="30dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="20dp"
         android:hint="CountryDesc"
         android:text="Capital: "
         app:layout_constraintEnd_toEndOf="parent"
@@ -88,7 +88,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textGovernmentStart" />
 
     <ImageButton
-        android:id="@+id/imageButton"
+        android:id="@+id/economyButtonStart"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="100dp"
@@ -97,6 +97,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/backArrowStart"
-        app:srcCompat="@mipmap/ic_gulden_sign" />
+        app:srcCompat="@mipmap/ic_gulden_sign"
+        tools:ignore="SpeakableTextPresentCheck" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

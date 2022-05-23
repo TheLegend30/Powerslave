@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="adjectives">
+        <item>Dobrouzian</item>
+        <item>Yuflistanian</item>
+        <item>Foplian</item>
+        <item>Tetrarian</item>
+        <item>Western-Efraitian</item>
+        <item>Efraitian</item>
+        <item>Vocravanian</item>
+        <item>Zusharian</item>
+        <item>Mubrurgian</item>
+        <item>Troatonian</item>
+        <item>Ugristanian</item>
+        <item>Taprarian</item>
+
+        <item>Thargonish</item>
+        <item>Aprean</item>
+        <item>Triarian</item>
+        <item>Thu Smonish</item>
+        <item>Buplainish</item>
+        <item>Gleay Skanish</item>
+        <item>Sheac Tringtonian</item>
+
+        <item>Uspuojian</item>
+        <item>Preaquelish</item>
+        <item>Esnanan</item>
+        <item>Snuelesin</item>
+        <item>Rasmoewanan</item>
+        <item>Acluan</item>
+        <item>Abrosian</item>
+        <item>Woplaxian</item>
+
+        <item>Castelandish</item>
+        <item>Skoysteinish</item>
+        <item>Zoblaisilish</item>
+        <item>Josneusteinish</item>
+        <item>Cliuthogish</item>
+        <item>Yethaethogish</item>
+        <item>Jotrian</item>
+
+        <item>Moprean</item>
+        <item>Xatrosian</item>
+        <item>Sosmaosilian</item>
+        <item>Uchosan</item>
+        <item>Flialorian</item>
+        <item>Stroycan</item>
+        <item>Truarusian</item>
+        <item>Draeq Drorian</item>
+        <item>Swosilian</item>
+
+        <item>Qastreongan</item>
+        <item>Gatryan</item>
+        <item>Vaglarian</item>
+        <item>Fraybian</item>
+        <item>Mubrorian</item>
+        <item>Ofraxian</item>
+        <item>Notran</item>
+        <item>Sheynan</item>
+
+        <item>Espaxian</item>
+        <item>Hecradish</item>
+        <item>Nodrosish</item>
+        <item>Ustran</item>
+        <item>Daspadian</item>
+        <item>Hashean</item>
+        <item>Meshocan</item>
+        <item>Keplarian</item>
+
+        <item>Yathalian</item>
+        <item>Shiyquelish</item>
+        <item>Negreyjian</item>
+        <item>Ecrilian</item>
+        <item>Efrenian</item>
+        <item>Bochiunian</item>
+        <item>Nustijanish</item>
+        <item>Shiesian</item>
+
+        <item>Stredorian</item>
+        <item>Saglarian</item>
+        <item>Qoscutholish</item>
+        <item>Odrinesian</item>
+        <item>Uplistanian</item>
+        <item>Jatrainian</item>
+        <item>Gathoacan</item>
+        <item>Wablarian</item>
+
+        <item>Ewiran</item>
+        <item>Tableunian</item>
+        <item>Mafrarian</item>
+        <item>Uskanan</item>
+    </string-array>
+</resources>

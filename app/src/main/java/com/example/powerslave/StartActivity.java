@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.ContentResolver;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
@@ -22,12 +23,13 @@ import java.io.InputStream;
 public class StartActivity extends AppCompatActivity implements View.OnClickListener {
 
     //Buttons in StartActivity
-    ImageButton backArrowStart;
-    Spinner countrySpinnerStart;
-    ImageView flagViewStart;
-    TextView textCapitalStart;
-    TextView textGovernmentStart;
-    TextView textLocationStart;
+    private ImageButton backArrowStart;
+    private ImageButton economyButtonStart;
+    public static Spinner countrySpinnerStart;
+    private ImageView flagViewStart;
+    private TextView textCapitalStart;
+    private TextView textGovernmentStart;
+    private TextView textLocationStart;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +38,7 @@ public class StartActivity extends AppCompatActivity implements View.OnClickList
 
         //Assigning values
         backArrowStart = findViewById(R.id.backArrowStart);
+        economyButtonStart = findViewById(R.id.economyButtonStart);
         flagViewStart = findViewById(R.id.flagViewStart);
         countrySpinnerStart = (Spinner) findViewById(R.id.countrySpinnerStart);
         textCapitalStart = findViewById(R.id.textCapitalStart);
@@ -44,6 +47,7 @@ public class StartActivity extends AppCompatActivity implements View.OnClickList
 
         //OnClick methods
         backArrowStart.setOnClickListener(this);
+        economyButtonStart.setOnClickListener(this);
 
         ArrayAdapter countryAdapter = new ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, MainActivity.countries);
 
@@ -51,7 +55,7 @@ public class StartActivity extends AppCompatActivity implements View.OnClickList
         countrySpinnerStart.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                 MainActivity.Country country = (MainActivity.Country) parent.getSelectedItem();
+                MainActivity.Country country = (MainActivity.Country) parent.getSelectedItem();
             }
 
             @Override
@@ -81,6 +85,9 @@ public class StartActivity extends AppCompatActivity implements View.OnClickList
     public void onClick(View view) {
         if (view.getId() == backArrowStart.getId()) {
             StartActivity.this.finish();
+        } else if (view.getId() == economyButtonStart.getId()) {
+            Intent intent = new Intent(StartActivity.this, EconomyStartActivity.class);
+            startActivity(intent);
         }
     }
 

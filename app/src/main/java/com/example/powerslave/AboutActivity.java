@@ -10,7 +10,7 @@ import android.widget.ImageView;
 public class AboutActivity extends AppCompatActivity implements View.OnClickListener {
 
     //Creating necessary objects;
-    ImageButton backArrowAbout;
+    private ImageButton backArrowAbout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
