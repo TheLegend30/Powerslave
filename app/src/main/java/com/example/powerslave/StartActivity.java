@@ -24,6 +24,7 @@ public class StartActivity extends AppCompatActivity implements View.OnClickList
 
     //Buttons in StartActivity
     private ImageButton backArrowStart;
+    private ImageButton forwardArrowStart;
     private ImageButton economyButtonStart;
     public static Spinner countrySpinnerStart;
     private ImageView flagViewStart;
@@ -38,6 +39,7 @@ public class StartActivity extends AppCompatActivity implements View.OnClickList
 
         //Assigning values
         backArrowStart = findViewById(R.id.backArrowStart);
+        forwardArrowStart = findViewById(R.id.forwardArrowStart);
         economyButtonStart = findViewById(R.id.economyButtonStart);
         flagViewStart = findViewById(R.id.flagViewStart);
         countrySpinnerStart = (Spinner) findViewById(R.id.countrySpinnerStart);
@@ -47,6 +49,7 @@ public class StartActivity extends AppCompatActivity implements View.OnClickList
 
         //OnClick methods
         backArrowStart.setOnClickListener(this);
+        forwardArrowStart.setOnClickListener(this);
         economyButtonStart.setOnClickListener(this);
 
         ArrayAdapter countryAdapter = new ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, MainActivity.countries);
@@ -85,6 +88,9 @@ public class StartActivity extends AppCompatActivity implements View.OnClickList
     public void onClick(View view) {
         if (view.getId() == backArrowStart.getId()) {
             StartActivity.this.finish();
+        } else if (view.getId() == forwardArrowStart.getId()) {
+            Intent intent = new Intent(StartActivity.this, ChooseRulerActivity.class);
+            startActivity(intent);
         } else if (view.getId() == economyButtonStart.getId()) {
             Intent intent = new Intent(StartActivity.this, EconomyStartActivity.class);
             startActivity(intent);

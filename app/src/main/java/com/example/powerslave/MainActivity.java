@@ -15,8 +15,12 @@ import java.util.stream.Stream;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
+    //TODO: Add ChooseRulerActivity and finish it
     //TODO: Settings + Finish Music
     //TODO: More Pics
+    //TODO: Military indexes
+    //TODO: Better descriptions
+    //TODO: Rework economic indexes
 
     //Main button on main activity
     private Button buttonStart;
