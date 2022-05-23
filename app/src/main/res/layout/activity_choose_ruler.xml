@@ -28,6 +28,19 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <TextView
+        android:id="@+id/textViewChRul2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Choose ideology"
+        android:textColor="@color/dark_blue"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.072"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/radioGroupSexChRul" />
+
     <EditText
         android:id="@+id/editTextName"
         android:layout_width="wrap_content"
@@ -35,9 +48,9 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="175dp"
         android:ems="10"
-        android:hint="Name"
         android:inputType="textPersonName"
         android:minHeight="48dp"
+        android:text="Name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewChRul1" />
@@ -49,9 +62,9 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="175dp"
         android:ems="10"
-        android:hint="Surname"
         android:inputType="textPersonName"
         android:minHeight="48dp"
+        android:text="Surname"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.538"
         app:layout_constraintStart_toStartOf="parent"
@@ -97,5 +110,40 @@
             android:text="Female"
             android:textColor="@color/dark_blue" />
     </RadioGroup>
+
+    <ImageButton
+        android:id="@+id/forwardArrowChRul"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/dark_blue"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@mipmap/ic_forward_arrow"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <Spinner
+        android:id="@+id/spinnerIdeology"
+        android:layout_width="409dp"
+        android:layout_height="wrap_content"
+        android:minHeight="48dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewChRul2"
+        app:layout_constraintVertical_bias="0.062"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <TextView
+        android:id="@+id/textViewIdeoDescChRul"
+        android:layout_width="370dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Description of ideology"
+        android:textColor="@color/dark_blue"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spinnerIdeology" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
