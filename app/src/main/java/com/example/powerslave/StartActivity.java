@@ -26,6 +26,7 @@ public class StartActivity extends AppCompatActivity implements View.OnClickList
     private ImageButton backArrowStart;
     private ImageButton forwardArrowStart;
     private ImageButton economyButtonStart;
+    private ImageButton militaryButtonStart;
     public static Spinner countrySpinnerStart;
     private ImageView flagViewStart;
     private TextView textCapitalStart;
@@ -41,6 +42,7 @@ public class StartActivity extends AppCompatActivity implements View.OnClickList
         backArrowStart = findViewById(R.id.backArrowStart);
         forwardArrowStart = findViewById(R.id.forwardArrowStart);
         economyButtonStart = findViewById(R.id.economyButtonStart);
+        militaryButtonStart = findViewById(R.id.militaryButtonStart);
         flagViewStart = findViewById(R.id.flagViewStart);
         countrySpinnerStart = (Spinner) findViewById(R.id.countrySpinnerStart);
         textCapitalStart = findViewById(R.id.textCapitalStart);
@@ -51,6 +53,7 @@ public class StartActivity extends AppCompatActivity implements View.OnClickList
         backArrowStart.setOnClickListener(this);
         forwardArrowStart.setOnClickListener(this);
         economyButtonStart.setOnClickListener(this);
+        militaryButtonStart.setOnClickListener(this);
 
         ArrayAdapter countryAdapter = new ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, MainActivity.countries);
 
@@ -93,6 +96,9 @@ public class StartActivity extends AppCompatActivity implements View.OnClickList
             startActivity(intent);
         } else if (view.getId() == economyButtonStart.getId()) {
             Intent intent = new Intent(StartActivity.this, EconomyStartActivity.class);
+            startActivity(intent);
+        } else if (view.getId() == militaryButtonStart.getId()) {
+            Intent intent = new Intent(StartActivity.this, MilitaryStartActivity.class);
             startActivity(intent);
         }
     }

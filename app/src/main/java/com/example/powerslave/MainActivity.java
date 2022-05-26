@@ -9,9 +9,14 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.example.powerslave.government.City;
+import com.example.powerslave.government.Continent;
+import com.example.powerslave.government.Government;
+import com.example.powerslave.government.GovernmentType;
+import com.example.powerslave.government.RegionalForm;
+import com.example.powerslave.government.Religion;
+
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.stream.Stream;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -125,7 +130,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 this.population = getResources().getIntArray(R.array.population)[key];
                 this.density = (float) population / area;
 
-                this.gdp = getResources().getIntArray(R.array.gdp)[key] * 100L;
+                this.gdp = getResources().getIntArray(R.array.gdp)[key] * 10L;
                 this.gdp_per_person = ((float) gdp / population);
                 this.debt = (long) (gdp * (Float.parseFloat(getResources().getStringArray(R.array.debt)[key]) / 100));
 
@@ -137,91 +142,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 this.developmentIndex = (life_expectancy * literacy * gdp_per_person) / 1000;
             }
 
-            public long getPopulation() {
-                return population;
-            }
-
-            public void setPopulation(long population) {
-                this.population = population;
-            }
-
-            public long getArea() {
-                return area;
-            }
-
-            public String getAreaString() {
-                return area + " km^2";
-            }
-
-            public void setArea(long area) {
-                this.area = area;
-            }
-
-            public float getDensity() {
-                return density;
-            }
-
-            public String getDensityString() {
-                return String.format("%.2f", density) + "/km^2";
-            }
-
-            public void setDensity(float density) {
-                this.density = density;
-            }
-
             public long getGdp() {
                 return gdp;
             }
 
-            public String getGdpString() {
-                return gdp + " ƒ";
-            }
-
             public void setGdp(long gdp) {
                 this.gdp = gdp;
-            }
-
-
-            public float getInflation() {
-                return inflation;
-            }
-
-            public String getInflationString() {
-                return String.format("%.2f", inflation) + " %";
-            }
-
-            public void setInflation(float inflation) {
-                this.inflation = inflation;
-            }
-
-            public float getGdp_per_person() {
-                return gdp_per_person;
-            }
-
-            public void setGdp_per_person(float gdp_per_person) {
-                this.gdp_per_person = gdp_per_person;
-            }
-
-            public String getGdp_per_person_String() {
-                return String.format("%.2f", gdp_per_person) + " ƒ";
-            }
-
-            public void setGdp_per_person(long gdp_per_person) {
-                this.gdp_per_person = gdp_per_person;
-            }
-
-            public long getDebt() {
-                return debt;
-            }
-
-            public String getDebtString() {
-                Float debtFloat = (((float) debt / gdp) * 100);
-                String debtPercent = String.format("( %.2f", debtFloat).concat(" %)");
-                return debt + " ƒ " + debtPercent;
-            }
-
-            public void setDebt(long debt) {
-                this.debt = debt;
             }
 
             public String getCurrency() {
@@ -230,14 +156,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             public void setCurrency(String currency) {
                 this.currency = currency;
-            }
-
-            public ArrayList<City> getCities() {
-                return cities;
-            }
-
-            public void setCities(ArrayList<City> cities) {
-                this.cities = cities;
             }
 
             public float getDevelopmentIndex() {
@@ -252,7 +170,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
                 ave_di /= countries.size();
                 if (developmentIndex <= ave_di) {
-                    if (developmentIndex <= ave_di - (ave_di*0.75)) {
+                    if (developmentIndex <= ave_di - (ave_di * 0.75)) {
                         devString = "(Very Low)";
                     } else if (developmentIndex <= ave_di - (ave_di * 0.5)) {
                         devString = "(Low)";
@@ -271,32 +189,104 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 this.developmentIndex = developmentIndex;
             }
 
-            public float getLiteracy() {
-                return literacy;
-            }
-
-            public String getLiteracyString() {
-                return String.format("%.2f", literacy) + " %";
-            }
-
-            public void setLiteracy(float literacy) {
-                this.literacy = literacy;
-            }
-
-            public float getLife_expectancy() {
-                return life_expectancy;
-            }
-
-            public String getLife_expectancyString() {
-                return String.format("%.2f", life_expectancy) + " years";
-            }
-
-            public void setLife_expectancy(float life_expectancy) {
-                this.life_expectancy = life_expectancy;
+            @Override
+            public String toString() {
+                String string;
+                string = "Area: " + area + " km^2" + "\n";
+                string += "Population: " + population + "\n";
+                string += "Density: " + String.format("%.2f", density) + "/km^2" + "\n";
+                string += "GDP: " + gdp + " ƒ" + "\n";
+                string += "GDP per Capita: " + String.format("%.2f", gdp_per_person) + " ƒ" + "\n";
+                string += "National Debt: " + debt + " ƒ " + String.format("(%.2f", (float) debt / gdp * 100).concat(" %)") + "\n";
+                string += "Inflation: " + String.format("%.2f", inflation) + " %" + "\n";
+                string += "Currency: " + adjective + " " + currency + "\n";
+                string += "Life Expectancy: " + String.format("%.2f", life_expectancy) + " years" + "\n";
+                string += "Literacy: " + String.format("%.2f", literacy) + " %"+ "\n";
+                string += "Development Index: " + getDevelopmentIndexString() + "\n";
+                return string;
             }
         }
 
         private Military military;
+
+        public class Military {
+            private int arm_power;
+            private int nav_power;
+            private int air_power;
+            private boolean conscription;
+            private boolean landlocked;
+            private int outlay;
+
+            public Military(int key) {
+                this.arm_power = getResources().getIntArray(R.array.army)[key];
+                this.nav_power = getResources().getIntArray(R.array.navy)[key];
+                this.air_power = getResources().getIntArray(R.array.air_force)[key];
+                this.conscription = Boolean.parseBoolean(getResources().getStringArray(R.array.conscription)[key]);
+                this.landlocked = Boolean.parseBoolean(getResources().getStringArray(R.array.landlocked)[key]);
+                this.outlay = (arm_power * 100) + (nav_power * 500) + (air_power * 800);
+            }
+
+            public int getArm_power() {
+                return arm_power;
+            }
+
+            public void setArm_power(int arm_power) {
+                this.arm_power = arm_power;
+            }
+
+            public int getNav_power() {
+                return nav_power;
+            }
+
+            public void setNav_power(int nav_power) {
+                this.nav_power = nav_power;
+            }
+
+            public int getAir_power() {
+                return air_power;
+            }
+
+            public void setAir_power(int air_power) {
+                this.air_power = air_power;
+            }
+
+            public boolean isConscription() {
+                return conscription;
+            }
+
+            public void setConscription(boolean conscription) {
+                this.conscription = conscription;
+            }
+
+            public boolean isLandlocked() {
+                return landlocked;
+            }
+
+            public void setLandlocked(boolean landlocked) {
+                this.landlocked = landlocked;
+            }
+
+            public int getOutlay() {
+                return outlay;
+            }
+
+            public void setOutlay(int outlay) {
+                this.outlay = outlay;
+            }
+
+            @Override
+            public String toString() {
+                String string;
+                string = "Army Power: " + arm_power + "\n";
+                string += "Navy Power: " + nav_power + "\n";
+                string += "Air Force Power: " + air_power + "\n";
+                string += "Conscription: " + (isConscription() ? "Yes" : "No") + "\n";
+                string += "Landlocked: " + (isLandlocked() ? "Yes" : "No") + "\n";
+                string += "Outlay: " + outlay + " ƒ ";
+                string += "(" + String.format("%.2f", (float) outlay / getEconomy().getGdp() * 100) + "%)" + "\n";
+                return string;
+            }
+        }
 
         private Government government;
 
@@ -310,6 +300,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             this.continent = Continent.valueOf(getResources().getStringArray(R.array.location)[key]);
             this.adjective = getResources().getStringArray(R.array.adjectives)[key];
             this.economy = new Economy(key);
+            this.military = new Military(key);
         }
 
         @Override
@@ -339,6 +330,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         public Economy getEconomy() {
             return economy;
+        }
+
+        public Military getMilitary() {
+            return military;
+        }
+
+        public void setMilitary(Military military) {
+            this.military = military;
         }
     }
 

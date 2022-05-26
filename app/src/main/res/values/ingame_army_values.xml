@@ -1,0 +1,457 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer-array name="army">
+        <item>8000</item>
+        <item>4000</item>
+        <item>3500</item>
+        <item>9000</item>
+        <item>4500</item>
+        <item>28000</item>
+        <item>1500</item>
+        <item>7000</item>
+        <item>1400</item>
+        <item>2100</item>
+        <item>2700</item>
+        <item>600</item>
+
+        <item>12000</item>
+        <item>45000</item>
+        <item>100000</item>
+        <item>10000</item>
+        <item>43000</item>
+        <item>32000</item>
+        <item>53000</item>
+
+        <item>1200</item>
+        <item>800</item>
+        <item>40000</item>
+        <item>1900</item>
+        <item>700</item>
+        <item>5000</item>
+        <item>1800</item>
+        <item>7500</item>
+
+        <item>260000</item>
+        <item>25000</item>
+        <item>20000</item>
+        <item>45000</item>
+        <item>78900</item>
+        <item>12570</item>
+        <item>15890</item>
+
+        <item>1200</item>
+        <item>2600</item>
+        <item>5030</item>
+        <item>400</item>
+        <item>300</item>
+        <item>250</item>
+        <item>600</item>
+        <item>900</item>
+        <item>1000</item>
+
+        <item>700</item>
+        <item>3000</item>
+        <item>900</item>
+        <item>250</item>
+        <item>1400</item>
+        <item>100</item>
+        <item>340</item>
+        <item>780</item>
+
+        <item>1200</item>
+        <item>1500</item>
+        <item>10000</item>
+        <item>8900</item>
+        <item>9800</item>
+        <item>5600</item>
+        <item>6700</item>
+        <item>7800</item>
+
+        <item>450</item>
+        <item>330</item>
+        <item>840</item>
+        <item>800</item>
+        <item>600</item>
+        <item>3400</item>
+        <item>670</item>
+        <item>5600</item>
+
+        <item>170</item>
+        <item>50</item>
+        <item>130</item>
+        <item>230</item>
+        <item>800</item>
+        <item>2400</item>
+        <item>2300</item>
+        <item>8700</item>
+
+        <item>245000</item>
+        <item>13000</item>
+        <item>12500</item>
+        <item>7890</item>
+    </integer-array>
+
+    <integer-array name="navy">
+        <item>100</item>
+        <item>0</item>
+        <item>35</item>
+        <item>120</item>
+        <item>80</item>
+        <item>500</item>
+        <item>25</item>
+        <item>90</item>
+        <item>0</item>
+        <item>30</item>
+        <item>0</item>
+        <item>5</item>
+
+        <item>450</item>
+        <item>680</item>
+        <item>1800</item>
+        <item>320</item>
+        <item>540</item>
+        <item>370</item>
+        <item>800</item>
+
+        <item>0</item>
+        <item>5</item>
+        <item>900</item>
+        <item>250</item>
+        <item>0</item>
+        <item>200</item>
+        <item>150</item>
+        <item>650</item>
+
+        <item>5000</item>
+        <item>0</item>
+        <item>580</item>
+        <item>870</item>
+        <item>1500</item>
+        <item>0</item>
+        <item>450</item>
+
+        <item>30</item>
+        <item>75</item>
+        <item>120</item>
+        <item>15</item>
+        <item>10</item>
+        <item>35</item>
+        <item>40</item>
+        <item>60</item>
+        <item>80</item>
+
+        <item>20</item>
+        <item>120</item>
+        <item>30</item>
+        <item>10</item>
+        <item>45</item>
+        <item>5</item>
+        <item>10</item>
+        <item>25</item>
+
+        <item>0</item>
+        <item>0</item>
+        <item>600</item>
+        <item>450</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+
+        <item>7</item>
+        <item>3</item>
+        <item>5</item>
+        <item>10</item>
+        <item>50</item>
+        <item>250</item>
+        <item>300</item>
+        <item>760</item>
+
+        <item>4700</item>
+        <item>1400</item>
+        <item>1200</item>
+        <item>800</item>
+    </integer-array>
+
+    <integer-array name="air_force">
+        <item>50</item>
+        <item>35</item>
+        <item>20</item>
+        <item>90</item>
+        <item>70</item>
+        <item>280</item>
+        <item>20</item>
+        <item>40</item>
+        <item>10</item>
+        <item>20</item>
+        <item>25</item>
+        <item>10</item>
+
+        <item>250</item>
+        <item>500</item>
+        <item>1200</item>
+        <item>230</item>
+        <item>540</item>
+        <item>500</item>
+        <item>520</item>
+
+        <item>15</item>
+        <item>4</item>
+        <item>600</item>
+        <item>80</item>
+        <item>10</item>
+        <item>80</item>
+        <item>150</item>
+        <item>120</item>
+
+        <item>4500</item>
+        <item>450</item>
+        <item>330</item>
+        <item>780</item>
+        <item>1450</item>
+        <item>150</item>
+        <item>130</item>
+
+        <item>10</item>
+        <item>23</item>
+        <item>80</item>
+        <item>10</item>
+        <item>0</item>
+        <item>0</item>
+        <item>25</item>
+        <item>10</item>
+        <item>20</item>
+
+        <item>0</item>
+        <item>90</item>
+        <item>10</item>
+        <item>0</item>
+        <item>25</item>
+        <item>0</item>
+        <item>10</item>
+        <item>25</item>
+
+        <item>4</item>
+        <item>6</item>
+        <item>650</item>
+        <item>230</item>
+        <item>280</item>
+        <item>17</item>
+        <item>24</item>
+        <item>54</item>
+
+        <item>0</item>
+        <item>3</item>
+        <item>10</item>
+        <item>14</item>
+        <item>15</item>
+        <item>220</item>
+        <item>45</item>
+        <item>450</item>
+
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>4</item>
+        <item>25</item>
+        <item>67</item>
+        <item>87</item>
+        <item>280</item>
+
+        <item>4100</item>
+        <item>770</item>
+        <item>560</item>
+        <item>230</item>
+    </integer-array>
+
+    <string-array name="conscription">
+        <item>true</item>
+        <item>true</item>
+        <item>true</item>
+        <item>false</item>
+        <item>true</item>
+        <item>true</item>
+        <item>true</item>
+        <item>true</item>
+        <item>false</item>
+        <item>true</item>
+        <item>true</item>
+        <item>false</item>
+
+        <item>false</item>
+        <item>false</item>
+        <item>true</item>
+        <item>false</item>
+        <item>true</item>
+        <item>false</item>
+        <item>false</item>
+
+        <item>true</item>
+        <item>true</item>
+        <item>false</item>
+        <item>false</item>
+        <item>true</item>
+        <item>true</item>
+        <item>true</item>
+        <item>true</item>
+
+        <item>false</item>
+        <item>false</item>
+        <item>false</item>
+        <item>false</item>
+        <item>false</item>
+        <item>true</item>
+        <item>false</item>
+
+        <item>true</item>
+        <item>true</item>
+        <item>true</item>
+        <item>true</item>
+        <item>true</item>
+        <item>true</item>
+        <item>false</item>
+        <item>true</item>
+        <item>false</item>
+
+        <item>false</item>
+        <item>true</item>
+        <item>true</item>
+        <item>true</item>
+        <item>false</item>
+        <item>true</item>
+        <item>false</item>
+        <item>false</item>
+
+        <item>true</item>
+        <item>true</item>
+        <item>false</item>
+        <item>false</item>
+        <item>false</item>
+        <item>true</item>
+        <item>true</item>
+        <item>true</item>
+
+        <item>false</item>
+        <item>true</item>
+        <item>true</item>
+        <item>false</item>
+        <item>true</item>
+        <item>false</item>
+        <item>true</item>
+        <item>true</item>
+
+        <item>true</item>
+        <item>false</item>
+        <item>true</item>
+        <item>true</item>
+        <item>true</item>
+        <item>true</item>
+        <item>false</item>
+        <item>false</item>
+
+        <item>true</item>
+        <item>true</item>
+        <item>false</item>
+        <item>true</item>
+    </string-array>
+    
+    <string-array name="landlocked">
+        <item>false</item>
+        <item>true</item>
+        <item>false</item>
+        <item>false</item>
+        <item>false</item>
+        <item>false</item>
+        <item>false</item>
+        <item>false</item>
+        <item>true</item>
+        <item>false</item>
+        <item>true</item>
+        <item>false</item>
+
+        <item>false</item>
+        <item>false</item>
+        <item>false</item>
+        <item>false</item>
+        <item>false</item>
+        <item>false</item>
+        <item>false</item>
+
+        <item>true</item>
+        <item>false</item>
+        <item>false</item>
+        <item>false</item>
+        <item>true</item>
+        <item>false</item>
+        <item>false</item>
+        <item>false</item>
+
+        <item>false</item>
+        <item>false</item>
+        <item>false</item>
+        <item>false</item>
+        <item>false</item>
+        <item>true</item>
+        <item>false</item>
+
+        <item>false</item>
+        <item>false</item>
+        <item>false</item>
+        <item>false</item>
+        <item>false</item>
+        <item>false</item>
+        <item>false</item>
+        <item>false</item>
+        <item>false</item>
+
+        <item>false</item>
+        <item>false</item>
+        <item>false</item>
+        <item>false</item>
+        <item>false</item>
+        <item>false</item>
+        <item>false</item>
+        <item>false</item>
+
+        <item>true</item>
+        <item>true</item>
+        <item>false</item>
+        <item>false</item>
+        <item>true</item>
+        <item>true</item>
+        <item>true</item>
+        <item>true</item>
+
+        <item>true</item>
+        <item>true</item>
+        <item>true</item>
+        <item>true</item>
+        <item>true</item>
+        <item>true</item>
+        <item>true</item>
+        <item>true</item>
+
+        <item>false</item>
+        <item>false</item>
+        <item>false</item>
+        <item>false</item>
+        <item>false</item>
+        <item>false</item>
+        <item>false</item>
+        <item>false</item>
+
+        <item>false</item>
+        <item>false</item>
+        <item>false</item>
+        <item>false</item>
+    </string-array>
+</resources>

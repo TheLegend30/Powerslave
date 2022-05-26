@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PowerSlave">
         <activity
+            android:name=".MilitaryStartActivity"
+            android:exported="false" />
+        <activity
             android:name=".ChooseRulerActivity"
             android:exported="false" />
         <activity

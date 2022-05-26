@@ -1,6 +1,9 @@
-package com.example.powerslave;
+package com.example.powerslave.person;
 
-public class Person {
+import com.example.powerslave.government.Continent;
+import com.example.powerslave.government.Ideology;
+
+public abstract class Person {
     private String name;
     private String surname;
     private Sex sex;

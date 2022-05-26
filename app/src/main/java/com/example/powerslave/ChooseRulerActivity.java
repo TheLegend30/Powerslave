@@ -13,6 +13,10 @@ import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.example.powerslave.government.Ideology;
+import com.example.powerslave.person.Ruler;
+import com.example.powerslave.person.Sex;
+
 import java.util.Random;
 
 public class ChooseRulerActivity extends AppCompatActivity implements View.OnClickListener {
@@ -27,7 +31,7 @@ public class ChooseRulerActivity extends AppCompatActivity implements View.OnCli
     private Spinner spinnerIdeology;
     private TextView textViewIdeoDescChRul;
     private MainActivity.Country country = MainActivity.countries.get(StartActivity.countrySpinnerStart.getSelectedItemPosition());
-    public Person ruler;
+    public static Ruler ruler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,7 +81,7 @@ public class ChooseRulerActivity extends AppCompatActivity implements View.OnCli
             } else {
                 sex = Sex.FEMALE;
             }
-            ruler = new Person(editTextName.getText().toString(), editTextSurname.getText().toString(), sex, country.getContinent(), Ideology.valueOf(getResources().getStringArray(R.array.ideology)[spinnerIdeology.getSelectedItemPosition()].toString()));
+            ruler = new Ruler(editTextName.getText().toString(), editTextSurname.getText().toString(), sex, country.getContinent(), Ideology.valueOf(getResources().getStringArray(R.array.ideology)[spinnerIdeology.getSelectedItemPosition()].toString()));
             System.out.println(ruler);
         } else if (view.getId() == imageButtonRandomName.getId()) {
             Random random = new Random();

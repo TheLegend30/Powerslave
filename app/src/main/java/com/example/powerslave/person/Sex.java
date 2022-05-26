@@ -1,4 +1,4 @@
-package com.example.powerslave;
+package com.example.powerslave.person;
 
 public enum Sex {
     MALE,

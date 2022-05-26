@@ -1,4 +1,4 @@
-package com.example.powerslave;
+package com.example.powerslave.government;
 
 public enum GovernmentType {
     PRE_REP,
