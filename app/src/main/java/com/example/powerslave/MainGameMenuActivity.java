@@ -11,28 +11,57 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.powerslave.person.Ruler;
 
-public class MainGameMenuActivity extends AppCompatActivity {
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
+public class MainGameMenuActivity extends AppCompatActivity implements View.OnClickListener {
+    private TextView textViewDate;
+    private Button buttonNextMonth;
+    private ImageButton buttonHealthcare;
+
     public static MainActivity.Country country = MainActivity.countries.get(StartActivity.countrySpinnerStart.getSelectedItemPosition());
     public static Ruler ruler = ChooseRulerActivity.ruler;
     public static boolean showAlertMessage = true;
+
+    public static Calendar calendar = Calendar.getInstance();
+    public static SimpleDateFormat format1 = new SimpleDateFormat("MMMM yyyy");
+
+    public static int selectedMinistry;
+
+    static {
+        calendar.set(1954, 0, 25);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_game_menu);
 
+        textViewDate = findViewById(R.id.textViewDate);
+        buttonNextMonth = findViewById(R.id.buttonNextMonth);
+        buttonHealthcare = findViewById(R.id.buttonHealthcare);
+
+        textViewDate.setText("Current date is: " + format1.format(calendar.getTime()));
+
+        buttonNextMonth.setOnClickListener(this);
+        buttonHealthcare.setOnClickListener(this);
+
         ActionBar actionBar = getSupportActionBar();
-
         actionBar.setIcon(R.drawable.ic_settings_foreground);
-
         actionBar.setDisplayUseLogoEnabled(true);
         actionBar.setDisplayShowHomeEnabled(true);
 
         showAlertMessage();
+
+
     }
 
     private void showAlertMessage() {
@@ -53,16 +82,16 @@ public class MainGameMenuActivity extends AppCompatActivity {
     }
 
     @Override
-    public boolean onCreateOptionsMenu( Menu menu ) {
+    public boolean onCreateOptionsMenu(Menu menu) {
 
         getMenuInflater().inflate(R.menu.main, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
     @Override
-    public boolean onOptionsItemSelected( @NonNull MenuItem item ) {
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case R.id.exit:
                 Intent intent = new Intent(MainGameMenuActivity.this, MainActivity.class);
                 startActivity(intent);
@@ -76,4 +105,16 @@ public class MainGameMenuActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onClick(View view) {
+        if (view.getId() == buttonNextMonth.getId()) {
+            calendar.add(Calendar.MONTH, 1);
+            MainGameMenuActivity.this.recreate();
+        } else {
+            Intent intent = new Intent(MainGameMenuActivity.this, MinistryActivity.class);
+            if (view.getId() == buttonHealthcare.getId()) {
+
+            }
+        }
+    }
 }

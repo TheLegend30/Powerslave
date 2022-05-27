@@ -41,8 +41,6 @@ public class ChooseRulerActivity extends AppCompatActivity implements View.OnCli
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_choose_ruler);
 
-        MainGameMenuActivity.showAlertMessage = true;
-
         backArrowChRul = findViewById(R.id.backArrowChRul);
         forwardArrowChRul = findViewById(R.id.forwardArrowChRul);
         imageButtonRandomName = findViewById(R.id.imageButtonRandomName);

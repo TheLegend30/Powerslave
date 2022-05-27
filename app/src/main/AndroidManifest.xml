@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PowerSlave">
         <activity
+            android:name=".MinistryActivity"
+            android:exported="false" />
+        <activity
             android:name=".EventActivity"
             android:exported="false" />
         <activity

@@ -15,6 +15,7 @@ import com.example.powerslave.government.Government;
 import com.example.powerslave.government.GovernmentType;
 import com.example.powerslave.government.RegionalForm;
 import com.example.powerslave.government.Religion;
+import com.example.powerslave.ministry.Ministry;
 
 import java.util.ArrayList;
 
@@ -105,6 +106,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         private String adjective;
         private Religion religion;
         private Continent continent;
+
+        private ArrayList<Ministry> ministries = new ArrayList<Ministry>();
 
         private Economy economy;
 
