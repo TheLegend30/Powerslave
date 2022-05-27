@@ -30,4 +30,9 @@ public class MilitaryStartActivity extends AppCompatActivity implements View.OnC
             MilitaryStartActivity.this.finish();
         }
     }
+
+    @Override
+    public void onBackPressed() {
+        onClick(findViewById(R.id.backArrowMilitaryStart));
+    }
 }

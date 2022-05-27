@@ -339,6 +339,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         public void setMilitary(Military military) {
             this.military = military;
         }
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
     }
 
 }

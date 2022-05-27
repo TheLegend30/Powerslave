@@ -1,7 +1,10 @@
 package com.example.powerslave;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -37,6 +40,8 @@ public class ChooseRulerActivity extends AppCompatActivity implements View.OnCli
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_choose_ruler);
+
+        MainGameMenuActivity.showAlertMessage = true;
 
         backArrowChRul = findViewById(R.id.backArrowChRul);
         forwardArrowChRul = findViewById(R.id.forwardArrowChRul);
@@ -83,6 +88,24 @@ public class ChooseRulerActivity extends AppCompatActivity implements View.OnCli
             }
             ruler = new Ruler(editTextName.getText().toString(), editTextSurname.getText().toString(), sex, country.getContinent(), Ideology.valueOf(getResources().getStringArray(R.array.ideology)[spinnerIdeology.getSelectedItemPosition()].toString()));
             System.out.println(ruler);
+            DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    switch (i) {
+                        case DialogInterface.BUTTON_POSITIVE:
+                            Intent intent = new Intent(ChooseRulerActivity.this, MainGameMenuActivity.class);
+                            startActivity(intent);
+                            break;
+                        case DialogInterface.BUTTON_NEGATIVE:
+                            break;
+                    }
+                }
+            };
+            AlertDialog.Builder builder = new AlertDialog.Builder(ChooseRulerActivity.this);
+            builder.setMessage("Are you sure with the country and your ruler?")
+                    .setPositiveButton("Yes", dialogClickListener)
+                    .setNegativeButton("No", dialogClickListener)
+                    .show();
         } else if (view.getId() == imageButtonRandomName.getId()) {
             Random random = new Random();
             switch (country.getContinent()) {

@@ -31,4 +31,9 @@ public class AboutActivity extends AppCompatActivity implements View.OnClickList
             AboutActivity.this.finish();
         }
     }
+
+    @Override
+    public void onBackPressed() {
+        onClick(findViewById(R.id.backArrowAbout));
+    }
 }

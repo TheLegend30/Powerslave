@@ -103,6 +103,10 @@ public class StartActivity extends AppCompatActivity implements View.OnClickList
         }
     }
 
+    @Override
+    public void onBackPressed() {
+        onClick(findViewById(R.id.backArrowStart));
+    }
 
 
 }

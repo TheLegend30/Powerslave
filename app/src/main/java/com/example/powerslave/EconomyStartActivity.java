@@ -33,4 +33,10 @@ public class EconomyStartActivity extends AppCompatActivity implements View.OnCl
             EconomyStartActivity.this.finish();
         }
     }
+
+    @Override
+    public void onBackPressed() {
+        onClick(findViewById(R.id.backArrowEconomyStart));
+    }
+
 }
