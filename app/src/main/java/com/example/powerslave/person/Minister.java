@@ -29,4 +29,11 @@ public class Minister extends Person{
     public void setCompetency(float competency) {
         this.competency = competency;
     }
+
+    @Override
+    public String toString() {
+        return super.toString() + "\n" +
+                "Loyalty: " + loyalty + "\n" +
+                "Competency: " + competency;
+    }
 }

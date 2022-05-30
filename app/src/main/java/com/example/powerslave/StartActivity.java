@@ -18,6 +18,8 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.example.powerslave.government.Country;
+
 import java.io.InputStream;
 
 public class StartActivity extends AppCompatActivity implements View.OnClickListener {
@@ -43,8 +45,8 @@ public class StartActivity extends AppCompatActivity implements View.OnClickList
         forwardArrowStart = findViewById(R.id.forwardArrowStart);
         economyButtonStart = findViewById(R.id.economyButtonStart);
         militaryButtonStart = findViewById(R.id.militaryButtonStart);
-        flagViewStart = findViewById(R.id.flagViewStart);
         countrySpinnerStart = (Spinner) findViewById(R.id.countrySpinnerStart);
+        flagViewStart = findViewById(R.id.flagViewStart);
         textCapitalStart = findViewById(R.id.textCapitalStart);
         textGovernmentStart = findViewById(R.id.textGovernmentStart);
         textLocationStart = findViewById(R.id.textLocationStart);
@@ -55,13 +57,13 @@ public class StartActivity extends AppCompatActivity implements View.OnClickList
         economyButtonStart.setOnClickListener(this);
         militaryButtonStart.setOnClickListener(this);
 
-        ArrayAdapter countryAdapter = new ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, MainActivity.countries);
+        ArrayAdapter countryAdapter = new ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, Country.countries);
 
         countrySpinnerStart.setAdapter(countryAdapter);
         countrySpinnerStart.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                MainActivity.Country country = (MainActivity.Country) parent.getSelectedItem();
+                Country country = (Country) parent.getSelectedItem();
             }
 
             @Override
@@ -72,7 +74,7 @@ public class StartActivity extends AppCompatActivity implements View.OnClickList
         countrySpinnerStart.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                MainActivity.Country country = MainActivity.countries.get(i);
+                Country country = Country.countries.get(i);
 
                 flagViewStart.setImageURI(country.getFlagSrc());
                 textCapitalStart.setText("Capital: " + country.getCapitalName());

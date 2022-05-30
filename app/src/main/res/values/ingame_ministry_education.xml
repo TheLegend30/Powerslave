@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="literacy">
+        <item>79.6</item>
+        <item>76.5</item>
+        <item>78.5</item>
+        <item>80.3</item>
+        <item>85.35</item>
+        <item>78.42</item>
+        <item>74.75</item>
+        <item>70.53</item>
+        <item>73.35</item>
+        <item>75.68</item>
+        <item>68.63</item>
+        <item>78.47</item>
+
+        <item>95.36</item>
+        <item>94.35</item>
+        <item>99.47</item>
+        <item>97.53</item>
+        <item>93.63</item>
+        <item>96.36</item>
+        <item>95.64</item>
+
+        <item>59.63</item>
+        <item>63.57</item>
+        <item>78.53</item>
+        <item>80.53</item>
+        <item>69.53</item>
+        <item>83.74</item>
+        <item>84.53</item>
+        <item>88.53</item>
+
+        <item>98.47</item>
+        <item>99.35</item>
+        <item>99.26</item>
+        <item>98.42</item>
+        <item>99.46</item>
+        <item>97.53</item>
+        <item>96.37</item>
+
+        <item>53.46</item>
+        <item>50.54</item>
+        <item>63.42</item>
+        <item>55.5</item>
+        <item>49.57</item>
+        <item>46.75</item>
+        <item>53.58</item>
+        <item>57.42</item>
+        <item>55.35</item>
+
+        <item>67.84</item>
+        <item>76.26</item>
+        <item>79.46</item>
+        <item>69.54</item>
+        <item>79.53</item>
+        <item>69.64</item>
+        <item>67.85</item>
+        <item>69.47</item>
+
+        <item>15.64</item>
+        <item>20.1</item>
+        <item>69.36</item>
+        <item>57.54</item>
+        <item>70.46</item>
+        <item>26.42</item>
+        <item>29.37</item>
+        <item>34.57</item>
+
+        <item>43.46</item>
+        <item>47.4</item>
+        <item>45.63</item>
+        <item>54.35</item>
+        <item>46.47</item>
+        <item>73.5</item>
+        <item>54.6</item>
+        <item>63.25</item>
+
+        <item>8.47</item>
+        <item>10.36</item>
+        <item>20.57</item>
+        <item>17.43</item>
+        <item>67.84</item>
+        <item>39.63</item>
+        <item>45.67</item>
+        <item>59.44</item>
+
+        <item>93.68</item>
+        <item>85.46</item>
+        <item>89.47</item>
+        <item>88.37</item>
+    </string-array>
+</resources>

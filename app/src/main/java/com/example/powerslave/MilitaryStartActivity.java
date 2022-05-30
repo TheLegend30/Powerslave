@@ -7,6 +7,8 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.example.powerslave.government.Country;
+
 public class MilitaryStartActivity extends AppCompatActivity implements View.OnClickListener {
     TextView textViewMilitaryStart;
     ImageButton backArrowMilitaryStart;
@@ -19,7 +21,7 @@ public class MilitaryStartActivity extends AppCompatActivity implements View.OnC
         textViewMilitaryStart = findViewById(R.id.textViewMilitaryStart);
         backArrowMilitaryStart = findViewById(R.id.backArrowMilitaryStart);
 
-        textViewMilitaryStart.setText(MainActivity.countries.get(StartActivity.countrySpinnerStart.getSelectedItemPosition()).getMilitary().toString());
+        textViewMilitaryStart.setText(Country.countries.get(StartActivity.countrySpinnerStart.getSelectedItemPosition()).getMilitary().toString());
 
         backArrowMilitaryStart.setOnClickListener(this);
     }

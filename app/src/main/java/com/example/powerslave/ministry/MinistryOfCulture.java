@@ -1,9 +1,11 @@
 package com.example.powerslave.ministry;
 
+import android.content.Context;
+
 import com.example.powerslave.person.Minister;
 
 public class MinistryOfCulture extends Ministry{
-    protected MinistryOfCulture(String name, Minister minister) {
-        super(name, minister);
+    public MinistryOfCulture(int countryKey, Minister minister, Context context) {
+        super(countryKey, minister, context);
     }
 }

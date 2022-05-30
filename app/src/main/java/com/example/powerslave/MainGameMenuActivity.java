@@ -14,9 +14,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.powerslave.government.Country;
 import com.example.powerslave.person.Ruler;
 
 import java.text.SimpleDateFormat;
@@ -24,20 +26,24 @@ import java.util.Calendar;
 
 public class MainGameMenuActivity extends AppCompatActivity implements View.OnClickListener {
     private TextView textViewDate;
+    private TextView textViewCountryName;
+    private ImageView imageViewFlag;
     private Button buttonNextMonth;
     private ImageButton buttonHealthcare;
+    private ImageButton buttonEducation;
+    private ImageButton buttonEconomy;
 
-    public static MainActivity.Country country = MainActivity.countries.get(StartActivity.countrySpinnerStart.getSelectedItemPosition());
+    public static Country country = Country.countries.get(StartActivity.countrySpinnerStart.getSelectedItemPosition());
     public static Ruler ruler = ChooseRulerActivity.ruler;
     public static boolean showAlertMessage = true;
 
     public static Calendar calendar = Calendar.getInstance();
     public static SimpleDateFormat format1 = new SimpleDateFormat("MMMM yyyy");
 
-    public static int selectedMinistry;
+    public static int selectedMinistry = 0;
 
     static {
-        calendar.set(1954, 0, 25);
+        calendar.set(1959, 0, 25);
     }
 
     @Override
@@ -46,13 +52,22 @@ public class MainGameMenuActivity extends AppCompatActivity implements View.OnCl
         setContentView(R.layout.activity_main_game_menu);
 
         textViewDate = findViewById(R.id.textViewDate);
+        textViewCountryName = findViewById(R.id.textViewCountryName);
+        imageViewFlag = findViewById(R.id.imageViewFlag);
         buttonNextMonth = findViewById(R.id.buttonNextMonth);
         buttonHealthcare = findViewById(R.id.buttonHealthcare);
+        buttonEducation = findViewById(R.id.buttonEducation);
+        buttonEconomy = findViewById(R.id.buttonEconomy);
 
         textViewDate.setText("Current date is: " + format1.format(calendar.getTime()));
+        textViewCountryName.setText("Country: " + country.getName());
+
+        imageViewFlag.setImageURI(country.getFlagSrc());
 
         buttonNextMonth.setOnClickListener(this);
         buttonHealthcare.setOnClickListener(this);
+        buttonEducation.setOnClickListener(this);
+        buttonEconomy.setOnClickListener(this);
 
         ActionBar actionBar = getSupportActionBar();
         actionBar.setIcon(R.drawable.ic_settings_foreground);
@@ -113,8 +128,14 @@ public class MainGameMenuActivity extends AppCompatActivity implements View.OnCl
         } else {
             Intent intent = new Intent(MainGameMenuActivity.this, MinistryActivity.class);
             if (view.getId() == buttonHealthcare.getId()) {
-
+                selectedMinistry = 0;
+            } else if (view.getId() == buttonEducation.getId()) {
+                selectedMinistry = 1;
+            } else if (view.getId() == buttonEconomy.getId()) {
+                selectedMinistry = 2;
             }
+
+            startActivity(intent);
         }
     }
 }

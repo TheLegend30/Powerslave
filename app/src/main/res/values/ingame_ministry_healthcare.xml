@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="life_expectancy">
+        <item>62.65</item>
+        <item>59.53</item>
+        <item>58.32</item>
+        <item>61.69</item>
+        <item>65.37</item>
+        <item>61.27</item>
+        <item>62.84</item>
+        <item>61.67</item>
+        <item>63.62</item>
+        <item>58.35</item>
+        <item>57.64</item>
+        <item>62.64</item>
+
+        <item>67.67</item>
+        <item>69.85</item>
+        <item>68.35</item>
+        <item>71.21</item>
+        <item>70.02</item>
+        <item>68.65</item>
+        <item>69.27</item>
+
+        <item>60.64</item>
+        <item>59.37</item>
+        <item>63.64</item>
+        <item>65.43</item>
+        <item>62.38</item>
+        <item>68.2</item>
+        <item>67.47</item>
+        <item>69.04</item>
+
+        <item>72.16</item>
+        <item>71.54</item>
+        <item>73.46</item>
+        <item>71.7</item>
+        <item>72.02</item>
+        <item>70.53</item>
+        <item>69.98</item>
+
+        <item>57.67</item>
+        <item>56.75</item>
+        <item>60.42</item>
+        <item>61.43</item>
+        <item>58.47</item>
+        <item>63.42</item>
+        <item>57.42</item>
+        <item>56.65</item>
+        <item>57.76</item>
+
+        <item>62.46</item>
+        <item>65.34</item>
+        <item>63.57</item>
+        <item>62.5</item>
+        <item>67.53</item>
+        <item>61.43</item>
+        <item>64.96</item>
+        <item>58.43</item>
+
+        <item>44.32</item>
+        <item>46.43</item>
+        <item>62.24</item>
+        <item>65.36</item>
+        <item>61.27</item>
+        <item>52.45</item>
+        <item>49.77</item>
+        <item>53.74</item>
+
+        <item>41.75</item>
+        <item>42.69</item>
+        <item>44.63</item>
+        <item>47.13</item>
+        <item>42.46</item>
+        <item>54.46</item>
+        <item>49.36</item>
+        <item>53.21</item>
+
+        <item>39.63</item>
+        <item>40.63</item>
+        <item>41.56</item>
+        <item>43.7</item>
+        <item>54.46</item>
+        <item>57.36</item>
+        <item>58.57</item>
+        <item>60.75</item>
+
+        <item>71.54</item>
+        <item>68.47</item>
+        <item>69.63</item>
+        <item>70.89</item>
+    </string-array>
+</resources>

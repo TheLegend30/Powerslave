@@ -16,6 +16,7 @@ import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.example.powerslave.government.Country;
 import com.example.powerslave.government.Ideology;
 import com.example.powerslave.person.Ruler;
 import com.example.powerslave.person.Sex;
@@ -33,7 +34,7 @@ public class ChooseRulerActivity extends AppCompatActivity implements View.OnCli
     private RadioButton radioButtonSexFemaleChRul;
     private Spinner spinnerIdeology;
     private TextView textViewIdeoDescChRul;
-    private MainActivity.Country country = MainActivity.countries.get(StartActivity.countrySpinnerStart.getSelectedItemPosition());
+    private Country country = Country.countries.get(StartActivity.countrySpinnerStart.getSelectedItemPosition());
     public static Ruler ruler;
 
     @Override
@@ -85,7 +86,6 @@ public class ChooseRulerActivity extends AppCompatActivity implements View.OnCli
                 sex = Sex.FEMALE;
             }
             ruler = new Ruler(editTextName.getText().toString(), editTextSurname.getText().toString(), sex, country.getContinent(), Ideology.valueOf(getResources().getStringArray(R.array.ideology)[spinnerIdeology.getSelectedItemPosition()].toString()));
-            System.out.println(ruler);
             DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {

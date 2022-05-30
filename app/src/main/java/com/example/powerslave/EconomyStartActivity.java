@@ -7,11 +7,13 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.example.powerslave.government.Country;
+
 public class EconomyStartActivity extends AppCompatActivity implements View.OnClickListener {
 
     private ImageButton backArrowEconomyStart;
     private TextView textEconomyStart;
-    private MainActivity.Country country = MainActivity.countries.get(StartActivity.countrySpinnerStart.getSelectedItemPosition());
+    private Country country = Country.countries.get(StartActivity.countrySpinnerStart.getSelectedItemPosition());
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,7 +23,7 @@ public class EconomyStartActivity extends AppCompatActivity implements View.OnCl
         backArrowEconomyStart = findViewById(R.id.backArrowEconomyStart);
         textEconomyStart = findViewById(R.id.textEconomyStart);
 
-        textEconomyStart.setText(country.getEconomy().toString());
+        textEconomyStart.setText(country.getMinistryOfEconomy().toString());
 
         backArrowEconomyStart.setOnClickListener(this);
 
