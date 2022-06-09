@@ -7,10 +7,180 @@
     android:background="@null"
     tools:context=".MainGameMenuActivity">
 
+    <ImageButton
+        android:id="@+id/buttonForeignAffairs"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:background="@null"
+        app:layout_constraintStart_toEndOf="@+id/buttonNationalIntelligence"
+        app:layout_constraintTop_toBottomOf="@+id/buttonInternalAffairs"
+        app:srcCompat="@mipmap/ic_ministry_of_external_affairs"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <ImageButton
+        android:id="@+id/buttonDevelopment"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:background="@null"
+        app:layout_constraintStart_toEndOf="@+id/buttonAgriculture"
+        app:layout_constraintTop_toBottomOf="@+id/buttonHealthcare"
+        app:srcCompat="@mipmap/ic_ministry_of_development"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <ImageButton
+        android:id="@+id/buttonHealthcare"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="36dp"
+        android:background="@null"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageViewFlag"
+        app:srcCompat="@mipmap/ic_ministry_of_health"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <ImageButton
+        android:id="@+id/buttonInternalAffairs"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:background="@null"
+        app:layout_constraintStart_toEndOf="@+id/buttonCulture"
+        app:layout_constraintTop_toBottomOf="@+id/buttonAgriculture"
+        app:srcCompat="@mipmap/ic_ministry_of_internal_affairs"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <ImageButton
+        android:id="@+id/buttonTransportation"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:background="@null"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/buttonIndustry"
+        app:layout_constraintTop_toBottomOf="@+id/buttonHealthcare"
+        app:srcCompat="@mipmap/ic_ministry_of_transportation"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <ImageButton
+        android:id="@+id/buttonParliament"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:background="@null"
+        app:layout_constraintStart_toEndOf="@+id/buttonJustice"
+        app:layout_constraintTop_toBottomOf="@+id/buttonAgriculture"
+        app:srcCompat="@mipmap/ic_parliament"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <ImageButton
+        android:id="@+id/buttonJustice"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:background="@null"
+        app:layout_constraintStart_toEndOf="@+id/buttonInternalAffairs"
+        app:layout_constraintTop_toBottomOf="@+id/buttonAgriculture"
+        app:srcCompat="@mipmap/ic_ministry_of_justice"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <ImageButton
+        android:id="@+id/buttonAgriculture"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="16dp"
+        android:background="@null"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonHealthcare"
+        app:srcCompat="@mipmap/ic_ministry_of_agriculture"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <ImageButton
+        android:id="@+id/buttonEducation"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="36dp"
+        android:background="@null"
+        app:layout_constraintStart_toEndOf="@+id/buttonHealthcare"
+        app:layout_constraintTop_toBottomOf="@+id/imageViewFlag"
+        app:srcCompat="@mipmap/ic_ministry_of_education"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <ImageButton
+        android:id="@+id/buttonNationalIntelligence"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:background="@null"
+        app:layout_constraintStart_toEndOf="@+id/buttonCulture"
+        app:layout_constraintTop_toBottomOf="@+id/buttonInternalAffairs"
+        app:srcCompat="@mipmap/ic_national_intelligence"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <ImageButton
+        android:id="@+id/buttonEconomy"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="36dp"
+        android:background="@null"
+        app:layout_constraintStart_toEndOf="@+id/buttonEducation"
+        app:layout_constraintTop_toBottomOf="@+id/imageViewFlag"
+        app:srcCompat="@mipmap/ic_gulden_sign"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <ImageButton
+        android:id="@+id/buttonIndustry"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:background="@null"
+        app:layout_constraintStart_toEndOf="@+id/buttonDevelopment"
+        app:layout_constraintTop_toBottomOf="@+id/buttonHealthcare"
+        app:srcCompat="@mipmap/ic_ministry_of_industry"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <ImageButton
+        android:id="@+id/buttonMilitary"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="36dp"
+        android:background="@null"
+        app:layout_constraintStart_toEndOf="@+id/buttonEconomy"
+        app:layout_constraintTop_toBottomOf="@+id/imageViewFlag"
+        app:srcCompat="@mipmap/ic_military_sign"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <ImageButton
+        android:id="@+id/buttonCulture"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="16dp"
+        android:background="@null"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonAgriculture"
+        app:srcCompat="@mipmap/ic_ministry_of_culture"
+        tools:ignore="SpeakableTextPresentCheck" />
+
     <Button
         android:id="@+id/buttonNextMonth"
         android:layout_width="250dp"
-        android:layout_height="100dp"
+        android:layout_height="60dp"
         android:layout_marginBottom="16dp"
         android:text="NEXT MONTH"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -33,69 +203,20 @@
         android:id="@+id/textViewCountryName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
         android:text="TextView"
         android:textColor="@color/dark_blue"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.386"
         app:layout_constraintStart_toEndOf="@+id/imageViewFlag"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageButton
-        android:id="@+id/buttonHealthcare"
-        android:layout_width="75dp"
-        android:layout_height="75dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="36dp"
-        android:background="@null"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageViewFlag"
-        app:srcCompat="@mipmap/ic_ministry_of_health"
-        tools:ignore="SpeakableTextPresentCheck" />
-
-    <ImageButton
-        android:id="@+id/buttonEducation"
-        android:layout_width="75dp"
-        android:layout_height="75dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="36dp"
-        android:background="@null"
-        app:layout_constraintStart_toEndOf="@+id/buttonHealthcare"
-        app:layout_constraintTop_toBottomOf="@+id/imageViewFlag"
-        app:srcCompat="@mipmap/ic_ministry_of_education"
-        tools:ignore="SpeakableTextPresentCheck" />
-
-    <ImageButton
-        android:id="@+id/buttonEconomy"
-        android:layout_width="75dp"
-        android:layout_height="75dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="36dp"
-        android:background="@null"
-        app:layout_constraintStart_toEndOf="@+id/buttonEducation"
-        app:layout_constraintTop_toBottomOf="@+id/imageViewFlag"
-        app:srcCompat="@mipmap/ic_gulden_sign"
-        tools:ignore="SpeakableTextPresentCheck" />
-
-    <ImageButton
-        android:id="@+id/buttonEducation3"
-        android:layout_width="75dp"
-        android:layout_height="75dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="36dp"
-        android:background="@null"
-        app:layout_constraintStart_toEndOf="@+id/buttonEconomy"
-        app:layout_constraintTop_toBottomOf="@+id/imageViewFlag"
-        app:srcCompat="@mipmap/ic_ministry_of_education"
-        tools:ignore="SpeakableTextPresentCheck" />
+        app:layout_constraintTop_toTopOf="@+id/imageViewFlag" />
 
     <ImageView
         android:id="@+id/imageViewFlag"
         android:layout_width="150dp"
         android:layout_height="100dp"
         android:layout_marginStart="36dp"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="65dp"
         android:background="#000000"
         android:padding="1dp"
         app:layout_constraintStart_toStartOf="parent"

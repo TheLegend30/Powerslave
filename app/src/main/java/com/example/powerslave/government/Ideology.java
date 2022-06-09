@@ -7,7 +7,7 @@ public enum Ideology {
     Hycrocism,
     Zowotism,
     Beclysm,
-    NeoLeeism,
+    Neoleeism,
     Fokritism;
 
 }

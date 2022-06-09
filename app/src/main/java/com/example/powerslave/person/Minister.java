@@ -1,17 +1,24 @@
 package com.example.powerslave.person;
 
+import android.net.Uri;
+
 import com.example.powerslave.government.Continent;
+import com.example.powerslave.government.Country;
 import com.example.powerslave.government.Ideology;
 
-public class Minister extends Person{
+import java.util.Random;
+
+public class Minister extends Person {
     private float loyalty;
     private float competency;
 
 
-    public Minister(String name, String surname, Sex sex, Continent motherland, Ideology ideology, float loyalty, float competency) {
-        super(name, surname, sex, motherland, ideology);
+
+    public Minister(String name, String surname, Sex sex, Country country, Ideology ideology, float loyalty, float competency, Uri portrait) {
+        super(name, surname, sex, country, ideology, portrait);
         this.loyalty = loyalty;
         this.competency = competency;
+        this.portrait = portrait;
     }
 
     public float getLoyalty() {
@@ -30,10 +37,19 @@ public class Minister extends Person{
         this.competency = competency;
     }
 
+    public Uri getPortrait() {
+        return portrait;
+    }
+
+    public void setPortrait(Uri portrait) {
+        this.portrait = portrait;
+    }
+
     @Override
     public String toString() {
         return super.toString() + "\n" +
-                "Loyalty: " + loyalty + "\n" +
-                "Competency: " + competency;
+                "L: " + loyalty + "\n" +
+                "C: " + competency;
     }
+
 }

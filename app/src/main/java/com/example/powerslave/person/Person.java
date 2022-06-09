@@ -1,19 +1,26 @@
 package com.example.powerslave.person;
 
+import android.net.Uri;
+
 import com.example.powerslave.government.Continent;
+import com.example.powerslave.government.Country;
 import com.example.powerslave.government.Ideology;
 
-public abstract class Person {
-    private String name;
-    private String surname;
-    private Sex sex;
-    private Ideology ideology;
+public abstract class Person implements Comparable<Person>{
+    protected String name;
+    protected String surname;
+    protected Sex sex;
+    protected Country country;
+    protected Ideology ideology;
+    protected Uri portrait;
 
-    public Person(String name, String surname, Sex sex, Continent motherland, Ideology ideology) {
+    public Person(String name, String surname, Sex sex, Country country, Ideology ideology, Uri portrait) {
         this.name = name;
         this.surname = surname;
         this.sex = sex;
+        this.country = country;
         this.ideology = ideology;
+        this.portrait = portrait;
     }
 
     public String getName() {
@@ -48,11 +55,31 @@ public abstract class Person {
         this.ideology = ideology;
     }
 
+    public Country getCountry() {
+        return country;
+    }
+
+    public void setCountry(Country country) {
+        this.country = country;
+    }
+
+    public Uri getPortrait() {
+        return portrait;
+    }
+
+    public void setPortrait(Uri portrait) {
+        this.portrait = portrait;
+    }
+
     @Override
     public String toString() {
-        return "Name: " + name + '\n' +
-                        "Surname: " + surname + '\n' +
-                        "Sex: " + sex + '\n' +
-                        "Ideology: " + ideology;
+        return name + '\n' + surname + '\n' +
+                "S: " + sex + '\n' +
+                "I: " + ideology;
+    }
+
+    @Override
+    public int compareTo(Person p) {
+        return this.name.compareTo(p.name);
     }
 }

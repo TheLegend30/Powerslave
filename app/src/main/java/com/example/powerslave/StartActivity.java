@@ -62,17 +62,6 @@ public class StartActivity extends AppCompatActivity implements View.OnClickList
         countrySpinnerStart.setAdapter(countryAdapter);
         countrySpinnerStart.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                Country country = (Country) parent.getSelectedItem();
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-            }
-        });
-
-        countrySpinnerStart.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 Country country = Country.countries.get(i);
 

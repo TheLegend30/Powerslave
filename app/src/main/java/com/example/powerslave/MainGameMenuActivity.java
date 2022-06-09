@@ -16,13 +16,15 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.powerslave.government.Country;
+import com.example.powerslave.person.Minister;
 import com.example.powerslave.person.Ruler;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 
 public class MainGameMenuActivity extends AppCompatActivity implements View.OnClickListener {
     private TextView textViewDate;
@@ -33,9 +35,9 @@ public class MainGameMenuActivity extends AppCompatActivity implements View.OnCl
     private ImageButton buttonEducation;
     private ImageButton buttonEconomy;
 
-    public static Country country = Country.countries.get(StartActivity.countrySpinnerStart.getSelectedItemPosition());
-    public static Ruler ruler = ChooseRulerActivity.ruler;
-    public static boolean showAlertMessage = true;
+    public static Country country;
+    public static Ruler ruler;
+    public static boolean showAlertMessage;
 
     public static Calendar calendar = Calendar.getInstance();
     public static SimpleDateFormat format1 = new SimpleDateFormat("MMMM yyyy");
@@ -43,13 +45,21 @@ public class MainGameMenuActivity extends AppCompatActivity implements View.OnCl
     public static int selectedMinistry = 0;
 
     static {
-        calendar.set(1959, 0, 25);
+        startMainGameActivity();
+    }
+
+    private static void startMainGameActivity() {
+        calendar.set(1965, 0, 25);
+        showAlertMessage = true;
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_game_menu);
+
+        country = ChooseRulerActivity.country;
+        ruler = ChooseRulerActivity.ruler;
 
         textViewDate = findViewById(R.id.textViewDate);
         textViewCountryName = findViewById(R.id.textViewCountryName);
@@ -110,6 +120,7 @@ public class MainGameMenuActivity extends AppCompatActivity implements View.OnCl
             case R.id.exit:
                 Intent intent = new Intent(MainGameMenuActivity.this, MainActivity.class);
                 startActivity(intent);
+                MainGameMenuActivity.startMainGameActivity();
                 break;
         }
         return super.onOptionsItemSelected(item);
@@ -124,6 +135,10 @@ public class MainGameMenuActivity extends AppCompatActivity implements View.OnCl
     public void onClick(View view) {
         if (view.getId() == buttonNextMonth.getId()) {
             calendar.add(Calendar.MONTH, 1);
+            country.addMinisterExperience();
+            if (calendar.getTime().getMonth() == 0) {
+                country.updateMinisters();
+            }
             MainGameMenuActivity.this.recreate();
         } else {
             Intent intent = new Intent(MainGameMenuActivity.this, MinistryActivity.class);

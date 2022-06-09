@@ -11,6 +11,7 @@ public class MinistryOfHealthcare extends Ministry {
 
     private float life_expectancy;
 
+
     public MinistryOfHealthcare(int countryKey, Minister minister, Context context) {
         super(countryKey, minister, context);
         this.name = "Ministry of Healthcare";

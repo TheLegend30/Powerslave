@@ -8,17 +8,66 @@
     tools:context=".MinistryActivity">
 
     <LinearLayout
-        android:id="@+id/textLayoutMinistry"
+        android:id="@+id/ministerSetLayout"
         android:layout_width="match_parent"
-        android:layout_height="350dp"
-        android:orientation="vertical">
+        android:layout_height="131dp"
+        android:orientation="horizontal">
 
+        <Spinner
+            android:id="@+id/spinnerChooseMinister"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            tools:ignore="SpeakableTextPresentCheck" />
+
+        <Button
+            android:id="@+id/buttonConfirmMinister"
+            android:layout_width="215dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="Confirm" />
     </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="210dp">
+
+        <LinearLayout
+            android:id="@+id/textLayoutMinistry"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textMinistry"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="TextView" />
+
+            <TextView
+                android:id="@+id/textMinister"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="TextView" />
+
+            <ImageView
+                android:id="@+id/ministerPortrait"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/anon_person" />
+
+        </LinearLayout>
+    </ScrollView>
 
     <LinearLayout
         android:id="@+id/buttonLayoutMinistry"
         android:layout_width="match_parent"
-        android:layout_height="300dp"
-        android:orientation="vertical"></LinearLayout>
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"></LinearLayout>
 
 </LinearLayout>

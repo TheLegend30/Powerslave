@@ -2,6 +2,7 @@ package com.example.powerslave;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.media.MediaPlayer;
@@ -12,15 +13,14 @@ import android.widget.Button;
 
 import com.example.powerslave.government.Country;
 
+import java.util.Collections;
+
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-    //TODO: Add ChooseRulerActivity and finish it
     //TODO: Settings + Finish Music
     //TODO: More Pics
-    //TODO: Military indexes
     //TODO: Better descriptions
-    //TODO: Rework economic indexes
 
     //Main button on main activity
     private Button buttonStart;
@@ -51,20 +51,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         buttonAbout.setOnClickListener(this);
         buttonExit.setOnClickListener(this);
 
-        initCountries();
+        Country.initCountries(this);
     }
 
     private void startMusic() {
         mediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.bossantigua);
         mediaPlayer.setLooping(true);
         //mediaPlayer.start();
-    }
-
-    private void initCountries() {
-        int length = getResources().getStringArray(R.array.countries).length;
-        for (int i = 0; i < length; i++) {
-            Country.countries.add(new Country(i, MainActivity.this));
-        }
     }
 
     @Override
