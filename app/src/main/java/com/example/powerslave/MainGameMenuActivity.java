@@ -18,13 +18,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.powerslave.government.Country;
-import com.example.powerslave.person.Minister;
+import com.example.powerslave.government.Event;
 import com.example.powerslave.person.Ruler;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Collections;
 
 public class MainGameMenuActivity extends AppCompatActivity implements View.OnClickListener {
     private TextView textViewDate;
@@ -34,6 +32,8 @@ public class MainGameMenuActivity extends AppCompatActivity implements View.OnCl
     private ImageButton buttonHealthcare;
     private ImageButton buttonEducation;
     private ImageButton buttonEconomy;
+    private ImageButton buttonDefense;
+    private ImageButton buttonAgriculture;
 
     public static Country country;
     public static Ruler ruler;
@@ -68,6 +68,8 @@ public class MainGameMenuActivity extends AppCompatActivity implements View.OnCl
         buttonHealthcare = findViewById(R.id.buttonHealthcare);
         buttonEducation = findViewById(R.id.buttonEducation);
         buttonEconomy = findViewById(R.id.buttonEconomy);
+        buttonDefense = findViewById(R.id.buttonDefense);
+        buttonAgriculture = findViewById(R.id.buttonAgriculture);
 
         textViewDate.setText("Current date is: " + format1.format(calendar.getTime()));
         textViewCountryName.setText("Country: " + country.getName());
@@ -78,6 +80,8 @@ public class MainGameMenuActivity extends AppCompatActivity implements View.OnCl
         buttonHealthcare.setOnClickListener(this);
         buttonEducation.setOnClickListener(this);
         buttonEconomy.setOnClickListener(this);
+        buttonDefense.setOnClickListener(this);
+        buttonAgriculture.setOnClickListener(this);
 
         ActionBar actionBar = getSupportActionBar();
         actionBar.setIcon(R.drawable.ic_settings_foreground);
@@ -139,7 +143,7 @@ public class MainGameMenuActivity extends AppCompatActivity implements View.OnCl
             if (calendar.getTime().getMonth() == 0) {
                 country.updateMinisters();
             }
-            MainGameMenuActivity.this.recreate();
+            showEvent();
         } else {
             Intent intent = new Intent(MainGameMenuActivity.this, MinistryActivity.class);
             if (view.getId() == buttonHealthcare.getId()) {
@@ -148,9 +152,27 @@ public class MainGameMenuActivity extends AppCompatActivity implements View.OnCl
                 selectedMinistry = 1;
             } else if (view.getId() == buttonEconomy.getId()) {
                 selectedMinistry = 2;
+            } else if (view.getId() == buttonDefense.getId()) {
+                selectedMinistry = 3;
+            } else if (view.getId() == buttonAgriculture.getId()) {
+                selectedMinistry = 4;
             }
 
             startActivity(intent);
         }
+    }
+
+    private void showEvent() {
+        Event event = new Event(this);
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(event.getEventText());
+
+        builder.setItems(event.getEventChoices(), (dialogInterface, i) -> {
+            switch (i) {
+                default:
+                    MainGameMenuActivity.this.recreate();
+            }
+        });
+        builder.create().show();
     }
 }

@@ -1,0 +1,457 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="farmers_limit">
+        <item>15.5</item>
+        <item>18.3</item>
+        <item>13.8</item>
+        <item>11.7</item>
+        <item>13.2</item>
+        <item>21.5</item>
+        <item>18.5</item>
+        <item>19.2</item>
+        <item>24.1</item>
+        <item>13.1</item>
+        <item>25.2</item>
+        <item>18.4</item>
+
+        <item>7.5</item>
+        <item>4.8</item>
+        <item>4.6</item>
+        <item>7.0</item>
+        <item>5.0</item>
+        <item>7.5</item>
+        <item>7.4</item>
+
+        <item>11.4</item>
+        <item>13.2</item>
+        <item>9.2</item>
+        <item>8.4</item>
+        <item>14.2</item>
+        <item>13.2</item>
+        <item>15.2</item>
+        <item>12.6</item>
+
+        <item>3.6</item>
+        <item>3.9</item>
+        <item>5.7</item>
+        <item>4.7</item>
+        <item>6.3</item>
+        <item>5.4</item>
+        <item>5.4</item>
+
+        <item>30.6</item>
+        <item>28.7</item>
+        <item>27.3</item>
+        <item>21.0</item>
+        <item>20.1</item>
+        <item>23.5</item>
+        <item>27.6</item>
+        <item>17.3</item>
+        <item>25.2</item>
+
+        <item>28.3</item>
+        <item>29.4</item>
+        <item>25.3</item>
+        <item>24.6</item>
+        <item>27.5</item>
+        <item>20.8</item>
+        <item>23.2</item>
+        <item>29.5</item>
+
+        <item>15.4</item>
+        <item>18.4</item>
+        <item>13.6</item>
+        <item>26.3</item>
+        <item>26.4</item>
+        <item>28.4</item>
+        <item>29.5</item>
+        <item>27.4</item>
+
+        <item>36.2</item>
+        <item>40.5</item>
+        <item>31.5</item>
+        <item>28.6</item>
+        <item>19.4</item>
+        <item>10.5</item>
+        <item>36.7</item>
+        <item>12.6</item>
+
+        <item>40.7</item>
+        <item>50.4</item>
+        <item>56.4</item>
+        <item>57.3</item>
+        <item>30.8</item>
+        <item>36.3</item>
+        <item>38.3</item>
+        <item>28.6</item>
+
+        <item>8.9</item>
+        <item>15.3</item>
+        <item>10.7</item>
+        <item>11.7</item>
+    </string-array>
+
+    <string-array name="miners_limit">
+        <item>13.6</item>
+        <item>16.3</item>
+        <item>17.3</item>
+        <item>18.3</item>
+        <item>14.7</item>
+        <item>16.4</item>
+        <item>15.3</item>
+        <item>14.7</item>
+        <item>17.4</item>
+        <item>16.3</item>
+        <item>17.4</item>
+        <item>15.7</item>
+
+        <item>10.5</item>
+        <item>8.4</item>
+        <item>5.8</item>
+        <item>7.5</item>
+        <item>5.7</item>
+        <item>8.4</item>
+        <item>6.3</item>
+
+        <item>12.6</item>
+        <item>11.5</item>
+        <item>12.5</item>
+        <item>17.4</item>
+        <item>15.3</item>
+        <item>18.4</item>
+        <item>16.3</item>
+        <item>17.4</item>
+
+        <item>3.2</item>
+        <item>1.7</item>
+        <item>1.8</item>
+        <item>2.3</item>
+        <item>2.8</item>
+        <item>2.1</item>
+        <item>2.7</item>
+
+        <item>14.2</item>
+        <item>12.6</item>
+        <item>14.7</item>
+        <item>15.2</item>
+        <item>18.2</item>
+        <item>24.3</item>
+        <item>21.6</item>
+        <item>21.7</item>
+        <item>29.6</item>
+
+        <item>10.2</item>
+        <item>18.3</item>
+        <item>19.7</item>
+        <item>27.4</item>
+        <item>24.2</item>
+        <item>25.2</item>
+        <item>21.7</item>
+        <item>25.2</item>
+
+        <item>15.3</item>
+        <item>17.3</item>
+        <item>14.6</item>
+        <item>19.5</item>
+        <item>25.2</item>
+        <item>23.1</item>
+        <item>27.0</item>
+        <item>27.3</item>
+
+        <item>36.3</item>
+        <item>32.7</item>
+        <item>31.6</item>
+        <item>28.7</item>
+        <item>26.3</item>
+        <item>17.3</item>
+        <item>15.8</item>
+        <item>20.7</item>
+
+        <item>30.7</item>
+        <item>37.9</item>
+        <item>31.7</item>
+        <item>37.3</item>
+        <item>26.7</item>
+        <item>20.7</item>
+        <item>21.7</item>
+        <item>17.5</item>
+
+        <item>10.5</item>
+        <item>21.3</item>
+        <item>14.7</item>
+        <item>15.8</item>
+    </string-array>
+
+    <string-array name="general_budget_agriculture">
+        <item>8.5</item>
+        <item>7.6</item>
+        <item>8.5</item>
+        <item>5.8</item>
+        <item>9.5</item>
+        <item>11.8</item>
+        <item>13.7</item>
+        <item>11.5</item>
+        <item>16.4</item>
+        <item>15.4</item>
+        <item>13.6</item>
+        <item>11.6</item>
+
+        <item>7.4</item>
+        <item>8.5</item>
+        <item>5.9</item>
+        <item>9.5</item>
+        <item>6.8</item>
+        <item>6.9</item>
+        <item>7.5</item>
+
+        <item>13.6</item>
+        <item>12.7</item>
+        <item>16.3</item>
+        <item>14.8</item>
+        <item>18.4</item>
+        <item>21.5</item>
+        <item>20.3</item>
+        <item>19.6</item>
+
+        <item>4.7</item>
+        <item>3.7</item>
+        <item>5.0</item>
+        <item>3.7</item>
+        <item>2.8</item>
+        <item>3.5</item>
+        <item>1.9</item>
+
+        <item>21.5</item>
+        <item>22.7</item>
+        <item>25.1</item>
+        <item>26.3</item>
+        <item>27.4</item>
+        <item>21.5</item>
+        <item>20.5</item>
+        <item>19.5</item>
+        <item>15.9</item>
+
+        <item>26.3</item>
+        <item>24.3</item>
+        <item>21.7</item>
+        <item>24.2</item>
+        <item>23.6</item>
+        <item>22.2</item>
+        <item>21.8</item>
+        <item>27.5</item>
+
+        <item>18.4</item>
+        <item>16.8</item>
+        <item>13.6</item>
+        <item>12.8</item>
+        <item>20.3</item>
+        <item>26.8</item>
+        <item>28.9</item>
+        <item>23.6</item>
+
+        <item>21.7</item>
+        <item>24.8</item>
+        <item>23.1</item>
+        <item>20.5</item>
+        <item>23.4</item>
+        <item>13.8</item>
+        <item>24.5</item>
+        <item>16.8</item>
+
+        <item>57.3</item>
+        <item>52.2</item>
+        <item>48.5</item>
+        <item>38.5</item>
+        <item>28.4</item>
+        <item>25.0</item>
+        <item>24.8</item>
+        <item>20.3</item>
+
+        <item>7.5</item>
+        <item>13.6</item>
+        <item>11.7</item>
+        <item>10.4</item>
+    </string-array>
+
+    <string-array name="farmers_salary">
+        <item>6.5</item>
+        <item>6.2</item>
+        <item>6.4</item>
+        <item>6.0</item>
+        <item>6.0</item>
+        <item>6.8</item>
+        <item>6.5</item>
+        <item>5.7</item>
+        <item>5.4</item>
+        <item>5.3</item>
+        <item>5.8</item>
+        <item>5.4</item>
+
+        <item>6.4</item>
+        <item>6.3</item>
+        <item>6.9</item>
+        <item>7.0</item>
+        <item>7.3</item>
+        <item>6.9</item>
+        <item>6.5</item>
+
+        <item>4.8</item>
+        <item>4.7</item>
+        <item>5.3</item>
+        <item>5.9</item>
+        <item>5.0</item>
+        <item>6.0</item>
+        <item>6.0</item>
+        <item>6.5</item>
+
+        <item>7.8</item>
+        <item>7.6</item>
+        <item>7.1</item>
+        <item>7.2</item>
+        <item>6.9</item>
+        <item>6.7</item>
+        <item>7.0</item>
+
+        <item>3.9</item>
+        <item>4.9</item>
+        <item>3.8</item>
+        <item>3.8</item>
+        <item>4.3</item>
+        <item>4.9</item>
+        <item>4.8</item>
+        <item>4.8</item>
+        <item>4.9</item>
+
+        <item>2.7</item>
+        <item>2.4</item>
+        <item>2.7</item>
+        <item>2.9</item>
+        <item>2.8</item>
+        <item>2.6</item>
+        <item>1.9</item>
+        <item>2.7</item>
+
+        <item>2.0</item>
+        <item>2.6</item>
+        <item>3.8</item>
+        <item>3.6</item>
+        <item>3.5</item>
+        <item>3.2</item>
+        <item>3.4</item>
+        <item>4.3</item>
+
+        <item>2.4</item>
+        <item>3.8</item>
+        <item>5.4</item>
+        <item>3.7</item>
+        <item>3.7</item>
+        <item>6.0</item>
+        <item>3.7</item>
+        <item>5.4</item>
+
+        <item>1.9</item>
+        <item>1.2</item>
+        <item>1.6</item>
+        <item>1.8</item>
+        <item>3.6</item>
+        <item>3.4</item>
+        <item>3.7</item>
+        <item>4.6</item>
+
+        <item>6.5</item>
+        <item>5.8</item>
+        <item>4.8</item>
+        <item>5.3</item>
+    </string-array>
+
+    <string-array name="miners_salary">
+        <item>6.9</item>
+        <item>6.7</item>
+        <item>6.6</item>
+        <item>6.4</item>
+        <item>6.5</item>
+        <item>5.8</item>
+        <item>7.5</item>
+        <item>5.7</item>
+        <item>5.4</item>
+        <item>5.2</item>
+        <item>5.2</item>
+        <item>5.0</item>
+
+        <item>4.4</item>
+        <item>7.3</item>
+        <item>7.9</item>
+        <item>7.4</item>
+        <item>7.2</item>
+        <item>6.3</item>
+        <item>6.8</item>
+
+        <item>3.8</item>
+        <item>4.9</item>
+        <item>5.4</item>
+        <item>5.6</item>
+        <item>6.0</item>
+        <item>6.3</item>
+        <item>6.8</item>
+        <item>6.5</item>
+
+        <item>7.9</item>
+        <item>8.9</item>
+        <item>8.1</item>
+        <item>7.9</item>
+        <item>7.2</item>
+        <item>6.4</item>
+        <item>7.1</item>
+
+        <item>4.9</item>
+        <item>5.9</item>
+        <item>4.8</item>
+        <item>4.8</item>
+        <item>5.4</item>
+        <item>3.9</item>
+        <item>4.8</item>
+        <item>5.8</item>
+        <item>3.9</item>
+
+        <item>2.9</item>
+        <item>2.4</item>
+        <item>2.3</item>
+        <item>2.4</item>
+        <item>2.6</item>
+        <item>2.7</item>
+        <item>2.3</item>
+        <item>2.1</item>
+
+        <item>2.2</item>
+        <item>2.8</item>
+        <item>4.1</item>
+        <item>3.9</item>
+        <item>3.4</item>
+        <item>4.9</item>
+        <item>5.4</item>
+        <item>3.3</item>
+
+        <item>2.9</item>
+        <item>3.9</item>
+        <item>5.9</item>
+        <item>4.9</item>
+        <item>4.7</item>
+        <item>6.4</item>
+        <item>4.9</item>
+        <item>5.8</item>
+
+        <item>1.6</item>
+        <item>2.2</item>
+        <item>2.6</item>
+        <item>3.0</item>
+        <item>3.9</item>
+        <item>3.5</item>
+        <item>3.9</item>
+        <item>5.6</item>
+
+        <item>7.5</item>
+        <item>6.9</item>
+        <item>5.9</item>
+        <item>6.4</item>
+    </string-array>
+</resources>

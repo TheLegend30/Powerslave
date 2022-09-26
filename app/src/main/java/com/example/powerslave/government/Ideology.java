@@ -9,5 +9,4 @@ public enum Ideology {
     Beclysm,
     Neoleeism,
     Fokritism;
-
 }

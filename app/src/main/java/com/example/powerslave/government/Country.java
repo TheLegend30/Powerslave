@@ -8,6 +8,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.powerslave.MainActivity;
 import com.example.powerslave.R;
 import com.example.powerslave.ministry.Ministry;
+import com.example.powerslave.ministry.MinistryOfAgriculture;
+import com.example.powerslave.ministry.MinistryOfDefense;
 import com.example.powerslave.ministry.MinistryOfEconomy;
 import com.example.powerslave.ministry.MinistryOfEducation;
 import com.example.powerslave.ministry.MinistryOfHealthcare;
@@ -29,9 +31,7 @@ public class Country implements Comparable<Country>{
     private Uri flagSrc;
     private RegionalForm regionalForm;
     private GovernmentType governmentType;
-    private String desc;
     private String adjective;
-    private Religion religion;
     private Continent continent;
 
     private Context context;
@@ -44,93 +44,10 @@ public class Country implements Comparable<Country>{
 
     private Map<String, Ministry> ministries = new HashMap<>();
 
-    private Military military;
-
     @Override
     public int compareTo(Country country) {
         return this.getName().compareTo(country.getName());
     }
-
-    public class Military {
-        private int arm_power;
-        private int nav_power;
-        private int air_power;
-        private boolean conscription;
-        private boolean landlocked;
-        private int outlay;
-
-        public Military(int key) {
-            this.arm_power = context.getResources().getIntArray(R.array.army)[key];
-            this.nav_power = context.getResources().getIntArray(R.array.navy)[key];
-            this.air_power = context.getResources().getIntArray(R.array.air_force)[key];
-            this.conscription = Boolean.parseBoolean(context.getResources().getStringArray(R.array.conscription)[key]);
-            this.landlocked = Boolean.parseBoolean(context.getResources().getStringArray(R.array.landlocked)[key]);
-            this.outlay = (arm_power * 100) + (nav_power * 500) + (air_power * 800);
-        }
-
-        public int getArm_power() {
-            return arm_power;
-        }
-
-        public void setArm_power(int arm_power) {
-            this.arm_power = arm_power;
-        }
-
-        public int getNav_power() {
-            return nav_power;
-        }
-
-        public void setNav_power(int nav_power) {
-            this.nav_power = nav_power;
-        }
-
-        public int getAir_power() {
-            return air_power;
-        }
-
-        public void setAir_power(int air_power) {
-            this.air_power = air_power;
-        }
-
-        public boolean isConscription() {
-            return conscription;
-        }
-
-        public void setConscription(boolean conscription) {
-            this.conscription = conscription;
-        }
-
-        public boolean isLandlocked() {
-            return landlocked;
-        }
-
-        public void setLandlocked(boolean landlocked) {
-            this.landlocked = landlocked;
-        }
-
-        public int getOutlay() {
-            return outlay;
-        }
-
-        public void setOutlay(int outlay) {
-            this.outlay = outlay;
-        }
-
-        @Override
-        public String toString() {
-            String string;
-            string = "Army Power: " + arm_power + "\n";
-            string += "Navy Power: " + nav_power + "\n";
-            string += "Air Force Power: " + air_power + "\n";
-            string += "Conscription: " + (isConscription() ? "Yes" : "No") + "\n";
-            string += "Landlocked: " + (isLandlocked() ? "Yes" : "No") + "\n";
-            string += "Outlay: " + outlay + " ƒ ";
-            string += "(" + String.format("%.2f", (float) outlay / getMinistryOfEconomy().getGdp() * 100) + "%)" + "\n";
-            return string;
-        }
-    }
-
-    private Government government;
 
     public Country(int key, Context context) {
         this.key = key;
@@ -143,13 +60,13 @@ public class Country implements Comparable<Country>{
         this.continent = Continent.valueOf(context.getResources().getStringArray(R.array.location)[key]);
         this.adjective = context.getResources().getStringArray(R.array.adjectives)[key];
         vacant =  new Minister("Vacant", "position", Sex.MALE, this, Ideology.Plycism, 0, 0, Uri.parse(context.getResources().getString(R.string.anon)));
-        ministries.put("m_health", new MinistryOfHealthcare(key, vacant, context));
-        ministries.put("m_education", new MinistryOfEducation(key, vacant, context));
+        ministries.put("m_health", new MinistryOfHealthcare(key, vacant, context, this));
+        ministries.put("m_education", new MinistryOfEducation(key, vacant, context, this));
         ministries.put("m_economy", new MinistryOfEconomy(key, vacant, context, this));
+        ministries.put("m_defense", new MinistryOfDefense(key, vacant, context, this));
+        ministries.put("m_agriculture", new MinistryOfAgriculture(key, vacant, context, this));
         initialFirstMinisterAppointment();
         updateMinisters();
-
-        this.military = new Military(key);
     }
 
     @Override
@@ -178,14 +95,6 @@ public class Country implements Comparable<Country>{
     }
 
 
-    public Military getMilitary() {
-        return military;
-    }
-
-    public void setMilitary(Military military) {
-        this.military = military;
-    }
-
     public String getName() {
         return name;
     }
@@ -212,6 +121,14 @@ public class Country implements Comparable<Country>{
 
     public MinistryOfEconomy getMinistryOfEconomy() {
         return (MinistryOfEconomy) ministries.get("m_economy");
+    }
+
+    public MinistryOfDefense getMinistryOfDefense(){
+        return (MinistryOfDefense) ministries.get("m_defense");
+    }
+
+    public MinistryOfAgriculture getMinistryOfAgriculture(){
+        return (MinistryOfAgriculture) ministries.get("m_agriculture");
     }
 
     public String getAdjective() {

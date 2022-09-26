@@ -3,11 +3,8 @@ package com.example.powerslave.ministry;
 import android.content.Context;
 
 import com.example.powerslave.R;
-import com.example.powerslave.government.City;
 import com.example.powerslave.government.Country;
 import com.example.powerslave.person.Minister;
-
-import java.util.ArrayList;
 
 public class MinistryOfEconomy extends Ministry {
 
@@ -18,28 +15,58 @@ public class MinistryOfEconomy extends Ministry {
     private long gdp;
     private float gdp_per_person;
     private long debt;
+
     private float inflation;
     private String currency;
-    private ArrayList<City> cities;
+    private float currency_to_gulden;
+    private float interest_rate;
 
-    private Country country;
+    private float gdp_increase;
+
+    private long labor_force;
+    private final long unemployment;
+    private long poverty;
+
+    private long exports;
+    private long taxes;
+    private long tariffs;
+
+    private long imports;
+
+    private long budget;
 
     private float developmentIndex;
 
     public MinistryOfEconomy(int countryKey, Minister minister, Context context, Country country) {
-        super(countryKey, minister, context);
+        super(countryKey, minister, context, country);
         this.name = "Ministry of Economy and Finances";
         this.country = country;
         this.area = context.getResources().getIntArray(R.array.area)[countryKey];
         this.population = context.getResources().getIntArray(R.array.population)[countryKey];
         this.density = (float) population / area;
 
-        this.gdp = context.getResources().getIntArray(R.array.gdp)[countryKey] * 10L;
+        this.gdp = context.getResources().getIntArray(R.array.gdp)[countryKey] * 100L;
         this.gdp_per_person = ((float) gdp / population);
         this.debt = (long) (gdp * (Float.parseFloat(context.getResources().getStringArray(R.array.debt)[countryKey]) / 100));
 
         this.inflation = Float.parseFloat(context.getResources().getStringArray(R.array.inflation)[countryKey]);
         this.currency = context.getResources().getStringArray(R.array.currency)[countryKey];
+        this.currency_to_gulden = Float.parseFloat(context.getResources().getStringArray(R.array.currency_to_gulden)[countryKey]);
+        this.interest_rate = Float.parseFloat(context.getResources().getStringArray(R.array.interest_rate)[countryKey]);
+
+        this.labor_force = (long) (population * (Float.parseFloat(context.getResources().getStringArray(R.array.labor_force)[countryKey]) / 100));
+        this.unemployment = labor_force;
+        this.poverty = population;
+
+        this.exports = 9000000;
+        this.taxes = 9000000;
+        this.tariffs = 9000000;
+
+        this.imports = 9000000;
+
+        this.budget = exports + taxes + tariffs - imports;
+
+        this.gdp_increase = Float.parseFloat(context.getResources().getStringArray(R.array.gdp_increase)[countryKey]);
 
         this.developmentIndex = (country.getMinistryOfHealthcare().getLife_expectancy() * country.getMinistryOfEducation().getLiteracy() * gdp_per_person) / 1000;
     }
@@ -58,6 +85,22 @@ public class MinistryOfEconomy extends Ministry {
 
     public void setCurrency(String currency) {
         this.currency = currency;
+    }
+
+    public long getLabor_force() {
+        return labor_force;
+    }
+
+    public void setLabor_force(long labor_force) {
+        this.labor_force = labor_force;
+    }
+
+    public long getBudget() {
+        return budget;
+    }
+
+    public void setBudget(long budget) {
+        this.budget = budget;
     }
 
     public float getDevelopmentIndex() {
@@ -91,6 +134,22 @@ public class MinistryOfEconomy extends Ministry {
         this.developmentIndex = developmentIndex;
     }
 
+    public float getGdp_per_person() {
+        return gdp_per_person;
+    }
+
+    public void setGdp_per_person(float gdp_per_person) {
+        this.gdp_per_person = gdp_per_person;
+    }
+
+    public float getCurrency_to_gulden() {
+        return currency_to_gulden;
+    }
+
+    public void setCurrency_to_gulden(float currency_to_gulden) {
+        this.currency_to_gulden = currency_to_gulden;
+    }
+
     @Override
     public String toString() {
         String string;
@@ -98,10 +157,16 @@ public class MinistryOfEconomy extends Ministry {
         string += "Population: " + population + "\n";
         string += "Density: " + String.format("%.2f", density) + "/km^2" + "\n";
         string += "GDP: " + gdp + " ƒ" + "\n";
-        string += "GDP per Capita: " + String.format("%.2f", gdp_per_person) + " ƒ" + "\n";
+        string += "GDP per Capita: " + String.format("%.2f", gdp_per_person) + " ƒ" + " (" + (gdp_per_person / currency_to_gulden) + " " + currency + ")" + "\n";
         string += "National Debt: " + debt + " ƒ " + String.format("(%.2f", (float) debt / gdp * 100).concat(" %)") + "\n";
         string += "Inflation: " + String.format("%.2f", inflation) + " %" + "\n";
         string += "Currency: " + country.getAdjective() + " " + currency + "\n";
+        string += "1 " + currency + " is " + String.format("%.5f", currency_to_gulden) + " of Golden Florin (ƒ)" + "\n";
+        string += "Interest Rate: " + interest_rate + " %" + "\n";
+        string += "GDP Increase from previous year: " + gdp_increase + " %" + "\n";
+        string += "Labor Force: " + labor_force + " (" + String.format("%.1f", (float) labor_force / population * 100.0) + " %)" + "\n";
+        string += "Unemployment Rate: " + unemployment + " (" + String.format("%.1f", (float) unemployment / population * 100.0) + " %)" + "\n";
+        string += "Poverty Rate: " + poverty + " (" + String.format("%.1f", (float) poverty / population * 100.0) + " %)" + "\n";
         string += "Development Index: " + getDevelopmentIndexString() + "\n";
         return super.toString() + "\n" + string;
     }

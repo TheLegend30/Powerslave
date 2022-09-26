@@ -1,30 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="rlg_ola">Olarunity</string>
-    <string name="rlg_ola_desc">Olarunity is a long-established belief system revolving around ancestral powers. Their main teachings revolve around tolerance and connectivity, and these teachings are often passed on through attempting to reach enlightenment and bi-weekly meetings. Koxendo teachings come from experiences and lessons from community members who are seen as mentors. They often express their beliefs through wood carvings, prayer beads and candles.
-Being a long-established belief system, Olarunity has spread all across the globe, and even managed to split into different versions of itself. The believers strongly view Olarunity as a means to reach a calmer state of mind.</string>
-
-    <string name="rlg_wry">Wryzority</string>
-    <string name="rlg_wry_desc">Wryzority is a contemporary religion with one main god and dozens of lesser gods. Their main teachings revolve around heaven and acceptance, and these teachings are often passed on through communal praying sessions and weekly temple visits. Wryzority teachings come from several tomes supposedly given by the gods as a means to spread good in a world of evil. Many of their religious symbols are represented in the form of figurines, rings and murals.
-Despite being a contemporary religion, Wryzority has managed to fracture into different groups with their own interpretations of the religious works, some of whom are not all too friendly toward each other. Wryzority is generally met with feelings of ignorance or disrespect by the rest of the world.</string>
-
-    <string name="rlg_rov">Rovani</string>
-    <string name="rlg_rov_desc">Rovani is an old belief system revolving around enlightenment. Their main teachings revolve around connectivity and tolerance, and these teachings are often passed on through weekly gatherings and communing with nature. Rovani teachings come from lessons passed down from the first people who have reached a higher status within their belief system. They often express their beliefs through buttons, skin paintings and shrines.
-Despite being an old belief system, Rovani is often met with feelings of ignorance or indifference by those outside of this belief system. Even some people outside of this belief system see Rovani as a means to reach a calmer state of mind.</string>
-
-    <string name="rlg_bro">Brosito</string>
-    <string name="rlg_bro_desc">Brosito is a young religion with two main gods and countless minor gods. Their main teachings revolve around balance and nature, and these teachings are often passed on through weekly temple visits and religious community events. Brosito teachings come from a book translated several times said to have been written by all the gods in a surge of justice and the spread of truth in the world. A lot of their religious symbols are represented in the form of clothing, hair pins and wood carvings.
-Despite being a young religion, Brosito has split into different groups with their own variations, but only the original has a true following, but these splits were met with a lot of resistance from the original side. Brosito is usually met with mild frustration by those outside of this religion.</string>
-
-    <string name="rlg_ilo">Ilokritism</string>
-    <string name="rlg_ilo_desc">Ilokritism is a young religion with a single god and a hierarchy of minor gods. Their main teachings revolve around honesty and power, and these teachings are often passed on through community newsletters and meetings with religious leaders. Ilokritism teachings come from antique publications said to have been given by the son of god as a gift to mankind at the beginning of time. Some of their religious symbols are represented in the form of animals, clothing and bracelets.
-Being a young religion, Ilokritism will likely divert into separate followings with different religious interpretations in the future. Ilokritism is generally met with hostility in the rest of the world.</string>
-
-    <string name="rlg_pho">Phokhi</string>
-    <string name="rlg_pho_desc">Phokhi is a recent belief system revolving around cosmic energies. Their main teachings revolve around good versus evil and virtues, and these teachings are often passed on through visits to spiritual places and attempting to reach enlightenment. Phokhi teachings come from lessons passed down from the first people who are looked up to by others. They often express their beliefs through hair pins, temples and figurines.
-Being a recent belief system, Phokhi has not gathered a large following yet, but it is growing at a steady pace. But as times change, more people begin to view Phokhi as a source of happiness or peacefulness.</string>
-
-
     <string-array name="ideology">
         <item>Plycism</item>
         <item>Vyhucism</item>

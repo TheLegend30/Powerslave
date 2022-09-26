@@ -45,19 +45,19 @@
                 android:layout_weight="1"
                 android:text="TextView" />
 
-            <TextView
-                android:id="@+id/textMinister"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:text="TextView" />
-
             <ImageView
                 android:id="@+id/ministerPortrait"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:layout_weight="1"
                 app:srcCompat="@drawable/anon_person" />
+
+            <TextView
+                android:id="@+id/textMinister"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="TextView" />
 
         </LinearLayout>
     </ScrollView>

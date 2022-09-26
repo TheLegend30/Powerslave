@@ -21,7 +21,7 @@ public class MilitaryStartActivity extends AppCompatActivity implements View.OnC
         textViewMilitaryStart = findViewById(R.id.textViewMilitaryStart);
         backArrowMilitaryStart = findViewById(R.id.backArrowMilitaryStart);
 
-        textViewMilitaryStart.setText(Country.countries.get(StartActivity.countrySpinnerStart.getSelectedItemPosition()).getMilitary().toString());
+        textViewMilitaryStart.setText(Country.countries.get(StartActivity.countrySpinnerStart.getSelectedItemPosition()).getMinistryOfDefense().toString());
 
         backArrowMilitaryStart.setOnClickListener(this);
     }
