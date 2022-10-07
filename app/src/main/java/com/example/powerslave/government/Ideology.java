@@ -8,5 +8,6 @@ public enum Ideology {
     Zowotism,
     Beclysm,
     Neoleeism,
-    Fokritism;
+    Fokritism,
+    Nonpartisan;
 }

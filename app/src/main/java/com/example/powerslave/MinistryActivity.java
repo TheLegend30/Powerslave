@@ -69,9 +69,12 @@ public class MinistryActivity extends AppCompatActivity implements View.OnClickL
             ministry = country.getMinistryOfInternalAffairs();
         } else if (MainGameMenuActivity.selectedMinistry == 10) {
             ministry = country.getMinistryOfJustice();
+        }else if (MainGameMenuActivity.selectedMinistry == 11) {
+            ministry = country.getParliament();
         }
 
 
+        System.out.println(ministry.getMinister());
         textMinister.setText(ministry.ministerToStringShort());
         textMinistry.setText(ministry.toString());
         ministerPortrait.setImageURI(ministry.getMinister().getPortrait());

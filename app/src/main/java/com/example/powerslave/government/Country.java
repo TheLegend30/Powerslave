@@ -17,7 +17,9 @@ import com.example.powerslave.ministry.MinistryOfForeignAffairs;
 import com.example.powerslave.ministry.MinistryOfHealthcare;
 import com.example.powerslave.ministry.MinistryOfInternalAffairs;
 import com.example.powerslave.ministry.MinistryOfJustice;
+import com.example.powerslave.ministry.Parliament;
 import com.example.powerslave.person.Minister;
+import com.example.powerslave.person.Ruler;
 import com.example.powerslave.person.Sex;
 
 import java.util.ArrayList;
@@ -42,6 +44,8 @@ public class Country implements Comparable<Country> {
     //Static arraylist of all game countries
     public static ArrayList<Country> countries;
 
+    private Ruler ruler;
+
     public final Minister vacant;
     private ArrayList<Minister> possibleMinisters;
 
@@ -62,6 +66,8 @@ public class Country implements Comparable<Country> {
         this.governmentType = GovernmentType.valueOf(context.getResources().getStringArray(R.array.government)[key]);
         this.continent = Continent.valueOf(context.getResources().getStringArray(R.array.location)[key]);
         this.adjective = context.getResources().getStringArray(R.array.adjectives)[key];
+        this.ruler = randomRuler();
+
         vacant = new Minister("Vacant", "position", Sex.MALE, this, Ideology.Plycism, 0, 0, Uri.parse(context.getResources().getString(R.string.anon)));
         ministries.put("m_economy", new MinistryOfEconomy(key, vacant, context, this));
         ministries.put("m_health", new MinistryOfHealthcare(key, vacant, context, this));
@@ -69,11 +75,14 @@ public class Country implements Comparable<Country> {
         ministries.put("m_defense", new MinistryOfDefense(key, vacant, context, this));
         ministries.put("m_agriculture", new MinistryOfAgriculture(key, vacant, context, this));
         ministries.put("m_foreign", new MinistryOfForeignAffairs(key, vacant, context, this));
+
         ministries.put("m_internal", new MinistryOfInternalAffairs(key, vacant, context, this));
         ministries.put("m_justice", new MinistryOfJustice(key, vacant, context, this));
+        ministries.put("m_parliament", new Parliament(key, vacant, context, this));
         initialFirstMinisterAppointment();
         updateMinisters();
     }
+
 
     @Override
     public String toString() {
@@ -148,6 +157,9 @@ public class Country implements Comparable<Country> {
     public MinistryOfJustice getMinistryOfJustice() {
         return (MinistryOfJustice) ministries.get("m_justice");
     }
+    public Parliament getParliament() {
+        return (Parliament) ministries.get("m_parliament");
+    }
 
     public String getAdjective() {
         return adjective;
@@ -155,6 +167,15 @@ public class Country implements Comparable<Country> {
 
     public void setAdjective(String adjective) {
         this.adjective = adjective;
+    }
+
+    public Ruler getRuler() {
+        return ruler;
+    }
+
+    public void setRuler(Ruler ruler) {
+        this.ruler = ruler;
+        updateMinistries();
     }
 
     public ArrayList<Minister> getPossibleMinisters() {
@@ -298,6 +319,129 @@ public class Country implements Comparable<Country> {
 
         Minister minister = new Minister(name, surname, sex, this, ideology, loyalty, competency, portrait);
         return minister;
+    }
+
+    public Ruler randomRuler() {
+        Random random = new Random();
+
+        String name = null, surname = null;
+        Sex sex = Sex.values()[random.nextInt(Sex.values().length)];
+        Uri portrait = null;
+
+        if (sex == Sex.MALE) {
+            switch (this.getContinent()) {
+                case EY:
+                    name = context.getResources().getStringArray(R.array.eyut_names_m)[random.nextInt(context.getResources().getStringArray(R.array.eyut_names_m).length)];
+                    surname = context.getResources().getStringArray(R.array.eyut_surnames)[random.nextInt(context.getResources().getStringArray(R.array.eyut_surnames).length)];
+                    portrait = Uri.parse(context.getResources().getStringArray(R.array.ym)[random.nextInt(context.getResources().getStringArray(R.array.ym).length)]);
+                    break;
+                case NY:
+                    name = context.getResources().getStringArray(R.array.nyut_names_m)[random.nextInt(context.getResources().getStringArray(R.array.nyut_names_m).length)];
+                    surname = context.getResources().getStringArray(R.array.nyut_surnames)[random.nextInt(context.getResources().getStringArray(R.array.nyut_surnames).length)];
+                    portrait = Uri.parse(context.getResources().getStringArray(R.array.ym)[random.nextInt(context.getResources().getStringArray(R.array.ym).length)]);
+                    break;
+                case SY:
+                    name = context.getResources().getStringArray(R.array.syut_names_m)[random.nextInt(context.getResources().getStringArray(R.array.syut_names_m).length)];
+                    surname = context.getResources().getStringArray(R.array.syut_surnames)[random.nextInt(context.getResources().getStringArray(R.array.syut_surnames).length)];
+                    portrait = Uri.parse(context.getResources().getStringArray(R.array.ym)[random.nextInt(context.getResources().getStringArray(R.array.ym).length)]);
+                    break;
+                case WY:
+                    name = context.getResources().getStringArray(R.array.wyut_names_m)[random.nextInt(context.getResources().getStringArray(R.array.wyut_names_m).length)];
+                    surname = context.getResources().getStringArray(R.array.wyut_surnames)[random.nextInt(context.getResources().getStringArray(R.array.wyut_surnames).length)];
+                    portrait = Uri.parse(context.getResources().getStringArray(R.array.ym)[random.nextInt(context.getResources().getStringArray(R.array.ym).length)]);
+                    break;
+                case IB:
+                    name = context.getResources().getStringArray(R.array.ibru_names_m)[random.nextInt(context.getResources().getStringArray(R.array.ibru_names_m).length)];
+                    surname = context.getResources().getStringArray(R.array.ibru_surnames)[random.nextInt(context.getResources().getStringArray(R.array.ibru_surnames).length)];
+                    portrait = Uri.parse(context.getResources().getStringArray(R.array.bm)[random.nextInt(context.getResources().getStringArray(R.array.bm).length)]);
+                    break;
+                case OB:
+                    name = context.getResources().getStringArray(R.array.obru_names_m)[random.nextInt(context.getResources().getStringArray(R.array.obru_names_m).length)];
+                    surname = context.getResources().getStringArray(R.array.obru_surnames)[random.nextInt(context.getResources().getStringArray(R.array.obru_surnames).length)];
+                    portrait = Uri.parse(context.getResources().getStringArray(R.array.bm)[random.nextInt(context.getResources().getStringArray(R.array.bm).length)]);
+                    break;
+                case CA:
+                    name = context.getResources().getStringArray(R.array.cadu_names_m)[random.nextInt(context.getResources().getStringArray(R.array.cadu_names_m).length)];
+                    surname = context.getResources().getStringArray(R.array.cadu_surnames)[random.nextInt(context.getResources().getStringArray(R.array.cadu_surnames).length)];
+                    portrait = Uri.parse(context.getResources().getStringArray(R.array.am)[random.nextInt(context.getResources().getStringArray(R.array.am).length)]);
+                    break;
+                case FA:
+                    name = context.getResources().getStringArray(R.array.fadu_names_m)[random.nextInt(context.getResources().getStringArray(R.array.fadu_names_m).length)];
+                    surname = context.getResources().getStringArray(R.array.fadu_surnames)[random.nextInt(context.getResources().getStringArray(R.array.fadu_surnames).length)];
+                    portrait = Uri.parse(context.getResources().getStringArray(R.array.am)[random.nextInt(context.getResources().getStringArray(R.array.am).length)]);
+                    break;
+                case ME:
+                    name = context.getResources().getStringArray(R.array.mehe_names_m)[random.nextInt(context.getResources().getStringArray(R.array.mehe_names_m).length)];
+                    surname = context.getResources().getStringArray(R.array.mehe_surnames)[random.nextInt(context.getResources().getStringArray(R.array.mehe_surnames).length)];
+                    portrait = Uri.parse(context.getResources().getStringArray(R.array.mm)[random.nextInt(context.getResources().getStringArray(R.array.mm).length)]);
+                    break;
+                case GE:
+                    name = context.getResources().getStringArray(R.array.gewi_names_m)[random.nextInt(context.getResources().getStringArray(R.array.gewi_names_m).length)];
+                    surname = context.getResources().getStringArray(R.array.gewi_surnames)[random.nextInt(context.getResources().getStringArray(R.array.gewi_surnames).length)];
+                    portrait = Uri.parse(context.getResources().getStringArray(R.array.mf)[random.nextInt(context.getResources().getStringArray(R.array.mf).length)]);
+                    break;
+            }
+        } else {
+            switch (this.getContinent()) {
+                case EY:
+                    name = context.getResources().getStringArray(R.array.eyut_names_f)[random.nextInt(context.getResources().getStringArray(R.array.eyut_names_f).length)];
+                    surname = context.getResources().getStringArray(R.array.eyut_surnames)[random.nextInt(context.getResources().getStringArray(R.array.eyut_surnames).length)];
+                    portrait = Uri.parse(context.getResources().getStringArray(R.array.yf)[random.nextInt(context.getResources().getStringArray(R.array.yf).length)]);
+                    break;
+                case NY:
+                    name = context.getResources().getStringArray(R.array.nyut_names_f)[random.nextInt(context.getResources().getStringArray(R.array.nyut_names_f).length)];
+                    surname = context.getResources().getStringArray(R.array.nyut_surnames)[random.nextInt(context.getResources().getStringArray(R.array.nyut_surnames).length)];
+                    portrait = Uri.parse(context.getResources().getStringArray(R.array.yf)[random.nextInt(context.getResources().getStringArray(R.array.yf).length)]);
+                    break;
+                case SY:
+                    name = context.getResources().getStringArray(R.array.syut_names_f)[random.nextInt(context.getResources().getStringArray(R.array.syut_names_f).length)];
+                    surname = context.getResources().getStringArray(R.array.syut_surnames)[random.nextInt(context.getResources().getStringArray(R.array.syut_surnames).length)];
+                    portrait = Uri.parse(context.getResources().getStringArray(R.array.yf)[random.nextInt(context.getResources().getStringArray(R.array.yf).length)]);
+                    break;
+                case WY:
+                    name = context.getResources().getStringArray(R.array.wyut_names_f)[random.nextInt(context.getResources().getStringArray(R.array.wyut_names_f).length)];
+                    surname = context.getResources().getStringArray(R.array.wyut_surnames)[random.nextInt(context.getResources().getStringArray(R.array.wyut_surnames).length)];
+                    portrait = Uri.parse(context.getResources().getStringArray(R.array.yf)[random.nextInt(context.getResources().getStringArray(R.array.yf).length)]);
+                    break;
+                case IB:
+                    name = context.getResources().getStringArray(R.array.ibru_names_f)[random.nextInt(context.getResources().getStringArray(R.array.ibru_names_f).length)];
+                    surname = context.getResources().getStringArray(R.array.ibru_surnames)[random.nextInt(context.getResources().getStringArray(R.array.ibru_surnames).length)];
+                    portrait = Uri.parse(context.getResources().getStringArray(R.array.bf)[random.nextInt(context.getResources().getStringArray(R.array.bf).length)]);
+                    break;
+                case OB:
+                    name = context.getResources().getStringArray(R.array.obru_names_f)[random.nextInt(context.getResources().getStringArray(R.array.obru_names_f).length)];
+                    surname = context.getResources().getStringArray(R.array.obru_surnames)[random.nextInt(context.getResources().getStringArray(R.array.obru_surnames).length)];
+                    portrait = Uri.parse(context.getResources().getStringArray(R.array.bf)[random.nextInt(context.getResources().getStringArray(R.array.bf).length)]);
+                    break;
+                case CA:
+                    name = context.getResources().getStringArray(R.array.cadu_names_f)[random.nextInt(context.getResources().getStringArray(R.array.cadu_names_f).length)];
+                    surname = context.getResources().getStringArray(R.array.cadu_surnames)[random.nextInt(context.getResources().getStringArray(R.array.cadu_surnames).length)];
+                    portrait = Uri.parse(context.getResources().getStringArray(R.array.af)[random.nextInt(context.getResources().getStringArray(R.array.af).length)]);
+                    break;
+                case FA:
+                    name = context.getResources().getStringArray(R.array.fadu_names_f)[random.nextInt(context.getResources().getStringArray(R.array.fadu_names_f).length)];
+                    surname = context.getResources().getStringArray(R.array.fadu_surnames)[random.nextInt(context.getResources().getStringArray(R.array.fadu_surnames).length)];
+                    portrait = Uri.parse(context.getResources().getStringArray(R.array.af)[random.nextInt(context.getResources().getStringArray(R.array.af).length)]);
+                    break;
+                case ME:
+                    name = context.getResources().getStringArray(R.array.mehe_names_f)[random.nextInt(context.getResources().getStringArray(R.array.mehe_names_f).length)];
+                    surname = context.getResources().getStringArray(R.array.mehe_surnames)[random.nextInt(context.getResources().getStringArray(R.array.mehe_surnames).length)];
+                    portrait = Uri.parse(context.getResources().getStringArray(R.array.mf)[random.nextInt(context.getResources().getStringArray(R.array.mf).length)]);
+                    break;
+                case GE:
+                    name = context.getResources().getStringArray(R.array.gewi_names_f)[random.nextInt(context.getResources().getStringArray(R.array.gewi_names_f).length)];
+                    surname = context.getResources().getStringArray(R.array.gewi_surnames)[random.nextInt(context.getResources().getStringArray(R.array.gewi_surnames).length)];
+                    portrait = Uri.parse(context.getResources().getStringArray(R.array.gf)[random.nextInt(context.getResources().getStringArray(R.array.gf).length)]);
+                    break;
+            }
+        }
+
+        Ideology ideology = Ideology.values()[random.nextInt(Ideology.values().length)];
+        float loyalty = (float) random.nextInt(100);
+        float competency = (float) random.nextInt(100);
+
+        Ruler ruler = new Ruler(name, surname, sex, this, ideology, portrait);
+        return ruler;
     }
 
     public void initialFirstMinisterAppointment() {

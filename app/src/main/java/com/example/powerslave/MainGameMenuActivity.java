@@ -37,6 +37,7 @@ public class MainGameMenuActivity extends AppCompatActivity implements View.OnCl
 
     private ImageButton buttonInternalAffairs;
     private ImageButton buttonJustice;
+    private ImageButton buttonParliament;
 
     public static Country country;
     public static Ruler ruler;
@@ -63,6 +64,7 @@ public class MainGameMenuActivity extends AppCompatActivity implements View.OnCl
 
         country = ChooseRulerActivity.country;
         ruler = ChooseRulerActivity.ruler;
+        country.setRuler(ruler);
 
         textViewDate = findViewById(R.id.textViewDate);
         textViewCountryName = findViewById(R.id.textViewCountryName);
@@ -76,6 +78,7 @@ public class MainGameMenuActivity extends AppCompatActivity implements View.OnCl
 
         buttonInternalAffairs = findViewById(R.id.buttonInternalAffairs);
         buttonJustice = findViewById(R.id.buttonJustice);
+        buttonParliament = findViewById(R.id.buttonParliament);
 
         textViewDate.setText("Current date is: " + format1.format(calendar.getTime()));
         textViewCountryName.setText("Country: " + country.getName());
@@ -91,6 +94,7 @@ public class MainGameMenuActivity extends AppCompatActivity implements View.OnCl
 
         buttonInternalAffairs.setOnClickListener(this);
         buttonJustice.setOnClickListener(this);
+        buttonParliament.setOnClickListener(this);
 
         ActionBar actionBar = getSupportActionBar();
         actionBar.setIcon(R.drawable.ic_settings_foreground);
@@ -169,6 +173,8 @@ public class MainGameMenuActivity extends AppCompatActivity implements View.OnCl
                 selectedMinistry = 9;
             } else if (view.getId() == buttonJustice.getId()) {
                 selectedMinistry = 10;
+            }else if (view.getId() == buttonParliament.getId()) {
+                selectedMinistry = 11;
             }
 
             startActivity(intent);
