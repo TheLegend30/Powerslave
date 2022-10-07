@@ -26,6 +26,8 @@ import com.example.powerslave.ministry.Ministry;
 import com.example.powerslave.ministry.MinistryOfHealthcare;
 import com.example.powerslave.person.Minister;
 
+import java.util.Map;
+
 public class MinistryActivity extends AppCompatActivity implements View.OnClickListener {
 
     private Country country = MainGameMenuActivity.country;
@@ -50,7 +52,7 @@ public class MinistryActivity extends AppCompatActivity implements View.OnClickL
         buttonConfirmMinister = findViewById(R.id.buttonConfirmMinister);
         buttonConfirmMinister.setOnClickListener(this);
 
-        ArrayAdapter<Minister> ministerAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, country.getPossibleMinisters());
+        ArrayAdapter<Minister> ministerAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, country.getPossibleMinisters());
         spinnerChooseMinister.setAdapter(ministerAdapter);
 
         if (MainGameMenuActivity.selectedMinistry == 0) {
@@ -63,6 +65,10 @@ public class MinistryActivity extends AppCompatActivity implements View.OnClickL
             ministry = country.getMinistryOfDefense();
         } else if (MainGameMenuActivity.selectedMinistry == 4) {
             ministry = country.getMinistryOfAgriculture();
+        } else if (MainGameMenuActivity.selectedMinistry == 9) {
+            ministry = country.getMinistryOfInternalAffairs();
+        } else if (MainGameMenuActivity.selectedMinistry == 10) {
+            ministry = country.getMinistryOfJustice();
         }
 
 
@@ -99,8 +105,10 @@ public class MinistryActivity extends AppCompatActivity implements View.OnClickL
                                 ministry.getMinister().setLoyalty(0f);
                             }
                         }
-                        MainGameMenuActivity.country.getPossibleMinisters().add(ministry.getMinister());
-                        ministry.setMinister(MainGameMenuActivity.country.getPossibleMinisters().get(spinnerChooseMinister.getSelectedItemPosition()));
+                        Minister previousMinister = ministry.getMinister();
+                        Minister newMinister = MainGameMenuActivity.country.getPossibleMinisters().get(spinnerChooseMinister.getSelectedItemPosition());
+                        ministry.setMinister(newMinister);
+                        MainGameMenuActivity.country.getPossibleMinisters().add(previousMinister);
                         MainGameMenuActivity.country.getPossibleMinisters().remove(spinnerChooseMinister.getSelectedItemPosition());
                         Toast.makeText(MinistryActivity.this, "Minister was selected", Toast.LENGTH_SHORT).show();
                         MinistryActivity.this.recreate();
@@ -109,8 +117,8 @@ public class MinistryActivity extends AppCompatActivity implements View.OnClickL
             };
 
             AlertDialog.Builder builder = new AlertDialog.Builder(MinistryActivity.this);
-            Minister tempMinister = MainGameMenuActivity.country.getPossibleMinisters().remove(spinnerChooseMinister.getSelectedItemPosition());
-            builder.setMessage("Are you sure you want to appoint this minister?" + "\nLoyalty: " + tempMinister.getLoyalty() + "\nCompetence: " + tempMinister.getCompetency() + "\nIdeology: " + tempMinister.getIdeology())
+            Minister tempMinister = MainGameMenuActivity.country.getPossibleMinisters().get(spinnerChooseMinister.getSelectedItemPosition());
+            builder.setMessage("Are you sure you want to appoint this minister?\nName & Surname: " + tempMinister.getName() + " " + tempMinister.getSurname() + "\nLoyalty: " + tempMinister.getLoyalty() + "\nCompetence: " + tempMinister.getCompetency() + "\nIdeology: " + tempMinister.getIdeology())
                     .setPositiveButton("Yes", dialogMinister)
                     .setNegativeButton("No", dialogMinister);
             builder.show();

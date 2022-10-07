@@ -19,10 +19,6 @@ import java.util.Collections;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-    //TODO: Settings + Finish Music
-    //TODO: More Pics
-    //TODO: Better descriptions
-
     //Main button on main activity
     private Button buttonStart;
     private Button buttonLoad;

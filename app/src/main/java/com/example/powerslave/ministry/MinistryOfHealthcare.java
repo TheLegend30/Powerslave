@@ -14,7 +14,7 @@ public class MinistryOfHealthcare extends Ministry {
     private int retirement_age;
 
     private float pension;
-    private long pensioners;
+    private int pensioners;
 
     private long doctors;
     private long doctors_salary;
@@ -24,12 +24,13 @@ public class MinistryOfHealthcare extends Ministry {
     private float natality;
     private float pop_growth;
 
+    private MinistryOfEconomy economy;
+
     public MinistryOfHealthcare(int countryKey, Minister minister, Context context, Country country) {
         super(countryKey, minister, context, country);
         this.name = "Ministry of Healthcare";
-        this.life_expectancy = Float.parseFloat(context.getResources().getStringArray(R.array.life_expectancy)[countryKey]);
-        this.retirement_age = context.getResources().getIntArray(R.array.life_expectancy)[countryKey];
 
+        this.economy = country.getMinistryOfEconomy();
 
     }
 
@@ -45,9 +46,19 @@ public class MinistryOfHealthcare extends Ministry {
         this.life_expectancy = life_expectancy;
     }
 
+    public int getPensioners() {
+        return pensioners;
+    }
+
+    public void setPensioners(int pensioners) {
+        this.pensioners = pensioners;
+    }
+
     @Override
     public String toString() {
-        return super.toString() + "\n" +
-                "Life expectancy: " + getLife_expectancyString();
+        String string;
+        string = "Life expectancy: " + getLife_expectancyString() + "\n";
+        string += "Pensioners: " + this.pensioners + "\n";
+        return super.toString() + "\n" + string;
     }
 }

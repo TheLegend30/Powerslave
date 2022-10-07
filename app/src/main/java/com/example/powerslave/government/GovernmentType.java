@@ -28,7 +28,7 @@ public enum GovernmentType {
             case MIL_DIC:
                 return "Military Dictatorship";
             case PER_DIC:
-                return "Personalist Dictatorship";
+                return "Personalistic Dictatorship";
             case REL_STA:
                 return "Theocracy";
             case TRI_STA:

@@ -7,6 +7,8 @@ import com.example.powerslave.person.Minister;
 
 public class MinistryOfDevelopment extends Ministry{
     private int clerks;
+    private int entrepreneurs;
+
     private int clerks_salary;
     private int clerks_salary_need;
 

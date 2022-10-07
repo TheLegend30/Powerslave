@@ -10,7 +10,7 @@ public class MinistryOfCulture extends Ministry{
     private int cultural_workers;
     private int cultural_workers_salary;
 
-    private int monuments_events;
+    private int monuments_and_events;
 
     private int tourists_count;
 

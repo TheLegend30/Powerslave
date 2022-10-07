@@ -27,6 +27,8 @@ public class MinistryOfEconomy extends Ministry {
     private final long unemployment;
     private long poverty;
 
+    private boolean landlocked;
+
     private long exports;
     private long taxes;
     private long tariffs;
@@ -58,6 +60,8 @@ public class MinistryOfEconomy extends Ministry {
         this.unemployment = labor_force;
         this.poverty = population;
 
+        this.landlocked = Boolean.parseBoolean(context.getResources().getStringArray(R.array.landlocked)[countryKey]);
+
         this.exports = 9000000;
         this.taxes = 9000000;
         this.tariffs = 9000000;
@@ -68,7 +72,7 @@ public class MinistryOfEconomy extends Ministry {
 
         this.gdp_increase = Float.parseFloat(context.getResources().getStringArray(R.array.gdp_increase)[countryKey]);
 
-        this.developmentIndex = (country.getMinistryOfHealthcare().getLife_expectancy() * country.getMinistryOfEducation().getLiteracy() * gdp_per_person) / 1000;
+        this.developmentIndex = 1;
     }
 
     public long getGdp() {
@@ -101,6 +105,22 @@ public class MinistryOfEconomy extends Ministry {
 
     public void setBudget(long budget) {
         this.budget = budget;
+    }
+
+    public long getPopulation() {
+        return population;
+    }
+
+    public void setPopulation(long population) {
+        this.population = population;
+    }
+
+    public boolean isLandlocked() {
+        return landlocked;
+    }
+
+    public void setLandlocked(boolean landlocked) {
+        this.landlocked = landlocked;
     }
 
     public float getDevelopmentIndex() {
@@ -167,7 +187,14 @@ public class MinistryOfEconomy extends Ministry {
         string += "Labor Force: " + labor_force + " (" + String.format("%.1f", (float) labor_force / population * 100.0) + " %)" + "\n";
         string += "Unemployment Rate: " + unemployment + " (" + String.format("%.1f", (float) unemployment / population * 100.0) + " %)" + "\n";
         string += "Poverty Rate: " + poverty + " (" + String.format("%.1f", (float) poverty / population * 100.0) + " %)" + "\n";
+        string += "Landlocked: " + (this.landlocked ? "Yes" : "No") + "\n";
         string += "Development Index: " + getDevelopmentIndexString() + "\n";
         return super.toString() + "\n" + string;
+    }
+
+    @Override
+    public void updateMinistry() {
+        super.updateMinistry();
+        this.developmentIndex = (country.getMinistryOfHealthcare().getLife_expectancy() * country.getMinistryOfEducation().getLiteracy() * gdp_per_person) / 1000;
     }
 }

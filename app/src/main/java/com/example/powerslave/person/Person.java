@@ -74,7 +74,6 @@ public abstract class Person implements Comparable<Person>{
     @Override
     public String toString() {
         return name + '\n' + surname + '\n' +
-                "S: " + sex + '\n' +
                 "I: " + ideology;
     }
 

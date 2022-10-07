@@ -15,7 +15,6 @@ public class Event {
     private String[] eventChoices;
     private Method choiceEffect;
     private String choiceEffectText;
-    //TODO: For effects use value effects (can get them by reflection)
 
     public Event(Context context) {
         Random random = new Random();

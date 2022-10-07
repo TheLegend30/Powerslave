@@ -1,6 +1,7 @@
 package com.example.powerslave.government;
 
 import android.content.Context;
+import android.content.Entity;
 import android.net.Uri;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,7 +13,10 @@ import com.example.powerslave.ministry.MinistryOfAgriculture;
 import com.example.powerslave.ministry.MinistryOfDefense;
 import com.example.powerslave.ministry.MinistryOfEconomy;
 import com.example.powerslave.ministry.MinistryOfEducation;
+import com.example.powerslave.ministry.MinistryOfForeignAffairs;
 import com.example.powerslave.ministry.MinistryOfHealthcare;
+import com.example.powerslave.ministry.MinistryOfInternalAffairs;
+import com.example.powerslave.ministry.MinistryOfJustice;
 import com.example.powerslave.person.Minister;
 import com.example.powerslave.person.Sex;
 
@@ -22,8 +26,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
-public class Country implements Comparable<Country>{
-    //TODO: Parliament class
+public class Country implements Comparable<Country> {
     private int key;
 
     private String name;
@@ -59,12 +62,15 @@ public class Country implements Comparable<Country>{
         this.governmentType = GovernmentType.valueOf(context.getResources().getStringArray(R.array.government)[key]);
         this.continent = Continent.valueOf(context.getResources().getStringArray(R.array.location)[key]);
         this.adjective = context.getResources().getStringArray(R.array.adjectives)[key];
-        vacant =  new Minister("Vacant", "position", Sex.MALE, this, Ideology.Plycism, 0, 0, Uri.parse(context.getResources().getString(R.string.anon)));
+        vacant = new Minister("Vacant", "position", Sex.MALE, this, Ideology.Plycism, 0, 0, Uri.parse(context.getResources().getString(R.string.anon)));
+        ministries.put("m_economy", new MinistryOfEconomy(key, vacant, context, this));
         ministries.put("m_health", new MinistryOfHealthcare(key, vacant, context, this));
         ministries.put("m_education", new MinistryOfEducation(key, vacant, context, this));
-        ministries.put("m_economy", new MinistryOfEconomy(key, vacant, context, this));
         ministries.put("m_defense", new MinistryOfDefense(key, vacant, context, this));
         ministries.put("m_agriculture", new MinistryOfAgriculture(key, vacant, context, this));
+        ministries.put("m_foreign", new MinistryOfForeignAffairs(key, vacant, context, this));
+        ministries.put("m_internal", new MinistryOfInternalAffairs(key, vacant, context, this));
+        ministries.put("m_justice", new MinistryOfJustice(key, vacant, context, this));
         initialFirstMinisterAppointment();
         updateMinisters();
     }
@@ -123,12 +129,24 @@ public class Country implements Comparable<Country>{
         return (MinistryOfEconomy) ministries.get("m_economy");
     }
 
-    public MinistryOfDefense getMinistryOfDefense(){
+    public MinistryOfDefense getMinistryOfDefense() {
         return (MinistryOfDefense) ministries.get("m_defense");
     }
 
-    public MinistryOfAgriculture getMinistryOfAgriculture(){
+    public MinistryOfAgriculture getMinistryOfAgriculture() {
         return (MinistryOfAgriculture) ministries.get("m_agriculture");
+    }
+
+    public MinistryOfForeignAffairs getMinistryOfForeignAffairs() {
+        return (MinistryOfForeignAffairs) ministries.get("m_foreign");
+    }
+
+    public MinistryOfInternalAffairs getMinistryOfInternalAffairs() {
+        return (MinistryOfInternalAffairs) ministries.get("m_internal");
+    }
+
+    public MinistryOfJustice getMinistryOfJustice() {
+        return (MinistryOfJustice) ministries.get("m_justice");
     }
 
     public String getAdjective() {
@@ -152,6 +170,9 @@ public class Country implements Comparable<Country>{
         countries = new ArrayList<>();
         for (int i = 0; i < length; i++) {
             countries.add(new Country(i, context));
+        }
+        for (Country c : countries) {
+            c.updateMinistries();
         }
         Collections.sort(Country.countries);
     }
@@ -300,10 +321,16 @@ public class Country implements Comparable<Country>{
 
     public void updateMinisters() {
         possibleMinisters = new ArrayList<>();
-        for (int i = 0; i < 20; i++) {
+        for (int i = 0; i < 10; i++) {
             possibleMinisters.add(this.randomMinister());
         }
         Collections.sort(possibleMinisters);
+    }
+
+    public void updateMinistries() {
+        for (Map.Entry<String, Ministry> ministry : ministries.entrySet()) {
+            ministry.getValue().updateMinistry();
+        }
     }
 
 

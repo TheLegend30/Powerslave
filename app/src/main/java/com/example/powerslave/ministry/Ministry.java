@@ -10,6 +10,8 @@ import com.example.powerslave.MainActivity;
 import com.example.powerslave.government.Country;
 import com.example.powerslave.person.Minister;
 
+import java.util.Random;
+
 public abstract class Ministry {
     protected int countryKey;
     protected String name;
@@ -40,8 +42,7 @@ public abstract class Ministry {
     public String ministerToStringShort() {
         return "Minister: " + minister.getName() + " " +
                 minister.getSurname() + "\n" +
-                "(S:" + minister.getSex() +
-                "  L:" + minister.getLoyalty() + "%" +
+                "(L:" + minister.getLoyalty() + "%" +
                 "  C:" + minister.getCompetency() + "%" +
                 "  I:" + minister.getIdeology() +
                 ")";
@@ -65,6 +66,9 @@ public abstract class Ministry {
     }
 
     public void updateMinistry() {
-        this.efficiency = (((minister.getCompetency() / 1.5f) + (minister.getLoyalty() / 3)) / 100);
+        this.efficiency = (((minister.getCompetency() / 1.25f) + (minister.getLoyalty() / 4f)) / 100f);
+    }
+
+    public void statsRandomizer() {
     }
 }
