@@ -11,13 +11,11 @@ import java.util.Random;
 public class MinistryOfAgriculture extends Ministry {
     private int farmers;
     private int farmers_limit;
-
     private float farmers_salary;
     private float farmers_salary_need;
 
     private int miners;
     private int miners_limit;
-
     private float miners_salary;
     private float miners_salary_need;
 
@@ -70,15 +68,15 @@ public class MinistryOfAgriculture extends Ministry {
         super.updateMinistry();
         this.efficiency *= ((general_budget + miners_salary + farmers_salary) / (general_budget_need + miners_salary_need + farmers_salary_need));
 
-        this.raw_food_output = (float) (efficiency * farmers * 1.15);
-        this.raw_output = (float) (efficiency * miners * 1.25);
+        this.raw_food_output = efficiency * farmers * 2.35f;
+        this.raw_output = efficiency * miners * 1.95f;
     }
 
     @Override
     public void statsRandomizer() {
         super.statsRandomizer();
-
         Random random = new Random();
+
         float modifier_farmers = 0f;
         float modifier_farmers_salary = 0f;
 
@@ -183,12 +181,10 @@ public class MinistryOfAgriculture extends Ministry {
 
         this.farmers_limit = (int) (this.economy.getLabor_force() * (modifier_farmers + (random.nextFloat() * (0.01 - (-0.01)) + (-0.01))));
         this.farmers = this.farmers_limit;
-
         this.farmers_salary = (float) (this.economy.getGdp_per_person() * (modifier_farmers_salary + (random.nextFloat() * (0.01 - (-0.01)) + (-0.01))));
 
         this.miners_limit = (int) (this.economy.getLabor_force() * (modifier_miners + (random.nextFloat() * (0.01 - (-0.01)) + (-0.01))));
         this.miners = this.miners_limit;
-
         this.miners_salary = (float) (this.economy.getGdp_per_person() * (modifier_miners_salary + (random.nextFloat() * (0.01 - (-0.01)) + (-0.01))));
 
         this.general_budget = (float) (this.economy.getBudget() * (modifier_general_budget + (random.nextFloat() * (0.01 - (-0.01)) + (-0.01))));

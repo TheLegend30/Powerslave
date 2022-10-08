@@ -57,13 +57,6 @@ public abstract class Ministry {
         updateMinistry();
     }
 
-    public float getGeneral_budget() {
-        return general_budget;
-    }
-
-    public void setGeneral_budget(float general_budget) {
-        this.general_budget = general_budget;
-    }
 
     public void updateMinistry() {
         this.efficiency = (((minister.getCompetency() / 1.25f) + (minister.getLoyalty() / 4f)) / 100f);

@@ -15,6 +15,7 @@ import com.example.powerslave.ministry.MinistryOfEconomy;
 import com.example.powerslave.ministry.MinistryOfEducation;
 import com.example.powerslave.ministry.MinistryOfForeignAffairs;
 import com.example.powerslave.ministry.MinistryOfHealthcare;
+import com.example.powerslave.ministry.MinistryOfIndustry;
 import com.example.powerslave.ministry.MinistryOfInternalAffairs;
 import com.example.powerslave.ministry.MinistryOfJustice;
 import com.example.powerslave.ministry.Parliament;
@@ -74,6 +75,7 @@ public class Country implements Comparable<Country> {
         ministries.put("m_education", new MinistryOfEducation(key, vacant, context, this));
         ministries.put("m_defense", new MinistryOfDefense(key, vacant, context, this));
         ministries.put("m_agriculture", new MinistryOfAgriculture(key, vacant, context, this));
+        ministries.put("m_industry", new MinistryOfIndustry(key, vacant, context, this));
         ministries.put("m_foreign", new MinistryOfForeignAffairs(key, vacant, context, this));
 
         ministries.put("m_internal", new MinistryOfInternalAffairs(key, vacant, context, this));
@@ -144,6 +146,10 @@ public class Country implements Comparable<Country> {
 
     public MinistryOfAgriculture getMinistryOfAgriculture() {
         return (MinistryOfAgriculture) ministries.get("m_agriculture");
+    }
+
+    public MinistryOfIndustry getMinistryOfIndustry() {
+        return (MinistryOfIndustry) ministries.get("m_industry");
     }
 
     public MinistryOfForeignAffairs getMinistryOfForeignAffairs() {

@@ -35,6 +35,8 @@ public class MainGameMenuActivity extends AppCompatActivity implements View.OnCl
     private ImageButton buttonDefense;
     private ImageButton buttonAgriculture;
 
+    private ImageButton buttonIndustry;
+
     private ImageButton buttonInternalAffairs;
     private ImageButton buttonJustice;
     private ImageButton buttonParliament;
@@ -76,6 +78,8 @@ public class MainGameMenuActivity extends AppCompatActivity implements View.OnCl
         buttonDefense = findViewById(R.id.buttonDefense);
         buttonAgriculture = findViewById(R.id.buttonAgriculture);
 
+        buttonIndustry = findViewById(R.id.buttonIndustry);
+
         buttonInternalAffairs = findViewById(R.id.buttonInternalAffairs);
         buttonJustice = findViewById(R.id.buttonJustice);
         buttonParliament = findViewById(R.id.buttonParliament);
@@ -91,6 +95,8 @@ public class MainGameMenuActivity extends AppCompatActivity implements View.OnCl
         buttonEconomy.setOnClickListener(this);
         buttonDefense.setOnClickListener(this);
         buttonAgriculture.setOnClickListener(this);
+
+        buttonIndustry.setOnClickListener(this);
 
         buttonInternalAffairs.setOnClickListener(this);
         buttonJustice.setOnClickListener(this);
@@ -169,11 +175,13 @@ public class MainGameMenuActivity extends AppCompatActivity implements View.OnCl
                 selectedMinistry = 3;
             } else if (view.getId() == buttonAgriculture.getId()) {
                 selectedMinistry = 4;
+            } else if (view.getId() == buttonIndustry.getId()) {
+                selectedMinistry = 6;
             } else if (view.getId() == buttonInternalAffairs.getId()) {
                 selectedMinistry = 9;
             } else if (view.getId() == buttonJustice.getId()) {
                 selectedMinistry = 10;
-            }else if (view.getId() == buttonParliament.getId()) {
+            } else if (view.getId() == buttonParliament.getId()) {
                 selectedMinistry = 11;
             }
 
