@@ -35,7 +35,7 @@ public abstract class Ministry {
 
     @Override
     public String toString() {
-        return name + "\n" + "Efficiency of the ministry: " + String.format("%.2f", efficiency * 100) + "%\n";
+        return name + "\n" + "Efficiency of the ministry: " + String.format("%.2f", efficiency * 100) + "%\n\n";
     }
 
     @NonNull

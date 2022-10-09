@@ -49,7 +49,7 @@ public class MinistryOfJustice extends Ministry {
         string += "Judges need: " + this.judges_need + "\n";
         string += "Prisons need: " + this.prisons_need + "\n";
         string += "Death penalty: " + (this.death_penalty ? "Yes" : "No") + "\n";
-        return super.toString() + "\n" + string;
+        return super.toString()  + string;
     }
 
     @Override

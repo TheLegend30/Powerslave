@@ -189,7 +189,7 @@ public class MinistryOfEconomy extends Ministry {
         string += "Poverty Rate: " + poverty + " (" + String.format("%.1f", (float) poverty / population * 100.0) + " %)" + "\n";
         string += "Landlocked: " + (this.landlocked ? "Yes" : "No") + "\n";
         string += "Development Index: " + getDevelopmentIndexString() + "\n";
-        return super.toString() + "\n" + string;
+        return super.toString() + string;
     }
 
     @Override

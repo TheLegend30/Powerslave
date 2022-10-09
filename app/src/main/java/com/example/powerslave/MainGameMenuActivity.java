@@ -85,7 +85,10 @@ public class MainGameMenuActivity extends AppCompatActivity implements View.OnCl
         buttonParliament = findViewById(R.id.buttonParliament);
 
         textViewDate.setText("Current date is: " + format1.format(calendar.getTime()));
-        textViewCountryName.setText("Country: " + country.getName());
+        textViewCountryName.setText("Country: " + country.getName() + "\n");
+        textViewCountryName.setText(textViewCountryName.getText() + "Capital: " + country.getCapitalName() + "\n");
+        textViewCountryName.setText(textViewCountryName.getText() + "Continent: " + country.getContinent() + "\n");
+        textViewCountryName.setText(textViewCountryName.getText() + "Ruler: " + country.getRuler().getName() + " " + country.getRuler().getSurname() + "\n");
 
         imageViewFlag.setImageURI(country.getFlagSrc());
 

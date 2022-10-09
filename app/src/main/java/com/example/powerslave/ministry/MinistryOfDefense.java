@@ -49,8 +49,6 @@ public class MinistryOfDefense extends Ministry {
         this.economy = country.getMinistryOfEconomy();
 
         statsRandomizer();
-
-        this.general_budget = (army_power * 1000) + (navy_power * 5000) + (air_power * 8000);
     }
 
 
@@ -63,26 +61,35 @@ public class MinistryOfDefense extends Ministry {
         string += "Generals: " + this.generals + "\n";
         string += "Generals limit: " + this.generals_limit + "\n";
         string += "Generals need: " + this.generals_need + "\n";
-        string += "Generals salary: " + this.generals_salary + "\n";
-        string += "Generals salary need: " + this.generals_salary_need + "\n";
+        string += "Generals salary: " + this.generals_salary + " ƒ" + "\n";
+        string += "Generals salary need: " + this.generals_salary_need + " ƒ" + "\n";
         string += "Admirals: " + this.admirals + "\n";
         string += "Admirals limit: " + this.admirals_limit + "\n";
         string += "Admirals need: " + this.admirals_need + "\n";
-        string += "Admirals salary: " + this.admirals_salary + "\n";
-        string += "Admirals salary need: " + this.admirals_salary_need + "\n";
+        string += "Admirals salary: " + this.admirals_salary + " ƒ" + "\n";
+        string += "Admirals salary need: " + this.admirals_salary_need + " ƒ" + "\n";
         string += "Air Force officers: " + this.air_force_officers + "\n";
         string += "Air Force officers limit: " + this.air_force_officers_limit + "\n";
         string += "Air Force officers need: " + this.air_force_officers_need + "\n";
-        string += "Air Force officers salary: " + this.air_force_officers_salary + "\n";
-        string += "Air Force officers salary need: " + this.air_force_officers_salary_need + "\n";
+        string += "Air Force officers salary: " + this.air_force_officers_salary + " ƒ" + "\n";
+        string += "Air Force officers salary need: " + this.air_force_officers_salary_need + " ƒ" + "\n";
+        string += "General budget: " + this.general_budget + " ƒ" + "\n";
+        string += "General budget need: " + this.general_budget_need + " ƒ" + "\n";
         string += "Conscription: " + (this.conscription ? "Yes" : "No") + "\n";
         string += "Landlocked: " + (this.economy.isLandlocked() ? "Yes" : "No") + "\n";
-        return string;
+        return super.toString() + string;
     }
 
     @Override
     public void updateMinistry() {
         super.updateMinistry();
+
+        this.general_budget_need = (float) (this.economy.getGdp() * 0.12f) + (army_power * 10f) + (navy_power * 50f) + (air_power * 80f);
+
+        efficiency *= generals_salary / generals_salary_need;
+        efficiency *= admirals_salary / admirals_salary_need;
+        efficiency *= air_force_officers_salary / air_force_officers_salary_need;
+        efficiency *= conscription ? 0.95 : 1.05;
     }
 
     @Override
@@ -103,6 +110,8 @@ public class MinistryOfDefense extends Ministry {
         float modifier_navy = 0f;
         float modifier_air = 0f;
 
+        float modifier_general_budget = 0f;
+
         switch (this.country.getContinent()) {
             case EY:
                 modifier_generals = 0.65f;
@@ -117,6 +126,8 @@ public class MinistryOfDefense extends Ministry {
                 modifier_army = 0.7f;
                 modifier_navy = 0.5f;
                 modifier_air = 0.3f;
+
+                modifier_general_budget = 0.13f;
                 break;
             case NY:
                 modifier_generals = 0.75f;
@@ -131,6 +142,8 @@ public class MinistryOfDefense extends Ministry {
                 modifier_army = 0.75f;
                 modifier_navy = 0.6f;
                 modifier_air = 0.4f;
+
+                modifier_general_budget = 0.11f;
                 break;
             case SY:
                 modifier_generals = 0.55f;
@@ -145,6 +158,8 @@ public class MinistryOfDefense extends Ministry {
                 modifier_army = 0.5f;
                 modifier_navy = 0.4f;
                 modifier_air = 0.2f;
+
+                modifier_general_budget = 0.10f;
                 break;
             case WY:
                 modifier_generals = 0.8f;
@@ -159,6 +174,8 @@ public class MinistryOfDefense extends Ministry {
                 modifier_army = 0.8f;
                 modifier_navy = 0.6f;
                 modifier_air = 0.4f;
+
+                modifier_general_budget = 0.15f;
                 break;
             case IB:
                 modifier_generals = 0.6f;
@@ -173,6 +190,8 @@ public class MinistryOfDefense extends Ministry {
                 modifier_army = 0.45f;
                 modifier_navy = 0.25f;
                 modifier_air = 0.15f;
+
+                modifier_general_budget = 0.16f;
                 break;
             case OB:
                 modifier_generals = 0.55f;
@@ -187,6 +206,8 @@ public class MinistryOfDefense extends Ministry {
                 modifier_army = 0.4f;
                 modifier_navy = 0.2f;
                 modifier_air = 0.1f;
+
+                modifier_general_budget = 0.18f;
                 break;
             case CA:
                 modifier_generals = 0.5f;
@@ -197,6 +218,8 @@ public class MinistryOfDefense extends Ministry {
 
                 modifier_air_force_officers = 0.1f;
                 modifier_air_force_officers_salary = 2.75f;
+
+                modifier_general_budget = 0.12f;
                 break;
             case FA:
                 modifier_generals = 0.45f;
@@ -211,6 +234,8 @@ public class MinistryOfDefense extends Ministry {
                 modifier_army = 0.35f;
                 modifier_navy = 0.2f;
                 modifier_air = 0.1f;
+
+                modifier_general_budget = 0.1f;
                 break;
             case ME:
                 modifier_generals = 0.35f;
@@ -225,6 +250,8 @@ public class MinistryOfDefense extends Ministry {
                 modifier_army = 0.3f;
                 modifier_navy = 0.1f;
                 modifier_air = 0.05f;
+
+                modifier_general_budget = 0.18f;
                 break;
             case GE:
                 modifier_generals = 0.85f;
@@ -239,6 +266,8 @@ public class MinistryOfDefense extends Ministry {
                 modifier_army = 0.75f;
                 modifier_navy = 0.7f;
                 modifier_air = 0.65f;
+
+                modifier_general_budget = 0.2f;
                 break;
         }
 
@@ -272,5 +301,7 @@ public class MinistryOfDefense extends Ministry {
         this.air_force_officers_limit = (int) (this.air_force_officers_need * (modifier_air_force_officers + random.nextFloat() * (0.03 - (-0.03)) + (-0.03)));
         this.air_force_officers = this.air_force_officers_limit;
         this.air_force_officers_salary = (float) (this.economy.getGdp_per_person() * (modifier_air_force_officers_salary + (random.nextFloat() * (0.01 - (-0.01)) + (-0.01))));
+
+        this.general_budget = (float) (this.economy.getBudget() * (modifier_general_budget + (random.nextFloat() * (0.01 - (-0.01)) + (-0.01))));
     }
 }

@@ -39,7 +39,7 @@ public class Parliament extends Ministry {
         string += "Traditional party (Neo-leeism): " + parties.get(Ideology.Neoleeism) + "\n";
         string += "Progress party (Fokritism): " + parties.get(Ideology.Fokritism) + "\n";
         string += "Nonpartisan (No Ideology): " + parties.get(Ideology.Nonpartisan) + "\n";
-        return string;
+        return super.toString() + string;
     }
 
     @Override
@@ -153,7 +153,7 @@ public class Parliament extends Ministry {
                 modifier_parliament_count = 0.45f;
 
                 modifier_ply = 0.05f;
-                modifier_vyh = 0.3f;
+                modifier_vyh = 0.25f;
                 modifier_are = 0.15f;
                 modifier_hyc = 0.05f;
                 modifier_zow = 0.05f;

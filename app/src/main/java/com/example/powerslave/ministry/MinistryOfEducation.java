@@ -83,7 +83,7 @@ public class MinistryOfEducation extends Ministry {
         string += "Schools need: " + this.schools_need + "\n";
         string += "Colleges need: " + this.colleges_need + "\n";
         string += "Teachers need: " + this.teachers_need + "\n";
-        return super.toString() + "\n" + string;
+        return super.toString()+ string;
     }
 
     @Override

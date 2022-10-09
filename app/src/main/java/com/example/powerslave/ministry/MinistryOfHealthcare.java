@@ -59,6 +59,6 @@ public class MinistryOfHealthcare extends Ministry {
         String string;
         string = "Life expectancy: " + getLife_expectancyString() + "\n";
         string += "Pensioners: " + this.pensioners + "\n";
-        return super.toString() + "\n" + string;
+        return super.toString() + string;
     }
 }

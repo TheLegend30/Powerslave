@@ -50,7 +50,7 @@ public class MinistryOfInternalAffairs extends Ministry {
         string += "Departments: " + this.departments + "\n";
         string += "Policemen need: " + this.policemen_need + "\n";
         string += "Departments need: " + this.departments_need + "\n";
-        return super.toString() + "\n" + string;
+        return super.toString() + string;
     }
 
     @Override
