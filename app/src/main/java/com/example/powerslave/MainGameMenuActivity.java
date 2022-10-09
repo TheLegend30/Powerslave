@@ -34,7 +34,7 @@ public class MainGameMenuActivity extends AppCompatActivity implements View.OnCl
     private ImageButton buttonEconomy;
     private ImageButton buttonDefense;
     private ImageButton buttonAgriculture;
-
+    private ImageButton buttonDevelopment;
     private ImageButton buttonIndustry;
 
     private ImageButton buttonInternalAffairs;
@@ -77,7 +77,7 @@ public class MainGameMenuActivity extends AppCompatActivity implements View.OnCl
         buttonEconomy = findViewById(R.id.buttonEconomy);
         buttonDefense = findViewById(R.id.buttonDefense);
         buttonAgriculture = findViewById(R.id.buttonAgriculture);
-
+        buttonDevelopment = findViewById(R.id.buttonDevelopment);
         buttonIndustry = findViewById(R.id.buttonIndustry);
 
         buttonInternalAffairs = findViewById(R.id.buttonInternalAffairs);
@@ -95,7 +95,7 @@ public class MainGameMenuActivity extends AppCompatActivity implements View.OnCl
         buttonEconomy.setOnClickListener(this);
         buttonDefense.setOnClickListener(this);
         buttonAgriculture.setOnClickListener(this);
-
+        buttonDevelopment.setOnClickListener(this);
         buttonIndustry.setOnClickListener(this);
 
         buttonInternalAffairs.setOnClickListener(this);
@@ -175,6 +175,8 @@ public class MainGameMenuActivity extends AppCompatActivity implements View.OnCl
                 selectedMinistry = 3;
             } else if (view.getId() == buttonAgriculture.getId()) {
                 selectedMinistry = 4;
+            } else if (view.getId() == buttonDevelopment.getId()) {
+                selectedMinistry = 5;
             } else if (view.getId() == buttonIndustry.getId()) {
                 selectedMinistry = 6;
             } else if (view.getId() == buttonInternalAffairs.getId()) {

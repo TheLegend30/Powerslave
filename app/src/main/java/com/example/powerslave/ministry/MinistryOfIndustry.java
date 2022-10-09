@@ -67,11 +67,6 @@ public class MinistryOfIndustry extends Ministry {
         this.name = "Ministry of Industry";
         this.economy = this.country.getMinistryOfEconomy();
 
-        this.low_workers_salary_need = this.economy.getGdp_per_person() / 2.05f;
-        this.middle_workers_salary_need = this.economy.getGdp_per_person() / 1.25f;
-        this.high_workers_salary_need = this.economy.getGdp_per_person() / 1.05f;
-        this.general_budget_need = (float) ((this.economy.getBudget() * 0.15) + ((low_workers * 0.08) + (middle_workers * 0.1)) + (high_workers * 0.15));
-
         statsRandomizer();
     }
 
@@ -79,12 +74,15 @@ public class MinistryOfIndustry extends Ministry {
     public String toString() {
         String string;
         string = "Low-level workers: " + low_workers + "\n";
+        string = "Low-level workers: " + low_workers_limit + "\n";
         string += "Low-level workers salary: " + low_workers_salary + "ƒ" + "\n";
         string += "Low-level workers salary need: " + low_workers_salary_need + "ƒ" + "\n";
         string += "Middle-level workers: " + middle_workers + "\n";
+        string += "Middle-level workers: " + middle_workers_limit + "\n";
         string += "Middle-level workers salary: " + middle_workers_salary + "\n";
         string += "Middle-level workers salary need: " + middle_workers_salary_need + "\n";
         string += "High-level workers: " + high_workers + "\n";
+        string += "High-level workers: " + high_workers_limit + "\n";
         string += "High-level workers salary: " + high_workers_salary + "\n";
         string += "High-level workers salary need: " + high_workers_salary_need + "\n";
         string += "General budget: " + general_budget + " ƒ" + "\n";
@@ -118,6 +116,11 @@ public class MinistryOfIndustry extends Ministry {
     @Override
     public void updateMinistry() {
         super.updateMinistry();
+        this.low_workers_salary_need = this.economy.getGdp_per_person() / 2.05f;
+        this.middle_workers_salary_need = this.economy.getGdp_per_person() / 1.25f;
+        this.high_workers_salary_need = this.economy.getGdp_per_person() / 1.05f;
+        this.general_budget_need = (float) ((this.economy.getBudget() * 0.15) + ((low_workers * 0.08) + (middle_workers * 0.1)) + (high_workers * 0.15));
+
         efficiency *= low_workers_salary / low_workers_salary_need;
         efficiency *= middle_workers_salary / middle_workers_salary_need;
         efficiency *= high_workers_salary / high_workers_salary_need;

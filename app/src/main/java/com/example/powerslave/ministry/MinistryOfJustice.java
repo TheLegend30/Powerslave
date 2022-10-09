@@ -42,6 +42,7 @@ public class MinistryOfJustice extends Ministry {
         String string;
         string = "Level of judges' decisions liberty (1 - minimum, 6 - maximum): " + this.level_of_judges_liberty + "\n";
         string += "Judges: " + this.judges + "\n";
+        string += "Judges limit: " + this.judges + "\n";
         string += "Judges salary: " + this.judges_salary + " ƒ" + "\n";
         string += "Judges salary need: " + this.judges_salary_need + " ƒ" + "\n";
         string += "Prisons: " + this.prisons + "\n";

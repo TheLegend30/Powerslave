@@ -44,6 +44,7 @@ public class MinistryOfInternalAffairs extends Ministry {
         string = "Crime per 100,000 people: " + this.crime + "\n";
         string += "Level of security (1 - minimum, 6 - maximum): " + this.level_of_security + "\n";
         string += "Policemen: " + this.policemen + "\n";
+        string += "Policemen limit: " + this.policemen_limit + "\n";
         string += "Policemen salary: " + this.policemen_salary + " ƒ" + "\n";
         string += "Policemen salary need: " + this.policemen_salary_need + " ƒ" + "\n";
         string += "Departments: " + this.departments + "\n";

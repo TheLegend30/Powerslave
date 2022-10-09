@@ -61,14 +61,17 @@ public class MinistryOfDefense extends Ministry {
         string += "Navy Power: " + this.navy_power + "\n";
         string += "Air Force Power: " + this.air_power + "\n";
         string += "Generals: " + this.generals + "\n";
+        string += "Generals limit: " + this.generals_limit + "\n";
         string += "Generals need: " + this.generals_need + "\n";
         string += "Generals salary: " + this.generals_salary + "\n";
         string += "Generals salary need: " + this.generals_salary_need + "\n";
         string += "Admirals: " + this.admirals + "\n";
+        string += "Admirals limit: " + this.admirals_limit + "\n";
         string += "Admirals need: " + this.admirals_need + "\n";
         string += "Admirals salary: " + this.admirals_salary + "\n";
         string += "Admirals salary need: " + this.admirals_salary_need + "\n";
         string += "Air Force officers: " + this.air_force_officers + "\n";
+        string += "Air Force officers limit: " + this.air_force_officers_limit + "\n";
         string += "Air Force officers need: " + this.air_force_officers_need + "\n";
         string += "Air Force officers salary: " + this.air_force_officers_salary + "\n";
         string += "Air Force officers salary need: " + this.air_force_officers_salary_need + "\n";

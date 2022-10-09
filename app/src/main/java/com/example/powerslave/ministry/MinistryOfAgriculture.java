@@ -34,10 +34,6 @@ public class MinistryOfAgriculture extends Ministry {
         this.name = "Ministry of Agriculture and Mining";
         this.economy = country.getMinistryOfEconomy();
 
-        this.farmers_salary_need = this.economy.getGdp_per_person() / 4;
-        this.miners_salary_need = this.economy.getGdp_per_person() / 3.5f;
-        this.general_budget_need = (float) ((this.economy.getBudget() * 0.1) + ((miners * 0.05) + (farmers * 0.01)));
-
         statsRandomizer();
     }
 
@@ -45,10 +41,12 @@ public class MinistryOfAgriculture extends Ministry {
     public String toString() {
         String string;
         string = "Farmers: " + this.farmers + "\n";
+        string = "Farmers limit: " + this.farmers_limit + "\n";
         string += "Farmers' salary: " + (this.farmers_salary / this.economy.getCurrency_to_gulden()) + " " + this.economy.getCurrency() + "\n";
         string += "Farmers' need salary: " + (this.farmers_salary_need / this.economy.getCurrency_to_gulden()) + " " + this.economy.getCurrency() + "\n";
 
         string += "Miners: " + this.miners + "\n";
+        string += "Miners limit: " + this.miners_limit + "\n";
         string += "Miners' salary: " + (this.miners_salary / this.economy.getCurrency_to_gulden()) + " " + this.economy.getCurrency() + "\n";
         string += "Miners' need salary: " + (this.miners_salary_need / this.economy.getCurrency_to_gulden()) + " " + this.economy.getCurrency() + "\n";
 
@@ -66,8 +64,11 @@ public class MinistryOfAgriculture extends Ministry {
     @Override
     public void updateMinistry() {
         super.updateMinistry();
-        this.efficiency *= ((general_budget + miners_salary + farmers_salary) / (general_budget_need + miners_salary_need + farmers_salary_need));
+        this.farmers_salary_need = this.economy.getGdp_per_person() / 4;
+        this.miners_salary_need = this.economy.getGdp_per_person() / 3.5f;
+        this.general_budget_need = (this.economy.getBudget() * 0.1f) + ((miners * 0.05f) + (farmers * 0.01f));
 
+        this.efficiency *= ((general_budget + miners_salary + farmers_salary) / (general_budget_need + miners_salary_need + farmers_salary_need));
         this.raw_food_output = efficiency * farmers * 2.35f;
         this.raw_output = efficiency * miners * 1.95f;
     }
