@@ -23,7 +23,7 @@ import com.example.powerslave.person.Ruler;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-
+// TODO: General budgets in all ministries rework
 public class MainGameMenuActivity extends AppCompatActivity implements View.OnClickListener {
     private TextView textViewDate;
     private TextView textViewCountryName;
