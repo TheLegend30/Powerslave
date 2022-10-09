@@ -31,7 +31,7 @@ public class MinistryOfEducation extends Ministry {
 
     private float literacy;
     private float degree;
-    private float liberty = 0;
+    private float liberty = 1;
 
     private MinistryOfEconomy economy;
 

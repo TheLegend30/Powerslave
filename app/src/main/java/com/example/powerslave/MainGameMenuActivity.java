@@ -23,6 +23,7 @@ import com.example.powerslave.person.Ruler;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+
 // TODO: General budgets in all ministries rework
 public class MainGameMenuActivity extends AppCompatActivity implements View.OnClickListener {
     private TextView textViewDate;
@@ -37,6 +38,7 @@ public class MainGameMenuActivity extends AppCompatActivity implements View.OnCl
     private ImageButton buttonDevelopment;
     private ImageButton buttonIndustry;
 
+    private ImageButton buttonCulture;
     private ImageButton buttonInternalAffairs;
     private ImageButton buttonJustice;
     private ImageButton buttonParliament;
@@ -80,6 +82,7 @@ public class MainGameMenuActivity extends AppCompatActivity implements View.OnCl
         buttonDevelopment = findViewById(R.id.buttonDevelopment);
         buttonIndustry = findViewById(R.id.buttonIndustry);
 
+        buttonCulture = findViewById(R.id.buttonCulture);
         buttonInternalAffairs = findViewById(R.id.buttonInternalAffairs);
         buttonJustice = findViewById(R.id.buttonJustice);
         buttonParliament = findViewById(R.id.buttonParliament);
@@ -101,6 +104,7 @@ public class MainGameMenuActivity extends AppCompatActivity implements View.OnCl
         buttonDevelopment.setOnClickListener(this);
         buttonIndustry.setOnClickListener(this);
 
+        buttonCulture.setOnClickListener(this);
         buttonInternalAffairs.setOnClickListener(this);
         buttonJustice.setOnClickListener(this);
         buttonParliament.setOnClickListener(this);
@@ -182,6 +186,8 @@ public class MainGameMenuActivity extends AppCompatActivity implements View.OnCl
                 selectedMinistry = 5;
             } else if (view.getId() == buttonIndustry.getId()) {
                 selectedMinistry = 6;
+            } else if (view.getId() == buttonCulture.getId()) {
+                selectedMinistry = 8;
             } else if (view.getId() == buttonInternalAffairs.getId()) {
                 selectedMinistry = 9;
             } else if (view.getId() == buttonJustice.getId()) {

@@ -65,10 +65,12 @@ public class MinistryActivity extends AppCompatActivity implements View.OnClickL
             ministry = country.getMinistryOfDefense();
         } else if (MainGameMenuActivity.selectedMinistry == 4) {
             ministry = country.getMinistryOfAgriculture();
-        }else if (MainGameMenuActivity.selectedMinistry == 5) {
+        } else if (MainGameMenuActivity.selectedMinistry == 5) {
             ministry = country.getMinistryOfDevelopment();
         } else if (MainGameMenuActivity.selectedMinistry == 6) {
             ministry = country.getMinistryOfIndustry();
+        } else if (MainGameMenuActivity.selectedMinistry == 8) {
+            ministry = country.getMinistryOfCulture();
         } else if (MainGameMenuActivity.selectedMinistry == 9) {
             ministry = country.getMinistryOfInternalAffairs();
         } else if (MainGameMenuActivity.selectedMinistry == 10) {
