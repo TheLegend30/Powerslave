@@ -22,8 +22,6 @@ public abstract class Ministry {
     protected float general_budget;
     protected float general_budget_need;
 
-    protected float outlay;
-
     protected float efficiency;
 
     protected Ministry(int countryKey, Minister minister, Context context, Country country) {
@@ -42,8 +40,8 @@ public abstract class Ministry {
     public String ministerToStringShort() {
         return "Minister: " + minister.getName() + " " +
                 minister.getSurname() + "\n" +
-                "(L:" + minister.getLoyalty() + "%" +
-                "  C:" + minister.getCompetency() + "%" +
+                "(L:" + String.format("%.2f", minister.getLoyalty()) + "%" +
+                "  C:" + String.format("%.2f", minister.getCompetency()) + "%" +
                 "  I:" + minister.getIdeology() +
                 ")";
     }
@@ -54,7 +52,6 @@ public abstract class Ministry {
 
     public void setMinister(Minister minister) {
         this.minister = minister;
-        updateMinistry();
     }
 
 

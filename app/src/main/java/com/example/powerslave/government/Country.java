@@ -54,6 +54,10 @@ public class Country implements Comparable<Country> {
 
     private Map<String, Ministry> ministries = new HashMap<>();
 
+    public void oneMove() {
+        updateMinistries();
+    }
+
     @Override
     public int compareTo(Country country) {
         return this.getName().compareTo(country.getName());
@@ -80,7 +84,6 @@ public class Country implements Comparable<Country> {
         ministries.put("m_industry", new MinistryOfIndustry(key, vacant, context, this));
         ministries.put("m_development", new MinistryOfDevelopment(key, vacant, context, this));
         ministries.put("m_foreign", new MinistryOfForeignAffairs(key, vacant, context, this));
-
         ministries.put("m_culture", new MinistryOfCulture(key, vacant, context, this));
         ministries.put("m_internal", new MinistryOfInternalAffairs(key, vacant, context, this));
         ministries.put("m_justice", new MinistryOfJustice(key, vacant, context, this));

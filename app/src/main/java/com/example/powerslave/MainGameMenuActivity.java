@@ -23,6 +23,7 @@ import com.example.powerslave.person.Ruler;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Map;
 
 // TODO: General budgets in all ministries rework
 public class MainGameMenuActivity extends AppCompatActivity implements View.OnClickListener {
@@ -43,11 +44,14 @@ public class MainGameMenuActivity extends AppCompatActivity implements View.OnCl
     private ImageButton buttonJustice;
     private ImageButton buttonParliament;
 
+    private ImageButton buttonForeignAffairs;
+
     public static Country country;
     public static Ruler ruler;
     public static boolean showAlertMessage;
 
     public static Calendar calendar = Calendar.getInstance();
+    public static int week;
     public static SimpleDateFormat format1 = new SimpleDateFormat("MMMM yyyy");
 
     public static int selectedMinistry = 0;
@@ -57,6 +61,7 @@ public class MainGameMenuActivity extends AppCompatActivity implements View.OnCl
     }
 
     private static void startMainGameActivity() {
+        week = 1;
         calendar.set(1965, 0, 25);
         showAlertMessage = true;
     }
@@ -87,7 +92,9 @@ public class MainGameMenuActivity extends AppCompatActivity implements View.OnCl
         buttonJustice = findViewById(R.id.buttonJustice);
         buttonParliament = findViewById(R.id.buttonParliament);
 
-        textViewDate.setText("Current date is: " + format1.format(calendar.getTime()));
+        buttonForeignAffairs = findViewById(R.id.buttonForeignAffairs);
+
+        textViewDate.setText("Current date is: " + "Week " + week + " " + format1.format(calendar.getTime()));
         textViewCountryName.setText("Country: " + country.getName() + "\n");
         textViewCountryName.setText(textViewCountryName.getText() + "Capital: " + country.getCapitalName() + "\n");
         textViewCountryName.setText(textViewCountryName.getText() + "Continent: " + country.getContinent() + "\n");
@@ -108,6 +115,8 @@ public class MainGameMenuActivity extends AppCompatActivity implements View.OnCl
         buttonInternalAffairs.setOnClickListener(this);
         buttonJustice.setOnClickListener(this);
         buttonParliament.setOnClickListener(this);
+
+        buttonForeignAffairs.setOnClickListener(this);
 
         ActionBar actionBar = getSupportActionBar();
         actionBar.setIcon(R.drawable.ic_settings_foreground);
@@ -164,12 +173,17 @@ public class MainGameMenuActivity extends AppCompatActivity implements View.OnCl
     @Override
     public void onClick(View view) {
         if (view.getId() == buttonNextMonth.getId()) {
-            calendar.add(Calendar.MONTH, 1);
-            country.addMinisterExperience();
+            if(++week == 5) {
+                calendar.add(Calendar.MONTH, 1);
+                country.addMinisterExperience();
+                week = 1;
+            }
             if (calendar.getTime().getMonth() == 0) {
                 country.updateMinisters();
             }
-            showEvent();
+            country.oneMove();
+            //showEvent();
+            MainGameMenuActivity.this.recreate();
         } else {
             Intent intent = new Intent(MainGameMenuActivity.this, MinistryActivity.class);
             if (view.getId() == buttonHealthcare.getId()) {
@@ -194,6 +208,8 @@ public class MainGameMenuActivity extends AppCompatActivity implements View.OnCl
                 selectedMinistry = 10;
             } else if (view.getId() == buttonParliament.getId()) {
                 selectedMinistry = 11;
+            } else if (view.getId() == buttonForeignAffairs.getId()) {
+                selectedMinistry = 13;
             }
 
             startActivity(intent);

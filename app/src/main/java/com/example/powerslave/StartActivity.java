@@ -45,7 +45,7 @@ public class StartActivity extends AppCompatActivity implements View.OnClickList
         forwardArrowStart = findViewById(R.id.forwardArrowStart);
         economyButtonStart = findViewById(R.id.economyButtonStart);
         militaryButtonStart = findViewById(R.id.militaryButtonStart);
-        countrySpinnerStart = (Spinner) findViewById(R.id.countrySpinnerStart);
+        countrySpinnerStart = findViewById(R.id.countrySpinnerStart);
         flagViewStart = findViewById(R.id.flagViewStart);
         textCapitalStart = findViewById(R.id.textCapitalStart);
         textGovernmentStart = findViewById(R.id.textGovernmentStart);
