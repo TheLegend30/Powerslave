@@ -10,9 +10,9 @@ import java.util.Random;
 public class MinistryOfTransportation extends Ministry {
 
     private int builders;
+    private int freeBuilders;
     private int buildersLimit;
     private int maximumBuildersLimit;
-
     private float buildersSalary;
     private float buildersSalaryNeed;
 
@@ -31,6 +31,8 @@ public class MinistryOfTransportation extends Ministry {
     private int roadKms;
     private int roadKmsLimit;
     private int roadKmsNeed;
+
+    private float buildingMaterialsNeed;
 
     private MinistryOfEconomy economy;
     private MinistryOfCulture culture;
@@ -56,6 +58,7 @@ public class MinistryOfTransportation extends Ministry {
     public String toString() {
         String string;
         string = "Builders: " + builders + "\n";
+        string += "Free builders: " + freeBuilders + "\n";
         string += "Builders limit: " + buildersLimit + " (Maximum - " + maximumBuildersLimit + ")" + "\n";
         string += "Builders salary: " + String.format("%.2f", buildersSalary) + " ƒ" + "\n";
         string += "Builders salary need: " + String.format("%.2f", buildersSalaryNeed) + " ƒ" + "\n";
@@ -71,13 +74,15 @@ public class MinistryOfTransportation extends Ministry {
         string += "Roads kms: " + roadKms + "\n";
         string += "Roads kms limit: " + roadKmsLimit + "\n";
         string += "Roads kms need: " + roadKmsNeed + "\n";
+        string += "General budget: " + String.format("%.2f", generalBudget) + " ƒ" + "\n";
+        string += "General need budget: " + String.format("%.2f", generalBudgetNeed) + " ƒ" + "\n";
         return super.toString() + string;
     }
 
     @Override
     public void updateMinistry() {
         super.updateMinistry();
-        efficiency *= buildersSalary / buildersSalaryNeed;
+        efficiency *= generalBudget / generalBudgetNeed;
         if (airports > 0) efficiency *= (float) airports / airportsNeed;
         if (!economy.isLandlocked()) efficiency *= (float) ports / portsNeed;
         efficiency *= (float) railroadKms / railroadKmsNeed;
@@ -98,6 +103,8 @@ public class MinistryOfTransportation extends Ministry {
         float modifierRailroadKms = 0f;
         float modifierRoadKms = 0f;
 
+        float modifierGeneralBudget = 0f;
+
         switch (this.country.getContinent()) {
             case EY:
                 modifierBuilders = 0.06f;
@@ -107,6 +114,8 @@ public class MinistryOfTransportation extends Ministry {
                 modifierPorts = 0.5f;
                 modifierRailroadKms = 0.4f;
                 modifierRoadKms = 0.6f;
+
+                modifierGeneralBudget = 0.65f;
                 break;
             case NY:
                 modifierBuilders = 0.08f;
@@ -116,6 +125,8 @@ public class MinistryOfTransportation extends Ministry {
                 modifierPorts = 0.65f;
                 modifierRailroadKms = 0.6f;
                 modifierRoadKms = 0.8f;
+
+                modifierGeneralBudget = 0.85f;
                 break;
             case SY:
                 modifierBuilders = 0.05f;
@@ -125,6 +136,8 @@ public class MinistryOfTransportation extends Ministry {
                 modifierPorts = 0.45f;
                 modifierRailroadKms = 0.35f;
                 modifierRoadKms = 0.55f;
+
+                modifierGeneralBudget = 0.6f;
                 break;
             case WY:
                 modifierBuilders = 0.09f;
@@ -134,6 +147,8 @@ public class MinistryOfTransportation extends Ministry {
                 modifierPorts = 0.75f;
                 modifierRailroadKms = 0.7f;
                 modifierRoadKms = 0.85f;
+
+                modifierGeneralBudget = 0.9f;
                 break;
             case IB:
                 modifierBuilders = 0.045f;
@@ -143,6 +158,8 @@ public class MinistryOfTransportation extends Ministry {
                 modifierPorts = 0.4f;
                 modifierRailroadKms = 0.3f;
                 modifierRoadKms = 0.5f;
+
+                modifierGeneralBudget = 0.55f;
                 break;
             case OB:
                 modifierBuilders = 0.04f;
@@ -152,6 +169,8 @@ public class MinistryOfTransportation extends Ministry {
                 modifierPorts = 0.4f;
                 modifierRailroadKms = 0.3f;
                 modifierRoadKms = 0.55f;
+
+                modifierGeneralBudget = 0.5f;
                 break;
             case CA:
                 modifierBuilders = 0.035f;
@@ -161,6 +180,8 @@ public class MinistryOfTransportation extends Ministry {
                 modifierPorts = 0.25f;
                 modifierRailroadKms = 0.3f;
                 modifierRoadKms = 0.45f;
+
+                modifierGeneralBudget = 0.45f;
                 break;
             case FA:
                 modifierBuilders = 0.03f;
@@ -170,6 +191,8 @@ public class MinistryOfTransportation extends Ministry {
                 modifierPorts = 0.2f;
                 modifierRailroadKms = 0.25f;
                 modifierRoadKms = 0.3f;
+
+                modifierGeneralBudget = 0.45f;
                 break;
             case ME:
                 modifierBuilders = 0.025f;
@@ -179,6 +202,8 @@ public class MinistryOfTransportation extends Ministry {
                 modifierPorts = 0.2f;
                 modifierRailroadKms = 0.15f;
                 modifierRoadKms = 0.2f;
+
+                modifierGeneralBudget = 0.35f;
                 break;
             case GE:
                 modifierBuilders = 0.09f;
@@ -188,11 +213,14 @@ public class MinistryOfTransportation extends Ministry {
                 modifierPorts = 0.7f;
                 modifierRailroadKms = 0.75f;
                 modifierRoadKms = 0.8f;
+
+                modifierGeneralBudget = 0.75f;
                 break;
         }
 
         buildersLimit = (int) (economy.getLabor_force() * (modifierBuilders + (random.nextFloat() * (0.005 - (-0.005)) + (-0.005))));
         builders = buildersLimit;
+        freeBuilders = builders;
         buildersSalary = (float) (economy.getGdpPerPerson() * (modifierBuildersSalary + (random.nextFloat() * (0.01f - (-0.01f)) + (-0.01f))));
 
         airportsLimit = (int) (airportsNeed * (modifierAirports + (random.nextFloat() * (0.01 - (-0.01)) + (-0.01))));
@@ -204,6 +232,8 @@ public class MinistryOfTransportation extends Ministry {
         roadKmsLimit = (int) (roadKmsNeed * (modifierRoadKms + (random.nextFloat() * (0.01 - (-0.01)) + (-0.01))));
         roadKms = roadKmsLimit;
 
-
+        generalBudgetNeed = (builders * 0.35f) + (builders * buildersSalary) + (airports * 1800f) + (ports * 1400f) + (railroadKms * 0.09f) + (roadKms * 0.05f);
+        generalBudget = (float) (generalBudgetNeed * (modifierGeneralBudget + (random.nextFloat() * (0.05 - (-0.05)) + (-0.05))));
+        maximumBuildersLimit = (int) (economy.getLabor_force() * 0.1);
     }
 }

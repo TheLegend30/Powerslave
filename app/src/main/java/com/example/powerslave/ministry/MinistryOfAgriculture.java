@@ -10,28 +10,30 @@ import java.util.Random;
 public class MinistryOfAgriculture extends Ministry {
     private int farmers;
     private int farmersLimit;
+    private int maximumFarmersLimit;
     private float farmersSalary;
     private float farmersSalaryNeed;
 
     private int miners;
     private int minersLimit;
+    private int maximumMinersLimit;
     private float minersSalary;
     private float minersSalaryNeed;
 
     private float rawFoodOutput;
     private float rawOutput;
 
-    private float rawFoodReserve = 0;
-    private float rawReserve = 0;
 
     private MinistryOfEconomy economy;
 
 
     public MinistryOfAgriculture(int countryKey, Minister minister, Context context, Country country) {
         super(countryKey, minister, context, country);
-
         this.name = "Ministry of Agriculture and Mining";
         this.economy = country.getMinistryOfEconomy();
+
+        this.maximumFarmersLimit = (int) (economy.getLabor_force() * 0.55);
+        this.maximumMinersLimit = (int) (economy.getLabor_force() * 0.4);
 
         statsRandomizer();
     }
@@ -39,37 +41,55 @@ public class MinistryOfAgriculture extends Ministry {
     @Override
     public String toString() {
         String string;
-        string = "Farmers: " + this.farmers + "\n";
-        string = "Farmers limit: " + this.farmersLimit + "\n";
-        string += "Farmers' salary: " + (this.farmersSalary / this.economy.getCurrencyToGulden()) + " " + this.economy.getCurrency() + "\n";
-        string += "Farmers' need salary: " + (this.farmersSalaryNeed / this.economy.getCurrencyToGulden()) + " " + this.economy.getCurrency() + "\n";
-
-        string += "Miners: " + this.miners + "\n";
-        string += "Miners limit: " + this.minersLimit + "\n";
-        string += "Miners' salary: " + (this.minersSalary / this.economy.getCurrencyToGulden()) + " " + this.economy.getCurrency() + "\n";
-        string += "Miners' need salary: " + (this.minersSalaryNeed / this.economy.getCurrencyToGulden()) + " " + this.economy.getCurrency() + "\n";
-
-        string += "General budget: " + generalBudget + " ƒ" + "\n";
-        string += "General need budget: " + generalBudgetNeed + " ƒ" + "\n";
-
-        string += "Raw food output: " + this.rawFoodOutput + " units" + "\n";
-        string += "Raw food reserve: " + this.rawFoodReserve + " units" + "\n";
-        string += "Raw output: " + this.rawOutput + " units" + "\n";
-        string += "Raw reserve: " + this.rawReserve + " units" + "\n";
-
+        string = "Farmers: " + farmers + "\n";
+        string += "Farmers limit: " + farmersLimit + " (Maximum - " + maximumFarmersLimit + ")" + "\n";
+        string += "Farmers' salary: " + String.format("%.2f", farmersSalary) + " ƒ" + "\n";
+        string += "Farmers' salary need : " + String.format("%.2f", farmersSalaryNeed) + " ƒ" + "\n";
+        string += "Miners: " + miners + "\n";
+        string += "Miners limit: " + minersLimit + " (Maximum - " + maximumMinersLimit + ")" + "\n";
+        string += "Miners' salary: " + String.format("%.2f", minersSalary) + " ƒ" + "\n";
+        string += "Miners' salary need : " + String.format("%.2f", minersSalaryNeed) + " ƒ" + "\n";
+        string += "General budget: " + String.format("%.2f", generalBudget) + " ƒ" + "\n";
+        string += "General budget need : " + String.format("%.2f", generalBudgetNeed) + " ƒ" + "\n";
+        string += "Raw food output: " + rawFoodOutput + " units" + "\n";
+        string += "Raw output: " + rawOutput + " units" + "\n";
         return super.toString() + "\n" + string;
     }
+
+    public int getFarmers() {
+        return farmers;
+    }
+
+    public float getFarmersSalary() {
+        return farmersSalary;
+    }
+
+    public int getMiners() {
+        return miners;
+    }
+
+    public float getMinersSalary() {
+        return minersSalary;
+    }
+
+    public float getRawFoodOutput() {
+        return rawFoodOutput;
+    }
+
+    public float getRawOutput() {
+        return rawOutput;
+    }
+
 
     @Override
     public void updateMinistry() {
         super.updateMinistry();
-        this.farmersSalaryNeed = this.economy.getGdpPerPerson() / 4;
-        this.minersSalaryNeed = this.economy.getGdpPerPerson() / 3.5f;
-        this.generalBudgetNeed = (this.economy.getBudget() * 0.1f) + ((miners * 0.05f) + (farmers * 0.01f));
+        farmersSalaryNeed = economy.getGdpPerPerson() / 4;
+        minersSalaryNeed = economy.getGdpPerPerson() / 3.5f;
 
-        this.efficiency *= ((generalBudget + minersSalary + farmersSalary) / (generalBudgetNeed + minersSalaryNeed + farmersSalaryNeed));
-        this.rawFoodOutput = efficiency * farmers * 2.35f;
-        this.rawOutput = efficiency * miners * 1.95f;
+        efficiency *= generalBudget / generalBudgetNeed;
+        rawFoodOutput = efficiency * farmers * 2.35f;
+        rawOutput = efficiency * miners * 1.95f;
     }
 
     @Override
@@ -85,7 +105,7 @@ public class MinistryOfAgriculture extends Ministry {
 
         float modifierGeneralBudget = 0f;
 
-        switch (this.country.getContinent()) {
+        switch (country.getContinent()) {
             case EY:
                 modifierFarmers = 0.15f;
                 modifierFarmersSalary = 0.10f;
@@ -93,7 +113,7 @@ public class MinistryOfAgriculture extends Ministry {
                 modifierMiners = 0.15f;
                 modifierMinersSalary = 0.12f;
 
-                modifierGeneralBudget = 0.08f;
+                modifierGeneralBudget = 0.65f;
                 break;
             case NY:
                 modifierFarmers = 0.055f;
@@ -102,7 +122,7 @@ public class MinistryOfAgriculture extends Ministry {
                 modifierMiners = 0.06f;
                 modifierMinersSalary = 0.28f;
 
-                modifierGeneralBudget = 0.05f;
+                modifierGeneralBudget = 0.75f;
                 break;
             case SY:
                 modifierFarmers = 0.13f;
@@ -111,7 +131,7 @@ public class MinistryOfAgriculture extends Ministry {
                 modifierMiners = 0.12f;
                 modifierMinersSalary = 0.14f;
 
-                modifierGeneralBudget = 0.10f;
+                modifierGeneralBudget = 0.68f;
                 break;
             case WY:
                 modifierFarmers = 0.05f;
@@ -120,7 +140,7 @@ public class MinistryOfAgriculture extends Ministry {
                 modifierMiners = 0.045f;
                 modifierMinersSalary = 0.30f;
 
-                modifierGeneralBudget = 0.04f;
+                modifierGeneralBudget = 0.8f;
                 break;
             case IB:
                 modifierFarmers = 0.25f;
@@ -129,7 +149,7 @@ public class MinistryOfAgriculture extends Ministry {
                 modifierMiners = 0.20f;
                 modifierMinersSalary = 0.11f;
 
-                modifierGeneralBudget = 0.20f;
+                modifierGeneralBudget = 0.50f;
                 break;
             case OB:
                 modifierFarmers = 0.26f;
@@ -138,7 +158,7 @@ public class MinistryOfAgriculture extends Ministry {
                 modifierMiners = 0.18f;
                 modifierMinersSalary = 0.10f;
 
-                modifierGeneralBudget = 0.22f;
+                modifierGeneralBudget = 0.42f;
                 break;
             case CA:
                 modifierFarmers = 0.20f;
@@ -147,7 +167,7 @@ public class MinistryOfAgriculture extends Ministry {
                 modifierMiners = 0.18f;
                 modifierMinersSalary = 0.09f;
 
-                modifierGeneralBudget = 0.18f;
+                modifierGeneralBudget = 0.48f;
                 break;
             case FA:
                 modifierFarmers = 0.35f;
@@ -156,7 +176,7 @@ public class MinistryOfAgriculture extends Ministry {
                 modifierMiners = 0.30f;
                 modifierMinersSalary = 0.8f;
 
-                modifierGeneralBudget = 0.19f;
+                modifierGeneralBudget = 0.49f;
                 break;
             case ME:
                 modifierFarmers = 0.45f;
@@ -165,7 +185,7 @@ public class MinistryOfAgriculture extends Ministry {
                 modifierMiners = 0.32f;
                 modifierMinersSalary = 0.075f;
 
-                modifierGeneralBudget = 0.45f;
+                modifierGeneralBudget = 0.35f;
                 break;
             case GE:
                 modifierFarmers = 0.08f;
@@ -174,20 +194,21 @@ public class MinistryOfAgriculture extends Ministry {
                 modifierMiners = 0.15f;
                 modifierMinersSalary = 0.23f;
 
-                modifierGeneralBudget = 0.075f;
+                modifierGeneralBudget = 0.75f;
                 break;
         }
 
 
-        this.farmersLimit = (int) (this.economy.getLabor_force() * (modifierFarmers + (random.nextFloat() * (0.01 - (-0.01)) + (-0.01))));
-        this.farmers = this.farmersLimit;
-        this.farmersSalary = (float) (this.economy.getGdpPerPerson() * (modifierFarmersSalary + (random.nextFloat() * (0.01 - (-0.01)) + (-0.01))));
+        farmersLimit = (int) (economy.getLabor_force() * (modifierFarmers + (random.nextFloat() * (0.01 - (-0.01)) + (-0.01))));
+        farmers = farmersLimit;
+        farmersSalary = (float) (economy.getGdpPerPerson() * (modifierFarmersSalary + (random.nextFloat() * (0.01 - (-0.01)) + (-0.01))));
 
-        this.minersLimit = (int) (this.economy.getLabor_force() * (modifierMiners + (random.nextFloat() * (0.01 - (-0.01)) + (-0.01))));
-        this.miners = this.minersLimit;
-        this.minersSalary = (float) (this.economy.getGdpPerPerson() * (modifierMinersSalary + (random.nextFloat() * (0.01 - (-0.01)) + (-0.01))));
+        minersLimit = (int) (economy.getLabor_force() * (modifierMiners + (random.nextFloat() * (0.01 - (-0.01)) + (-0.01))));
+        miners = minersLimit;
+        minersSalary = (float) (economy.getGdpPerPerson() * (modifierMinersSalary + (random.nextFloat() * (0.01 - (-0.01)) + (-0.01))));
 
-        this.generalBudget = (float) (this.economy.getBudget() * (modifierGeneralBudget + (random.nextFloat() * (0.01 - (-0.01)) + (-0.01))));
+        generalBudgetNeed = (miners * 0.05f) + (farmers * 0.01f) + (miners * minersSalary) + (farmers * farmersSalary);
+        generalBudget = (float) (generalBudgetNeed * (modifierGeneralBudget + (random.nextFloat() * (0.04 - (-0.04)) + (-0.04))));
     }
 }
 

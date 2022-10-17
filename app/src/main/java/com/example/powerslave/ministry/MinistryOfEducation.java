@@ -11,7 +11,7 @@ public class MinistryOfEducation extends Ministry {
 
     private int teachers;
     private int teachersLimit;
-
+    private int maximumTeachersLimit;
     private float teachersSalary;
     private float teachersSalaryNeed;
 
@@ -26,12 +26,11 @@ public class MinistryOfEducation extends Ministry {
 
     private int colleges;
     private int collegesLimit;
-    private int colleges_need;
+    private int collegesNeed;
 
     private float literacy;
     private float degree;
-    private float liberty = 1;
-    // TODO: Liberty
+    private float liberty;
 
     private MinistryOfEconomy economy;
 
@@ -50,10 +49,6 @@ public class MinistryOfEducation extends Ministry {
         return literacy;
     }
 
-    public String getLiteracyString() {
-        return (literacy * 100f) + " %";
-    }
-
     public void setLiteracy(float literacy) {
         this.literacy = literacy;
     }
@@ -69,29 +64,30 @@ public class MinistryOfEducation extends Ministry {
     @Override
     public String toString() {
         String string;
-        string = "Literacy: " + getLiteracyString() + "\n";
-        string += "Degree: " + (degree * 100f) + " %" + "\n";
-        string += "Liberty: " + liberty + " %" + "\n";
-        string += "Teachers: " + this.teachers + "\n";
-        string += "Teachers limit: " + this.teachersLimit + "\n";
-        string += "Teachers salary: " + this.teachersSalary + " ƒ" + "\n";
-        string += "Teachers need salary: " + this.teachersSalaryNeed + " ƒ" + "\n";
-        string += "Children: " + this.children + "\n";
-        string += "Students: " + this.students + "\n";
-        string += "Schools: " + this.schools + "\n";
-        string += "Colleges: " + this.colleges + "\n";
-        string += "Schools need: " + this.schoolsNeed + "\n";
-        string += "Colleges need: " + this.colleges_need + "\n";
-        string += "Teachers need: " + this.teachersNeed + "\n";
+        string = "Literacy: " + String.format("%.2f", literacy * 100f) + " %" + "\n";
+        string += "Degree: " + String.format("%.2f", degree * 100f) + " %" + "\n";
+        string += "Liberty: " + String.format("%.2f", liberty * 100f) + " %" + "\n";
+        string += "Teachers: " + teachers + "\n";
+        string += "Teachers limit: " + teachersLimit + " (Maximum - " + maximumTeachersLimit + ")" + "\n";
+        string += "Teachers salary: " + String.format("%.2f", teachersSalary) + " ƒ" + "\n";
+        string += "Teachers salary need : " + String.format("%.2f", teachersSalaryNeed) + " ƒ" + "\n";
+        string += "Children: " + children + "\n";
+        string += "Students: " + students + "\n";
+        string += "Schools: " + schools + "\n";
+        string += "Colleges: " + colleges + "\n";
+        string += "Schools need: " + schoolsNeed + "\n";
+        string += "Colleges need: " + collegesNeed + "\n";
+        string += "Teachers need: " + teachersNeed + "\n";
         return super.toString()+ string;
     }
 
     @Override
     public void updateMinistry() {
         super.updateMinistry();
-        this.efficiency *= ((float) (schools + colleges) / (float) (schoolsNeed + colleges_need));
-        this.efficiency *= ((float) teachers / (float) teachersNeed);
-        this.efficiency *= (teachersSalary / teachersSalaryNeed);
+        liberty = (float) (((2.5f / country.getMinistryOfInternalAffairs().getLevelOfSecurity()) * (4.5f / country.getMinistryOfJustice().getLevelOfJudgesLiberty())) * (degree * 25f) * (literacy / 25f) * (efficiency * 1.25f) * (country.getMinistryOfJustice().isDeathPenalty() ? 0.95 : 1.05));
+        efficiency *= generalBudget / generalBudgetNeed;
+        efficiency *= ((float) (schools + colleges) / (float) (schoolsNeed + collegesNeed));
+        efficiency *= ((float) teachers / (float) teachersNeed);
     }
 
     @Override
@@ -111,7 +107,7 @@ public class MinistryOfEducation extends Ministry {
         float modifierLiteracy = 0f;
         float modifierDegree = 0f;
 
-        switch (this.country.getContinent()) {
+        switch (country.getContinent()) {
             case EY:
                 modifierTeachers = 0.013f;
                 modifierTeachersSalary = 0.5f;
@@ -234,25 +230,26 @@ public class MinistryOfEducation extends Ministry {
                 break;
         }
 
-        this.teachersLimit = (int) (this.economy.getLabor_force() * (modifierTeachers + (random.nextFloat() * (0.003 - (-0.003)) + (-0.003))));
-        this.teachers = this.teachersLimit;
+        teachersLimit = (int) (economy.getLabor_force() * (modifierTeachers + (random.nextFloat() * (0.003 - (-0.003)) + (-0.003))));
+        teachers = teachersLimit;
 
-        this.teachersSalary = (float) (this.economy.getGdpPerPerson() * (modifierTeachersSalary + (random.nextFloat() * (0.01 - (-0.01)) + (-0.01))));
+        teachersSalary = (float) (economy.getGdpPerPerson() * (modifierTeachersSalary + (random.nextFloat() * (0.01 - (-0.01)) + (-0.01))));
 
-        this.students = (int) (this.economy.getLabor_force() * (modifierStudents + (random.nextFloat() * (0.005 - (-0.005)) + (-0.005))));
+        students = (int) (economy.getLabor_force() * (modifierStudents + (random.nextFloat() * (0.005 - (-0.005)) + (-0.005))));
 
-        this.teachersSalaryNeed = (float) (this.economy.getGdpPerPerson() / 1.5);
-        this.schoolsNeed = (int) Math.ceil(children / 500);
-        this.colleges_need = (int) Math.ceil(students / 1250);
-        this.teachersNeed = (children + students) / 35;
+        teachersSalaryNeed = (float) (economy.getGdpPerPerson() / 1.5);
+        schoolsNeed = (int) Math.ceil(children / 500);
+        collegesNeed = (int) Math.ceil(students / 1250);
+        teachersNeed = (children + students) / 35;
 
-        this.schoolsLimit = (int) (this.schoolsNeed * (modifierSchools + (random.nextFloat() * (0.01 - (-0.01)) + (-0.01))));
-        this.schools = this.schoolsLimit;
+        schoolsLimit = (int) (schoolsNeed * (modifierSchools + (random.nextFloat() * (0.01 - (-0.01)) + (-0.01))));
+        schools = schoolsLimit;
 
-        this.collegesLimit = (int) (this.colleges_need * (modifierColleges + (random.nextFloat() * (0.01 - (-0.01)) + (-0.01))));
-        this.colleges = this.collegesLimit;
+        collegesLimit = (int) (collegesNeed * (modifierColleges + (random.nextFloat() * (0.01 - (-0.01)) + (-0.01))));
+        colleges = collegesLimit;
 
-        this.literacy = (float) (modifierLiteracy + (random.nextFloat() * (0.01 - (-0.01)) + (-0.01)));
-        this.degree = (float) (modifierDegree + (random.nextFloat() * (0.01 - (-0.01)) + (-0.01)));
+        literacy = (float) (modifierLiteracy + (random.nextFloat() * (0.01 - (-0.01)) + (-0.01)));
+        degree = (float) (modifierDegree + (random.nextFloat() * (0.01 - (-0.01)) + (-0.01)));
+        maximumTeachersLimit = teachersNeed * 9;
     }
 }

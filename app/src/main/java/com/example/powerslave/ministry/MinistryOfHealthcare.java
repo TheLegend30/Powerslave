@@ -14,6 +14,7 @@ public class MinistryOfHealthcare extends Ministry {
 
     private int doctors;
     private int doctorsLimit;
+    private int maximumDoctorsLimit;
     private int doctorsNeed;
     private float doctorsSalary;
     private float doctorsSalaryNeed;
@@ -51,18 +52,20 @@ public class MinistryOfHealthcare extends Ministry {
     public String toString() {
         String string;
         string = "Doctors: " + doctors + "\n";
-        string += "Doctors limit: " + doctorsLimit + "\n";
-        string += "Doctors salary: " + doctorsSalary + " ƒ" + "\n";
-        string += "Doctors salary need: " + doctorsSalaryNeed + " ƒ" + "\n";
+        string += "Doctors limit: " + doctorsLimit + " (Maximum - " + maximumDoctorsLimit + ")" + "\n";
+        string += "Doctors salary: " + String.format("%.2f", doctorsSalary) + " ƒ" + "\n";
+        string += "Doctors salary need: " + String.format("%.2f", doctorsSalaryNeed) + " ƒ" + "\n";
         string += "Doctors need: " + doctorsNeed + "\n";
         string += "Pensioners: " + pensioners + "\n";
-        string += "Pension: " + pension + " ƒ" + "\n";
-        string += "Pension need: " + pensionNeed + " ƒ" + "\n";
+        string += "Pension: " + String.format("%.2f", pension) + " ƒ" + "\n";
+        string += "Pension need: " + String.format("%.2f", pensionNeed) + " ƒ" + "\n";
         string += "Hospitals: " + hospitals + "\n";
         string += "Hospitals need: " + hospitalsNeed + "\n";
-        string += "Natality level per 100 people: " + natality + "\n";
-        string += "Mortality level per 100 people: " + mortality + "\n";
-        string += "Pop growth (total): " + popGrowth + "\n";
+        string += "General budget: " + String.format("%.2f", generalBudget) + " ƒ" + "\n";
+        string += "General budget need : " + String.format("%.2f", generalBudgetNeed) + " ƒ" + "\n";
+        string += "Natality level per 100 people: " + String.format("%.2f", natality) + "\n";
+        string += "Mortality level per 100 people: " + String.format("%.2f", mortality) + "\n";
+        string += "Pop growth (total) in month: " + popGrowth + "\n";
         return super.toString() + string;
     }
 
@@ -75,9 +78,9 @@ public class MinistryOfHealthcare extends Ministry {
 
         popGrowth = (int) ((economy.getPopulation() / 100) * (natality - mortality));
 
-        efficiency *= doctorsSalary / doctorsSalaryNeed;
         efficiency *= (float) doctors / doctorsNeed;
         efficiency *= (float) hospitals / hospitalsNeed;
+        efficiency *= generalBudget / generalBudgetNeed;
     }
 
     @Override
@@ -98,6 +101,8 @@ public class MinistryOfHealthcare extends Ministry {
         float modifierNatality = 0f;
         float modifierMortality = 0f;
 
+        float modifierGeneralBudget = 0f;
+
         switch (this.country.getContinent()) {
             case EY:
                 modifierLifeExpectancy = 65f;
@@ -112,6 +117,8 @@ public class MinistryOfHealthcare extends Ministry {
 
                 modifierNatality = 2.4f;
                 modifierMortality = 1.8f;
+
+                modifierGeneralBudget = 0.7f;
                 break;
             case NY:
                 modifierLifeExpectancy = 70f;
@@ -126,6 +133,8 @@ public class MinistryOfHealthcare extends Ministry {
 
                 modifierNatality = 2.1f;
                 modifierMortality = 1.6f;
+
+                modifierGeneralBudget = 0.8f;
                 break;
             case SY:
                 modifierLifeExpectancy = 63f;
@@ -140,6 +149,8 @@ public class MinistryOfHealthcare extends Ministry {
 
                 modifierNatality = 2.8f;
                 modifierMortality = 2.3f;
+
+                modifierGeneralBudget = 0.65f;
                 break;
             case WY:
                 modifierLifeExpectancy = 73f;
@@ -154,6 +165,8 @@ public class MinistryOfHealthcare extends Ministry {
 
                 modifierNatality = 2.2f;
                 modifierMortality = 1.65f;
+
+                modifierGeneralBudget = 0.9f;
                 break;
             case IB:
                 modifierLifeExpectancy = 60f;
@@ -168,6 +181,8 @@ public class MinistryOfHealthcare extends Ministry {
 
                 modifierNatality = 3.4f;
                 modifierMortality = 2.6f;
+
+                modifierGeneralBudget = 0.6f;
                 break;
             case OB:
                 modifierLifeExpectancy = 58f;
@@ -182,6 +197,8 @@ public class MinistryOfHealthcare extends Ministry {
 
                 modifierNatality = 3.5f;
                 modifierMortality = 2.75f;
+
+                modifierGeneralBudget = 0.65f;
                 break;
             case CA:
                 modifierLifeExpectancy = 58f;
@@ -196,6 +213,8 @@ public class MinistryOfHealthcare extends Ministry {
 
                 modifierNatality = 3.7f;
                 modifierMortality = 2.9f;
+
+                modifierGeneralBudget = 0.55f;
                 break;
             case FA:
                 modifierLifeExpectancy = 55f;
@@ -210,6 +229,8 @@ public class MinistryOfHealthcare extends Ministry {
 
                 modifierNatality = 3.9f;
                 modifierMortality = 3.2f;
+
+                modifierGeneralBudget = 0.5f;
                 break;
             case ME:
                 modifierLifeExpectancy = 51f;
@@ -224,6 +245,8 @@ public class MinistryOfHealthcare extends Ministry {
 
                 modifierNatality = 4.4f;
                 modifierMortality = 3.4f;
+
+                modifierGeneralBudget = 0.35f;
                 break;
             case GE:
                 modifierLifeExpectancy = 72f;
@@ -238,6 +261,8 @@ public class MinistryOfHealthcare extends Ministry {
 
                 modifierNatality = 2.4f;
                 modifierMortality = 1.85f;
+
+                modifierGeneralBudget = 0.88f;
                 break;
         }
 
@@ -262,5 +287,7 @@ public class MinistryOfHealthcare extends Ministry {
         natality = modifierNatality + (random.nextFloat() * (0.15f - (-0.15f)) + (-0.15f));
         mortality = modifierMortality + (random.nextFloat() * (0.15f - (-0.15f)) + (-0.15f));
 
+        generalBudgetNeed = (doctors * 0.65f) + (doctors * doctorsSalary) + (pensioners * pension) + (hospitals * 625f);
+        generalBudget = generalBudgetNeed * (modifierGeneralBudget + (random.nextFloat() * (0.05f - (-0.05f)) + (-0.05f)));
     }
 }

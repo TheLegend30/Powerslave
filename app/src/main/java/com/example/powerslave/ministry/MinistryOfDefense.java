@@ -10,6 +10,7 @@ import java.util.Random;
 public class MinistryOfDefense extends Ministry {
     private int generals;
     private int generalsLimit;
+    private int maximumGeneralsLimit;
     private int generalsNeed;
 
     private float generalsSalary;
@@ -17,6 +18,7 @@ public class MinistryOfDefense extends Ministry {
 
     private int admirals;
     private int admiralsLimit;
+    private int maximumAdmiralsLimit;
     private int admiralsNeed;
 
     private float admiralsSalary;
@@ -24,6 +26,7 @@ public class MinistryOfDefense extends Ministry {
 
     private int airForceOfficers;
     private int airForceOfficersLimit;
+    private int maximumAirForceOfficersLimit;
     private int airForceOfficersNeed;
 
     private float airForceOfficersSalary;
@@ -40,11 +43,13 @@ public class MinistryOfDefense extends Ministry {
 
     private boolean conscription;
 
+    private float fuelNeed;
+    private float militaryIndustryNeed;
+
     private MinistryOfEconomy economy;
 
     public MinistryOfDefense(int countryKey, Minister minister, Context context, Country country) {
         super(countryKey, minister, context, country);
-
         this.name = "Ministry of Defense";
         this.economy = country.getMinistryOfEconomy();
 
@@ -55,40 +60,46 @@ public class MinistryOfDefense extends Ministry {
     @Override
     public String toString() {
         String string;
-        string = "Army Power: " + this.armyPower + "\n";
-        string += "Navy Power: " + this.navyPower + "\n";
-        string += "Air Force Power: " + this.airPower + "\n";
-        string += "Generals: " + this.generals + "\n";
-        string += "Generals limit: " + this.generalsLimit + "\n";
-        string += "Generals need: " + this.generalsNeed + "\n";
-        string += "Generals salary: " + this.generalsSalary + " ƒ" + "\n";
-        string += "Generals salary need: " + this.generalsSalaryNeed + " ƒ" + "\n";
-        string += "Admirals: " + this.admirals + "\n";
-        string += "Admirals limit: " + this.admiralsLimit + "\n";
-        string += "Admirals need: " + this.admiralsNeed + "\n";
-        string += "Admirals salary: " + this.admiralsSalary + " ƒ" + "\n";
-        string += "Admirals salary need: " + this.admiralsSalaryNeed + " ƒ" + "\n";
-        string += "Air Force officers: " + this.airForceOfficers + "\n";
-        string += "Air Force officers limit: " + this.airForceOfficersLimit + "\n";
-        string += "Air Force officers need: " + this.airForceOfficersNeed + "\n";
-        string += "Air Force officers salary: " + this.airForceOfficersSalary + " ƒ" + "\n";
-        string += "Air Force officers salary need: " + this.airForceOfficersSalaryNeed + " ƒ" + "\n";
-        string += "General budget: " + this.generalBudget + " ƒ" + "\n";
-        string += "General budget need: " + this.generalBudgetNeed + " ƒ" + "\n";
-        string += "Conscription: " + (this.conscription ? "Yes" : "No") + "\n";
-        string += "Landlocked: " + (this.economy.isLandlocked() ? "Yes" : "No") + "\n";
+        string = "Army Power: " + armyPower + "\n";
+        string += "Navy Power: " + navyPower + "\n";
+        string += "Air Force Power: " + airPower + "\n";
+        string += "Generals: " + generals + "\n";
+        string += "Generals limit: " + generalsLimit + " (Maximum - " + maximumGeneralsLimit + ")" + "\n";
+        string += "Generals need: " + generalsNeed + "\n";
+        string += "Generals salary: " + String.format("%.2f", generalsSalary) + " ƒ" + "\n";
+        string += "Generals salary need: " + String.format("%.2f", generalsSalaryNeed) + " ƒ" + "\n";
+        string += "Admirals: " + admirals + "\n";
+        string += "Admirals limit: " + admiralsLimit + " (Maximum - " + maximumAdmiralsLimit + ")" + "\n";
+        string += "Admirals need: " + admiralsNeed + "\n";
+        string += "Admirals salary: " + String.format("%.2f", admiralsSalary) + " ƒ" + "\n";
+        string += "Admirals salary need: " + String.format("%.2f", admiralsSalaryNeed) + " ƒ" + "\n";
+        string += "Air Force officers: " + airForceOfficers + "\n";
+        string += "Air Force officers limit: " + airForceOfficersLimit + " (Maximum - " + maximumAirForceOfficersLimit + ")" + "\n";
+        string += "Air Force officers need: " + airForceOfficersNeed + "\n";
+        string += "Air Force officers salary: " + String.format("%.2f", airForceOfficersSalary) + " ƒ" + "\n";
+        string += "Air Force officers salary need: " + String.format("%.2f", airForceOfficersSalaryNeed) + " ƒ" + "\n";
+        string += "General budget: " + String.format("%.2f", generalBudget) + " ƒ" + "\n";
+        string += "General budget need: " + String.format("%.2f", generalBudgetNeed) + " ƒ" + "\n";
+        string += "Fuel need: " + fuelNeed + " units" + "\n";
+        string += "Military industry need: " + militaryIndustryNeed + " units" + "\n";
+        string += "Conscription: " + (conscription ? "Yes" : "No") + "\n";
+        string += "Landlocked: " + (economy.isLandlocked() ? "Yes" : "No") + "\n";
         return super.toString() + string;
+    }
+
+    public float getFuelNeed() {
+        return fuelNeed;
+    }
+
+    public float getMilitaryIndustryNeed() {
+        return militaryIndustryNeed;
     }
 
     @Override
     public void updateMinistry() {
         super.updateMinistry();
 
-        this.generalBudgetNeed = (float) (this.economy.getGdp() * 0.12f) + (armyPower * 10f) + (navyPower * 50f) + (airPower * 80f);
-
-        efficiency *= generalsSalary / generalsSalaryNeed;
-        efficiency *= admiralsSalary / admiralsSalaryNeed;
-        efficiency *= airForceOfficersSalary / airForceOfficersSalaryNeed;
+        efficiency *= generalBudget / generalBudgetNeed;
         efficiency *= conscription ? 0.95 : 1.05;
     }
 
@@ -112,7 +123,7 @@ public class MinistryOfDefense extends Ministry {
 
         float modifierGeneralBudget = 0f;
 
-        switch (this.country.getContinent()) {
+        switch (country.getContinent()) {
             case EY:
                 modifierGenerals = 0.65f;
                 modifierGeneralsSalary = 3f;
@@ -127,7 +138,7 @@ public class MinistryOfDefense extends Ministry {
                 modifierNavy = 0.5f;
                 modifierAir = 0.3f;
 
-                modifierGeneralBudget = 0.13f;
+                modifierGeneralBudget = 0.93f;
                 break;
             case NY:
                 modifierGenerals = 0.75f;
@@ -143,7 +154,7 @@ public class MinistryOfDefense extends Ministry {
                 modifierNavy = 0.6f;
                 modifierAir = 0.4f;
 
-                modifierGeneralBudget = 0.11f;
+                modifierGeneralBudget = 0.81f;
                 break;
             case SY:
                 modifierGenerals = 0.55f;
@@ -159,7 +170,7 @@ public class MinistryOfDefense extends Ministry {
                 modifierNavy = 0.4f;
                 modifierAir = 0.2f;
 
-                modifierGeneralBudget = 0.10f;
+                modifierGeneralBudget = 0.70f;
                 break;
             case WY:
                 modifierGenerals = 0.8f;
@@ -175,7 +186,7 @@ public class MinistryOfDefense extends Ministry {
                 modifierNavy = 0.6f;
                 modifierAir = 0.4f;
 
-                modifierGeneralBudget = 0.15f;
+                modifierGeneralBudget = 0.85f;
                 break;
             case IB:
                 modifierGenerals = 0.6f;
@@ -191,7 +202,7 @@ public class MinistryOfDefense extends Ministry {
                 modifierNavy = 0.25f;
                 modifierAir = 0.15f;
 
-                modifierGeneralBudget = 0.16f;
+                modifierGeneralBudget = 0.66f;
                 break;
             case OB:
                 modifierGenerals = 0.55f;
@@ -207,7 +218,7 @@ public class MinistryOfDefense extends Ministry {
                 modifierNavy = 0.2f;
                 modifierAir = 0.1f;
 
-                modifierGeneralBudget = 0.18f;
+                modifierGeneralBudget = 0.58f;
                 break;
             case CA:
                 modifierGenerals = 0.5f;
@@ -219,7 +230,7 @@ public class MinistryOfDefense extends Ministry {
                 modifierAirForceOfficers = 0.1f;
                 modifierAirForceOfficersSalary = 2.75f;
 
-                modifierGeneralBudget = 0.12f;
+                modifierGeneralBudget = 0.52f;
                 break;
             case FA:
                 modifierGenerals = 0.45f;
@@ -235,7 +246,7 @@ public class MinistryOfDefense extends Ministry {
                 modifierNavy = 0.2f;
                 modifierAir = 0.1f;
 
-                modifierGeneralBudget = 0.1f;
+                modifierGeneralBudget = 0.6f;
                 break;
             case ME:
                 modifierGenerals = 0.35f;
@@ -251,7 +262,7 @@ public class MinistryOfDefense extends Ministry {
                 modifierNavy = 0.1f;
                 modifierAir = 0.05f;
 
-                modifierGeneralBudget = 0.18f;
+                modifierGeneralBudget = 0.58f;
                 break;
             case GE:
                 modifierGenerals = 0.85f;
@@ -267,41 +278,48 @@ public class MinistryOfDefense extends Ministry {
                 modifierNavy = 0.7f;
                 modifierAir = 0.65f;
 
-                modifierGeneralBudget = 0.2f;
+                modifierGeneralBudget = 0.7f;
                 break;
         }
 
-        this.conscription = random.nextBoolean();
+        conscription = random.nextBoolean();
 
-        this.armyPowerLimit = (int) ((this.economy.getLabor_force() / (conscription ? 450f : 650f)) * (modifierArmy + random.nextFloat() * (0.03 - (-0.03)) + (-0.03)));
-        this.armyPower = this.armyPowerLimit;
+        armyPowerLimit = (int) ((economy.getLabor_force() / (conscription ? 450f : 650f)) * (modifierArmy + random.nextFloat() * (0.03 - (-0.03)) + (-0.03)));
+        armyPower = armyPowerLimit;
 
-        this.navyPowerLimit = (int) ((this.economy.getLabor_force() / (conscription ? 1050f : 1350f)) * (modifierNavy + random.nextFloat() * (0.03 - (-0.03)) + (-0.03)) * (this.economy.isLandlocked() ? 0 : 1));
-        this.navyPower = this.navyPowerLimit;
+        navyPowerLimit = (int) ((economy.getLabor_force() / (conscription ? 1050f : 1350f)) * (modifierNavy + random.nextFloat() * (0.03 - (-0.03)) + (-0.03)) * (economy.isLandlocked() ? 0 : 1));
+        navyPower = navyPowerLimit;
 
-        this.airPowerLimit = (int) ((this.economy.getLabor_force() / (conscription ? 1450f : 1850f)) * (modifierAir + random.nextFloat() * (0.03 - (-0.03)) + (-0.03)));
-        this.airPower = this.airPowerLimit;
+        airPowerLimit = (int) ((economy.getLabor_force() / (conscription ? 1450f : 1850f)) * (modifierAir + random.nextFloat() * (0.03 - (-0.03)) + (-0.03)));
+        airPower = airPowerLimit;
 
-        this.generalsNeed = armyPower / 100;
-        this.admiralsNeed = navyPower / 80;
-        this.airForceOfficersNeed = airPower / 50;
+        generalsNeed = armyPower / 100;
+        admiralsNeed = navyPower / 80;
+        airForceOfficersNeed = airPower / 50;
 
-        this.generalsSalaryNeed = (int) (economy.getGdpPerPerson() * 3.25);
-        this.admiralsSalaryNeed = (int) (economy.getGdpPerPerson() * 3.55 * (this.economy.isLandlocked() ? 0 : 1));
-        this.airForceOfficersSalaryNeed = (int) (economy.getGdpPerPerson() * 3.85);
+        generalsSalaryNeed = (int) (economy.getGdpPerPerson() * 3.25);
+        admiralsSalaryNeed = (int) (economy.getGdpPerPerson() * 3.55 * (economy.isLandlocked() ? 0 : 1));
+        airForceOfficersSalaryNeed = (int) (economy.getGdpPerPerson() * 3.85);
 
-        this.generalsLimit = (int) (this.generalsNeed * (modifierGenerals + random.nextFloat() * (0.03 - (-0.03)) + (-0.03)));
-        this.generals = this.generalsLimit;
-        this.generalsSalary = (float) (this.economy.getGdpPerPerson() * (modifierGeneralsSalary + (random.nextFloat() * (0.01 - (-0.01)) + (-0.01))));
+        generalsLimit = (int) (generalsNeed * (modifierGenerals + random.nextFloat() * (0.03 - (-0.03)) + (-0.03)));
+        generals = generalsLimit;
+        generalsSalary = (float) (economy.getGdpPerPerson() * (modifierGeneralsSalary + (random.nextFloat() * (0.01 - (-0.01)) + (-0.01))));
 
-        this.admiralsLimit = (int) (this.admiralsNeed * (modifierAdmirals + random.nextFloat() * (0.03 - (-0.03)) + (-0.03)) * (this.economy.isLandlocked() ? 0 : 1));
-        this.admirals = this.admiralsLimit;
-        this.admiralsSalary = (float) (this.economy.getGdpPerPerson() * (modifierAdmiralsSalary + (random.nextFloat() * (0.01 - (-0.01)) + (-0.01))) * (this.economy.isLandlocked() ? 0 : 1));
+        admiralsLimit = (int) (admiralsNeed * (modifierAdmirals + random.nextFloat() * (0.03 - (-0.03)) + (-0.03)) * (economy.isLandlocked() ? 0 : 1));
+        admirals = admiralsLimit;
+        admiralsSalary = (float) (economy.getGdpPerPerson() * (modifierAdmiralsSalary + (random.nextFloat() * (0.01 - (-0.01)) + (-0.01))) * (economy.isLandlocked() ? 0 : 1));
 
-        this.airForceOfficersLimit = (int) (this.airForceOfficersNeed * (modifierAirForceOfficers + random.nextFloat() * (0.03 - (-0.03)) + (-0.03)));
-        this.airForceOfficers = this.airForceOfficersLimit;
-        this.airForceOfficersSalary = (float) (this.economy.getGdpPerPerson() * (modifierAirForceOfficersSalary + (random.nextFloat() * (0.01 - (-0.01)) + (-0.01))));
+        airForceOfficersLimit = (int) (airForceOfficersNeed * (modifierAirForceOfficers + random.nextFloat() * (0.03 - (-0.03)) + (-0.03)));
+        airForceOfficers = airForceOfficersLimit;
+        airForceOfficersSalary = (float) (economy.getGdpPerPerson() * (modifierAirForceOfficersSalary + (random.nextFloat() * (0.01 - (-0.01)) + (-0.01))));
 
-        this.generalBudget = (float) (this.economy.getBudget() * (modifierGeneralBudget + (random.nextFloat() * (0.01 - (-0.01)) + (-0.01))));
+        generalBudgetNeed = (armyPower * 100f) + (navyPower * 500f) + (airPower * 800f) + (generals * generalsSalary) + (admirals * admiralsSalary) + (airForceOfficers * airForceOfficersSalary);
+        generalBudget = (float) (generalBudgetNeed * (modifierGeneralBudget + (random.nextFloat() * (0.01 - (-0.01)) + (-0.01))));
+        fuelNeed = armyPower * 1.3f + navyPower * 2.9f + airPower * 3.8f;
+        militaryIndustryNeed = armyPower * 0.3f + navyPower * 1.3f + airPower * 1.8f;
+
+        maximumGeneralsLimit = generalsNeed * 10;
+        maximumAdmiralsLimit = admiralsNeed * 10;
+        maximumAirForceOfficersLimit = airForceOfficersNeed * 10;
     }
 }

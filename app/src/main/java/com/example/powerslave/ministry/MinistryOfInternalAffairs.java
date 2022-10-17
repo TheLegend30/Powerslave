@@ -11,13 +11,13 @@ public class MinistryOfInternalAffairs extends Ministry {
 
     private int policemen;
     private int policemenLimit;
+    private int maximumPolicemenLimit;
     private int policemenNeed;
     private float policemenSalary;
     private float policemenSalaryNeed;
 
     private int departments;
     private int departmentsLimit;
-
     private int departmentsNeed;
 
     private int crime;
@@ -28,35 +28,40 @@ public class MinistryOfInternalAffairs extends Ministry {
 
     public MinistryOfInternalAffairs(int countryKey, Minister minister, Context context, Country country) {
         super(countryKey, minister, context, country);
-
         this.name = "Ministry of Internal Affairs";
         economy = country.getMinistryOfEconomy();
 
         statsRandomizer();
     }
 
+    public int getLevelOfSecurity() {
+        return levelOfSecurity;
+    }
+
     @Override
     public String toString() {
         String string;
-        string = "Crime per 100,000 people: " + this.crime + "\n";
-        string += "Level of security (1 - minimum, 6 - maximum): " + this.levelOfSecurity + "\n";
-        string += "Policemen: " + this.policemen + "\n";
-        string += "Policemen limit: " + this.policemenLimit + "\n";
-        string += "Policemen salary: " + this.policemenSalary + " ƒ" + "\n";
-        string += "Policemen salary need: " + this.policemenSalaryNeed + " ƒ" + "\n";
-        string += "Departments: " + this.departments + "\n";
-        string += "Policemen need: " + this.policemenNeed + "\n";
-        string += "Departments need: " + this.departmentsNeed + "\n";
+        string = "Crime per 100,000 people: " + crime + "\n";
+        string += "Level of security (1 - minimum, 6 - maximum): " + levelOfSecurity + "\n";
+        string += "Policemen: " + policemen + "\n";
+        string += "Policemen limit: " + policemenLimit + " (Maximum - " + maximumPolicemenLimit + ")" + "\n";
+        string += "Policemen salary: " + String.format("%.2f", policemenSalary) + " ƒ" + "\n";
+        string += "Policemen salary need: " + String.format("%.2f", policemenSalaryNeed) + " ƒ" + "\n";
+        string += "Policemen need: " + policemenNeed + "\n";
+        string += "Departments: " + departments + "\n";
+        string += "Departments need: " + departmentsNeed + "\n";
+        string += "General budget: " + String.format("%.2f", generalBudget) + " ƒ" + "\n";
+        string += "General need budget: " + String.format("%.2f", generalBudgetNeed) + " ƒ" + "\n";
         return super.toString() + string;
     }
 
     @Override
     public void updateMinistry() {
         super.updateMinistry();
-        this.efficiency *= ((float) departments / (float) departmentsNeed);
-        this.efficiency *= (policemenSalary / policemenSalaryNeed);
-        this.efficiency *= ((float) policemen / (float) policemenNeed);
-        this.efficiency *= ((float) levelOfSecurity / 4f);
+        efficiency *= ((float) departments / (float) departmentsNeed);
+        efficiency *= ((float) policemen / (float) policemenNeed);
+        efficiency *= ((float) levelOfSecurity / 4f);
+        efficiency *= generalBudget / generalBudgetNeed;
     }
 
     @Override
@@ -73,7 +78,9 @@ public class MinistryOfInternalAffairs extends Ministry {
 
         int modifierLevelOfSecurity = 0;
 
-        switch (this.country.getContinent()) {
+        float modifierGeneralBudget = 0f;
+
+        switch (country.getContinent()) {
             case EY:
                 modifierPolicemen = 0.032f;
                 modifierPolicemenSalary = 0.7f;
@@ -81,6 +88,8 @@ public class MinistryOfInternalAffairs extends Ministry {
                 modifierDepartments = 0.7f;
                 modifierCrime = 3000;
                 modifierLevelOfSecurity = 4;
+
+                modifierGeneralBudget = 0.65f;
                 break;
             case NY:
                 modifierPolicemen = 0.04f;
@@ -90,6 +99,8 @@ public class MinistryOfInternalAffairs extends Ministry {
                 modifierCrime = 2300;
 
                 modifierLevelOfSecurity = 2;
+
+                modifierGeneralBudget = 0.85f;
                 break;
             case SY:
                 modifierPolicemen = 0.03f;
@@ -99,6 +110,8 @@ public class MinistryOfInternalAffairs extends Ministry {
                 modifierCrime = 3150;
 
                 modifierLevelOfSecurity = 3;
+
+                modifierGeneralBudget = 0.6f;
                 break;
             case WY:
                 modifierPolicemen = 0.042f;
@@ -108,6 +121,8 @@ public class MinistryOfInternalAffairs extends Ministry {
                 modifierCrime = 2350;
 
                 modifierLevelOfSecurity = 2;
+
+                modifierGeneralBudget = 0.9f;
                 break;
             case IB:
                 modifierPolicemen = 0.015f;
@@ -117,6 +132,8 @@ public class MinistryOfInternalAffairs extends Ministry {
                 modifierCrime = 3565;
 
                 modifierLevelOfSecurity = 3;
+
+                modifierGeneralBudget = 0.55f;
                 break;
             case OB:
                 modifierPolicemen = 0.013f;
@@ -126,6 +143,8 @@ public class MinistryOfInternalAffairs extends Ministry {
                 modifierCrime = 3690;
 
                 modifierLevelOfSecurity = 3;
+
+                modifierGeneralBudget = 0.5f;
                 break;
             case CA:
                 modifierPolicemen = 0.011f;
@@ -135,6 +154,8 @@ public class MinistryOfInternalAffairs extends Ministry {
                 modifierCrime = 4165;
 
                 modifierLevelOfSecurity = 3;
+
+                modifierGeneralBudget = 0.45f;
                 break;
             case FA:
                 modifierPolicemen = 0.01f;
@@ -144,6 +165,8 @@ public class MinistryOfInternalAffairs extends Ministry {
                 modifierCrime = 4570;
 
                 modifierLevelOfSecurity = 3;
+
+                modifierGeneralBudget = 0.45f;
                 break;
             case ME:
                 modifierPolicemen = 0.007f;
@@ -153,6 +176,8 @@ public class MinistryOfInternalAffairs extends Ministry {
                 modifierCrime = 4965;
 
                 modifierLevelOfSecurity = 3;
+
+                modifierGeneralBudget = 0.35f;
                 break;
             case GE:
                 modifierPolicemen = 0.035f;
@@ -162,27 +187,32 @@ public class MinistryOfInternalAffairs extends Ministry {
                 modifierCrime = 2390;
 
                 modifierLevelOfSecurity = 4;
+
+                modifierGeneralBudget = 0.95f;
                 break;
         }
 
-        this.policemenLimit = (int) (this.economy.getLabor_force() * (modifierPolicemen + (random.nextFloat() * (0.002 - (-0.002)) + (-0.02))));
-        this.policemen = this.policemenLimit;
+        policemenLimit = (int) (economy.getLabor_force() * (modifierPolicemen + (random.nextFloat() * (0.002f - (-0.002f)) + (-0.02f))));
+        policemen = policemenLimit;
 
-        this.policemenSalary = (float) (this.economy.getGdpPerPerson() * (modifierPolicemenSalary + (random.nextFloat() * (0.01 - (-0.01)) + (-0.01))));
-
-
-        this.policemenNeed = (int) (this.economy.getPopulation() / 200.0);
-        this.policemenSalaryNeed = (float) (this.economy.getGdpPerPerson() / 1.25);
-        this.departmentsNeed = (int) Math.ceil(policemen / 300.0);
+        policemenSalary = (float) (economy.getGdpPerPerson() * (modifierPolicemenSalary + (random.nextFloat() * (0.01f - (-0.01f)) + (-0.01f))));
 
 
-        this.departmentsLimit = (int) (this.departmentsNeed * (modifierDepartments + (random.nextFloat() * (0.01 - (-0.01)) + (-0.01))));
-        this.departments = this.departmentsLimit;
+        policemenNeed = (int) (economy.getPopulation() / 200.0);
+        policemenSalaryNeed = (float) (economy.getGdpPerPerson() / 1.25);
+        departmentsNeed = (int) Math.ceil(policemen / 300.0);
 
-        this.crime = (int) (modifierCrime + (random.nextInt((500 - (-500)) + 1) + (-500)));
 
-        this.levelOfSecurity = (modifierLevelOfSecurity + (random.nextInt((1 - (-1))) + (-1)));
+        departmentsLimit = (int) (departmentsNeed * (modifierDepartments + (random.nextFloat() * (0.01 - (-0.01)) + (-0.01))));
+        departments = departmentsLimit;
 
+        crime = (int) (modifierCrime + (random.nextInt((500 - (-500)) + 1) + (-500)));
+
+        levelOfSecurity = (modifierLevelOfSecurity + (random.nextInt((1 - (-1))) + (-1)));
+
+        generalBudgetNeed = (policemen * 0.75f) + (departments * 450f) + (policemen * policemenSalary);
+        generalBudget = generalBudgetNeed * (modifierGeneralBudget + (random.nextFloat() * (0.05f - (-0.05f)) + (-0.05f)));
+        maximumPolicemenLimit = policemenNeed * 8;
     }
 
     public int getCrime() {

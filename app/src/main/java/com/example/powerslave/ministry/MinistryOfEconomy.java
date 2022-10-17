@@ -7,7 +7,6 @@ import com.example.powerslave.government.Country;
 import com.example.powerslave.person.Minister;
 
 public class MinistryOfEconomy extends Ministry {
-
     private long population;
     private long area;
     private float density;
@@ -21,21 +20,26 @@ public class MinistryOfEconomy extends Ministry {
     private float currencyToGulden;
     private float interest_rate;
 
-    private float gdpIncrease;
-
     private long labor_force;
-    private final long unemployment;
+    private long unemployment;
     private long poverty;
 
     private boolean landlocked;
 
-    private long exports;
-    private long taxes;
-    private long tariffs;
+    private float low_taxes;
+    private float low_taxes_modifier = 0.2f;
+    private float middle_taxes;
+    private float middle_taxes_modifier = 0.3f;
+    private float high_taxes;
+    private float high_taxes_modifier = 0.25f;
+    private float total_taxes = 0;
 
-    private long imports;
+    private long exportsAndImport = 0;
 
-    private long budget;
+    private float tariffs = 0.03f;
+    private float total_tariffs;
+
+    private float budget = 0;
 
     private float developmentIndex;
 
@@ -61,18 +65,6 @@ public class MinistryOfEconomy extends Ministry {
         this.poverty = population;
 
         this.landlocked = Boolean.parseBoolean(context.getResources().getStringArray(R.array.landlocked)[countryKey]);
-
-        this.exports = 9000000;
-        this.taxes = 9000000;
-        this.tariffs = 9000000;
-
-        this.imports = 9000000;
-
-        this.budget = exports + taxes + tariffs - imports;
-
-        this.gdpIncrease = Float.parseFloat(context.getResources().getStringArray(R.array.gdp_increase)[countryKey]);
-
-        this.developmentIndex = 1;
     }
 
     public long getGdp() {
@@ -99,7 +91,7 @@ public class MinistryOfEconomy extends Ministry {
         this.labor_force = labor_force;
     }
 
-    public long getBudget() {
+    public float getBudget() {
         return budget;
     }
 
@@ -187,11 +179,11 @@ public class MinistryOfEconomy extends Ministry {
         string += "GDP: " + gdp + " ƒ" + "\n";
         string += "GDP per Capita: " + String.format("%.2f", gdpPerPerson) + " ƒ" + " (" + (gdpPerPerson / currencyToGulden) + " " + currency + ")" + "\n";
         string += "National Debt: " + debt + " ƒ " + String.format("(%.2f", (float) debt / gdp * 100).concat(" %)") + "\n";
+        string += "Budget: " + String.format("%.2f", budget) + " ƒ " + "\n";
         string += "Inflation: " + String.format("%.2f", inflation) + " %" + "\n";
         string += "Currency: " + country.getAdjective() + " " + currency + "\n";
         string += "1 " + currency + " is " + String.format("%.5f", currencyToGulden) + " of Golden Florin (ƒ)" + "\n";
         string += "Interest Rate: " + interest_rate + " %" + "\n";
-        string += "GDP Increase from previous year: " + gdpIncrease + " %" + "\n";
         string += "Labor Force: " + labor_force + " (" + String.format("%.1f", (float) labor_force / population * 100.0) + " %)" + "\n";
         string += "Unemployment Rate: " + unemployment + " (" + String.format("%.1f", (float) unemployment / population * 100.0) + " %)" + "\n";
         string += "Poverty Rate: " + poverty + " (" + String.format("%.1f", (float) poverty / population * 100.0) + " %)" + "\n";
@@ -203,6 +195,39 @@ public class MinistryOfEconomy extends Ministry {
     @Override
     public void updateMinistry() {
         super.updateMinistry();
-        this.developmentIndex = (country.getMinistryOfHealthcare().getLifeExpectancy() * country.getMinistryOfEducation().getLiteracy() * gdpPerPerson) / 1000;
+        developmentIndex = (country.getMinistryOfHealthcare().getLifeExpectancy() * country.getMinistryOfEducation().getLiteracy() * gdpPerPerson) / 100;
+        MinistryOfAgriculture agriculture = country.getMinistryOfAgriculture();
+        MinistryOfIndustry industry = country.getMinistryOfIndustry();
+        MinistryOfDevelopment development = country.getMinistryOfDevelopment();
+        MinistryOfDefense defense = country.getMinistryOfDefense();
+
+        low_taxes = low_taxes_modifier * ((agriculture.getMiners() * agriculture.getMinersSalary()) + (agriculture.getFarmers() * agriculture.getFarmersSalary()) + (industry.getLowWorkers() * industry.getLowWorkersSalary()));
+        middle_taxes = middle_taxes_modifier * ((industry.getMiddleWorkers() * industry.getMiddleWorkersSalary()) + (development.getClerks() * development.getClerksSalary()));
+        high_taxes = high_taxes_modifier * ((industry.getHighWorkers() * industry.getHighWorkersSalary()) + (development.getTradeOutput()));
+        total_taxes += low_taxes + middle_taxes + high_taxes;
+
+        exportsAndImport += 0.3f * (agriculture.getRawOutput() - industry.getRawNeed());
+        exportsAndImport += 0.35f * ( agriculture.getRawFoodOutput() - industry.getRawFoodNeed());
+
+        exportsAndImport += 0.85f * (industry.getAlloysOutput() - industry.getAlloysNeed());
+        exportsAndImport += 0.9f * (industry.getChemicalsOutput() - industry.getChemicalsNeed());
+        exportsAndImport += 0.8f * industry.getBuildingMaterialsOutput();
+        exportsAndImport += 0.7f * (industry.getFoodOutput() - development.getFoodNeed());
+
+        exportsAndImport += 1.35f * (industry.getMechanicsOutput() - industry.getMechanicsNeed());
+        exportsAndImport += 1.05f * (industry.getFuelOutput() - defense.getFuelNeed());
+        exportsAndImport += 1.15 * (industry.getLightIndustryOutput() - development.getLightIndustryNeed());
+
+        exportsAndImport += 2.3f * (industry.getMilitaryIndustryOutput() - defense.getMilitaryIndustryNeed());
+        exportsAndImport += 2.25f * (industry.getElectricsOutput() - development.getElectricsNeed());
+
+        exportsAndImport += 1.55f * (development.getServicesOutput() - development.getServicesNeed());
+
+        exportsAndImport *= country.getMinistryOfTransportation().efficiency * 50f;
+
+        total_tariffs = exportsAndImport * tariffs * country.getMinistryOfTransportation().efficiency;
+
+        budget = exportsAndImport + total_tariffs + total_taxes;
+
     }
 }

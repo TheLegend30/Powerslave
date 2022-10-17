@@ -10,16 +10,19 @@ import java.util.Random;
 public class MinistryOfIndustry extends Ministry {
     private int lowWorkers;
     private int lowWorkersLimit;
+    private int maximumLowWorkersLimit;
     private float lowWorkersSalary;
     private float lowWorkersSalaryNeed;
 
     private int middleWorkers;
     private int middleWorkersLimit;
+    private int maximumMiddleWorkersLimit;
     private float middleWorkersSalary;
     private float middleWorkersSalaryNeed;
 
     private int highWorkers;
     private int highWorkersLimit;
+    private int maximumHighWorkersLimit;
     private float highWorkersSalary;
     private float highWorkersSalaryNeed;
 
@@ -39,26 +42,13 @@ public class MinistryOfIndustry extends Ministry {
     private float electricsOutput;
 
 
-    // output
-    private float alloys_reserve = 0f;
-    private float chemicals_reserve = 0f;
-    private float building_materials_reserve = 0f;
-    private float food_reserve = 0f;
-
-    private float mechanics_reserve = 0f;
-    private float fuel_reserve = 0f;
-    private float light_industry_reserve = 0f;
-
-    private float military_industry_reserve = 0f;
-    private float electrics_reserve = 0f;
-
     //For ministry
-    private float raw_food_need;
-    private float raw_need;
+    private float rawFoodNeed;
+    private float rawNeed;
 
-    private float alloys_need;
-    private float chemicals_need;
-    private float mechanics_need;
+    private float alloysNeed;
+    private float chemicalsNeed;
+    private float mechanicsNeed;
 
     MinistryOfEconomy economy;
 
@@ -70,46 +60,119 @@ public class MinistryOfIndustry extends Ministry {
         statsRandomizer();
     }
 
+    public int getLowWorkers() {
+        return lowWorkers;
+    }
+
+    public float getLowWorkersSalary() {
+        return lowWorkersSalary;
+    }
+
+    public int getMiddleWorkers() {
+        return middleWorkers;
+    }
+
+    public float getMiddleWorkersSalary() {
+        return middleWorkersSalary;
+    }
+
+    public int getHighWorkers() {
+        return highWorkers;
+    }
+
+    public float getHighWorkersSalary() {
+        return highWorkersSalary;
+    }
+
+    public float getAlloysOutput() {
+        return alloysOutput;
+    }
+
+    public float getChemicalsOutput() {
+        return chemicalsOutput;
+    }
+
+    public float getBuildingMaterialsOutput() {
+        return buildingMaterialsOutput;
+    }
+
+    public float getFoodOutput() {
+        return foodOutput;
+    }
+
+    public float getMechanicsOutput() {
+        return mechanicsOutput;
+    }
+
+    public float getFuelOutput() {
+        return fuelOutput;
+    }
+
+    public float getLightIndustryOutput() {
+        return lightIndustryOutput;
+    }
+
+    public float getMilitaryIndustryOutput() {
+        return militaryIndustryOutput;
+    }
+
+    public float getElectricsOutput() {
+        return electricsOutput;
+    }
+
+    public float getRawFoodNeed() {
+        return rawFoodNeed;
+    }
+
+    public float getRawNeed() {
+        return rawNeed;
+    }
+
+    public float getAlloysNeed() {
+        return alloysNeed;
+    }
+
+    public float getChemicalsNeed() {
+        return chemicalsNeed;
+    }
+
+    public float getMechanicsNeed() {
+        return mechanicsNeed;
+    }
+
+
+
     @Override
     public String toString() {
         String string;
         string = "Low-level workers: " + lowWorkers + "\n";
-        string = "Low-level workers: " + lowWorkersLimit + "\n";
-        string += "Low-level workers salary: " + lowWorkersSalary + "ƒ" + "\n";
-        string += "Low-level workers salary need: " + lowWorkersSalaryNeed + "ƒ" + "\n";
-        string += "Middle-level workers: " + middleWorkers + "\n";
-        string += "Middle-level workers: " + middleWorkersLimit + "\n";
-        string += "Middle-level workers salary: " + middleWorkersSalary + "\n";
-        string += "Middle-level workers salary need: " + middleWorkersSalaryNeed + "\n";
-        string += "High-level workers: " + highWorkers + "\n";
-        string += "High-level workers: " + highWorkersLimit + "\n";
-        string += "High-level workers salary: " + highWorkersSalary + "\n";
-        string += "High-level workers salary need: " + highWorkersSalaryNeed + "\n";
-        string += "General budget: " + generalBudget + " ƒ" + "\n";
-        string += "General need budget: " + generalBudgetNeed + " ƒ" + "\n";
+        string += "Low-level workers limit: " + lowWorkersLimit + " (Maximum - " + maximumLowWorkersLimit + ")" + "\n";
+        string += "Low-level workers salary: "  + String.format("%.2f", lowWorkersSalary) + " ƒ" + "\n";
+        string += "Low-level workers salary need: "  + String.format("%.2f", lowWorkersSalaryNeed) + " ƒ" + "\n";
+        string += "Middle-level workers: " + middleWorkers + " (Maximum - " + maximumMiddleWorkersLimit + ")" + "\n";
+        string += "Middle-level workers limit: " + middleWorkersLimit + "\n";
+        string += "Middle-level workers salary: " + String.format("%.2f", middleWorkersSalary) + " ƒ" + "\n";
+        string += "Middle-level workers salary need: " + String.format("%.2f", middleWorkersSalaryNeed) + " ƒ" + "\n";
+        string += "High-level workers: " + highWorkers + " (Maximum - " + maximumHighWorkersLimit + ")" + "\n";
+        string += "High-level workers limit: " + highWorkersLimit + "\n";
+        string += "High-level workers salary: " + String.format("%.2f", highWorkersSalary) + " ƒ" + "\n";
+        string += "High-level workers salary need: " + String.format("%.2f", highWorkersSalaryNeed) + " ƒ" + "\n";
+        string += "General budget: " + String.format("%.2f", generalBudget) + " ƒ" + "\n";
+        string += "General need budget: " + String.format("%.2f", generalBudgetNeed) + " ƒ" + "\n";
         string += "Alloys output: " + alloysOutput + " units" + "\n";
-        string += "Alloys reserve: " + alloys_reserve + " units" + "\n";
         string += "Chemicals output: " + chemicalsOutput + " units" + "\n";
-        string += "Chemicals reserve: " + chemicals_reserve + " units" + "\n";
         string += "Building materials output: " + buildingMaterialsOutput + " units" + "\n";
-        string += "Building materials reserve: " + building_materials_reserve + " units" + "\n";
         string += "Food output: " + foodOutput + " units" + "\n";
-        string += "Food reserve: " + food_reserve + " units" + "\n";
         string += "Mechanics output: " + mechanicsOutput + " units" + "\n";
-        string += "Mechanics reserve: " + mechanics_reserve + " units" + "\n";
         string += "Fuel output: " + fuelOutput + " units" + "\n";
-        string += "Fuel reserve: " + fuel_reserve + " units" + "\n";
         string += "Light industry output: " + lightIndustryOutput + " units" + "\n";
-        string += "Light industry  reserve: " + light_industry_reserve + " units" + "\n";
         string += "Electrics output: " + electricsOutput + " units" + "\n";
-        string += "Electrics reserve: " + electrics_reserve + " units" + "\n";
         string += "Military industry output: " + militaryIndustryOutput + " units" + "\n";
-        string += "Military industry reserve: " + military_industry_reserve + " units" + "\n";
-        string += "Raw food need: " + raw_food_need + " units" + "\n";
-        string += "Raw need: " + raw_need + " units" + "\n";
-        string += "Alloys need: " + alloys_need + " units" + "\n";
-        string += "Chemicals need: " + chemicals_need + " units" + "\n";
-        string += "Mechanics need: " + mechanics_need + " units" + "\n";
+        string += "Raw food need: " + rawFoodNeed + " units" + "\n";
+        string += "Raw need: " + rawNeed + " units" + "\n";
+        string += "Alloys need: " + alloysNeed + " units" + "\n";
+        string += "Chemicals need: " + chemicalsNeed + " units" + "\n";
+        string += "Mechanics need: " + mechanicsNeed + " units" + "\n";
         return super.toString() + string;
     }
 
@@ -121,9 +184,6 @@ public class MinistryOfIndustry extends Ministry {
         this.highWorkersSalaryNeed = this.economy.getGdpPerPerson() / 1.05f;
         this.generalBudgetNeed = (float) ((this.economy.getBudget() * 0.15) + ((lowWorkers * 0.08) + (middleWorkers * 0.1)) + (highWorkers * 0.15));
 
-        efficiency *= lowWorkersSalary / lowWorkersSalaryNeed;
-        efficiency *= middleWorkersSalary / middleWorkersSalaryNeed;
-        efficiency *= highWorkersSalary / highWorkersSalaryNeed;
         efficiency *= generalBudget / generalBudgetNeed;
 
         alloysOutput = efficiency * lowWorkers * 1.85f;
@@ -138,12 +198,12 @@ public class MinistryOfIndustry extends Ministry {
         electricsOutput = efficiency * highWorkers * 1.15f;
         militaryIndustryOutput = efficiency * highWorkers * 1.15f;
 
-        raw_food_need = (foodOutput * 0.75f) + (lightIndustryOutput * 0.35f);
-        raw_need = (alloysOutput * 0.95f) + (buildingMaterialsOutput * 0.85f) + (lightIndustryOutput * 0.35f) + (chemicalsOutput * 0.25f);
+        rawFoodNeed = (foodOutput * 0.75f) + (lightIndustryOutput * 0.35f);
+        rawNeed = (alloysOutput * 0.95f) + (buildingMaterialsOutput * 0.85f) + (lightIndustryOutput * 0.35f) + (chemicalsOutput * 0.25f);
 
-        alloys_need = (mechanicsOutput * 0.55f) + (militaryIndustryOutput * 1.15f);
-        chemicals_need = (fuelOutput * 1.5f) + (lightIndustryOutput * 0.15f);
-        mechanics_need = (electricsOutput * 0.55f) + (militaryIndustryOutput * 0.65f);
+        alloysNeed = (mechanicsOutput * 0.55f) + (militaryIndustryOutput * 1.15f);
+        chemicalsNeed = (fuelOutput * 1.5f) + (lightIndustryOutput * 0.15f);
+        mechanicsNeed = (electricsOutput * 0.55f) + (militaryIndustryOutput * 0.65f);
 
     }
 
@@ -163,7 +223,7 @@ public class MinistryOfIndustry extends Ministry {
 
         float modifierGeneralBudget = 0f;
 
-        switch (this.country.getContinent()) {
+        switch (country.getContinent()) {
             case EY:
                 modifierLowWorkers = 0.3f;
                 modifierLowWorkersSalary = 0.35f;
@@ -174,7 +234,7 @@ public class MinistryOfIndustry extends Ministry {
                 modifierHighWorkers = 0.05f;
                 modifierHighWorkersSalary = 0.95f;
 
-                modifierGeneralBudget = 0.15f;
+                modifierGeneralBudget = 0.65f;
                 break;
             case NY:
                 modifierLowWorkers = 0.2f;
@@ -186,7 +246,7 @@ public class MinistryOfIndustry extends Ministry {
                 modifierHighWorkers = 0.1f;
                 modifierHighWorkersSalary = 1.25f;
 
-                modifierGeneralBudget = 0.2f;
+                modifierGeneralBudget = 0.75f;
                 break;
             case SY:
                 modifierLowWorkers = 0.35f;
@@ -198,7 +258,7 @@ public class MinistryOfIndustry extends Ministry {
                 modifierHighWorkers = 0.05f;
                 modifierHighWorkersSalary = 0.85f;
 
-                modifierGeneralBudget = 0.13f;
+                modifierGeneralBudget = 0.63f;
                 break;
             case WY:
                 modifierLowWorkers = 0.1f;
@@ -210,7 +270,7 @@ public class MinistryOfIndustry extends Ministry {
                 modifierHighWorkers = 0.15f;
                 modifierHighWorkersSalary = 1.3f;
 
-                modifierGeneralBudget = 0.18f;
+                modifierGeneralBudget = 0.88f;
                 break;
             case IB:
                 modifierLowWorkers = 0.25f;
@@ -222,7 +282,7 @@ public class MinistryOfIndustry extends Ministry {
                 modifierHighWorkers = 0.04f;
                 modifierHighWorkersSalary = 0.85f;
 
-                modifierGeneralBudget = 0.1f;
+                modifierGeneralBudget = 0.46f;
                 break;
             case OB:
                 modifierLowWorkers = 0.2f;
@@ -234,7 +294,7 @@ public class MinistryOfIndustry extends Ministry {
                 modifierHighWorkers = 0.03f;
                 modifierHighWorkersSalary = 0.8f;
 
-                modifierGeneralBudget = 0.1f;
+                modifierGeneralBudget = 0.45f;
                 break;
             case CA:
                 modifierLowWorkers = 0.15f;
@@ -246,7 +306,7 @@ public class MinistryOfIndustry extends Ministry {
                 modifierHighWorkers = 0.02f;
                 modifierHighWorkersSalary = 0.8f;
 
-                modifierGeneralBudget = 0.08f;
+                modifierGeneralBudget = 0.35f;
                 break;
             case FA:
                 modifierLowWorkers = 0.12f;
@@ -258,7 +318,7 @@ public class MinistryOfIndustry extends Ministry {
                 modifierHighWorkers = 0.02f;
                 modifierHighWorkersSalary = 0.75f;
 
-                modifierGeneralBudget = 0.08f;
+                modifierGeneralBudget = 0.48f;
                 break;
             case ME:
                 modifierLowWorkers = 0.1f;
@@ -270,7 +330,7 @@ public class MinistryOfIndustry extends Ministry {
                 modifierHighWorkers = 0.01f;
                 modifierHighWorkersSalary = 0.7f;
 
-                modifierGeneralBudget = 0.07f;
+                modifierGeneralBudget = 0.37f;
                 break;
             case GE:
                 modifierLowWorkers = 0.1f;
@@ -282,22 +342,27 @@ public class MinistryOfIndustry extends Ministry {
                 modifierHighWorkers = 0.2f;
                 modifierHighWorkersSalary = 1.2f;
 
-                modifierGeneralBudget = 0.17f;
+                modifierGeneralBudget = 0.87f;
                 break;
         }
-        this.lowWorkersLimit = (int) (this.economy.getLabor_force() * (modifierLowWorkers + ((random.nextFloat() * (0.005 - (-0.005)) + (-0.005)))));
-        this.lowWorkers = this.lowWorkersLimit;
-        this.lowWorkersSalary = (float) (this.economy.getGdpPerPerson() * (modifierLowWorkersSalary + (random.nextFloat() * (0.01 - (-0.01)) + (-0.01))));
+        lowWorkersLimit = (int) (economy.getLabor_force() * (modifierLowWorkers + ((random.nextFloat() * (0.005 - (-0.005)) + (-0.005)))));
+        lowWorkers = lowWorkersLimit;
+        lowWorkersSalary = (float) (economy.getGdpPerPerson() * (modifierLowWorkersSalary + (random.nextFloat() * (0.01 - (-0.01)) + (-0.01))));
 
-        this.middleWorkersLimit = (int) (this.economy.getLabor_force() * (modifierMiddleWorkers + ((random.nextFloat() * (0.005 - (-0.005)) + (-0.005)))));
-        this.middleWorkers = this.middleWorkersLimit;
-        this.middleWorkersSalary = (float) (this.economy.getGdpPerPerson() * (modifierMiddleWorkersSalary + (random.nextFloat() * (0.01 - (-0.01)) + (-0.01))));
+        middleWorkersLimit = (int) (economy.getLabor_force() * (modifierMiddleWorkers + ((random.nextFloat() * (0.005 - (-0.005)) + (-0.005)))));
+        middleWorkers = middleWorkersLimit;
+        middleWorkersSalary = (float) (economy.getGdpPerPerson() * (modifierMiddleWorkersSalary + (random.nextFloat() * (0.01 - (-0.01)) + (-0.01))));
 
-        this.highWorkersLimit = (int) (this.economy.getLabor_force() * (modifierHighWorkers + ((random.nextFloat() * (0.005 - (-0.005)) + (-0.005)))));
-        this.highWorkers = this.highWorkersLimit;
-        this.highWorkersSalary = (float) (this.economy.getGdpPerPerson() * (modifierHighWorkersSalary + (random.nextFloat() * (0.01 - (-0.01)) + (-0.01))));
+        highWorkersLimit = (int) (economy.getLabor_force() * (modifierHighWorkers + ((random.nextFloat() * (0.005 - (-0.005)) + (-0.005)))));
+        highWorkers = highWorkersLimit;
+        highWorkersSalary = (float) (economy.getGdpPerPerson() * (modifierHighWorkersSalary + (random.nextFloat() * (0.01 - (-0.01)) + (-0.01))));
 
-        this.generalBudget = (float) (this.economy.getBudget() * (modifierGeneralBudget + (random.nextFloat() * (0.01 - (-0.01)) + (-0.01))));
+        generalBudgetNeed = (lowWorkers * 0.15f) + (middleWorkers * 0.25f) + (highWorkers * 0.35f) + (lowWorkers * lowWorkersSalary) + (middleWorkers * middleWorkersSalary) + (highWorkers * highWorkersSalary);
+        generalBudget = (float) (generalBudgetNeed * (modifierGeneralBudget + (random.nextFloat() * (0.05 - (-0.05)) + (-0.05))));
+
+        maximumLowWorkersLimit = (int) (economy.getLabor_force() * 0.45);
+        maximumMiddleWorkersLimit = (int) (economy.getLabor_force() * 0.45);
+        maximumHighWorkersLimit = (int) (economy.getLabor_force() * 0.45);
     }
 
 }

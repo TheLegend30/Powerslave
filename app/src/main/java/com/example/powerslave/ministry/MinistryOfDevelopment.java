@@ -10,6 +10,7 @@ import java.util.Random;
 public class MinistryOfDevelopment extends Ministry {
     private int clerks;
     private int clerksLimit;
+    private int maximumClerksLimit;
     private float clerksSalary;
     private float clerksSalaryNeed;
 
@@ -34,32 +35,67 @@ public class MinistryOfDevelopment extends Ministry {
         statsRandomizer();
     }
 
+    public int getClerks() {
+        return clerks;
+    }
+
+    public float getClerksSalary() {
+        return clerksSalary;
+    }
+
+    public int getEntrepreneurs() {
+        return entrepreneurs;
+    }
+
+    public float getTradeOutput() {
+        return tradeOutput;
+    }
+
+    public float getServicesOutput() {
+        return servicesOutput;
+    }
+
+    public float getElectricsNeed() {
+        return electricsNeed;
+    }
+
+    public float getLightIndustryNeed() {
+        return lightIndustryNeed;
+    }
+
+    public float getFoodNeed() {
+        return foodNeed;
+    }
+
+    public float getServicesNeed() {
+        return servicesNeed;
+    }
+
     @Override
     public String toString() {
         String string;
         string = "Clerks: " + clerks + "\n";
-        string += "Clerks limit: " + clerksLimit + "\n";
-        string += "Clerks salary: " + clerksSalary + "ƒ" + "\n";
-        string += "Clerks salary need: " + clerksSalaryNeed + "ƒ" + "\n";
+        string += "Clerks limit: " + clerksLimit + " (Maximum - " + maximumClerksLimit + ")" + "\n";
+        string += "Clerks salary: " + String.format("%.2f", clerksSalary) + " ƒ" + "\n";
+        string += "Clerks salary need: " + String.format("%.2f", clerksSalaryNeed) + " ƒ" +"\n";
         string += "Entrepreneurs: " + entrepreneurs + "\n";
-        string += "General budget: " + generalBudget + "\n";
-        string += "General budget need: " + generalBudgetNeed + "\n";
+        string += "General budget: " + String.format("%.2f", generalBudget) + " ƒ" + "\n";
+        string += "General budget need: " + String.format("%.2f", generalBudgetNeed) + " ƒ" + "\n";
         string += "Services output: " + servicesOutput + "\n";
         string += "Services need: " + servicesNeed + "\n";
         string += "Trade output: " + tradeOutput + "\n";
-        string += "Electrics need: " + electricsNeed + "\n";
-        string += "Light industry need: " + lightIndustryNeed + "\n";
-        string += "Food need: " + foodNeed + "\n";
+        string += "Electrics need: " + electricsNeed + " units" + "\n";
+        string += "Light industry need: " + lightIndustryNeed + " units" + "\n";
+        string += "Food need: " + foodNeed + " units" + "\n";
         return super.toString() + string;
     }
+
+
 
     @Override
     public void updateMinistry() {
         super.updateMinistry();
-        this.clerksSalaryNeed = this.economy.getGdpPerPerson() / 1.15f;
-        this.generalBudgetNeed = (this.economy.getBudget() * 0.15f) + ((clerks * 0.11f));
 
-        efficiency *= clerksSalary / clerksSalaryNeed;
         efficiency *= generalBudget / generalBudgetNeed;
 
         servicesOutput = clerks * efficiency * 0.9f;
@@ -81,85 +117,87 @@ public class MinistryOfDevelopment extends Ministry {
 
         float modifierGeneralBudget = 0f;
 
-        switch (this.country.getContinent()) {
+        switch (country.getContinent()) {
             case EY:
                 modifierClerks = 0.1f;
                 modifierClerksSalary = 0.75f;
                 modifierEntrepreneurs = 0.02f;
 
-                modifierGeneralBudget = 0.14f;
+                modifierGeneralBudget = 0.64f;
                 break;
             case NY:
                 modifierClerks = 0.13f;
                 modifierClerksSalary = 0.8f;
                 modifierEntrepreneurs = 0.04f;
 
-                modifierGeneralBudget = 0.165f;
+                modifierGeneralBudget = 0.85f;
                 break;
             case SY:
                 modifierClerks = 0.1f;
                 modifierClerksSalary = 0.72f;
                 modifierEntrepreneurs = 0.025f;
 
-                modifierGeneralBudget = 0.135f;
+                modifierGeneralBudget = 0.69f;
                 break;
             case WY:
                 modifierClerks = 0.18f;
                 modifierClerksSalary = 0.85f;
                 modifierEntrepreneurs = 0.08f;
 
-                modifierGeneralBudget = 0.17f;
+                modifierGeneralBudget = 0.97f;
                 break;
             case IB:
                 modifierClerks = 0.09f;
                 modifierClerksSalary = 0.7f;
                 modifierEntrepreneurs = 0.025f;
 
-                modifierGeneralBudget = 0.12f;
+                modifierGeneralBudget = 0.72f;
                 break;
             case OB:
                 modifierClerks = 0.085f;
                 modifierClerksSalary = 0.68f;
                 modifierEntrepreneurs = 0.023f;
 
-                modifierGeneralBudget = 0.11f;
+                modifierGeneralBudget = 0.61f;
                 break;
             case CA:
                 modifierClerks = 0.08f;
                 modifierClerksSalary = 0.63f;
                 modifierEntrepreneurs = 0.02f;
 
-                modifierGeneralBudget = 0.105f;
+                modifierGeneralBudget = 0.65f;
                 break;
             case FA:
                 modifierClerks = 0.075f;
                 modifierClerksSalary = 0.6f;
                 modifierEntrepreneurs = 0.02f;
 
-                modifierGeneralBudget = 0.1f;
+                modifierGeneralBudget = 0.6f;
                 break;
             case ME:
                 modifierClerks = 0.065f;
                 modifierClerksSalary = 0.55f;
                 modifierEntrepreneurs = 0.015f;
 
-                modifierGeneralBudget = 0.085f;
+                modifierGeneralBudget = 0.55f;
                 break;
             case GE:
                 modifierClerks = 0.16f;
                 modifierClerksSalary = 0.83f;
-                modifierEntrepreneurs = 0.045f;
+                modifierEntrepreneurs = 0.45f;
 
-                modifierGeneralBudget = 0.125f;
+                modifierGeneralBudget = 0.825f;
                 break;
         }
 
-        this.clerksLimit = (int) (this.economy.getLabor_force() * (modifierClerks + (random.nextFloat() * (0.01f - (-0.01f)) + (-0.01f))));
-        this.clerks = this.clerksLimit;
-        this.clerksSalary = this.economy.getGdpPerPerson() * (modifierClerksSalary + (random.nextFloat() * (0.01f - (-0.01f)) + (-0.01f)));
+        clerksLimit = (int) (economy.getLabor_force() * (modifierClerks + (random.nextFloat() * (0.01f - (-0.01f)) + (-0.01f))));
+        clerks = clerksLimit;
+        clerksSalary = economy.getGdpPerPerson() * (modifierClerksSalary + (random.nextFloat() * (0.01f - (-0.01f)) + (-0.01f)));
 
-        this.entrepreneurs = (int) (this.economy.getLabor_force() * (modifierEntrepreneurs + (random.nextFloat() * (0.0005f - (-0.0005f)) + (-0.0005f))));
+        entrepreneurs = (int) (economy.getLabor_force() * (modifierEntrepreneurs + (random.nextFloat() * (0.0005f - (-0.0005f)) + (-0.0005f))));
 
-        this.generalBudget = (float) (this.economy.getBudget() * (modifierGeneralBudget + (random.nextFloat() * (0.01 - (-0.01)) + (-0.01))));
+        generalBudgetNeed = (clerks * 0.25f) + (clerks * clerksSalary);
+        generalBudget = (float) (generalBudgetNeed * (modifierGeneralBudget + (random.nextFloat() * (0.05f - (-0.05f)) + (-0.05f))));
+        maximumClerksLimit = (int) (economy.getLabor_force() * 0.2f);
     }
 }
