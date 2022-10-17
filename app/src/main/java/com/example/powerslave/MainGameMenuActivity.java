@@ -24,7 +24,7 @@ import com.example.powerslave.person.Ruler;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Map;
-
+// Change updates
 public class MainGameMenuActivity extends AppCompatActivity implements View.OnClickListener {
     private TextView textViewDate;
     private TextView textViewCountryName;

@@ -5,6 +5,8 @@ import android.content.Context;
 import com.example.powerslave.government.Country;
 import com.example.powerslave.person.Minister;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Random;
 
 public class MinistryOfTransportation extends Ministry {
@@ -37,6 +39,8 @@ public class MinistryOfTransportation extends Ministry {
     private MinistryOfEconomy economy;
     private MinistryOfCulture culture;
 
+    public ArrayList<BuildingQueue> queue = new ArrayList<>();
+
     public MinistryOfTransportation(int countryKey, Minister minister, Context context, Country country) {
         super(countryKey, minister, context, country);
         this.name = "Ministry of Transportation and Building";
@@ -53,6 +57,57 @@ public class MinistryOfTransportation extends Ministry {
 
         statsRandomizer();
     }
+
+    private enum Building {
+        HOSPITAL
+    }
+
+    private class BuildingQueue {
+        private Building building;
+        private int workers, weeks;
+
+        private BuildingQueue(Building building, int workers, int weeks) {
+            this.building = building;
+            this.workers = workers;
+            this.weeks = weeks;
+        }
+    }
+
+    public void buildHospital() {
+        if (freeBuilders >= 1000) {
+            queue.add(new BuildingQueue(Building.HOSPITAL, 1000, 8));
+            freeBuilders -= 1000;
+        }
+    }
+
+    public void checkIfFinished() {
+        for (Iterator<BuildingQueue> iterator = queue.iterator(); iterator.hasNext(); ) {
+            BuildingQueue b = iterator.next();
+            if (b.weeks == 0) {
+                switch (b.building) {
+                    case HOSPITAL:
+                        country.getMinistryOfHealthcare().setHospitals(country.getMinistryOfHealthcare().getHospitals() + 1);
+                        break;
+                }
+                freeBuilders += b.workers;
+                iterator.remove();
+            }
+        }
+
+    }
+
+//    Queue in ministryActivity
+    public void weekPassed() {
+        for (BuildingQueue b : queue) {
+            b.weeks--;
+        }
+        checkIfFinished();
+    }
+
+    public int getFreeBuilders() {
+        return freeBuilders;
+    }
+
 
     @Override
     public String toString() {
@@ -87,6 +142,7 @@ public class MinistryOfTransportation extends Ministry {
         if (!economy.isLandlocked()) efficiency *= (float) ports / portsNeed;
         efficiency *= (float) railroadKms / railroadKmsNeed;
         efficiency *= (float) roadKms / roadKmsNeed;
+        weekPassed();
     }
 
     @Override
@@ -221,7 +277,7 @@ public class MinistryOfTransportation extends Ministry {
         buildersLimit = (int) (economy.getLabor_force() * (modifierBuilders + (random.nextFloat() * (0.005 - (-0.005)) + (-0.005))));
         builders = buildersLimit;
         freeBuilders = builders;
-        buildersSalary = (float) (economy.getGdpPerPerson() * (modifierBuildersSalary + (random.nextFloat() * (0.01f - (-0.01f)) + (-0.01f))));
+        buildersSalary = economy.getGdpPerPerson() * (modifierBuildersSalary + (random.nextFloat() * (0.01f - (-0.01f)) + (-0.01f)));
 
         airportsLimit = (int) (airportsNeed * (modifierAirports + (random.nextFloat() * (0.01 - (-0.01)) + (-0.01))));
         airports = airportsLimit;

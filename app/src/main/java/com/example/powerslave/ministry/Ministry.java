@@ -61,4 +61,8 @@ public abstract class Ministry {
 
     public void statsRandomizer() {
     }
+
+    public void workersIncreasing(){
+
+    }
 }

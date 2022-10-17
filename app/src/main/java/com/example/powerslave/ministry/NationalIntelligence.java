@@ -185,14 +185,20 @@ public class NationalIntelligence extends Ministry {
             if (c != this.country && doesMissionNotExists(c))
                 countriesMissions.add(new NationalIntelligence.Mission(c));
         }
-        agents +=  agentsLimit * 0.05 * country.getMinistryOfEducation().efficiency * efficiency;
-        if (agents > agentsLimit) agents = agentsLimit;
-        agentsFree = agents;
+
         for (NationalIntelligence.Mission m : countriesMissions) {
             agentsFree -= m.agentsThere;
             m.progressChange();
         }
         Collections.sort(countriesMissions);
         efficiency *= agentsSalary / agentsSalaryNeed;
+    }
+
+    @Override
+    public void workersIncreasing() {
+        super.workersIncreasing();
+        agents +=  agentsLimit * 0.05 * country.getMinistryOfEducation().efficiency * efficiency;
+        if (agents > agentsLimit) agents = agentsLimit;
+        agentsFree = agents;
     }
 }

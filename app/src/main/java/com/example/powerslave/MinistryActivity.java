@@ -5,12 +5,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Dialog;
 import android.content.DialogInterface;
-import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.text.InputType;
 import android.text.TextUtils;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -26,6 +24,7 @@ import android.widget.Toast;
 import com.example.powerslave.government.Country;
 import com.example.powerslave.ministry.Ministry;
 import com.example.powerslave.ministry.MinistryOfForeignAffairs;
+import com.example.powerslave.ministry.MinistryOfHealthcare;
 import com.example.powerslave.ministry.NationalIntelligence;
 import com.example.powerslave.person.Minister;
 import com.example.powerslave.person.Sex;
@@ -62,6 +61,136 @@ public class MinistryActivity extends AppCompatActivity implements View.OnClickL
 
         if (MainGameMenuActivity.selectedMinistry == 0) {
             ministry = country.getMinistryOfHealthcare();
+
+            MinistryOfHealthcare healthcare = (MinistryOfHealthcare) ministry;
+
+            EditText doctorsLimitEdit = new EditText(this);
+            doctorsLimitEdit.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+            doctorsLimitEdit.setInputType(InputType.TYPE_CLASS_NUMBER);
+            doctorsLimitEdit.setHint("Enter limit of doctors");
+
+            Button buttonConfirmDoctorsLimitEdit = new Button(this);
+            buttonConfirmDoctorsLimitEdit.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+            buttonConfirmDoctorsLimitEdit.setText("Confirm limit");
+            buttonConfirmDoctorsLimitEdit.setOnClickListener(view -> {
+                if (TextUtils.isEmpty(doctorsLimitEdit.getText())) {
+                    Toast.makeText(MinistryActivity.this, "You need to enter something", Toast.LENGTH_SHORT).show();
+                } else {
+                    Integer limit = Integer.parseInt(String.valueOf(doctorsLimitEdit.getText()));
+                    if (limit > healthcare.getMaximumDoctorsLimit() || limit < 0) {
+                        Toast.makeText(MinistryActivity.this, ("Have you lost your mind, " + (country.getRuler().getSex() == Sex.MALE ? "sir?" : "ma'am?")), Toast.LENGTH_SHORT).show();
+                    } else {
+                        healthcare.setDoctorsLimit(limit);
+                        MinistryActivity.this.recreate();
+                    }
+                }
+            });
+
+            EditText doctorsSalaryEdit = new EditText(this);
+            doctorsSalaryEdit.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+            doctorsSalaryEdit.setInputType(InputType.TYPE_CLASS_NUMBER);
+            doctorsSalaryEdit.setHint("Enter salary of doctors");
+
+            Button buttonConfirmDoctorsSalaryEdit = new Button(this);
+            buttonConfirmDoctorsSalaryEdit.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+            buttonConfirmDoctorsSalaryEdit.setText("Confirm salary");
+            buttonConfirmDoctorsSalaryEdit.setOnClickListener(view -> {
+                if (TextUtils.isEmpty(doctorsSalaryEdit.getText())) {
+                    Toast.makeText(MinistryActivity.this, "You need to enter something", Toast.LENGTH_SHORT).show();
+                } else {
+                    Float salary = Float.parseFloat(String.valueOf(doctorsSalaryEdit.getText()));
+                    if (salary > (healthcare.getDoctorsSalaryNeed() * 10) || salary < 0) {
+                        Toast.makeText(MinistryActivity.this, ("Have you lost your mind, " + (country.getRuler().getSex() == Sex.MALE ? "sir?" : "ma'am?")), Toast.LENGTH_SHORT).show();
+                    } else {
+                        healthcare.setDoctorsSalary(salary);
+                        MinistryActivity.this.recreate();
+                    }
+                }
+            });
+
+            EditText pensionSalaryEdit = new EditText(this);
+            pensionSalaryEdit.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+            pensionSalaryEdit.setInputType(InputType.TYPE_CLASS_NUMBER);
+            pensionSalaryEdit.setHint("Enter pension");
+
+            Button buttonConfirmPensionEdit = new Button(this);
+            buttonConfirmPensionEdit.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+            buttonConfirmPensionEdit.setText("Confirm pension");
+            buttonConfirmPensionEdit.setOnClickListener(view -> {
+                if (TextUtils.isEmpty(pensionSalaryEdit.getText())) {
+                    Toast.makeText(MinistryActivity.this, "You need to enter something", Toast.LENGTH_SHORT).show();
+                } else {
+                    Float pension = Float.parseFloat(String.valueOf(pensionSalaryEdit.getText()));
+                    if (pension > (healthcare.getPensionNeed() * 10) || pension < 0) {
+                        Toast.makeText(MinistryActivity.this, ("Have you lost your mind, " + (country.getRuler().getSex() == Sex.MALE ? "sir?" : "ma'am?")), Toast.LENGTH_SHORT).show();
+                    } else {
+                        healthcare.setPension(pension);
+                        MinistryActivity.this.recreate();
+                    }
+                }
+            });
+
+            EditText retirementAgeEdit = new EditText(this);
+            retirementAgeEdit.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+            retirementAgeEdit.setInputType(InputType.TYPE_CLASS_NUMBER);
+            retirementAgeEdit.setHint("Enter retirement age");
+
+            Button buttonConfirmRetirementAgeEdit = new Button(this);
+            buttonConfirmRetirementAgeEdit.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+            buttonConfirmRetirementAgeEdit.setText("Confirm retirement age");
+            buttonConfirmRetirementAgeEdit.setOnClickListener(view -> {
+                if (TextUtils.isEmpty(retirementAgeEdit.getText())) {
+                    Toast.makeText(MinistryActivity.this, "You need to enter something", Toast.LENGTH_SHORT).show();
+                } else {
+                    Integer retirementAge = Integer.parseInt(String.valueOf(retirementAgeEdit.getText()));
+                    if (retirementAge > (healthcare.getLifeExpectancy() + 20) || retirementAge < (healthcare.getLifeExpectancy() - 20)) {
+                        Toast.makeText(MinistryActivity.this, ("Have you lost your mind, " + (country.getRuler().getSex() == Sex.MALE ? "sir?" : "ma'am?")), Toast.LENGTH_SHORT).show();
+                    } else {
+                        healthcare.setRetirementAge(retirementAge);
+                        MinistryActivity.this.recreate();
+                    }
+                }
+            });
+
+            EditText wantToBuildHospitalsEdit = new EditText(this);
+            wantToBuildHospitalsEdit.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+            wantToBuildHospitalsEdit.setInputType(InputType.TYPE_CLASS_NUMBER);
+            wantToBuildHospitalsEdit.setHint("How much hospitals want to build?");
+
+            Button buttonBuildHospital = new Button(this);
+            buttonBuildHospital.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+            buttonBuildHospital.setText("Build hospitals");
+            buttonBuildHospital.setOnClickListener(view -> {
+                if (TextUtils.isEmpty(wantToBuildHospitalsEdit.getText())) {
+                    Toast.makeText(MinistryActivity.this, "You need to enter something", Toast.LENGTH_SHORT).show();
+                } else {
+                    boolean showSecondMessage = true;
+                    for (int i = 0; i < Integer.parseInt(String.valueOf(wantToBuildHospitalsEdit.getText())); i++) {
+                        if (country.getMinistryOfTransportation().getFreeBuilders() < 1000) {
+                            Toast.makeText(MinistryActivity.this, "We'll build only " + i + " hospitals", Toast.LENGTH_SHORT).show();
+                            showSecondMessage = false;
+                            break;
+                        }
+                        country.getMinistryOfTransportation().buildHospital();
+                    }
+                    if (showSecondMessage)
+                        Toast.makeText(MinistryActivity.this, "We'll build " + Integer.parseInt(String.valueOf(wantToBuildHospitalsEdit.getText())) + " hospitals", Toast.LENGTH_SHORT).show();
+                }
+
+            });
+
+
+            buttonLayout.addView(doctorsLimitEdit);
+            buttonLayout.addView(buttonConfirmDoctorsLimitEdit);
+            buttonLayout.addView(doctorsSalaryEdit);
+            buttonLayout.addView(buttonConfirmDoctorsSalaryEdit);
+            buttonLayout.addView(pensionSalaryEdit);
+            buttonLayout.addView(buttonConfirmPensionEdit);
+            buttonLayout.addView(retirementAgeEdit);
+            buttonLayout.addView(buttonConfirmRetirementAgeEdit);
+            buttonLayout.addView(wantToBuildHospitalsEdit);
+            buttonLayout.addView(buttonBuildHospital);
+
         } else if (MainGameMenuActivity.selectedMinistry == 1) {
             ministry = country.getMinistryOfEducation();
         } else if (MainGameMenuActivity.selectedMinistry == 2) {

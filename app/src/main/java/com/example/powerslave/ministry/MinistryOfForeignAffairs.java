@@ -192,9 +192,6 @@ public class MinistryOfForeignAffairs extends Ministry {
             if (c != this.country && doesRelationNotExists(c))
                 countriesRelations.add(new Relation(c));
         }
-        diplomats +=  diplomatsLimit * 0.1 * country.getMinistryOfEducation().efficiency * efficiency;
-        if (diplomats > diplomatsLimit) diplomats = diplomatsLimit;
-        diplomatsFree = diplomats;
         tradePartners = 0;
         allies = 0;
         for (Relation r : countriesRelations) {
@@ -207,5 +204,12 @@ public class MinistryOfForeignAffairs extends Ministry {
         efficiency *= diplomatsSalary / diplomatsSalaryNeed;
     }
 
+    @Override
+    public void workersIncreasing() {
+        super.workersIncreasing();
+        diplomats +=  diplomatsLimit * 0.1 * country.getMinistryOfEducation().efficiency * efficiency;
+        if (diplomats > diplomatsLimit) diplomats = diplomatsLimit;
+        diplomatsFree = diplomats;
+    }
 }
 

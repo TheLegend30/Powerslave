@@ -53,6 +53,7 @@ public class Country implements Comparable<Country> {
     private Map<String, Ministry> ministries = new HashMap<>();
 
     public void oneMove() {
+        increasingMinistries();
         updateMinistries();
     }
 
@@ -502,6 +503,12 @@ public class Country implements Comparable<Country> {
     public void updateMinistries() {
         for (Map.Entry<String, Ministry> ministry : ministries.entrySet()) {
             ministry.getValue().updateMinistry();
+        }
+    }
+
+    private void increasingMinistries() {
+        for (Map.Entry<String, Ministry> ministry : ministries.entrySet()) {
+            ministry.getValue().workersIncreasing();
         }
     }
 

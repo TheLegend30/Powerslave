@@ -48,6 +48,82 @@ public class MinistryOfHealthcare extends Ministry {
         return pensioners;
     }
 
+    public void setLifeExpectancy(float lifeExpectancy) {
+        this.lifeExpectancy = lifeExpectancy;
+    }
+
+    public int getDoctors() {
+        return doctors;
+    }
+
+    public void setDoctors(int doctors) {
+        this.doctors = doctors;
+    }
+
+    public int getDoctorsLimit() {
+        return doctorsLimit;
+    }
+
+    public void setDoctorsLimit(int doctorsLimit) {
+        this.doctorsLimit = doctorsLimit;
+    }
+
+    public int getMaximumDoctorsLimit() {
+        return maximumDoctorsLimit;
+    }
+
+    public void setMaximumDoctorsLimit(int maximumDoctorsLimit) {
+        this.maximumDoctorsLimit = maximumDoctorsLimit;
+    }
+
+    public float getDoctorsSalary() {
+        return doctorsSalary;
+    }
+
+    public void setDoctorsSalary(float doctorsSalary) {
+        this.doctorsSalary = doctorsSalary;
+    }
+
+    public float getDoctorsSalaryNeed() {
+        return doctorsSalaryNeed;
+    }
+
+    public void setDoctorsSalaryNeed(float doctorsSalaryNeed) {
+        this.doctorsSalaryNeed = doctorsSalaryNeed;
+    }
+
+    public float getPension() {
+        return pension;
+    }
+
+    public void setPension(float pension) {
+        this.pension = pension;
+    }
+
+    public float getPensionNeed() {
+        return pensionNeed;
+    }
+
+    public void setPensionNeed(float pensionNeed) {
+        this.pensionNeed = pensionNeed;
+    }
+
+    public int getRetirementAge() {
+        return retirementAge;
+    }
+
+    public void setRetirementAge(int retirementAge) {
+        this.retirementAge = retirementAge;
+    }
+
+    public int getHospitals() {
+        return hospitals;
+    }
+
+    public void setHospitals(int hospitals) {
+        this.hospitals = hospitals;
+    }
+
     @Override
     public String toString() {
         String string;
@@ -59,6 +135,8 @@ public class MinistryOfHealthcare extends Ministry {
         string += "Pensioners: " + pensioners + "\n";
         string += "Pension: " + String.format("%.2f", pension) + " ƒ" + "\n";
         string += "Pension need: " + String.format("%.2f", pensionNeed) + " ƒ" + "\n";
+        string += "Retirement age: " + retirementAge + " years" + "\n";
+        string += "Life expectancy: " + String.format("%.2f", lifeExpectancy) + " years" + "\n";
         string += "Hospitals: " + hospitals + "\n";
         string += "Hospitals need: " + hospitalsNeed + "\n";
         string += "General budget: " + String.format("%.2f", generalBudget) + " ƒ" + "\n";
@@ -77,6 +155,8 @@ public class MinistryOfHealthcare extends Ministry {
         pensionNeed = economy.getGdpPerPerson() * 0.35f;
 
         popGrowth = (int) ((economy.getPopulation() / 100) * (natality - mortality));
+
+        generalBudgetNeed = (doctors * 0.65f) + (doctors * doctorsSalary) + (pensioners * pension) + (hospitals * 625f);
 
         efficiency *= (float) doctors / doctorsNeed;
         efficiency *= (float) hospitals / hospitalsNeed;
@@ -271,7 +351,7 @@ public class MinistryOfHealthcare extends Ministry {
 
         doctorsLimit = (int) (economy.getLabor_force() * (modifierDoctors + (random.nextFloat() * (0.0005f - (-0.0005f)) + (-0.0005f))));
         doctors = doctorsLimit;
-        doctorsSalary = (float) (economy.getGdpPerPerson() * (modifierDoctorsSalary + (random.nextFloat() * (0.005f - (-0.005f)) + (-0.005f))));
+        doctorsSalary = economy.getGdpPerPerson() * (modifierDoctorsSalary + (random.nextFloat() * (0.005f - (-0.005f)) + (-0.005f)));
 
         ////////
         doctorsNeed = (int) economy.getPopulation() / 350;
@@ -280,7 +360,7 @@ public class MinistryOfHealthcare extends Ministry {
 
         pensioners = (int) (economy.getPopulation() - ((economy.getLabor_force() * (lifeExpectancy / retirementAge)) * 1.15f));
 
-        pension = (float) (economy.getGdpPerPerson() * (modifierPension + (random.nextFloat() * (0.005f - (-0.005f)) + (-0.005f))));
+        pension = economy.getGdpPerPerson() * (modifierPension + (random.nextFloat() * (0.005f - (-0.005f)) + (-0.005f)));
 
         hospitals = (int) (hospitalsNeed * (modifierHospitals + (random.nextFloat() * (0.005f - (-0.005f)) + (-0.005f))));
 
@@ -289,5 +369,13 @@ public class MinistryOfHealthcare extends Ministry {
 
         generalBudgetNeed = (doctors * 0.65f) + (doctors * doctorsSalary) + (pensioners * pension) + (hospitals * 625f);
         generalBudget = generalBudgetNeed * (modifierGeneralBudget + (random.nextFloat() * (0.05f - (-0.05f)) + (-0.05f)));
+        maximumDoctorsLimit = doctorsNeed * 5;
+    }
+
+    @Override
+    public void workersIncreasing() {
+        super.workersIncreasing();
+        doctors += doctorsLimit * 0.2 * country.getMinistryOfEducation().efficiency * efficiency;
+        if (doctors > doctorsLimit) doctors = doctorsLimit;
     }
 }
