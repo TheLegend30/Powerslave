@@ -203,31 +203,45 @@ public class MinistryOfEconomy extends Ministry {
 
         low_taxes = low_taxes_modifier * ((agriculture.getMiners() * agriculture.getMinersSalary()) + (agriculture.getFarmers() * agriculture.getFarmersSalary()) + (industry.getLowWorkers() * industry.getLowWorkersSalary()));
         middle_taxes = middle_taxes_modifier * ((industry.getMiddleWorkers() * industry.getMiddleWorkersSalary()) + (development.getClerks() * development.getClerksSalary()));
-        high_taxes = high_taxes_modifier * ((industry.getHighWorkers() * industry.getHighWorkersSalary()) + (development.getTradeOutput()));
+        high_taxes = high_taxes_modifier * ((industry.getHighWorkers() * industry.getHighWorkersSalary()) + (development.getTradeOutput() * 1.5f));
         total_taxes += low_taxes + middle_taxes + high_taxes;
 
         exportsAndImport += 0.3f * (agriculture.getRawOutput() - industry.getRawNeed());
         exportsAndImport += 0.35f * ( agriculture.getRawFoodOutput() - industry.getRawFoodNeed());
 
-        exportsAndImport += 0.85f * (industry.getAlloysOutput() - industry.getAlloysNeed());
-        exportsAndImport += 0.9f * (industry.getChemicalsOutput() - industry.getChemicalsNeed());
-        exportsAndImport += 0.8f * industry.getBuildingMaterialsOutput();
-        exportsAndImport += 0.7f * (industry.getFoodOutput() - development.getFoodNeed());
+        exportsAndImport += 1.85f * (industry.getAlloysOutput() - industry.getAlloysNeed());
+        exportsAndImport += 1.45f * (industry.getChemicalsOutput() - industry.getChemicalsNeed());
+        exportsAndImport += 1.5f * industry.getBuildingMaterialsOutput();
+        exportsAndImport += 1.7f * (industry.getFoodOutput() - development.getFoodNeed());
 
-        exportsAndImport += 1.35f * (industry.getMechanicsOutput() - industry.getMechanicsNeed());
-        exportsAndImport += 1.05f * (industry.getFuelOutput() - defense.getFuelNeed());
-        exportsAndImport += 1.15 * (industry.getLightIndustryOutput() - development.getLightIndustryNeed());
+        exportsAndImport += 3.35f * (industry.getMechanicsOutput() - industry.getMechanicsNeed());
+        exportsAndImport += 2.05f * (industry.getFuelOutput() - defense.getFuelNeed());
+        exportsAndImport += 3.15 * (industry.getLightIndustryOutput() - development.getLightIndustryNeed());
 
-        exportsAndImport += 2.3f * (industry.getMilitaryIndustryOutput() - defense.getMilitaryIndustryNeed());
-        exportsAndImport += 2.25f * (industry.getElectricsOutput() - development.getElectricsNeed());
+        exportsAndImport += 5.3f * (industry.getMilitaryIndustryOutput() - defense.getMilitaryIndustryNeed());
+        exportsAndImport += 4.25f * (industry.getElectricsOutput() - development.getElectricsNeed());
 
-        exportsAndImport += 1.55f * (development.getServicesOutput() - development.getServicesNeed());
+        exportsAndImport += 6.55f * (development.getServicesOutput() - development.getServicesNeed());
 
-        exportsAndImport *= country.getMinistryOfTransportation().efficiency * 50f;
+        exportsAndImport *= country.getMinistryOfTransportation().efficiency * 75f;
 
         total_tariffs = exportsAndImport * tariffs * country.getMinistryOfTransportation().efficiency;
 
         budget = exportsAndImport + total_tariffs + total_taxes;
+
+        budget -= country.getMinistryOfAgriculture().generalBudget;
+        budget -= country.getMinistryOfCulture().generalBudget;
+        budget -= country.getMinistryOfDefense().generalBudget;
+        budget -= country.getMinistryOfDevelopment().generalBudget;
+        budget -= country.getMinistryOfEducation().generalBudget;
+        budget -= country.getMinistryOfForeignAffairs().generalBudget;
+        budget -= country.getMinistryOfHealthcare().generalBudget;
+        budget -= country.getMinistryOfIndustry().generalBudget;
+        budget -= country.getMinistryOfInternalAffairs().generalBudget;
+        budget -= country.getMinistryOfJustice().generalBudget;
+        budget -= country.getMinistryOfTransportation().generalBudget;
+        budget -= country.getNationalIntelligence().generalBudget;
+        budget -= country.getParliament().generalBudget;
 
     }
 }

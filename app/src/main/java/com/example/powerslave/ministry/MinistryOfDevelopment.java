@@ -196,7 +196,7 @@ public class MinistryOfDevelopment extends Ministry {
 
         entrepreneurs = (int) (economy.getLabor_force() * (modifierEntrepreneurs + (random.nextFloat() * (0.0005f - (-0.0005f)) + (-0.0005f))));
 
-        generalBudgetNeed = (clerks * 0.25f) + (clerks * clerksSalary);
+        generalBudgetNeed = (clerks * 0.2f) + (clerks * clerksSalary);
         generalBudget = (float) (generalBudgetNeed * (modifierGeneralBudget + (random.nextFloat() * (0.05f - (-0.05f)) + (-0.05f))));
         maximumClerksLimit = (int) (economy.getLabor_force() * 0.2f);
     }

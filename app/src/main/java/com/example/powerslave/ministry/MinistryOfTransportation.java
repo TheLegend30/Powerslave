@@ -96,7 +96,7 @@ public class MinistryOfTransportation extends Ministry {
 
     }
 
-//    Queue in ministryActivity
+    // Queue in ministryActivity
     public void weekPassed() {
         for (BuildingQueue b : queue) {
             b.weeks--;

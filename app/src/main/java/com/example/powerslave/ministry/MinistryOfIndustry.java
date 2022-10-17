@@ -182,7 +182,6 @@ public class MinistryOfIndustry extends Ministry {
         this.lowWorkersSalaryNeed = this.economy.getGdpPerPerson() / 2.05f;
         this.middleWorkersSalaryNeed = this.economy.getGdpPerPerson() / 1.25f;
         this.highWorkersSalaryNeed = this.economy.getGdpPerPerson() / 1.05f;
-        this.generalBudgetNeed = (float) ((this.economy.getBudget() * 0.15) + ((lowWorkers * 0.08) + (middleWorkers * 0.1)) + (highWorkers * 0.15));
 
         efficiency *= generalBudget / generalBudgetNeed;
 
@@ -357,7 +356,7 @@ public class MinistryOfIndustry extends Ministry {
         highWorkers = highWorkersLimit;
         highWorkersSalary = (float) (economy.getGdpPerPerson() * (modifierHighWorkersSalary + (random.nextFloat() * (0.01 - (-0.01)) + (-0.01))));
 
-        generalBudgetNeed = (lowWorkers * 0.15f) + (middleWorkers * 0.25f) + (highWorkers * 0.35f) + (lowWorkers * lowWorkersSalary) + (middleWorkers * middleWorkersSalary) + (highWorkers * highWorkersSalary);
+        generalBudgetNeed = (lowWorkers * 0.05f) + (middleWorkers * 0.07f) + (highWorkers * 0.1f) + (lowWorkers * lowWorkersSalary) + (middleWorkers * middleWorkersSalary) + (highWorkers * highWorkersSalary);
         generalBudget = (float) (generalBudgetNeed * (modifierGeneralBudget + (random.nextFloat() * (0.05 - (-0.05)) + (-0.05))));
 
         maximumLowWorkersLimit = (int) (economy.getLabor_force() * 0.45);

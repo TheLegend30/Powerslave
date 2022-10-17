@@ -207,7 +207,7 @@ public class MinistryOfAgriculture extends Ministry {
         miners = minersLimit;
         minersSalary = (float) (economy.getGdpPerPerson() * (modifierMinersSalary + (random.nextFloat() * (0.01 - (-0.01)) + (-0.01))));
 
-        generalBudgetNeed = (miners * 0.05f) + (farmers * 0.01f) + (miners * minersSalary) + (farmers * farmersSalary);
+        generalBudgetNeed = (miners * 0.015f) + (farmers * 0.01f) + (miners * minersSalary) + (farmers * farmersSalary);
         generalBudget = (float) (generalBudgetNeed * (modifierGeneralBudget + (random.nextFloat() * (0.04 - (-0.04)) + (-0.04))));
     }
 }
