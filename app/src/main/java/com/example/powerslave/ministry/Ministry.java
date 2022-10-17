@@ -19,8 +19,8 @@ public abstract class Ministry {
     protected Context context;
     protected Country country;
 
-    protected float general_budget;
-    protected float general_budget_need;
+    protected float generalBudget;
+    protected float generalBudgetNeed;
 
     protected float efficiency;
 

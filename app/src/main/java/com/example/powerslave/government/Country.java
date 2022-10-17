@@ -1,12 +1,8 @@
 package com.example.powerslave.government;
 
 import android.content.Context;
-import android.content.Entity;
 import android.net.Uri;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import com.example.powerslave.MainActivity;
 import com.example.powerslave.R;
 import com.example.powerslave.ministry.Ministry;
 import com.example.powerslave.ministry.MinistryOfAgriculture;
@@ -20,6 +16,8 @@ import com.example.powerslave.ministry.MinistryOfHealthcare;
 import com.example.powerslave.ministry.MinistryOfIndustry;
 import com.example.powerslave.ministry.MinistryOfInternalAffairs;
 import com.example.powerslave.ministry.MinistryOfJustice;
+import com.example.powerslave.ministry.MinistryOfTransportation;
+import com.example.powerslave.ministry.NationalIntelligence;
 import com.example.powerslave.ministry.Parliament;
 import com.example.powerslave.person.Minister;
 import com.example.powerslave.person.Ruler;
@@ -75,7 +73,7 @@ public class Country implements Comparable<Country> {
         this.adjective = context.getResources().getStringArray(R.array.adjectives)[key];
         this.ruler = randomRuler();
 
-        vacant = new Minister("Vacant", "position", Sex.MALE, this, Ideology.Plycism, 0, 0, Uri.parse(context.getResources().getString(R.string.anon)));
+        vacant = new Minister("Vacant", "position", Sex.MALE, this, Ideology.PLYCISM, 0, 0, Uri.parse(context.getResources().getString(R.string.anon)));
         ministries.put("m_economy", new MinistryOfEconomy(key, vacant, context, this));
         ministries.put("m_health", new MinistryOfHealthcare(key, vacant, context, this));
         ministries.put("m_education", new MinistryOfEducation(key, vacant, context, this));
@@ -84,10 +82,12 @@ public class Country implements Comparable<Country> {
         ministries.put("m_industry", new MinistryOfIndustry(key, vacant, context, this));
         ministries.put("m_development", new MinistryOfDevelopment(key, vacant, context, this));
         ministries.put("m_foreign", new MinistryOfForeignAffairs(key, vacant, context, this));
+        ministries.put("m_national", new NationalIntelligence(key, vacant, context, this));
         ministries.put("m_culture", new MinistryOfCulture(key, vacant, context, this));
         ministries.put("m_internal", new MinistryOfInternalAffairs(key, vacant, context, this));
         ministries.put("m_justice", new MinistryOfJustice(key, vacant, context, this));
         ministries.put("m_parliament", new Parliament(key, vacant, context, this));
+        ministries.put("m_transportation", new MinistryOfTransportation(key, vacant, context, this));
         initialFirstMinisterAppointment();
         updateMinisters();
     }
@@ -174,9 +174,15 @@ public class Country implements Comparable<Country> {
     public MinistryOfInternalAffairs getMinistryOfInternalAffairs() {
         return (MinistryOfInternalAffairs) ministries.get("m_internal");
     }
+    public NationalIntelligence getNationalIntelligence() {
+        return (NationalIntelligence) ministries.get("m_national");
+    }
 
     public MinistryOfJustice getMinistryOfJustice() {
         return (MinistryOfJustice) ministries.get("m_justice");
+    }
+    public MinistryOfTransportation getMinistryOfTransportation() {
+        return (MinistryOfTransportation) ministries.get("m_transportation");
     }
 
     public Parliament getParliament() {

@@ -26,12 +26,11 @@ public class MinistryOfForeignAffairs extends Ministry {
 
     public MinistryOfForeignAffairs(int countryKey, Minister minister, Context context, Country country) {
         super(countryKey, minister, context, country);
-
         this.name = "Ministry of Foreign Affairs";
         this.economy = country.getMinistryOfEconomy();
 
         this.countriesRelations = new ArrayList<>();
-        this.diplomatsSalaryNeed = this.economy.getGdp_per_person() * 3.5f;
+        this.diplomatsSalaryNeed = this.economy.getGdpPerPerson() * 4.5f;
         this.maximumDiplomatsLimit = (int) (economy.getLabor_force() * 0.002);
     }
 
@@ -110,6 +109,7 @@ public class MinistryOfForeignAffairs extends Ministry {
 
         public void relationChange() {
             relation += (diplomatsThere / 200f) * efficiency;
+            if(relation > 100) relation = 100f;
         }
     }
 
@@ -177,8 +177,8 @@ public class MinistryOfForeignAffairs extends Ministry {
         string = "Diplomats: " + diplomats + "\n";
         string += "Free diplomats: " + diplomatsFree + "\n";
         string += "Diplomats limit: " + diplomatsLimit + " (Maximum - " + maximumDiplomatsLimit + ")" + "\n";
-        string += "Diplomats salary: " + diplomatsSalary + " ƒ" + "\n";
-        string += "Diplomats salary need: " + diplomatsSalaryNeed + " ƒ" + "\n";
+        string += "Diplomats salary: " + String.format("%.2f", diplomatsSalary) + " ƒ" + "\n";
+        string += "Diplomats salary need: " + String.format("%.2f", diplomatsSalaryNeed) + " ƒ" + "\n";
         string += "Allies: " + allies + "\n";
         string += "Trade partners: " + tradePartners + "\n";
         return super.toString() + string;
@@ -195,8 +195,12 @@ public class MinistryOfForeignAffairs extends Ministry {
         diplomats +=  diplomatsLimit * 0.1 * country.getMinistryOfEducation().efficiency * efficiency;
         if (diplomats > diplomatsLimit) diplomats = diplomatsLimit;
         diplomatsFree = diplomats;
+        tradePartners = 0;
+        allies = 0;
         for (Relation r : countriesRelations) {
             diplomatsFree -= r.diplomatsThere;
+            if(r.isTradePartner) tradePartners++;
+            if(r.isAlly) allies++;
             r.relationChange();
         }
         Collections.sort(countriesRelations);

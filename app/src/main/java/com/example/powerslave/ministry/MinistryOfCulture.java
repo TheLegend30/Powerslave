@@ -9,15 +9,15 @@ import java.util.Random;
 // TODO: Liberty
 public class MinistryOfCulture extends Ministry{
 
-    private int cultural_workers;
-    private int cultural_workers_limit;
-    private float cultural_workers_salary;
-    private float cultural_workers_salary_need;
+    private int culturalWorkers;
+    private int culturalWorkersLimit;
+    private float culturalWorkersSalary;
+    private float culturalWorkersSalaryNeed;
 
-    private int monuments_and_events;
-    private int monuments_and_events_need;
+    private int monumentsAndEvents;
+    private int monumentsAndEventsNeed;
 
-    private int tourists_count;
+    private int touristsCount;
 
     private MinistryOfEconomy economy;
 
@@ -29,16 +29,24 @@ public class MinistryOfCulture extends Ministry{
         statsRandomizer();
     }
 
+    public int getTouristsCount() {
+        return touristsCount;
+    }
+
+    public void setTouristsCount(int touristsCount) {
+        this.touristsCount = touristsCount;
+    }
+
     @Override
     public String toString() {
         String string;
-        string = "Cultural workers: " + cultural_workers + "\n";
-        string += "Cultural workers limit: " + cultural_workers_limit + " ƒ" +  "\n";
-        string += "Cultural workers salary: " + cultural_workers_salary + " ƒ" + "\n";
-        string += "Cultural workers salary need: " + cultural_workers_salary_need + "\n";
-        string += "Monuments and events: " + monuments_and_events + "\n";
-        string += "Monuments and events need: " + monuments_and_events_need + "\n";
-        string += "Tourists count: " + tourists_count + "\n";
+        string = "Cultural workers: " + culturalWorkers + "\n";
+        string += "Cultural workers limit: " + culturalWorkersLimit + " ƒ" +  "\n";
+        string += "Cultural workers salary: " + culturalWorkersSalary + " ƒ" + "\n";
+        string += "Cultural workers salary need: " + culturalWorkersSalaryNeed + "\n";
+        string += "Monuments and events: " + monumentsAndEvents + "\n";
+        string += "Monuments and events need: " + monumentsAndEventsNeed + "\n";
+        string += "Tourists count: " + touristsCount + "\n";
         return super.toString() + string;
     }
 
@@ -46,10 +54,10 @@ public class MinistryOfCulture extends Ministry{
     public void updateMinistry() {
         super.updateMinistry();
 
-        efficiency *= cultural_workers_salary / cultural_workers_salary_need;
-        efficiency *= (float) monuments_and_events / monuments_and_events_need;
+        efficiency *= culturalWorkersSalary / culturalWorkersSalaryNeed;
+        efficiency *= (float) monumentsAndEvents / monumentsAndEventsNeed;
 
-        tourists_count = (int) (country.getMinistryOfEducation().getLiberty() * efficiency * monuments_and_events * 3000);
+        touristsCount = (int) (country.getMinistryOfEducation().getLiberty() * efficiency * monumentsAndEvents * 3000);
     }
 
     @Override
@@ -114,14 +122,14 @@ public class MinistryOfCulture extends Ministry{
                 break;
         }
 
-        cultural_workers_salary_need = economy.getGdp_per_person() * 0.45f;
+        culturalWorkersSalaryNeed = economy.getGdpPerPerson() * 0.45f;
 
-        cultural_workers_limit = (int) (economy.getLabor_force() * (modifier_cultural_workers + (random.nextFloat() * (0.00005f - (-0.00005f)) + (-0.00005f))));
-        cultural_workers = cultural_workers_limit;
-        cultural_workers_salary = economy.getGdp_per_person() * (modifier_cultural_workers_salary + (random.nextFloat() * (0.05f - (-0.05f)) + (-0.05f)));
+        culturalWorkersLimit = (int) (economy.getLabor_force() * (modifier_cultural_workers + (random.nextFloat() * (0.00005f - (-0.00005f)) + (-0.00005f))));
+        culturalWorkers = culturalWorkersLimit;
+        culturalWorkersSalary = economy.getGdpPerPerson() * (modifier_cultural_workers_salary + (random.nextFloat() * (0.05f - (-0.05f)) + (-0.05f)));
 
-        monuments_and_events_need = cultural_workers / 50;
+        monumentsAndEventsNeed = culturalWorkers / 50;
 
-        monuments_and_events = (int) (monuments_and_events_need * (modifier_monuments_and_events + (random.nextFloat() * (0.005f - (-0.005f)) + (-0.005f))));
+        monumentsAndEvents = (int) (monumentsAndEventsNeed * (modifier_monuments_and_events + (random.nextFloat() * (0.005f - (-0.005f)) + (-0.005f))));
     }
 }

@@ -9,34 +9,34 @@ import java.util.Random;
 
 public class MinistryOfDefense extends Ministry {
     private int generals;
-    private int generals_limit;
-    private int generals_need;
+    private int generalsLimit;
+    private int generalsNeed;
 
-    private float generals_salary;
-    private float generals_salary_need;
+    private float generalsSalary;
+    private float generalsSalaryNeed;
 
     private int admirals;
-    private int admirals_limit;
-    private int admirals_need;
+    private int admiralsLimit;
+    private int admiralsNeed;
 
-    private float admirals_salary;
-    private float admirals_salary_need;
+    private float admiralsSalary;
+    private float admiralsSalaryNeed;
 
-    private int air_force_officers;
-    private int air_force_officers_limit;
-    private int air_force_officers_need;
+    private int airForceOfficers;
+    private int airForceOfficersLimit;
+    private int airForceOfficersNeed;
 
-    private float air_force_officers_salary;
-    private float air_force_officers_salary_need;
+    private float airForceOfficersSalary;
+    private float airForceOfficersSalaryNeed;
 
-    private int army_power;
-    private int army_power_limit;
+    private int armyPower;
+    private int armyPowerLimit;
 
-    private int navy_power;
-    private int navy_power_limit;
+    private int navyPower;
+    private int navyPowerLimit;
 
-    private int air_power;
-    private int air_power_limit;
+    private int airPower;
+    private int airPowerLimit;
 
     private boolean conscription;
 
@@ -55,26 +55,26 @@ public class MinistryOfDefense extends Ministry {
     @Override
     public String toString() {
         String string;
-        string = "Army Power: " + this.army_power + "\n";
-        string += "Navy Power: " + this.navy_power + "\n";
-        string += "Air Force Power: " + this.air_power + "\n";
+        string = "Army Power: " + this.armyPower + "\n";
+        string += "Navy Power: " + this.navyPower + "\n";
+        string += "Air Force Power: " + this.airPower + "\n";
         string += "Generals: " + this.generals + "\n";
-        string += "Generals limit: " + this.generals_limit + "\n";
-        string += "Generals need: " + this.generals_need + "\n";
-        string += "Generals salary: " + this.generals_salary + " ƒ" + "\n";
-        string += "Generals salary need: " + this.generals_salary_need + " ƒ" + "\n";
+        string += "Generals limit: " + this.generalsLimit + "\n";
+        string += "Generals need: " + this.generalsNeed + "\n";
+        string += "Generals salary: " + this.generalsSalary + " ƒ" + "\n";
+        string += "Generals salary need: " + this.generalsSalaryNeed + " ƒ" + "\n";
         string += "Admirals: " + this.admirals + "\n";
-        string += "Admirals limit: " + this.admirals_limit + "\n";
-        string += "Admirals need: " + this.admirals_need + "\n";
-        string += "Admirals salary: " + this.admirals_salary + " ƒ" + "\n";
-        string += "Admirals salary need: " + this.admirals_salary_need + " ƒ" + "\n";
-        string += "Air Force officers: " + this.air_force_officers + "\n";
-        string += "Air Force officers limit: " + this.air_force_officers_limit + "\n";
-        string += "Air Force officers need: " + this.air_force_officers_need + "\n";
-        string += "Air Force officers salary: " + this.air_force_officers_salary + " ƒ" + "\n";
-        string += "Air Force officers salary need: " + this.air_force_officers_salary_need + " ƒ" + "\n";
-        string += "General budget: " + this.general_budget + " ƒ" + "\n";
-        string += "General budget need: " + this.general_budget_need + " ƒ" + "\n";
+        string += "Admirals limit: " + this.admiralsLimit + "\n";
+        string += "Admirals need: " + this.admiralsNeed + "\n";
+        string += "Admirals salary: " + this.admiralsSalary + " ƒ" + "\n";
+        string += "Admirals salary need: " + this.admiralsSalaryNeed + " ƒ" + "\n";
+        string += "Air Force officers: " + this.airForceOfficers + "\n";
+        string += "Air Force officers limit: " + this.airForceOfficersLimit + "\n";
+        string += "Air Force officers need: " + this.airForceOfficersNeed + "\n";
+        string += "Air Force officers salary: " + this.airForceOfficersSalary + " ƒ" + "\n";
+        string += "Air Force officers salary need: " + this.airForceOfficersSalaryNeed + " ƒ" + "\n";
+        string += "General budget: " + this.generalBudget + " ƒ" + "\n";
+        string += "General budget need: " + this.generalBudgetNeed + " ƒ" + "\n";
         string += "Conscription: " + (this.conscription ? "Yes" : "No") + "\n";
         string += "Landlocked: " + (this.economy.isLandlocked() ? "Yes" : "No") + "\n";
         return super.toString() + string;
@@ -84,11 +84,11 @@ public class MinistryOfDefense extends Ministry {
     public void updateMinistry() {
         super.updateMinistry();
 
-        this.general_budget_need = (float) (this.economy.getGdp() * 0.12f) + (army_power * 10f) + (navy_power * 50f) + (air_power * 80f);
+        this.generalBudgetNeed = (float) (this.economy.getGdp() * 0.12f) + (armyPower * 10f) + (navyPower * 50f) + (airPower * 80f);
 
-        efficiency *= generals_salary / generals_salary_need;
-        efficiency *= admirals_salary / admirals_salary_need;
-        efficiency *= air_force_officers_salary / air_force_officers_salary_need;
+        efficiency *= generalsSalary / generalsSalaryNeed;
+        efficiency *= admiralsSalary / admiralsSalaryNeed;
+        efficiency *= airForceOfficersSalary / airForceOfficersSalaryNeed;
         efficiency *= conscription ? 0.95 : 1.05;
     }
 
@@ -97,211 +97,211 @@ public class MinistryOfDefense extends Ministry {
         super.statsRandomizer();
         Random random = new Random();
 
-        float modifier_generals = 0f;
-        float modifier_generals_salary = 0f;
+        float modifierGenerals = 0f;
+        float modifierGeneralsSalary = 0f;
 
-        float modifier_admirals = 0f;
-        float modifier_admirals_salary = 0f;
+        float modifierAdmirals = 0f;
+        float modifierAdmiralsSalary = 0f;
 
-        float modifier_air_force_officers = 0f;
-        float modifier_air_force_officers_salary = 0f;
+        float modifierAirForceOfficers = 0f;
+        float modifierAirForceOfficersSalary = 0f;
 
-        float modifier_army = 0f;
-        float modifier_navy = 0f;
-        float modifier_air = 0f;
+        float modifierArmy = 0f;
+        float modifierNavy = 0f;
+        float modifierAir = 0f;
 
-        float modifier_general_budget = 0f;
+        float modifierGeneralBudget = 0f;
 
         switch (this.country.getContinent()) {
             case EY:
-                modifier_generals = 0.65f;
-                modifier_generals_salary = 3f;
+                modifierGenerals = 0.65f;
+                modifierGeneralsSalary = 3f;
 
-                modifier_admirals = 0.5f;
-                modifier_admirals_salary = 3.15f;
+                modifierAdmirals = 0.5f;
+                modifierAdmiralsSalary = 3.15f;
 
-                modifier_air_force_officers = 0.35f;
-                modifier_air_force_officers_salary = 3.25f;
+                modifierAirForceOfficers = 0.35f;
+                modifierAirForceOfficersSalary = 3.25f;
 
-                modifier_army = 0.7f;
-                modifier_navy = 0.5f;
-                modifier_air = 0.3f;
+                modifierArmy = 0.7f;
+                modifierNavy = 0.5f;
+                modifierAir = 0.3f;
 
-                modifier_general_budget = 0.13f;
+                modifierGeneralBudget = 0.13f;
                 break;
             case NY:
-                modifier_generals = 0.75f;
-                modifier_generals_salary = 3.25f;
+                modifierGenerals = 0.75f;
+                modifierGeneralsSalary = 3.25f;
 
-                modifier_admirals = 0.55f;
-                modifier_admirals_salary = 3.35f;
+                modifierAdmirals = 0.55f;
+                modifierAdmiralsSalary = 3.35f;
 
-                modifier_air_force_officers = 0.45f;
-                modifier_air_force_officers_salary = 3.45f;
+                modifierAirForceOfficers = 0.45f;
+                modifierAirForceOfficersSalary = 3.45f;
 
-                modifier_army = 0.75f;
-                modifier_navy = 0.6f;
-                modifier_air = 0.4f;
+                modifierArmy = 0.75f;
+                modifierNavy = 0.6f;
+                modifierAir = 0.4f;
 
-                modifier_general_budget = 0.11f;
+                modifierGeneralBudget = 0.11f;
                 break;
             case SY:
-                modifier_generals = 0.55f;
-                modifier_generals_salary = 2.85f;
+                modifierGenerals = 0.55f;
+                modifierGeneralsSalary = 2.85f;
 
-                modifier_admirals = 0.45f;
-                modifier_admirals_salary = 3.05f;
+                modifierAdmirals = 0.45f;
+                modifierAdmiralsSalary = 3.05f;
 
-                modifier_air_force_officers = 0.3f;
-                modifier_air_force_officers_salary = 3.15f;
+                modifierAirForceOfficers = 0.3f;
+                modifierAirForceOfficersSalary = 3.15f;
 
-                modifier_army = 0.5f;
-                modifier_navy = 0.4f;
-                modifier_air = 0.2f;
+                modifierArmy = 0.5f;
+                modifierNavy = 0.4f;
+                modifierAir = 0.2f;
 
-                modifier_general_budget = 0.10f;
+                modifierGeneralBudget = 0.10f;
                 break;
             case WY:
-                modifier_generals = 0.8f;
-                modifier_generals_salary = 3.45f;
+                modifierGenerals = 0.8f;
+                modifierGeneralsSalary = 3.45f;
 
-                modifier_admirals = 0.6f;
-                modifier_admirals_salary = 3.75f;
+                modifierAdmirals = 0.6f;
+                modifierAdmiralsSalary = 3.75f;
 
-                modifier_air_force_officers = 0.55f;
-                modifier_air_force_officers_salary = 3.95f;
+                modifierAirForceOfficers = 0.55f;
+                modifierAirForceOfficersSalary = 3.95f;
 
-                modifier_army = 0.8f;
-                modifier_navy = 0.6f;
-                modifier_air = 0.4f;
+                modifierArmy = 0.8f;
+                modifierNavy = 0.6f;
+                modifierAir = 0.4f;
 
-                modifier_general_budget = 0.15f;
+                modifierGeneralBudget = 0.15f;
                 break;
             case IB:
-                modifier_generals = 0.6f;
-                modifier_generals_salary = 2.5f;
+                modifierGenerals = 0.6f;
+                modifierGeneralsSalary = 2.5f;
 
-                modifier_admirals = 0.35f;
-                modifier_admirals_salary = 2.85f;
+                modifierAdmirals = 0.35f;
+                modifierAdmiralsSalary = 2.85f;
 
-                modifier_air_force_officers = 0.15f;
-                modifier_air_force_officers_salary = 3f;
+                modifierAirForceOfficers = 0.15f;
+                modifierAirForceOfficersSalary = 3f;
 
-                modifier_army = 0.45f;
-                modifier_navy = 0.25f;
-                modifier_air = 0.15f;
+                modifierArmy = 0.45f;
+                modifierNavy = 0.25f;
+                modifierAir = 0.15f;
 
-                modifier_general_budget = 0.16f;
+                modifierGeneralBudget = 0.16f;
                 break;
             case OB:
-                modifier_generals = 0.55f;
-                modifier_generals_salary = 2.4f;
+                modifierGenerals = 0.55f;
+                modifierGeneralsSalary = 2.4f;
 
-                modifier_admirals = 0.35f;
-                modifier_admirals_salary = 2.85f;
+                modifierAdmirals = 0.35f;
+                modifierAdmiralsSalary = 2.85f;
 
-                modifier_air_force_officers = 0.15f;
-                modifier_air_force_officers_salary = 2.9f;
+                modifierAirForceOfficers = 0.15f;
+                modifierAirForceOfficersSalary = 2.9f;
 
-                modifier_army = 0.4f;
-                modifier_navy = 0.2f;
-                modifier_air = 0.1f;
+                modifierArmy = 0.4f;
+                modifierNavy = 0.2f;
+                modifierAir = 0.1f;
 
-                modifier_general_budget = 0.18f;
+                modifierGeneralBudget = 0.18f;
                 break;
             case CA:
-                modifier_generals = 0.5f;
-                modifier_generals_salary = 2.3f;
+                modifierGenerals = 0.5f;
+                modifierGeneralsSalary = 2.3f;
 
-                modifier_admirals = 0.25f;
-                modifier_admirals_salary = 2.55f;
+                modifierAdmirals = 0.25f;
+                modifierAdmiralsSalary = 2.55f;
 
-                modifier_air_force_officers = 0.1f;
-                modifier_air_force_officers_salary = 2.75f;
+                modifierAirForceOfficers = 0.1f;
+                modifierAirForceOfficersSalary = 2.75f;
 
-                modifier_general_budget = 0.12f;
+                modifierGeneralBudget = 0.12f;
                 break;
             case FA:
-                modifier_generals = 0.45f;
-                modifier_generals_salary = 2.25f;
+                modifierGenerals = 0.45f;
+                modifierGeneralsSalary = 2.25f;
 
-                modifier_admirals = 0.25f;
-                modifier_admirals_salary = 2.5f;
+                modifierAdmirals = 0.25f;
+                modifierAdmiralsSalary = 2.5f;
 
-                modifier_air_force_officers = 0.1f;
-                modifier_air_force_officers_salary = 2.65f;
+                modifierAirForceOfficers = 0.1f;
+                modifierAirForceOfficersSalary = 2.65f;
 
-                modifier_army = 0.35f;
-                modifier_navy = 0.2f;
-                modifier_air = 0.1f;
+                modifierArmy = 0.35f;
+                modifierNavy = 0.2f;
+                modifierAir = 0.1f;
 
-                modifier_general_budget = 0.1f;
+                modifierGeneralBudget = 0.1f;
                 break;
             case ME:
-                modifier_generals = 0.35f;
-                modifier_generals_salary = 2f;
+                modifierGenerals = 0.35f;
+                modifierGeneralsSalary = 2f;
 
-                modifier_admirals = 0.2f;
-                modifier_admirals_salary = 2.15f;
+                modifierAdmirals = 0.2f;
+                modifierAdmiralsSalary = 2.15f;
 
-                modifier_air_force_officers = 0.05f;
-                modifier_air_force_officers_salary = 2.35f;
+                modifierAirForceOfficers = 0.05f;
+                modifierAirForceOfficersSalary = 2.35f;
 
-                modifier_army = 0.3f;
-                modifier_navy = 0.1f;
-                modifier_air = 0.05f;
+                modifierArmy = 0.3f;
+                modifierNavy = 0.1f;
+                modifierAir = 0.05f;
 
-                modifier_general_budget = 0.18f;
+                modifierGeneralBudget = 0.18f;
                 break;
             case GE:
-                modifier_generals = 0.85f;
-                modifier_generals_salary = 3.5f;
+                modifierGenerals = 0.85f;
+                modifierGeneralsSalary = 3.5f;
 
-                modifier_admirals = 0.7f;
-                modifier_admirals_salary = 3.85f;
+                modifierAdmirals = 0.7f;
+                modifierAdmiralsSalary = 3.85f;
 
-                modifier_air_force_officers = 0.65f;
-                modifier_air_force_officers_salary = 4f;
+                modifierAirForceOfficers = 0.65f;
+                modifierAirForceOfficersSalary = 4f;
 
-                modifier_army = 0.75f;
-                modifier_navy = 0.7f;
-                modifier_air = 0.65f;
+                modifierArmy = 0.75f;
+                modifierNavy = 0.7f;
+                modifierAir = 0.65f;
 
-                modifier_general_budget = 0.2f;
+                modifierGeneralBudget = 0.2f;
                 break;
         }
 
         this.conscription = random.nextBoolean();
 
-        this.army_power_limit = (int) ((this.economy.getLabor_force() / (conscription ? 450f : 650f)) * (modifier_army + random.nextFloat() * (0.03 - (-0.03)) + (-0.03)));
-        this.army_power = this.army_power_limit;
+        this.armyPowerLimit = (int) ((this.economy.getLabor_force() / (conscription ? 450f : 650f)) * (modifierArmy + random.nextFloat() * (0.03 - (-0.03)) + (-0.03)));
+        this.armyPower = this.armyPowerLimit;
 
-        this.navy_power_limit = (int) ((this.economy.getLabor_force() / (conscription ? 1050f : 1350f)) * (modifier_navy + random.nextFloat() * (0.03 - (-0.03)) + (-0.03)) * (this.economy.isLandlocked() ? 0 : 1));
-        this.navy_power = this.navy_power_limit;
+        this.navyPowerLimit = (int) ((this.economy.getLabor_force() / (conscription ? 1050f : 1350f)) * (modifierNavy + random.nextFloat() * (0.03 - (-0.03)) + (-0.03)) * (this.economy.isLandlocked() ? 0 : 1));
+        this.navyPower = this.navyPowerLimit;
 
-        this.air_power_limit = (int) ((this.economy.getLabor_force() / (conscription ? 1450f : 1850f)) * (modifier_air + random.nextFloat() * (0.03 - (-0.03)) + (-0.03)));
-        this.air_power = this.air_power_limit;
+        this.airPowerLimit = (int) ((this.economy.getLabor_force() / (conscription ? 1450f : 1850f)) * (modifierAir + random.nextFloat() * (0.03 - (-0.03)) + (-0.03)));
+        this.airPower = this.airPowerLimit;
 
-        this.generals_need = army_power / 100;
-        this.admirals_need = navy_power / 80;
-        this.air_force_officers_need = air_power / 50;
+        this.generalsNeed = armyPower / 100;
+        this.admiralsNeed = navyPower / 80;
+        this.airForceOfficersNeed = airPower / 50;
 
-        this.generals_salary_need = (int) (economy.getGdp_per_person() * 3.25);
-        this.admirals_salary_need = (int) (economy.getGdp_per_person() * 3.55 * (this.economy.isLandlocked() ? 0 : 1));
-        this.air_force_officers_salary_need = (int) (economy.getGdp_per_person() * 3.85);
+        this.generalsSalaryNeed = (int) (economy.getGdpPerPerson() * 3.25);
+        this.admiralsSalaryNeed = (int) (economy.getGdpPerPerson() * 3.55 * (this.economy.isLandlocked() ? 0 : 1));
+        this.airForceOfficersSalaryNeed = (int) (economy.getGdpPerPerson() * 3.85);
 
-        this.generals_limit = (int) (this.generals_need * (modifier_generals + random.nextFloat() * (0.03 - (-0.03)) + (-0.03)));
-        this.generals = this.generals_limit;
-        this.generals_salary = (float) (this.economy.getGdp_per_person() * (modifier_generals_salary + (random.nextFloat() * (0.01 - (-0.01)) + (-0.01))));
+        this.generalsLimit = (int) (this.generalsNeed * (modifierGenerals + random.nextFloat() * (0.03 - (-0.03)) + (-0.03)));
+        this.generals = this.generalsLimit;
+        this.generalsSalary = (float) (this.economy.getGdpPerPerson() * (modifierGeneralsSalary + (random.nextFloat() * (0.01 - (-0.01)) + (-0.01))));
 
-        this.admirals_limit = (int) (this.admirals_need * (modifier_admirals + random.nextFloat() * (0.03 - (-0.03)) + (-0.03)) * (this.economy.isLandlocked() ? 0 : 1));
-        this.admirals = this.admirals_limit;
-        this.admirals_salary = (float) (this.economy.getGdp_per_person() * (modifier_admirals_salary + (random.nextFloat() * (0.01 - (-0.01)) + (-0.01))) * (this.economy.isLandlocked() ? 0 : 1));
+        this.admiralsLimit = (int) (this.admiralsNeed * (modifierAdmirals + random.nextFloat() * (0.03 - (-0.03)) + (-0.03)) * (this.economy.isLandlocked() ? 0 : 1));
+        this.admirals = this.admiralsLimit;
+        this.admiralsSalary = (float) (this.economy.getGdpPerPerson() * (modifierAdmiralsSalary + (random.nextFloat() * (0.01 - (-0.01)) + (-0.01))) * (this.economy.isLandlocked() ? 0 : 1));
 
-        this.air_force_officers_limit = (int) (this.air_force_officers_need * (modifier_air_force_officers + random.nextFloat() * (0.03 - (-0.03)) + (-0.03)));
-        this.air_force_officers = this.air_force_officers_limit;
-        this.air_force_officers_salary = (float) (this.economy.getGdp_per_person() * (modifier_air_force_officers_salary + (random.nextFloat() * (0.01 - (-0.01)) + (-0.01))));
+        this.airForceOfficersLimit = (int) (this.airForceOfficersNeed * (modifierAirForceOfficers + random.nextFloat() * (0.03 - (-0.03)) + (-0.03)));
+        this.airForceOfficers = this.airForceOfficersLimit;
+        this.airForceOfficersSalary = (float) (this.economy.getGdpPerPerson() * (modifierAirForceOfficersSalary + (random.nextFloat() * (0.01 - (-0.01)) + (-0.01))));
 
-        this.general_budget = (float) (this.economy.getBudget() * (modifier_general_budget + (random.nextFloat() * (0.01 - (-0.01)) + (-0.01))));
+        this.generalBudget = (float) (this.economy.getBudget() * (modifierGeneralBudget + (random.nextFloat() * (0.01 - (-0.01)) + (-0.01))));
     }
 }

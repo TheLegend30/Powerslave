@@ -8,35 +8,35 @@ import com.example.powerslave.person.Minister;
 import java.util.Random;
 
 public class MinistryOfIndustry extends Ministry {
-    private int low_workers;
-    private int low_workers_limit;
-    private float low_workers_salary;
-    private float low_workers_salary_need;
+    private int lowWorkers;
+    private int lowWorkersLimit;
+    private float lowWorkersSalary;
+    private float lowWorkersSalaryNeed;
 
-    private int middle_workers;
-    private int middle_workers_limit;
-    private float middle_workers_salary;
-    private float middle_workers_salary_need;
+    private int middleWorkers;
+    private int middleWorkersLimit;
+    private float middleWorkersSalary;
+    private float middleWorkersSalaryNeed;
 
-    private int high_workers;
-    private int high_workers_limit;
-    private float high_workers_salary;
-    private float high_workers_salary_need;
+    private int highWorkers;
+    private int highWorkersLimit;
+    private float highWorkersSalary;
+    private float highWorkersSalaryNeed;
 
     // first output
-    private float alloys_output;
-    private float chemicals_output;
-    private float building_materials_output;
-    private float food_output;
+    private float alloysOutput;
+    private float chemicalsOutput;
+    private float buildingMaterialsOutput;
+    private float foodOutput;
 
     // second output
-    private float mechanics_output;
-    private float fuel_output;
-    private float light_industry_output;
+    private float mechanicsOutput;
+    private float fuelOutput;
+    private float lightIndustryOutput;
 
     // third output
-    private float military_industry_output;
-    private float electrics_output;
+    private float militaryIndustryOutput;
+    private float electricsOutput;
 
 
     // output
@@ -73,37 +73,37 @@ public class MinistryOfIndustry extends Ministry {
     @Override
     public String toString() {
         String string;
-        string = "Low-level workers: " + low_workers + "\n";
-        string = "Low-level workers: " + low_workers_limit + "\n";
-        string += "Low-level workers salary: " + low_workers_salary + "ƒ" + "\n";
-        string += "Low-level workers salary need: " + low_workers_salary_need + "ƒ" + "\n";
-        string += "Middle-level workers: " + middle_workers + "\n";
-        string += "Middle-level workers: " + middle_workers_limit + "\n";
-        string += "Middle-level workers salary: " + middle_workers_salary + "\n";
-        string += "Middle-level workers salary need: " + middle_workers_salary_need + "\n";
-        string += "High-level workers: " + high_workers + "\n";
-        string += "High-level workers: " + high_workers_limit + "\n";
-        string += "High-level workers salary: " + high_workers_salary + "\n";
-        string += "High-level workers salary need: " + high_workers_salary_need + "\n";
-        string += "General budget: " + general_budget + " ƒ" + "\n";
-        string += "General need budget: " + general_budget_need + " ƒ" + "\n";
-        string += "Alloys output: " + alloys_output + " units" + "\n";
+        string = "Low-level workers: " + lowWorkers + "\n";
+        string = "Low-level workers: " + lowWorkersLimit + "\n";
+        string += "Low-level workers salary: " + lowWorkersSalary + "ƒ" + "\n";
+        string += "Low-level workers salary need: " + lowWorkersSalaryNeed + "ƒ" + "\n";
+        string += "Middle-level workers: " + middleWorkers + "\n";
+        string += "Middle-level workers: " + middleWorkersLimit + "\n";
+        string += "Middle-level workers salary: " + middleWorkersSalary + "\n";
+        string += "Middle-level workers salary need: " + middleWorkersSalaryNeed + "\n";
+        string += "High-level workers: " + highWorkers + "\n";
+        string += "High-level workers: " + highWorkersLimit + "\n";
+        string += "High-level workers salary: " + highWorkersSalary + "\n";
+        string += "High-level workers salary need: " + highWorkersSalaryNeed + "\n";
+        string += "General budget: " + generalBudget + " ƒ" + "\n";
+        string += "General need budget: " + generalBudgetNeed + " ƒ" + "\n";
+        string += "Alloys output: " + alloysOutput + " units" + "\n";
         string += "Alloys reserve: " + alloys_reserve + " units" + "\n";
-        string += "Chemicals output: " + chemicals_output + " units" + "\n";
+        string += "Chemicals output: " + chemicalsOutput + " units" + "\n";
         string += "Chemicals reserve: " + chemicals_reserve + " units" + "\n";
-        string += "Building materials output: " + building_materials_output + " units" + "\n";
+        string += "Building materials output: " + buildingMaterialsOutput + " units" + "\n";
         string += "Building materials reserve: " + building_materials_reserve + " units" + "\n";
-        string += "Food output: " + food_output + " units" + "\n";
+        string += "Food output: " + foodOutput + " units" + "\n";
         string += "Food reserve: " + food_reserve + " units" + "\n";
-        string += "Mechanics output: " + mechanics_output + " units" + "\n";
+        string += "Mechanics output: " + mechanicsOutput + " units" + "\n";
         string += "Mechanics reserve: " + mechanics_reserve + " units" + "\n";
-        string += "Fuel output: " + fuel_output + " units" + "\n";
+        string += "Fuel output: " + fuelOutput + " units" + "\n";
         string += "Fuel reserve: " + fuel_reserve + " units" + "\n";
-        string += "Light industry output: " + light_industry_output + " units" + "\n";
+        string += "Light industry output: " + lightIndustryOutput + " units" + "\n";
         string += "Light industry  reserve: " + light_industry_reserve + " units" + "\n";
-        string += "Electrics output: " + electrics_output + " units" + "\n";
+        string += "Electrics output: " + electricsOutput + " units" + "\n";
         string += "Electrics reserve: " + electrics_reserve + " units" + "\n";
-        string += "Military industry output: " + military_industry_output + " units" + "\n";
+        string += "Military industry output: " + militaryIndustryOutput + " units" + "\n";
         string += "Military industry reserve: " + military_industry_reserve + " units" + "\n";
         string += "Raw food need: " + raw_food_need + " units" + "\n";
         string += "Raw need: " + raw_need + " units" + "\n";
@@ -116,34 +116,34 @@ public class MinistryOfIndustry extends Ministry {
     @Override
     public void updateMinistry() {
         super.updateMinistry();
-        this.low_workers_salary_need = this.economy.getGdp_per_person() / 2.05f;
-        this.middle_workers_salary_need = this.economy.getGdp_per_person() / 1.25f;
-        this.high_workers_salary_need = this.economy.getGdp_per_person() / 1.05f;
-        this.general_budget_need = (float) ((this.economy.getBudget() * 0.15) + ((low_workers * 0.08) + (middle_workers * 0.1)) + (high_workers * 0.15));
+        this.lowWorkersSalaryNeed = this.economy.getGdpPerPerson() / 2.05f;
+        this.middleWorkersSalaryNeed = this.economy.getGdpPerPerson() / 1.25f;
+        this.highWorkersSalaryNeed = this.economy.getGdpPerPerson() / 1.05f;
+        this.generalBudgetNeed = (float) ((this.economy.getBudget() * 0.15) + ((lowWorkers * 0.08) + (middleWorkers * 0.1)) + (highWorkers * 0.15));
 
-        efficiency *= low_workers_salary / low_workers_salary_need;
-        efficiency *= middle_workers_salary / middle_workers_salary_need;
-        efficiency *= high_workers_salary / high_workers_salary_need;
-        efficiency *= general_budget / general_budget_need;
+        efficiency *= lowWorkersSalary / lowWorkersSalaryNeed;
+        efficiency *= middleWorkersSalary / middleWorkersSalaryNeed;
+        efficiency *= highWorkersSalary / highWorkersSalaryNeed;
+        efficiency *= generalBudget / generalBudgetNeed;
 
-        alloys_output = efficiency * low_workers * 1.85f;
-        chemicals_output = efficiency * low_workers * 1.25f;
-        building_materials_output = efficiency * low_workers * 1.5f;
-        food_output = efficiency * low_workers * 3.75f;
+        alloysOutput = efficiency * lowWorkers * 1.85f;
+        chemicalsOutput = efficiency * lowWorkers * 1.25f;
+        buildingMaterialsOutput = efficiency * lowWorkers * 1.5f;
+        foodOutput = efficiency * lowWorkers * 3.75f;
 
-        mechanics_output = efficiency * middle_workers * 1.5f;
-        fuel_output = efficiency * middle_workers * 1.85f;
-        light_industry_output = efficiency * middle_workers * 1.45f;
+        mechanicsOutput = efficiency * middleWorkers * 1.5f;
+        fuelOutput = efficiency * middleWorkers * 1.85f;
+        lightIndustryOutput = efficiency * middleWorkers * 1.45f;
 
-        electrics_output = efficiency * high_workers * 1.15f;
-        military_industry_output = efficiency * high_workers * 1.15f;
+        electricsOutput = efficiency * highWorkers * 1.15f;
+        militaryIndustryOutput = efficiency * highWorkers * 1.15f;
 
-        raw_food_need = (food_output * 0.75f) + (light_industry_output * 0.35f);
-        raw_need = (alloys_output * 0.95f) + (building_materials_output * 0.85f) + (light_industry_output * 0.35f) + (chemicals_output * 0.25f);
+        raw_food_need = (foodOutput * 0.75f) + (lightIndustryOutput * 0.35f);
+        raw_need = (alloysOutput * 0.95f) + (buildingMaterialsOutput * 0.85f) + (lightIndustryOutput * 0.35f) + (chemicalsOutput * 0.25f);
 
-        alloys_need = (mechanics_output * 0.55f) + (military_industry_output * 1.15f);
-        chemicals_need = (fuel_output * 1.5f) + (light_industry_output * 0.15f);
-        mechanics_need = (electrics_output * 0.55f) + (military_industry_output * 0.65f);
+        alloys_need = (mechanicsOutput * 0.55f) + (militaryIndustryOutput * 1.15f);
+        chemicals_need = (fuelOutput * 1.5f) + (lightIndustryOutput * 0.15f);
+        mechanics_need = (electricsOutput * 0.55f) + (militaryIndustryOutput * 0.65f);
 
     }
 
@@ -152,152 +152,152 @@ public class MinistryOfIndustry extends Ministry {
         super.statsRandomizer();
         Random random = new Random();
 
-        float modifier_low_workers = 0f;
-        float modifier_low_workers_salary = 0f;
+        float modifierLowWorkers = 0f;
+        float modifierLowWorkersSalary = 0f;
 
-        float modifier_middle_workers = 0f;
-        float modifier_middle_workers_salary = 0f;
+        float modifierMiddleWorkers = 0f;
+        float modifierMiddleWorkersSalary = 0f;
 
-        float modifier_high_workers = 0f;
-        float modifier_high_workers_salary = 0f;
+        float modifierHighWorkers = 0f;
+        float modifierHighWorkersSalary = 0f;
 
-        float modifier_general_budget = 0f;
+        float modifierGeneralBudget = 0f;
 
         switch (this.country.getContinent()) {
             case EY:
-                modifier_low_workers = 0.3f;
-                modifier_low_workers_salary = 0.35f;
+                modifierLowWorkers = 0.3f;
+                modifierLowWorkersSalary = 0.35f;
 
-                modifier_middle_workers = 0.1f;
-                modifier_middle_workers_salary = 0.65f;
+                modifierMiddleWorkers = 0.1f;
+                modifierMiddleWorkersSalary = 0.65f;
 
-                modifier_high_workers = 0.05f;
-                modifier_high_workers_salary = 0.95f;
+                modifierHighWorkers = 0.05f;
+                modifierHighWorkersSalary = 0.95f;
 
-                modifier_general_budget = 0.15f;
+                modifierGeneralBudget = 0.15f;
                 break;
             case NY:
-                modifier_low_workers = 0.2f;
-                modifier_low_workers_salary = 0.55f;
+                modifierLowWorkers = 0.2f;
+                modifierLowWorkersSalary = 0.55f;
 
-                modifier_middle_workers = 0.2f;
-                modifier_middle_workers_salary = 0.85f;
+                modifierMiddleWorkers = 0.2f;
+                modifierMiddleWorkersSalary = 0.85f;
 
-                modifier_high_workers = 0.1f;
-                modifier_high_workers_salary = 1.25f;
+                modifierHighWorkers = 0.1f;
+                modifierHighWorkersSalary = 1.25f;
 
-                modifier_general_budget = 0.2f;
+                modifierGeneralBudget = 0.2f;
                 break;
             case SY:
-                modifier_low_workers = 0.35f;
-                modifier_low_workers_salary = 0.3f;
+                modifierLowWorkers = 0.35f;
+                modifierLowWorkersSalary = 0.3f;
 
-                modifier_middle_workers = 0.05f;
-                modifier_middle_workers_salary = 0.75f;
+                modifierMiddleWorkers = 0.05f;
+                modifierMiddleWorkersSalary = 0.75f;
 
-                modifier_high_workers = 0.05f;
-                modifier_high_workers_salary = 0.85f;
+                modifierHighWorkers = 0.05f;
+                modifierHighWorkersSalary = 0.85f;
 
-                modifier_general_budget = 0.13f;
+                modifierGeneralBudget = 0.13f;
                 break;
             case WY:
-                modifier_low_workers = 0.1f;
-                modifier_low_workers_salary = 0.65f;
+                modifierLowWorkers = 0.1f;
+                modifierLowWorkersSalary = 0.65f;
 
-                modifier_middle_workers = 0.25f;
-                modifier_middle_workers_salary = 0.95f;
+                modifierMiddleWorkers = 0.25f;
+                modifierMiddleWorkersSalary = 0.95f;
 
-                modifier_high_workers = 0.15f;
-                modifier_high_workers_salary = 1.3f;
+                modifierHighWorkers = 0.15f;
+                modifierHighWorkersSalary = 1.3f;
 
-                modifier_general_budget = 0.18f;
+                modifierGeneralBudget = 0.18f;
                 break;
             case IB:
-                modifier_low_workers = 0.25f;
-                modifier_low_workers_salary = 0.25f;
+                modifierLowWorkers = 0.25f;
+                modifierLowWorkersSalary = 0.25f;
 
-                modifier_middle_workers = 0.05f;
-                modifier_middle_workers_salary = 0.5f;
+                modifierMiddleWorkers = 0.05f;
+                modifierMiddleWorkersSalary = 0.5f;
 
-                modifier_high_workers = 0.04f;
-                modifier_high_workers_salary = 0.85f;
+                modifierHighWorkers = 0.04f;
+                modifierHighWorkersSalary = 0.85f;
 
-                modifier_general_budget = 0.1f;
+                modifierGeneralBudget = 0.1f;
                 break;
             case OB:
-                modifier_low_workers = 0.2f;
-                modifier_low_workers_salary = 0.25f;
+                modifierLowWorkers = 0.2f;
+                modifierLowWorkersSalary = 0.25f;
 
-                modifier_middle_workers = 0.05f;
-                modifier_middle_workers_salary = 0.45f;
+                modifierMiddleWorkers = 0.05f;
+                modifierMiddleWorkersSalary = 0.45f;
 
-                modifier_high_workers = 0.03f;
-                modifier_high_workers_salary = 0.8f;
+                modifierHighWorkers = 0.03f;
+                modifierHighWorkersSalary = 0.8f;
 
-                modifier_general_budget = 0.1f;
+                modifierGeneralBudget = 0.1f;
                 break;
             case CA:
-                modifier_low_workers = 0.15f;
-                modifier_low_workers_salary = 0.23f;
+                modifierLowWorkers = 0.15f;
+                modifierLowWorkersSalary = 0.23f;
 
-                modifier_middle_workers = 0.04f;
-                modifier_middle_workers_salary = 0.45f;
+                modifierMiddleWorkers = 0.04f;
+                modifierMiddleWorkersSalary = 0.45f;
 
-                modifier_high_workers = 0.02f;
-                modifier_high_workers_salary = 0.8f;
+                modifierHighWorkers = 0.02f;
+                modifierHighWorkersSalary = 0.8f;
 
-                modifier_general_budget = 0.08f;
+                modifierGeneralBudget = 0.08f;
                 break;
             case FA:
-                modifier_low_workers = 0.12f;
-                modifier_low_workers_salary = 0.23f;
+                modifierLowWorkers = 0.12f;
+                modifierLowWorkersSalary = 0.23f;
 
-                modifier_middle_workers = 0.03f;
-                modifier_middle_workers_salary = 0.45f;
+                modifierMiddleWorkers = 0.03f;
+                modifierMiddleWorkersSalary = 0.45f;
 
-                modifier_high_workers = 0.02f;
-                modifier_high_workers_salary = 0.75f;
+                modifierHighWorkers = 0.02f;
+                modifierHighWorkersSalary = 0.75f;
 
-                modifier_general_budget = 0.08f;
+                modifierGeneralBudget = 0.08f;
                 break;
             case ME:
-                modifier_low_workers = 0.1f;
-                modifier_low_workers_salary = 0.2f;
+                modifierLowWorkers = 0.1f;
+                modifierLowWorkersSalary = 0.2f;
 
-                modifier_middle_workers = 0.03f;
-                modifier_middle_workers_salary = 0.4f;
+                modifierMiddleWorkers = 0.03f;
+                modifierMiddleWorkersSalary = 0.4f;
 
-                modifier_high_workers = 0.01f;
-                modifier_high_workers_salary = 0.7f;
+                modifierHighWorkers = 0.01f;
+                modifierHighWorkersSalary = 0.7f;
 
-                modifier_general_budget = 0.07f;
+                modifierGeneralBudget = 0.07f;
                 break;
             case GE:
-                modifier_low_workers = 0.1f;
-                modifier_low_workers_salary = 0.6f;
+                modifierLowWorkers = 0.1f;
+                modifierLowWorkersSalary = 0.6f;
 
-                modifier_middle_workers = 0.3f;
-                modifier_middle_workers_salary = 1f;
+                modifierMiddleWorkers = 0.3f;
+                modifierMiddleWorkersSalary = 1f;
 
-                modifier_high_workers = 0.2f;
-                modifier_high_workers_salary = 1.2f;
+                modifierHighWorkers = 0.2f;
+                modifierHighWorkersSalary = 1.2f;
 
-                modifier_general_budget = 0.17f;
+                modifierGeneralBudget = 0.17f;
                 break;
         }
-        this.low_workers_limit = (int) (this.economy.getLabor_force() * (modifier_low_workers + ((random.nextFloat() * (0.005 - (-0.005)) + (-0.005)))));
-        this.low_workers = this.low_workers_limit;
-        this.low_workers_salary = (float) (this.economy.getGdp_per_person() * (modifier_low_workers_salary + (random.nextFloat() * (0.01 - (-0.01)) + (-0.01))));
+        this.lowWorkersLimit = (int) (this.economy.getLabor_force() * (modifierLowWorkers + ((random.nextFloat() * (0.005 - (-0.005)) + (-0.005)))));
+        this.lowWorkers = this.lowWorkersLimit;
+        this.lowWorkersSalary = (float) (this.economy.getGdpPerPerson() * (modifierLowWorkersSalary + (random.nextFloat() * (0.01 - (-0.01)) + (-0.01))));
 
-        this.middle_workers_limit = (int) (this.economy.getLabor_force() * (modifier_middle_workers + ((random.nextFloat() * (0.005 - (-0.005)) + (-0.005)))));
-        this.middle_workers = this.middle_workers_limit;
-        this.middle_workers_salary = (float) (this.economy.getGdp_per_person() * (modifier_middle_workers_salary + (random.nextFloat() * (0.01 - (-0.01)) + (-0.01))));
+        this.middleWorkersLimit = (int) (this.economy.getLabor_force() * (modifierMiddleWorkers + ((random.nextFloat() * (0.005 - (-0.005)) + (-0.005)))));
+        this.middleWorkers = this.middleWorkersLimit;
+        this.middleWorkersSalary = (float) (this.economy.getGdpPerPerson() * (modifierMiddleWorkersSalary + (random.nextFloat() * (0.01 - (-0.01)) + (-0.01))));
 
-        this.high_workers_limit = (int) (this.economy.getLabor_force() * (modifier_high_workers + ((random.nextFloat() * (0.005 - (-0.005)) + (-0.005)))));
-        this.high_workers = this.high_workers_limit;
-        this.high_workers_salary = (float) (this.economy.getGdp_per_person() * (modifier_high_workers_salary + (random.nextFloat() * (0.01 - (-0.01)) + (-0.01))));
+        this.highWorkersLimit = (int) (this.economy.getLabor_force() * (modifierHighWorkers + ((random.nextFloat() * (0.005 - (-0.005)) + (-0.005)))));
+        this.highWorkers = this.highWorkersLimit;
+        this.highWorkersSalary = (float) (this.economy.getGdpPerPerson() * (modifierHighWorkersSalary + (random.nextFloat() * (0.01 - (-0.01)) + (-0.01))));
 
-        this.general_budget = (float) (this.economy.getBudget() * (modifier_general_budget + (random.nextFloat() * (0.01 - (-0.01)) + (-0.01))));
+        this.generalBudget = (float) (this.economy.getBudget() * (modifierGeneralBudget + (random.nextFloat() * (0.01 - (-0.01)) + (-0.01))));
     }
 
 }

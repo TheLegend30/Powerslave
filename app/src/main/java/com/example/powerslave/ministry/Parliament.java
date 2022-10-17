@@ -5,47 +5,46 @@ import android.content.Context;
 import com.example.powerslave.government.Country;
 import com.example.powerslave.government.Ideology;
 import com.example.powerslave.person.Minister;
-import com.example.powerslave.person.Ruler;
 
 import java.util.HashMap;
 import java.util.Random;
 
 public class Parliament extends Ministry {
 
-    private Ideology your_ideology;
-    private int parliament_count;
-    private int parliament_count_max;
+    private Ideology yourIdeology;
+    private int parliamentCount;
+    private int parliamentCountMax;
     private HashMap<Ideology, Integer> parties = new HashMap<>();
 
     public Parliament(int countryKey, Minister minister, Context context, Country country) {
         super(countryKey, minister, context, country);
         this.name = "Parliament of " + this.country.getName();
 
-        this.your_ideology = this.country.getRuler().getIdeology();
+        this.yourIdeology = this.country.getRuler().getIdeology();
         statsRandomizer();
     }
 
     @Override
     public String toString() {
         String string;
-        string = "Your ideology: " + this.your_ideology + "\n";
-        string += "Parliament size: " + this.parliament_count_max + "\n";
-        string += "Party for Great Future (Plycism): " + parties.get(Ideology.Plycism) + "\n";
-        string += "Party for everyone (Vyhucism): " + parties.get(Ideology.Vyhucism) + "\n";
-        string += "Pious party (Arewosm): " + parties.get(Ideology.Arewosm) + "\n";
-        string += "Equal party (Hycrocism): " + parties.get(Ideology.Hycrocism) + "\n";
-        string += "Labour party (Zowotism): " + parties.get(Ideology.Zowotism) + "\n";
-        string += "Prosperity party (Beclysm): " + parties.get(Ideology.Beclysm) + "\n";
-        string += "Traditional party (Neo-leeism): " + parties.get(Ideology.Neoleeism) + "\n";
-        string += "Progress party (Fokritism): " + parties.get(Ideology.Fokritism) + "\n";
-        string += "Nonpartisan (No Ideology): " + parties.get(Ideology.Nonpartisan) + "\n";
+        string = "Your ideology: " + this.yourIdeology + "\n";
+        string += "Parliament size: " + this.parliamentCountMax + "\n";
+        string += "Party for Great Future (Plycism): " + parties.get(Ideology.PLYCISM) + "\n";
+        string += "Party for everyone (Vyhucism): " + parties.get(Ideology.VYHUCISM) + "\n";
+        string += "Pious party (Arewosm): " + parties.get(Ideology.AREWOSM) + "\n";
+        string += "Equal party (Hycrocism): " + parties.get(Ideology.HYCROCISM) + "\n";
+        string += "Labour party (Zowotism): " + parties.get(Ideology.ZOWOTISM) + "\n";
+        string += "Prosperity party (Beclysm): " + parties.get(Ideology.BECLYSM) + "\n";
+        string += "Traditional party (Neo-Leeism): " + parties.get(Ideology.NEOLEEISM) + "\n";
+        string += "Progress party (Fokritism): " + parties.get(Ideology.FOKRITISM) + "\n";
+        string += "Nonpartisan (No Ideology): " + parties.get(Ideology.NONPARTISAN) + "\n";
         return super.toString() + string;
     }
 
     @Override
     public void updateMinistry() {
         super.updateMinistry();
-        this.your_ideology = this.country.getRuler().getIdeology();
+        this.yourIdeology = this.country.getRuler().getIdeology();
     }
 
     @Override
@@ -53,195 +52,195 @@ public class Parliament extends Ministry {
         super.statsRandomizer();
         Random random = new Random();
 
-        float modifier_parliament_count = 0f;
+        float modifierParliamentCount = 0f;
 
-        float modifier_ply = 0f;
-        float modifier_vyh = 0f;
-        float modifier_are = 0f;
-        float modifier_hyc = 0f;
-        float modifier_zow = 0f;
-        float modifier_bec = 0f;
-        float modifier_neo = 0f;
-        float modifier_fok = 0f;
+        float modifierPly = 0f;
+        float modifierVyh = 0f;
+        float modifierAre = 0f;
+        float modifierHyc = 0f;
+        float modifierZow = 0f;
+        float modifierBec = 0f;
+        float modifierNeo = 0f;
+        float modifierFok = 0f;
 
         switch (this.country.getContinent()) {
             case EY:
-                modifier_parliament_count = 0.75f;
+                modifierParliamentCount = 0.75f;
 
-                modifier_ply = 0.1f;
-                modifier_vyh = 0.05f;
-                modifier_are = 0.15f;
-                modifier_hyc = 0.2f;
-                modifier_zow = 0.2f;
-                modifier_bec = 0.05f;
-                modifier_neo = 0.05f;
-                modifier_fok = 0.05f;
+                modifierPly = 0.1f;
+                modifierVyh = 0.05f;
+                modifierAre = 0.15f;
+                modifierHyc = 0.2f;
+                modifierZow = 0.2f;
+                modifierBec = 0.05f;
+                modifierNeo = 0.05f;
+                modifierFok = 0.05f;
                 break;
             case NY:
-                modifier_parliament_count = 0.85f;
+                modifierParliamentCount = 0.85f;
 
-                modifier_ply = 0.1f;
-                modifier_vyh = 0.05f;
-                modifier_are = 0.1f;
-                modifier_hyc = 0.05f;
-                modifier_zow = 0.25f;
-                modifier_bec = 0.25f;
-                modifier_neo = 0.05f;
-                modifier_fok = 0.05f;
+                modifierPly = 0.1f;
+                modifierVyh = 0.05f;
+                modifierAre = 0.1f;
+                modifierHyc = 0.05f;
+                modifierZow = 0.25f;
+                modifierBec = 0.25f;
+                modifierNeo = 0.05f;
+                modifierFok = 0.05f;
                 break;
             case SY:
-                modifier_parliament_count = 0.65f;
+                modifierParliamentCount = 0.65f;
 
-                modifier_ply = 0.1f;
-                modifier_vyh = 0.05f;
-                modifier_are = 0.05f;
-                modifier_hyc = 0.05f;
-                modifier_zow = 0.3f;
-                modifier_bec = 0.25f;
-                modifier_neo = 0.05f;
-                modifier_fok = 0.05f;
+                modifierPly = 0.1f;
+                modifierVyh = 0.05f;
+                modifierAre = 0.05f;
+                modifierHyc = 0.05f;
+                modifierZow = 0.3f;
+                modifierBec = 0.25f;
+                modifierNeo = 0.05f;
+                modifierFok = 0.05f;
                 break;
             case WY:
-                modifier_parliament_count = 0.95f;
+                modifierParliamentCount = 0.95f;
 
-                modifier_ply = 0.1f;
-                modifier_vyh = 0.05f;
-                modifier_are = 0.15f;
-                modifier_hyc = 0.05f;
-                modifier_zow = 0.05f;
-                modifier_bec = 0.3f;
-                modifier_neo = 0.15f;
-                modifier_fok = 0.05f;
+                modifierPly = 0.1f;
+                modifierVyh = 0.05f;
+                modifierAre = 0.15f;
+                modifierHyc = 0.05f;
+                modifierZow = 0.05f;
+                modifierBec = 0.3f;
+                modifierNeo = 0.15f;
+                modifierFok = 0.05f;
                 break;
             case IB:
-                modifier_parliament_count = 0.55f;
+                modifierParliamentCount = 0.55f;
 
-                modifier_ply = 0.1f;
-                modifier_vyh = 0.05f;
-                modifier_are = 0.15f;
-                modifier_hyc = 0.1f;
-                modifier_zow = 0.15f;
-                modifier_bec = 0.15f;
-                modifier_neo = 0.15f;
-                modifier_fok = 0.05f;
+                modifierPly = 0.1f;
+                modifierVyh = 0.05f;
+                modifierAre = 0.15f;
+                modifierHyc = 0.1f;
+                modifierZow = 0.15f;
+                modifierBec = 0.15f;
+                modifierNeo = 0.15f;
+                modifierFok = 0.05f;
                 break;
             case OB:
-                modifier_parliament_count = 0.65f;
+                modifierParliamentCount = 0.65f;
 
-                modifier_ply = 0.1f;
-                modifier_vyh = 0.4f;
-                modifier_are = 0.05f;
-                modifier_hyc = 0.15f;
-                modifier_zow = 0.05f;
-                modifier_bec = 0.05f;
-                modifier_neo = 0.05f;
-                modifier_fok = 0.05f;
+                modifierPly = 0.1f;
+                modifierVyh = 0.4f;
+                modifierAre = 0.05f;
+                modifierHyc = 0.15f;
+                modifierZow = 0.05f;
+                modifierBec = 0.05f;
+                modifierNeo = 0.05f;
+                modifierFok = 0.05f;
                 break;
             case CA:
-                modifier_parliament_count = 0.55f;
+                modifierParliamentCount = 0.55f;
 
-                modifier_ply = 0.1f;
-                modifier_vyh = 0.1f;
-                modifier_are = 0.15f;
-                modifier_hyc = 0.2f;
-                modifier_zow = 0.05f;
-                modifier_bec = 0.05f;
-                modifier_neo = 0.05f;
-                modifier_fok = 0.05f;
+                modifierPly = 0.1f;
+                modifierVyh = 0.1f;
+                modifierAre = 0.15f;
+                modifierHyc = 0.2f;
+                modifierZow = 0.05f;
+                modifierBec = 0.05f;
+                modifierNeo = 0.05f;
+                modifierFok = 0.05f;
                 break;
             case FA:
-                modifier_parliament_count = 0.45f;
+                modifierParliamentCount = 0.45f;
 
-                modifier_ply = 0.05f;
-                modifier_vyh = 0.25f;
-                modifier_are = 0.15f;
-                modifier_hyc = 0.05f;
-                modifier_zow = 0.05f;
-                modifier_bec = 0.05f;
-                modifier_neo = 0.05f;
-                modifier_fok = 0.25f;
+                modifierPly = 0.05f;
+                modifierVyh = 0.25f;
+                modifierAre = 0.15f;
+                modifierHyc = 0.05f;
+                modifierZow = 0.05f;
+                modifierBec = 0.05f;
+                modifierNeo = 0.05f;
+                modifierFok = 0.25f;
                 break;
             case ME:
-                modifier_parliament_count = 0.35f;
+                modifierParliamentCount = 0.35f;
 
-                modifier_ply = 0.1f;
-                modifier_vyh = 0.05f;
-                modifier_are = 0.15f;
-                modifier_hyc = 0.15f;
-                modifier_zow = 0.1f;
-                modifier_bec = 0.15f;
-                modifier_neo = 0.05f;
-                modifier_fok = 0.15f;
+                modifierPly = 0.1f;
+                modifierVyh = 0.05f;
+                modifierAre = 0.15f;
+                modifierHyc = 0.15f;
+                modifierZow = 0.1f;
+                modifierBec = 0.15f;
+                modifierNeo = 0.05f;
+                modifierFok = 0.15f;
                 break;
             case GE:
-                modifier_parliament_count = 0.65f;
+                modifierParliamentCount = 0.65f;
 
-                modifier_ply = 0.55f;
-                modifier_vyh = 0.05f;
-                modifier_are = 0.05f;
-                modifier_hyc = 0.05f;
-                modifier_zow = 0.05f;
-                modifier_bec = 0.05f;
-                modifier_neo = 0.05f;
-                modifier_fok = 0.05f;
+                modifierPly = 0.55f;
+                modifierVyh = 0.05f;
+                modifierAre = 0.05f;
+                modifierHyc = 0.05f;
+                modifierZow = 0.05f;
+                modifierBec = 0.05f;
+                modifierNeo = 0.05f;
+                modifierFok = 0.05f;
                 break;
         }
 
-        switch (this.your_ideology) {
-            case Plycism:
-                modifier_ply += 0.05;
+        switch (this.yourIdeology) {
+            case PLYCISM:
+                modifierPly += 0.05;
                 break;
-            case Vyhucism:
-                modifier_vyh += 0.05;
+            case VYHUCISM:
+                modifierVyh += 0.05;
                 break;
-            case Arewosm:
-                modifier_are += 0.05;
+            case AREWOSM:
+                modifierAre += 0.05;
                 break;
-            case Hycrocism:
-                modifier_hyc += 0.05;
+            case HYCROCISM:
+                modifierHyc += 0.05;
                 break;
-            case Zowotism:
-                modifier_zow += 0.05;
+            case ZOWOTISM:
+                modifierZow += 0.05;
                 break;
-            case Beclysm:
-                modifier_bec += 0.05;
+            case BECLYSM:
+                modifierBec += 0.05;
                 break;
-            case Neoleeism:
-                modifier_neo += 0.05;
+            case NEOLEEISM:
+                modifierNeo += 0.05;
                 break;
-            case Fokritism:
-                modifier_fok += 0.05;
+            case FOKRITISM:
+                modifierFok += 0.05;
                 break;
         }
 
-        this.parliament_count = (int) (Math.ceil(500 * modifier_parliament_count));
-        this.parliament_count_max = this.parliament_count;
+        this.parliamentCount = (int) (Math.ceil(500 * modifierParliamentCount));
+        this.parliamentCountMax = this.parliamentCount;
 
-        parties.put(Ideology.Plycism, (int) (parliament_count_max * (modifier_ply + (random.nextFloat() * (0.005 - (-0.0005)) + (-0.0005)))));
-        this.parliament_count -= parties.get(Ideology.Plycism);
+        parties.put(Ideology.PLYCISM, (int) (parliamentCountMax * (modifierPly + (random.nextFloat() * (0.005 - (-0.0005)) + (-0.0005)))));
+        this.parliamentCount -= parties.get(Ideology.PLYCISM);
 
-        parties.put(Ideology.Vyhucism, (int) (parliament_count_max * (modifier_vyh + (random.nextFloat() * (0.005 - (-0.0005)) + (-0.0005)))));
-        this.parliament_count -= parties.get(Ideology.Vyhucism);
+        parties.put(Ideology.VYHUCISM, (int) (parliamentCountMax * (modifierVyh + (random.nextFloat() * (0.005 - (-0.0005)) + (-0.0005)))));
+        this.parliamentCount -= parties.get(Ideology.VYHUCISM);
 
-        parties.put(Ideology.Arewosm, (int) (parliament_count_max * (modifier_are + (random.nextFloat() * (0.005 - (-0.0005)) + (-0.0005)))));
-        this.parliament_count -= parties.get(Ideology.Arewosm);
+        parties.put(Ideology.AREWOSM, (int) (parliamentCountMax * (modifierAre + (random.nextFloat() * (0.005 - (-0.0005)) + (-0.0005)))));
+        this.parliamentCount -= parties.get(Ideology.AREWOSM);
 
-        parties.put(Ideology.Hycrocism, (int) (parliament_count_max * (modifier_hyc + (random.nextFloat() * (0.005 - (-0.0005)) + (-0.0005)))));
-        this.parliament_count -= parties.get(Ideology.Hycrocism);
+        parties.put(Ideology.HYCROCISM, (int) (parliamentCountMax * (modifierHyc + (random.nextFloat() * (0.005 - (-0.0005)) + (-0.0005)))));
+        this.parliamentCount -= parties.get(Ideology.HYCROCISM);
 
-        parties.put(Ideology.Zowotism, (int) (parliament_count_max * (modifier_zow + (random.nextFloat() * (0.005 - (-0.0005)) + (-0.0005)))));
-        this.parliament_count -= parties.get(Ideology.Zowotism);
+        parties.put(Ideology.ZOWOTISM, (int) (parliamentCountMax * (modifierZow + (random.nextFloat() * (0.005 - (-0.0005)) + (-0.0005)))));
+        this.parliamentCount -= parties.get(Ideology.ZOWOTISM);
 
-        parties.put(Ideology.Beclysm, (int) (parliament_count_max * (modifier_bec + (random.nextFloat() * (0.005 - (-0.0005)) + (-0.0005)))));
-        this.parliament_count -= parties.get(Ideology.Beclysm);
+        parties.put(Ideology.BECLYSM, (int) (parliamentCountMax * (modifierBec + (random.nextFloat() * (0.005 - (-0.0005)) + (-0.0005)))));
+        this.parliamentCount -= parties.get(Ideology.BECLYSM);
 
-        parties.put(Ideology.Neoleeism, (int) (parliament_count_max * (modifier_neo + (random.nextFloat() * (0.005 - (-0.0005)) + (-0.0005)))));
-        this.parliament_count -= parties.get(Ideology.Neoleeism);
+        parties.put(Ideology.NEOLEEISM, (int) (parliamentCountMax * (modifierNeo + (random.nextFloat() * (0.005 - (-0.0005)) + (-0.0005)))));
+        this.parliamentCount -= parties.get(Ideology.NEOLEEISM);
 
-        parties.put(Ideology.Fokritism, (int) (parliament_count_max * (modifier_fok + (random.nextFloat() * (0.005 - (-0.0005)) + (-0.0005)))));
-        this.parliament_count -= parties.get(Ideology.Fokritism);
+        parties.put(Ideology.FOKRITISM, (int) (parliamentCountMax * (modifierFok + (random.nextFloat() * (0.005 - (-0.0005)) + (-0.0005)))));
+        this.parliamentCount -= parties.get(Ideology.FOKRITISM);
 
-        parties.put(Ideology.Nonpartisan, parliament_count);
+        parties.put(Ideology.NONPARTISAN, parliamentCount);
 
     }
 }

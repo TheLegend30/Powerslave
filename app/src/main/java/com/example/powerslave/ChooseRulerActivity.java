@@ -67,7 +67,7 @@ public class ChooseRulerActivity extends AppCompatActivity implements View.OnCli
         forwardArrowChRul.setOnClickListener(this);
         imageButtonRandomName.setOnClickListener(this);
 
-        ArrayAdapter ideologyAdapter = new ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, getResources().getStringArray(R.array.ideology));
+        ArrayAdapter ideologyAdapter = new ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, Ideology.values());
 
         spinnerIdeology.setAdapter(ideologyAdapter);
         spinnerIdeology.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -94,18 +94,15 @@ public class ChooseRulerActivity extends AppCompatActivity implements View.OnCli
             } else {
                 sex = Sex.FEMALE;
             }
-            ruler = new Ruler(editTextName.getText().toString(), editTextSurname.getText().toString(), sex, country, Ideology.valueOf(getResources().getStringArray(R.array.ideology)[spinnerIdeology.getSelectedItemPosition()].toString()), portraitUriStart);
-            DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialogInterface, int i) {
-                    switch (i) {
-                        case DialogInterface.BUTTON_POSITIVE:
-                            Intent intent = new Intent(ChooseRulerActivity.this, MainGameMenuActivity.class);
-                            startActivity(intent);
-                            break;
-                        case DialogInterface.BUTTON_NEGATIVE:
-                            break;
-                    }
+            ruler = new Ruler(editTextName.getText().toString(), editTextSurname.getText().toString(), sex, country, Ideology.values()[spinnerIdeology.getSelectedItemPosition()], portraitUriStart);
+            DialogInterface.OnClickListener dialogClickListener = (dialogInterface, i) -> {
+                switch (i) {
+                    case DialogInterface.BUTTON_POSITIVE:
+                        Intent intent = new Intent(ChooseRulerActivity.this, MainGameMenuActivity.class);
+                        startActivity(intent);
+                        break;
+                    case DialogInterface.BUTTON_NEGATIVE:
+                        break;
                 }
             };
             AlertDialog.Builder builder = new AlertDialog.Builder(ChooseRulerActivity.this);

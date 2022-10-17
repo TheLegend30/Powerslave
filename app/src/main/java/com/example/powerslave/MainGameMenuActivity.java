@@ -38,12 +38,12 @@ public class MainGameMenuActivity extends AppCompatActivity implements View.OnCl
     private ImageButton buttonAgriculture;
     private ImageButton buttonDevelopment;
     private ImageButton buttonIndustry;
-
+    private ImageButton buttonTransportation;
     private ImageButton buttonCulture;
     private ImageButton buttonInternalAffairs;
     private ImageButton buttonJustice;
     private ImageButton buttonParliament;
-
+    private ImageButton buttonNationalIntelligence;
     private ImageButton buttonForeignAffairs;
 
     public static Country country;
@@ -86,12 +86,12 @@ public class MainGameMenuActivity extends AppCompatActivity implements View.OnCl
         buttonAgriculture = findViewById(R.id.buttonAgriculture);
         buttonDevelopment = findViewById(R.id.buttonDevelopment);
         buttonIndustry = findViewById(R.id.buttonIndustry);
-
+        buttonTransportation = findViewById(R.id.buttonTransportation);
         buttonCulture = findViewById(R.id.buttonCulture);
         buttonInternalAffairs = findViewById(R.id.buttonInternalAffairs);
         buttonJustice = findViewById(R.id.buttonJustice);
         buttonParliament = findViewById(R.id.buttonParliament);
-
+        buttonNationalIntelligence = findViewById(R.id.buttonNationalIntelligence);
         buttonForeignAffairs = findViewById(R.id.buttonForeignAffairs);
 
         textViewDate.setText("Current date is: " + "Week " + week + " " + format1.format(calendar.getTime()));
@@ -110,12 +110,12 @@ public class MainGameMenuActivity extends AppCompatActivity implements View.OnCl
         buttonAgriculture.setOnClickListener(this);
         buttonDevelopment.setOnClickListener(this);
         buttonIndustry.setOnClickListener(this);
-
+        buttonTransportation.setOnClickListener(this);
         buttonCulture.setOnClickListener(this);
         buttonInternalAffairs.setOnClickListener(this);
         buttonJustice.setOnClickListener(this);
         buttonParliament.setOnClickListener(this);
-
+        buttonNationalIntelligence.setOnClickListener(this);
         buttonForeignAffairs.setOnClickListener(this);
 
         ActionBar actionBar = getSupportActionBar();
@@ -173,7 +173,7 @@ public class MainGameMenuActivity extends AppCompatActivity implements View.OnCl
     @Override
     public void onClick(View view) {
         if (view.getId() == buttonNextMonth.getId()) {
-            if(++week == 5) {
+            if (++week == 5) {
                 calendar.add(Calendar.MONTH, 1);
                 country.addMinisterExperience();
                 week = 1;
@@ -200,6 +200,8 @@ public class MainGameMenuActivity extends AppCompatActivity implements View.OnCl
                 selectedMinistry = 5;
             } else if (view.getId() == buttonIndustry.getId()) {
                 selectedMinistry = 6;
+            } else if (view.getId() == buttonTransportation.getId()) {
+                selectedMinistry = 7;
             } else if (view.getId() == buttonCulture.getId()) {
                 selectedMinistry = 8;
             } else if (view.getId() == buttonInternalAffairs.getId()) {
@@ -208,6 +210,8 @@ public class MainGameMenuActivity extends AppCompatActivity implements View.OnCl
                 selectedMinistry = 10;
             } else if (view.getId() == buttonParliament.getId()) {
                 selectedMinistry = 11;
+            } else if (view.getId() == buttonNationalIntelligence.getId()) {
+                selectedMinistry = 12;
             } else if (view.getId() == buttonForeignAffairs.getId()) {
                 selectedMinistry = 13;
             }

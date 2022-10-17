@@ -2,7 +2,6 @@ package com.example.powerslave.ministry;
 
 import android.content.Context;
 
-import com.example.powerslave.R;
 import com.example.powerslave.government.Country;
 import com.example.powerslave.person.Minister;
 
@@ -11,18 +10,18 @@ import java.util.Random;
 public class MinistryOfJustice extends Ministry {
 
     private int judges;
-    private int judges_limit;
-    private int judges_need;
-    private float judges_salary;
-    private float judges_salary_need;
+    private int judgesLimit;
+    private int judgesNeed;
+    private float judgesSalary;
+    private float judgesSalaryNeed;
 
     private int prisons;
-    private int prisons_limit;
-    private int prisons_need;
+    private int prisonsLimit;
+    private int prisonsNeed;
 
-    private int level_of_judges_liberty;
+    private int levelOfJudgesLiberty;
 
-    private boolean death_penalty;
+    private boolean deathPenalty;
 
     private MinistryOfEconomy economy;
     private MinistryOfInternalAffairs internalAffairs;
@@ -40,26 +39,26 @@ public class MinistryOfJustice extends Ministry {
     @Override
     public String toString() {
         String string;
-        string = "Level of judges' decisions liberty (1 - minimum, 6 - maximum): " + this.level_of_judges_liberty + "\n";
+        string = "Level of judges' decisions liberty (1 - minimum, 6 - maximum): " + this.levelOfJudgesLiberty + "\n";
         string += "Judges: " + this.judges + "\n";
         string += "Judges limit: " + this.judges + "\n";
-        string += "Judges salary: " + this.judges_salary + " ƒ" + "\n";
-        string += "Judges salary need: " + this.judges_salary_need + " ƒ" + "\n";
+        string += "Judges salary: " + this.judgesSalary + " ƒ" + "\n";
+        string += "Judges salary need: " + this.judgesSalaryNeed + " ƒ" + "\n";
         string += "Prisons: " + this.prisons + "\n";
-        string += "Judges need: " + this.judges_need + "\n";
-        string += "Prisons need: " + this.prisons_need + "\n";
-        string += "Death penalty: " + (this.death_penalty ? "Yes" : "No") + "\n";
+        string += "Judges need: " + this.judgesNeed + "\n";
+        string += "Prisons need: " + this.prisonsNeed + "\n";
+        string += "Death penalty: " + (this.deathPenalty ? "Yes" : "No") + "\n";
         return super.toString()  + string;
     }
 
     @Override
     public void updateMinistry() {
         super.updateMinistry();
-        this.efficiency *= (float) judges / (float) judges_need;
-        this.efficiency *= (float) prisons / (float) prisons_need;
-        this.efficiency *= judges_salary / judges_salary_need;
-        this.efficiency *= level_of_judges_liberty / 4.5;
-        this.efficiency *= death_penalty ? 1.05f : 0.95f;
+        this.efficiency *= (float) judges / (float) judgesNeed;
+        this.efficiency *= (float) prisons / (float) prisonsNeed;
+        this.efficiency *= judgesSalary / judgesSalaryNeed;
+        this.efficiency *= levelOfJudgesLiberty / 4.5;
+        this.efficiency *= deathPenalty ? 1.05f : 0.95f;
     }
 
     @Override
@@ -67,102 +66,102 @@ public class MinistryOfJustice extends Ministry {
         super.statsRandomizer();
         Random random = new Random();
 
-        float modifier_judges = 0f;
-        float modifier_judges_salary = 0f;
+        float modifierJudges = 0f;
+        float modifierJudgesSalary = 0f;
 
-        float modifier_prisons = 0f;
+        float modifierPrisons = 0f;
 
-        int modifier_level_of_judges_liberty = 0;
+        int modifierLevelOfJudgesLiberty = 0;
 
         switch (this.country.getContinent()) {
             case EY:
-                modifier_judges = 0.0015f;
-                modifier_judges_salary = 1.15f;
+                modifierJudges = 0.0015f;
+                modifierJudgesSalary = 1.15f;
 
-                modifier_prisons = 0.6f;
+                modifierPrisons = 0.6f;
 
-                modifier_level_of_judges_liberty = 2;
+                modifierLevelOfJudgesLiberty = 2;
                 break;
             case NY:
-                modifier_judges = 0.002f;
-                modifier_judges_salary = 1.25f;
+                modifierJudges = 0.002f;
+                modifierJudgesSalary = 1.25f;
 
-                modifier_prisons = 0.7f;
+                modifierPrisons = 0.7f;
 
-                modifier_level_of_judges_liberty = 4;
+                modifierLevelOfJudgesLiberty = 4;
                 break;
             case SY:
-                modifier_judges = 0.0013f;
-                modifier_judges_salary = 1.05f;
+                modifierJudges = 0.0013f;
+                modifierJudgesSalary = 1.05f;
 
-                modifier_prisons = 0.55f;
-                modifier_level_of_judges_liberty = 2;
+                modifierPrisons = 0.55f;
+                modifierLevelOfJudgesLiberty = 2;
                 break;
             case WY:
-                modifier_judges = 0.0021f;
-                modifier_judges_salary = 1.35f;
+                modifierJudges = 0.0021f;
+                modifierJudgesSalary = 1.35f;
 
-                modifier_prisons = 0.75f;
-                modifier_level_of_judges_liberty = 5;
+                modifierPrisons = 0.75f;
+                modifierLevelOfJudgesLiberty = 5;
                 break;
             case IB:
-                modifier_judges = 0.001f;
-                modifier_judges_salary = 1f;
+                modifierJudges = 0.001f;
+                modifierJudgesSalary = 1f;
 
-                modifier_prisons = 0.5f;
-                modifier_level_of_judges_liberty = 2;
+                modifierPrisons = 0.5f;
+                modifierLevelOfJudgesLiberty = 2;
                 break;
             case OB:
-                modifier_judges = 0.0011f;
-                modifier_judges_salary = 0.95f;
+                modifierJudges = 0.0011f;
+                modifierJudgesSalary = 0.95f;
 
-                modifier_prisons = 0.45f;
-                modifier_level_of_judges_liberty = 3;
+                modifierPrisons = 0.45f;
+                modifierLevelOfJudgesLiberty = 3;
                 break;
             case CA:
-                modifier_judges = 0.00105f;
-                modifier_judges_salary = 0.9f;
+                modifierJudges = 0.00105f;
+                modifierJudgesSalary = 0.9f;
 
-                modifier_prisons = 0.4f;
-                modifier_level_of_judges_liberty = 3;
+                modifierPrisons = 0.4f;
+                modifierLevelOfJudgesLiberty = 3;
                 break;
             case FA:
-                modifier_judges = 0.0009f;
-                modifier_judges_salary = 0.85f;
+                modifierJudges = 0.0009f;
+                modifierJudgesSalary = 0.85f;
 
-                modifier_prisons = 0.35f;
-                modifier_level_of_judges_liberty = 2;
+                modifierPrisons = 0.35f;
+                modifierLevelOfJudgesLiberty = 2;
                 break;
             case ME:
-                modifier_judges = 0.0007f;
-                modifier_judges_salary = 0.75f;
+                modifierJudges = 0.0007f;
+                modifierJudgesSalary = 0.75f;
 
-                modifier_prisons = 0.25f;
-                modifier_level_of_judges_liberty = 2;
+                modifierPrisons = 0.25f;
+                modifierLevelOfJudgesLiberty = 2;
                 break;
             case GE:
-                modifier_judges = 0.0018f;
-                modifier_judges_salary = 1.18f;
+                modifierJudges = 0.0018f;
+                modifierJudgesSalary = 1.18f;
 
-                modifier_prisons = 0.8f;
-                modifier_level_of_judges_liberty = 2;
+                modifierPrisons = 0.8f;
+                modifierLevelOfJudgesLiberty = 2;
                 break;
         }
 
-        this.judges_need = (int) (economy.getPopulation() / 1050);
-        this.judges_salary_need = (int) (economy.getGdp_per_person() * 1.25);
-        this.prisons_need = (int) ((internalAffairs.getCrime() * (economy.getPopulation() / 100000)) / 2500);
+        this.judgesNeed = (int) (economy.getPopulation() / 1050);
+        this.judgesSalaryNeed = (int) (economy.getGdpPerPerson() * 1.25);
+        this.prisonsNeed = (int) ((internalAffairs.getCrime() * (economy.getPopulation() / 100000)) / 2500);
 
-        this.judges_limit = (int) (economy.getLabor_force() * (modifier_judges + (random.nextFloat() * (0.0003 - (-0.0003)) + (-0.0003))));
-        this.judges = this.judges_limit;
+        this.judgesLimit = (int) (economy.getLabor_force() * (modifierJudges + (random.nextFloat() * (0.0003 - (-0.0003)) + (-0.0003))));
+        this.judges = this.judgesLimit;
 
-        this.judges_salary = (float) (this.economy.getGdp_per_person() * (modifier_judges_salary + (random.nextFloat() * (0.05 - (-0.05)) + (-0.05))));
+        this.judgesSalary = (float) (this.economy.getGdpPerPerson() * (modifierJudgesSalary + (random.nextFloat() * (0.05 - (-0.05)) + (-0.05))));
 
-        this.prisons_limit = (int) (prisons_need * (modifier_prisons + (random.nextFloat() * (0.05 - (-0.05)) + (-0.05))));
-        this.prisons = this.prisons_limit;
+        this.prisonsLimit = (int) (prisonsNeed * (modifierPrisons + (random.nextFloat() * (0.05 - (-0.05)) + (-0.05))));
+        this.prisons = this.prisonsLimit;
 
-        this.level_of_judges_liberty = (modifier_level_of_judges_liberty + (random.nextInt((1 - (-1))) + (-1)));
+        this.levelOfJudgesLiberty = (modifierLevelOfJudgesLiberty + (random.nextInt((1 - (-1))) + (-1)));
 
-        this.death_penalty = random.nextBoolean();
+        this.deathPenalty = random.nextBoolean();
     }
 }
