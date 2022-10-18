@@ -1,10 +1,5 @@
 package com.example.powerslave;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -17,13 +12,17 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.powerslave.government.Country;
-import com.example.powerslave.government.Event;
 import com.example.powerslave.person.Ruler;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Map;
+
 // Change updates
 public class MainGameMenuActivity extends AppCompatActivity implements View.OnClickListener {
     private TextView textViewDate;
@@ -51,28 +50,25 @@ public class MainGameMenuActivity extends AppCompatActivity implements View.OnCl
 
     public static Calendar calendar = Calendar.getInstance();
     public static int week;
+    public static int total_weeks;
     public static SimpleDateFormat format1 = new SimpleDateFormat("MMMM yyyy");
 
     public static int selectedMinistry = 0;
 
-    static {
-        startMainGameActivity();
-    }
-
-    private static void startMainGameActivity() {
+    public static void startMainGameActivity() {
         week = 1;
+        total_weeks = 0;
         calendar.set(1965, 0, 25);
         showAlertMessage = true;
+        country = ChooseRulerActivity.country;
+        ruler = ChooseRulerActivity.ruler;
+        country.setRuler(ruler);
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_game_menu);
-
-        country = ChooseRulerActivity.country;
-        ruler = ChooseRulerActivity.ruler;
-        country.setRuler(ruler);
 
         textViewDate = findViewById(R.id.textViewDate);
         textViewCountryName = findViewById(R.id.textViewCountryName);
@@ -98,6 +94,8 @@ public class MainGameMenuActivity extends AppCompatActivity implements View.OnCl
         textViewCountryName.setText(textViewCountryName.getText() + "Capital: " + country.getCapitalName() + "\n");
         textViewCountryName.setText(textViewCountryName.getText() + "Continent: " + country.getContinent() + "\n");
         textViewCountryName.setText(textViewCountryName.getText() + "Ruler: " + country.getRuler().getName() + " " + country.getRuler().getSurname() + "\n");
+        textViewCountryName.setText(textViewCountryName.getText() + "Rating of ruler: " + country.getRuler().getRatingString() + " %" + "\n");
+        textViewCountryName.setText(textViewCountryName.getText() + "Time left: " + country.getRuler().getTerm_in_weeks() + " weeks" + "\n");
 
         imageViewFlag.setImageURI(country.getFlagSrc());
 
@@ -124,7 +122,6 @@ public class MainGameMenuActivity extends AppCompatActivity implements View.OnCl
 
         showAlertMessage();
 
-
     }
 
     private void showAlertMessage() {
@@ -139,6 +136,7 @@ public class MainGameMenuActivity extends AppCompatActivity implements View.OnCl
         AlertDialog.Builder builder = new AlertDialog.Builder(MainGameMenuActivity.this);
         if (showAlertMessage) {
             builder.setMessage("Welcome to the Power Slave! Now you're playing as ruler of country of " + country.getName() + ". Good luck in your decisions!")
+                    .setCancelable(false)
                     .setPositiveButton("Understood", dialogClickListener)
                     .show();
         }
@@ -172,16 +170,27 @@ public class MainGameMenuActivity extends AppCompatActivity implements View.OnCl
     @Override
     public void onClick(View view) {
         if (view.getId() == buttonNextMonth.getId()) {
+            total_weeks++;
+            country.getRuler().setTerm_in_weeks(country.getRuler().getTerm_in_weeks() - 1);
             if (++week == 5) {
                 calendar.add(Calendar.MONTH, 1);
                 country.addMinisterExperience();
+                country.getRuler().changeRating();
                 week = 1;
+                if (country.getRuler().getTerm_in_weeks() == 0) {
+                    gameOver("Your term is finally over!");
+                    return;
+                }
+                if (country.getRuler().getRating() == 0f) {
+                    gameOver("You were killed by angry mob!");
+                    return;
+                }
             }
-            if (calendar.getTime().getMonth() == 0) {
+            if (total_weeks % 52 == 0) {
                 country.updateMinisters();
             }
             country.oneMove();
-            //showEvent();
+            //  showEvent();
             MainGameMenuActivity.this.recreate();
         } else {
             Intent intent = new Intent(MainGameMenuActivity.this, MinistryActivity.class);
@@ -219,17 +228,44 @@ public class MainGameMenuActivity extends AppCompatActivity implements View.OnCl
         }
     }
 
-    private void showEvent() {
-        Event event = new Event(this);
+    private void gameOver(String title) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle(event.getEventText());
-
-        builder.setItems(event.getEventChoices(), (dialogInterface, i) -> {
-            switch (i) {
-                default:
-                    MainGameMenuActivity.this.recreate();
-            }
+        String result;
+        if (ruler.getRating() < 10f) {
+            result = "Terrible";
+        } else if (ruler.getRating() >= 10f && ruler.getRating() < 25f) {
+            result = "Bad";
+        } else if (ruler.getRating() >= 25f && ruler.getRating() < 50f) {
+            result = "Average";
+        } else if (ruler.getRating() >= 50 && ruler.getRating() < 75f) {
+            result = "Good";
+        } else {
+            result = "Incredible";
+        }
+        result += " work";
+        builder.setTitle(title);
+        builder.setMessage("Total time ruled: " + total_weeks + " weeks" + "\n" + "Your rating in the end: " + country.getRuler().getRatingString() + " %" + " \n(" + result + ")\n");
+        builder.setCancelable(false);
+        builder.setPositiveButton("My time has come...", (dialogInterface, i) -> {
+            Intent intent = new Intent(MainGameMenuActivity.this, MainActivity.class);
+            startActivity(intent);
+            MainGameMenuActivity.startMainGameActivity();
         });
-        builder.create().show();
+        AlertDialog alert = builder.create();
+        alert.show();
     }
+
+//    private void showEvent() {
+//        Event event = new Event(this);
+//        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+//        builder.setTitle(event.getEventText());
+//
+//        builder.setItems(event.getEventChoices(), (dialogInterface, i) -> {
+//            switch (i) {
+//                default:
+//                    MainGameMenuActivity.this.recreate();
+//            }
+//        });
+//        builder.create().show();
+//    }
 }

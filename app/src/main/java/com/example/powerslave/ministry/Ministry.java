@@ -54,6 +54,13 @@ public abstract class Ministry {
         this.minister = minister;
     }
 
+    public float getEfficiency() {
+        return efficiency;
+    }
+
+    public void setEfficiency(float efficiency) {
+        this.efficiency = efficiency;
+    }
 
     public void updateMinistry() {
         this.efficiency = (((minister.getCompetency() / 1.25f) + (minister.getLoyalty() / 4f)) / 100f);

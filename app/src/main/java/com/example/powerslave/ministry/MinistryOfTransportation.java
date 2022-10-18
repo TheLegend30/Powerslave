@@ -59,7 +59,17 @@ public class MinistryOfTransportation extends Ministry {
     }
 
     private enum Building {
-        HOSPITAL
+        HOSPITAL;
+
+        @Override
+        public String toString(){
+            switch (this) {
+                case HOSPITAL:
+                    return "Hospital";
+                default:
+                    return "Not existing building";
+            }
+        }
     }
 
     private class BuildingQueue {
@@ -70,6 +80,11 @@ public class MinistryOfTransportation extends Ministry {
             this.building = building;
             this.workers = workers;
             this.weeks = weeks;
+        }
+
+        @Override
+        public String toString() {
+            return "Building: " + building + " Workers: " + workers + " Time left: " + weeks + "\n";
         }
     }
 
@@ -108,6 +123,14 @@ public class MinistryOfTransportation extends Ministry {
         return freeBuilders;
     }
 
+    private String queueToString() {
+        String string = "";
+        for (BuildingQueue b : queue) {
+            string += b.toString();
+        }
+        return string;
+    }
+
 
     @Override
     public String toString() {
@@ -131,6 +154,8 @@ public class MinistryOfTransportation extends Ministry {
         string += "Roads kms need: " + roadKmsNeed + "\n";
         string += "General budget: " + String.format("%.2f", generalBudget) + " ƒ" + "\n";
         string += "General need budget: " + String.format("%.2f", generalBudgetNeed) + " ƒ" + "\n";
+        string += "Building queue\n";
+        string += queueToString();
         return super.toString() + string;
     }
 

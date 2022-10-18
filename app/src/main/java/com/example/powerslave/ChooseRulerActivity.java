@@ -99,6 +99,7 @@ public class ChooseRulerActivity extends AppCompatActivity implements View.OnCli
                 switch (i) {
                     case DialogInterface.BUTTON_POSITIVE:
                         Intent intent = new Intent(ChooseRulerActivity.this, MainGameMenuActivity.class);
+                        MainGameMenuActivity.startMainGameActivity();
                         startActivity(intent);
                         break;
                     case DialogInterface.BUTTON_NEGATIVE:
