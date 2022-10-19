@@ -23,6 +23,7 @@ import android.widget.Toast;
 
 import com.example.powerslave.government.Country;
 import com.example.powerslave.ministry.Ministry;
+import com.example.powerslave.ministry.MinistryOfEducation;
 import com.example.powerslave.ministry.MinistryOfForeignAffairs;
 import com.example.powerslave.ministry.MinistryOfHealthcare;
 import com.example.powerslave.ministry.NationalIntelligence;
@@ -193,6 +194,120 @@ public class MinistryActivity extends AppCompatActivity implements View.OnClickL
 
         } else if (MainGameMenuActivity.selectedMinistry == 1) {
             ministry = country.getMinistryOfEducation();
+
+            MinistryOfEducation education = (MinistryOfEducation) ministry;
+
+            EditText teachersLimitEdit = new EditText(this);
+            teachersLimitEdit.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+            teachersLimitEdit.setInputType(InputType.TYPE_CLASS_NUMBER);
+            teachersLimitEdit.setHint("Enter limit of teachers");
+
+            Button buttonConfirmTeachersLimitEdit = new Button(this);
+            buttonConfirmTeachersLimitEdit.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+            buttonConfirmTeachersLimitEdit.setText("Confirm limit");
+            buttonConfirmTeachersLimitEdit.setOnClickListener(view -> {
+                if (TextUtils.isEmpty(teachersLimitEdit.getText())) {
+                    Toast.makeText(MinistryActivity.this, "You need to enter something", Toast.LENGTH_SHORT).show();
+                } else {
+                    Integer limit = Integer.parseInt(String.valueOf(teachersLimitEdit.getText()));
+                    if (limit > education.getMaximumTeachersLimit() || limit < 0) {
+                        Toast.makeText(MinistryActivity.this, ("Have you lost your mind, " + (country.getRuler().getSex() == Sex.MALE ? "sir?" : "ma'am?")), Toast.LENGTH_SHORT).show();
+                    } else {
+                        education.setTeachersLimit(limit);
+                        MinistryActivity.this.recreate();
+                    }
+                }
+            });
+
+            EditText teachersSalaryEdit = new EditText(this);
+            teachersSalaryEdit.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+            teachersSalaryEdit.setInputType(InputType.TYPE_CLASS_NUMBER);
+            teachersSalaryEdit.setHint("Enter salary of teachers");
+
+            Button buttonConfirmTeachersSalaryEdit = new Button(this);
+            buttonConfirmTeachersSalaryEdit.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+            buttonConfirmTeachersSalaryEdit.setText("Confirm salary");
+            buttonConfirmTeachersSalaryEdit.setOnClickListener(view -> {
+                if (TextUtils.isEmpty(teachersSalaryEdit.getText())) {
+                    Toast.makeText(MinistryActivity.this, "You need to enter something", Toast.LENGTH_SHORT).show();
+                } else {
+                    Float salary = Float.parseFloat(String.valueOf(teachersSalaryEdit.getText()));
+                    if (salary > (education.getTeachersSalaryNeed() * 10) || salary < 0) {
+                        Toast.makeText(MinistryActivity.this, ("Have you lost your mind, " + (country.getRuler().getSex() == Sex.MALE ? "sir?" : "ma'am?")), Toast.LENGTH_SHORT).show();
+                    } else {
+                        education.setTeachersSalary(salary);
+                        MinistryActivity.this.recreate();
+                    }
+                }
+            });
+
+
+            EditText wantToBuildSchoolsEdit = new EditText(this);
+            wantToBuildSchoolsEdit.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+            wantToBuildSchoolsEdit.setInputType(InputType.TYPE_CLASS_NUMBER);
+            wantToBuildSchoolsEdit.setHint("How much schools want to build?");
+
+            Button buttonBuildSchool = new Button(this);
+            buttonBuildSchool.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+            buttonBuildSchool.setText("Build school");
+            buttonBuildSchool.setOnClickListener(view -> {
+                if (TextUtils.isEmpty(wantToBuildSchoolsEdit.getText())) {
+                    Toast.makeText(MinistryActivity.this, "You need to enter something", Toast.LENGTH_SHORT).show();
+                } else {
+                    boolean showSecondMessage = true;
+                    for (int i = 0; i < Integer.parseInt(String.valueOf(wantToBuildSchoolsEdit.getText())); i++) {
+                        if (country.getMinistryOfTransportation().getFreeBuilders() < 900) {
+                            Toast.makeText(MinistryActivity.this, "We'll build only " + i + " schools", Toast.LENGTH_SHORT).show();
+                            showSecondMessage = false;
+                            break;
+                        }
+                        country.getMinistryOfTransportation().buildSchool();
+                    }
+                    if (showSecondMessage)
+                        Toast.makeText(MinistryActivity.this, "We'll build " + Integer.parseInt(String.valueOf(wantToBuildSchoolsEdit.getText())) + " schools", Toast.LENGTH_SHORT).show();
+                }
+
+            });
+
+            EditText wantToBuildCollegesEdit = new EditText(this);
+            wantToBuildCollegesEdit.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+            wantToBuildCollegesEdit.setInputType(InputType.TYPE_CLASS_NUMBER);
+            wantToBuildCollegesEdit.setHint("How much colleges want to build?");
+
+            Button buttonBuildCollege = new Button(this);
+            buttonBuildCollege.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+            buttonBuildCollege.setText("Build college");
+            buttonBuildCollege.setOnClickListener(view -> {
+                if (TextUtils.isEmpty(wantToBuildCollegesEdit.getText())) {
+                    Toast.makeText(MinistryActivity.this, "You need to enter something", Toast.LENGTH_SHORT).show();
+                } else {
+                    boolean showSecondMessage = true;
+                    for (int i = 0; i < Integer.parseInt(String.valueOf(wantToBuildCollegesEdit.getText())); i++) {
+                        if (country.getMinistryOfTransportation().getFreeBuilders() < 2000) {
+                            Toast.makeText(MinistryActivity.this, "We'll build only " + i + " colleges", Toast.LENGTH_SHORT).show();
+                            showSecondMessage = false;
+                            break;
+                        }
+                        country.getMinistryOfTransportation().buildCollege();
+                    }
+                    if (showSecondMessage)
+                        Toast.makeText(MinistryActivity.this, "We'll build " + Integer.parseInt(String.valueOf(wantToBuildCollegesEdit.getText())) + " colleges", Toast.LENGTH_SHORT).show();
+                }
+
+            });
+
+
+            buttonLayout.addView(teachersLimitEdit);
+            buttonLayout.addView(buttonConfirmTeachersLimitEdit);
+            buttonLayout.addView(teachersSalaryEdit);
+            buttonLayout.addView(buttonConfirmTeachersSalaryEdit);
+
+            buttonLayout.addView(wantToBuildSchoolsEdit);
+            buttonLayout.addView(buttonBuildSchool);
+
+            buttonLayout.addView(wantToBuildCollegesEdit);
+            buttonLayout.addView(buttonBuildCollege);
+
         } else if (MainGameMenuActivity.selectedMinistry == 2) {
             ministry = country.getMinistryOfEconomy();
         } else if (MainGameMenuActivity.selectedMinistry == 3) {

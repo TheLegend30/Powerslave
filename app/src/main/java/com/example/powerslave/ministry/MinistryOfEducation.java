@@ -21,11 +21,9 @@ public class MinistryOfEducation extends Ministry {
     private int students;
 
     private int schools;
-    private int schoolsLimit;
     private int schoolsNeed;
 
     private int colleges;
-    private int collegesLimit;
     private int collegesNeed;
 
     private float literacy;
@@ -61,6 +59,86 @@ public class MinistryOfEducation extends Ministry {
         this.liberty = liberty;
     }
 
+    public int getTeachers() {
+        return teachers;
+    }
+
+    public void setTeachers(int teachers) {
+        this.teachers = teachers;
+    }
+
+    public int getTeachersLimit() {
+        return teachersLimit;
+    }
+
+    public void setTeachersLimit(int teachersLimit) {
+        this.teachersLimit = teachersLimit;
+    }
+
+    public float getTeachersSalary() {
+        return teachersSalary;
+    }
+
+    public void setTeachersSalary(float teachersSalary) {
+        this.teachersSalary = teachersSalary;
+    }
+
+    public float getTeachersSalaryNeed() {
+        return teachersSalaryNeed;
+    }
+
+    public void setTeachersSalaryNeed(float teachersSalaryNeed) {
+        this.teachersSalaryNeed = teachersSalaryNeed;
+    }
+
+    public int getTeachersNeed() {
+        return teachersNeed;
+    }
+
+    public void setTeachersNeed(int teachersNeed) {
+        this.teachersNeed = teachersNeed;
+    }
+
+    public int getSchools() {
+        return schools;
+    }
+
+    public void setSchools(int schools) {
+        this.schools = schools;
+    }
+
+    public int getMaximumTeachersLimit() {
+        return maximumTeachersLimit;
+    }
+
+    public void setMaximumTeachersLimit(int maximumTeachersLimit) {
+        this.maximumTeachersLimit = maximumTeachersLimit;
+    }
+
+    public int getSchoolsNeed() {
+        return schoolsNeed;
+    }
+
+    public void setSchoolsNeed(int schoolsNeed) {
+        this.schoolsNeed = schoolsNeed;
+    }
+
+    public int getColleges() {
+        return colleges;
+    }
+
+    public void setColleges(int colleges) {
+        this.colleges = colleges;
+    }
+
+    public int getCollegesNeed() {
+        return collegesNeed;
+    }
+
+    public void setCollegesNeed(int collegesNeed) {
+        this.collegesNeed = collegesNeed;
+    }
+
     @Override
     public String toString() {
         String string;
@@ -80,7 +158,7 @@ public class MinistryOfEducation extends Ministry {
         string += "Teachers need: " + teachersNeed + "\n";
         string += "General budget: " + String.format("%.2f", generalBudget) + " ƒ" + "\n";
         string += "General budget need : " + String.format("%.2f", generalBudgetNeed) + " ƒ" + "\n";
-        return super.toString()+ string;
+        return super.toString() + string;
     }
 
     @Override
@@ -266,11 +344,9 @@ public class MinistryOfEducation extends Ministry {
         collegesNeed = (int) Math.ceil(students / 1250);
         teachersNeed = (children + students) / 35;
 
-        schoolsLimit = (int) (schoolsNeed * (modifierSchools + (random.nextFloat() * (0.01 - (-0.01)) + (-0.01))));
-        schools = schoolsLimit;
+        schools = (int) (schoolsNeed * (modifierSchools + (random.nextFloat() * (0.01 - (-0.01)) + (-0.01))));
 
-        collegesLimit = (int) (collegesNeed * (modifierColleges + (random.nextFloat() * (0.01 - (-0.01)) + (-0.01))));
-        colleges = collegesLimit;
+        colleges = (int) (collegesNeed * (modifierColleges + (random.nextFloat() * (0.01 - (-0.01)) + (-0.01))));
 
         literacy = (float) (modifierLiteracy + (random.nextFloat() * (0.01 - (-0.01)) + (-0.01)));
         degree = (float) (modifierDegree + (random.nextFloat() * (0.01 - (-0.01)) + (-0.01)));
@@ -278,5 +354,12 @@ public class MinistryOfEducation extends Ministry {
         generalBudgetNeed = (teachers * 0.45f) + (teachers * teachersSalary) + (schools * 230f) + (colleges * 1025f);
         generalBudget = generalBudgetNeed * (modifierGeneralBudget + (random.nextFloat() * (0.05f - (-0.05f)) + (-0.05f)));
         maximumTeachersLimit = teachersNeed * 9;
+    }
+
+    @Override
+    public void workersIncreasing() {
+        super.workersIncreasing();
+        teachers += teachersLimit * 0.3 * country.getMinistryOfEducation().efficiency * efficiency;
+        if (teachers > teachersLimit) teachers = teachersLimit;
     }
 }

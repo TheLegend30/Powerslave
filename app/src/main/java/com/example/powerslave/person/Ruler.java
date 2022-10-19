@@ -39,6 +39,9 @@ public class Ruler extends Person {
     }
 
     public void changeRating() {
-        setRating(getRating() + (country.getMinistryOfHealthcare().getEfficiency() / 0.5f) - 1);
+        float rating = 1f;
+        rating *= (country.getMinistryOfHealthcare().getEfficiency() / 0.5f);
+        rating *= (country.getMinistryOfEducation().getEfficiency() / 0.5f);
+        setRating(getRating() + (rating - 1));
     }
 }
