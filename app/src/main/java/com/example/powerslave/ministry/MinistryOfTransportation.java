@@ -62,6 +62,7 @@ public class MinistryOfTransportation extends Ministry {
         HOSPITAL,
         SCHOOL,
         COLLEGE,
+        MONUMENT,
         PRISON;
 
         @Override
@@ -73,6 +74,8 @@ public class MinistryOfTransportation extends Ministry {
                     return "School";
                 case COLLEGE:
                     return "College";
+                case MONUMENT:
+                    return "Monument";
                 case PRISON:
                     return "Prison";
                 default:
@@ -107,20 +110,28 @@ public class MinistryOfTransportation extends Ministry {
 
     public void buildSchool() {
         if (freeBuilders >= 900) {
-            queue.add(new BuildingQueue(Building.SCHOOL, 900, 8));
+            queue.add(new BuildingQueue(Building.SCHOOL, 900, 9));
             freeBuilders -= 900;
         }
     }
 
     public void buildCollege() {
         if (freeBuilders >= 2000) {
-            queue.add(new BuildingQueue(Building.COLLEGE, 2000, 8));
+            queue.add(new BuildingQueue(Building.COLLEGE, 2000, 12));
             freeBuilders -= 2000;
         }
     }
+
+    public void buildMonument() {
+        if (freeBuilders >= 1500) {
+            queue.add(new BuildingQueue(Building.MONUMENT, 1500, 10));
+            freeBuilders -= 1500;
+        }
+    }
+
     public void buildPrison() {
         if (freeBuilders >= 2500) {
-            queue.add(new BuildingQueue(Building.PRISON, 2500, 8));
+            queue.add(new BuildingQueue(Building.PRISON, 2500, 10));
             freeBuilders -= 2500;
         }
     }
@@ -138,6 +149,9 @@ public class MinistryOfTransportation extends Ministry {
                         break;
                     case COLLEGE:
                         country.getMinistryOfEducation().setColleges(country.getMinistryOfEducation().getColleges() + 1);
+                        break;
+                    case MONUMENT:
+                        country.getMinistryOfCulture().setMonuments(country.getMinistryOfCulture().getMonuments() + 1);
                         break;
                     case PRISON:
                         country.getMinistryOfJustice().setPrisons(country.getMinistryOfJustice().getPrisons() + 1);

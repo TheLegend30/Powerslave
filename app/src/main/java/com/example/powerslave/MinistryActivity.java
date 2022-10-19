@@ -25,6 +25,7 @@ import android.widget.Toast;
 
 import com.example.powerslave.government.Country;
 import com.example.powerslave.ministry.Ministry;
+import com.example.powerslave.ministry.MinistryOfCulture;
 import com.example.powerslave.ministry.MinistryOfEducation;
 import com.example.powerslave.ministry.MinistryOfForeignAffairs;
 import com.example.powerslave.ministry.MinistryOfHealthcare;
@@ -326,6 +327,90 @@ public class MinistryActivity extends AppCompatActivity implements View.OnClickL
             ministry = country.getMinistryOfTransportation();
         } else if (MainGameMenuActivity.selectedMinistry == 8) {
             ministry = country.getMinistryOfCulture();
+
+            MinistryOfCulture culture = (MinistryOfCulture) ministry;
+
+            EditText culturalWorkersLimitEdit = new EditText(this);
+            culturalWorkersLimitEdit.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+            culturalWorkersLimitEdit.setInputType(InputType.TYPE_CLASS_NUMBER);
+            culturalWorkersLimitEdit.setHint("Enter limit of cultural workers");
+
+            Button buttonConfirmCulturalWorkersLimitEdit = new Button(this);
+            buttonConfirmCulturalWorkersLimitEdit.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+            buttonConfirmCulturalWorkersLimitEdit.setText("Confirm limit");
+            buttonConfirmCulturalWorkersLimitEdit.setOnClickListener(view -> {
+                if (TextUtils.isEmpty(culturalWorkersLimitEdit.getText())) {
+                    Toast.makeText(MinistryActivity.this, "You need to enter something", Toast.LENGTH_SHORT).show();
+                } else {
+                    Integer limit = Integer.parseInt(String.valueOf(culturalWorkersLimitEdit.getText()));
+                    if (limit > culture.getMaximumCulturalWorkersLimit() || limit < 0) {
+                        Toast.makeText(MinistryActivity.this, ("Have you lost your mind, " + (country.getRuler().getSex() == Sex.MALE ? "sir?" : "ma'am?")), Toast.LENGTH_SHORT).show();
+                    } else {
+                        culture.setCulturalWorkersLimit(limit);
+                        MinistryActivity.this.recreate();
+                    }
+                }
+            });
+
+            EditText culturalWorkersSalaryEdit = new EditText(this);
+            culturalWorkersSalaryEdit.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+            culturalWorkersSalaryEdit.setInputType(InputType.TYPE_CLASS_NUMBER);
+            culturalWorkersSalaryEdit.setHint("Enter salary of cultural workers");
+
+            Button buttonConfirmCulturalWorkersSalaryEdit = new Button(this);
+            buttonConfirmCulturalWorkersSalaryEdit.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+            buttonConfirmCulturalWorkersSalaryEdit.setText("Confirm salary");
+            buttonConfirmCulturalWorkersSalaryEdit.setOnClickListener(view -> {
+                if (TextUtils.isEmpty(culturalWorkersSalaryEdit.getText())) {
+                    Toast.makeText(MinistryActivity.this, "You need to enter something", Toast.LENGTH_SHORT).show();
+                } else {
+                    Float salary = Float.parseFloat(String.valueOf(culturalWorkersSalaryEdit.getText()));
+                    if (salary > (culture.getCulturalWorkersSalaryNeed() * 10) || salary < 0) {
+                        Toast.makeText(MinistryActivity.this, ("Have you lost your mind, " + (country.getRuler().getSex() == Sex.MALE ? "sir?" : "ma'am?")), Toast.LENGTH_SHORT).show();
+                    } else {
+                        culture.setCulturalWorkersSalary(salary);
+                        MinistryActivity.this.recreate();
+                    }
+                }
+            });
+
+
+            // TODO: Workers need change to dynamic
+            EditText wantToBuildMonumentsEdit = new EditText(this);
+            wantToBuildMonumentsEdit.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+            wantToBuildMonumentsEdit.setInputType(InputType.TYPE_CLASS_NUMBER);
+            wantToBuildMonumentsEdit.setHint("How much monuments want to build?");
+
+            Button buttonBuildMonument = new Button(this);
+            buttonBuildMonument.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+            buttonBuildMonument.setText("Build monument");
+            buttonBuildMonument.setOnClickListener(view -> {
+                if (TextUtils.isEmpty(wantToBuildMonumentsEdit.getText())) {
+                    Toast.makeText(MinistryActivity.this, "You need to enter something", Toast.LENGTH_SHORT).show();
+                } else {
+                    boolean showSecondMessage = true;
+                    for (int i = 0; i < Integer.parseInt(String.valueOf(wantToBuildMonumentsEdit.getText())); i++) {
+                        if (country.getMinistryOfTransportation().getFreeBuilders() < 1500) {
+                            Toast.makeText(MinistryActivity.this, "We'll build only " + i + " monuments", Toast.LENGTH_SHORT).show();
+                            showSecondMessage = false;
+                            break;
+                        }
+                        country.getMinistryOfTransportation().buildMonument();
+                    }
+                    if (showSecondMessage)
+                        Toast.makeText(MinistryActivity.this, "We'll build " + Integer.parseInt(String.valueOf(wantToBuildMonumentsEdit.getText())) + " monuments", Toast.LENGTH_SHORT).show();
+                }
+
+            });
+
+            buttonLayout.addView(culturalWorkersLimitEdit);
+            buttonLayout.addView(buttonConfirmCulturalWorkersLimitEdit);
+            buttonLayout.addView(culturalWorkersSalaryEdit);
+            buttonLayout.addView(buttonConfirmCulturalWorkersSalaryEdit);
+            buttonLayout.addView(wantToBuildMonumentsEdit);
+            buttonLayout.addView(buttonBuildMonument);
+
+
         } else if (MainGameMenuActivity.selectedMinistry == 9) {
             ministry = country.getMinistryOfInternalAffairs();
         } else if (MainGameMenuActivity.selectedMinistry == 10) {
@@ -423,7 +508,8 @@ public class MinistryActivity extends AppCompatActivity implements View.OnClickL
 
             Slider libertySlider = new Slider(this);
             libertySlider.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
-            libertySlider.setValueFrom(0);
+            libertySlider.setValueFrom(1);
+            libertySlider.setValue(1);
             libertySlider.setValueTo(6);
             libertySlider.setStepSize(1);
 
@@ -431,13 +517,8 @@ public class MinistryActivity extends AppCompatActivity implements View.OnClickL
             libertySlider.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
             libertyButton.setText("Confirm liberty level");
             libertyButton.setOnClickListener(view -> {
-                if (libertySlider.getValue() > 0f) {
-                    justice.setLevelOfJudgesLiberty((int) libertySlider.getValue());
-                    MinistryActivity.this.recreate();
-                } else {
-                    Toast.makeText(MinistryActivity.this, "Level cannot be 0", Toast.LENGTH_SHORT).show();
-                }
-
+                justice.setLevelOfJudgesLiberty((int) libertySlider.getValue());
+                MinistryActivity.this.recreate();
             });
 
             buttonLayout.addView(judgesLimitEdit);
