@@ -33,13 +33,10 @@ public class MinistryOfDefense extends Ministry {
     private float airForceOfficersSalaryNeed;
 
     private int armyPower;
-    private int armyPowerLimit;
 
     private int navyPower;
-    private int navyPowerLimit;
 
     private int airPower;
-    private int airPowerLimit;
 
     private boolean conscription;
 
@@ -95,12 +92,200 @@ public class MinistryOfDefense extends Ministry {
         return militaryIndustryNeed;
     }
 
+    public int getGenerals() {
+        return generals;
+    }
+
+    public void setGenerals(int generals) {
+        this.generals = generals;
+    }
+
+    public int getGeneralsLimit() {
+        return generalsLimit;
+    }
+
+    public void setGeneralsLimit(int generalsLimit) {
+        this.generalsLimit = generalsLimit;
+    }
+
+    public int getMaximumGeneralsLimit() {
+        return maximumGeneralsLimit;
+    }
+
+    public void setMaximumGeneralsLimit(int maximumGeneralsLimit) {
+        this.maximumGeneralsLimit = maximumGeneralsLimit;
+    }
+
+    public int getGeneralsNeed() {
+        return generalsNeed;
+    }
+
+    public void setGeneralsNeed(int generalsNeed) {
+        this.generalsNeed = generalsNeed;
+    }
+
+    public float getGeneralsSalary() {
+        return generalsSalary;
+    }
+
+    public void setGeneralsSalary(float generalsSalary) {
+        this.generalsSalary = generalsSalary;
+    }
+
+    public float getGeneralsSalaryNeed() {
+        return generalsSalaryNeed;
+    }
+
+    public void setGeneralsSalaryNeed(float generalsSalaryNeed) {
+        this.generalsSalaryNeed = generalsSalaryNeed;
+    }
+
+    public int getAdmirals() {
+        return admirals;
+    }
+
+    public void setAdmirals(int admirals) {
+        this.admirals = admirals;
+    }
+
+    public int getAdmiralsLimit() {
+        return admiralsLimit;
+    }
+
+    public void setAdmiralsLimit(int admiralsLimit) {
+        this.admiralsLimit = admiralsLimit;
+    }
+
+    public int getMaximumAdmiralsLimit() {
+        return maximumAdmiralsLimit;
+    }
+
+    public void setMaximumAdmiralsLimit(int maximumAdmiralsLimit) {
+        this.maximumAdmiralsLimit = maximumAdmiralsLimit;
+    }
+
+    public int getAdmiralsNeed() {
+        return admiralsNeed;
+    }
+
+    public void setAdmiralsNeed(int admiralsNeed) {
+        this.admiralsNeed = admiralsNeed;
+    }
+
+    public float getAdmiralsSalary() {
+        return admiralsSalary;
+    }
+
+    public void setAdmiralsSalary(float admiralsSalary) {
+        this.admiralsSalary = admiralsSalary;
+    }
+
+    public float getAdmiralsSalaryNeed() {
+        return admiralsSalaryNeed;
+    }
+
+    public void setAdmiralsSalaryNeed(float admiralsSalaryNeed) {
+        this.admiralsSalaryNeed = admiralsSalaryNeed;
+    }
+
+    public int getAirForceOfficers() {
+        return airForceOfficers;
+    }
+
+    public void setAirForceOfficers(int airForceOfficers) {
+        this.airForceOfficers = airForceOfficers;
+    }
+
+    public int getAirForceOfficersLimit() {
+        return airForceOfficersLimit;
+    }
+
+    public void setAirForceOfficersLimit(int airForceOfficersLimit) {
+        this.airForceOfficersLimit = airForceOfficersLimit;
+    }
+
+    public int getMaximumAirForceOfficersLimit() {
+        return maximumAirForceOfficersLimit;
+    }
+
+    public void setMaximumAirForceOfficersLimit(int maximumAirForceOfficersLimit) {
+        this.maximumAirForceOfficersLimit = maximumAirForceOfficersLimit;
+    }
+
+    public int getAirForceOfficersNeed() {
+        return airForceOfficersNeed;
+    }
+
+    public void setAirForceOfficersNeed(int airForceOfficersNeed) {
+        this.airForceOfficersNeed = airForceOfficersNeed;
+    }
+
+    public float getAirForceOfficersSalary() {
+        return airForceOfficersSalary;
+    }
+
+    public void setAirForceOfficersSalary(float airForceOfficersSalary) {
+        this.airForceOfficersSalary = airForceOfficersSalary;
+    }
+
+    public float getAirForceOfficersSalaryNeed() {
+        return airForceOfficersSalaryNeed;
+    }
+
+    public void setAirForceOfficersSalaryNeed(float airForceOfficersSalaryNeed) {
+        this.airForceOfficersSalaryNeed = airForceOfficersSalaryNeed;
+    }
+
+    public int getArmyPower() {
+        return armyPower;
+    }
+
+    public void setArmyPower(int armyPower) {
+        this.armyPower = armyPower;
+    }
+
+    public int getNavyPower() {
+        return navyPower;
+    }
+
+    public void setNavyPower(int navyPower) {
+        this.navyPower = navyPower;
+    }
+
+    public int getAirPower() {
+        return airPower;
+    }
+
+    public void setAirPower(int airPower) {
+        this.airPower = airPower;
+    }
+
+    public boolean isConscription() {
+        return conscription;
+    }
+
+    public void setConscription(boolean conscription) {
+        this.conscription = conscription;
+    }
+
+    public void setFuelNeed(float fuelNeed) {
+        this.fuelNeed = fuelNeed;
+    }
+
+    public void setMilitaryIndustryNeed(float militaryIndustryNeed) {
+        this.militaryIndustryNeed = militaryIndustryNeed;
+    }
+
     @Override
     public void updateMinistry() {
         super.updateMinistry();
 
+        armyPower *= conscription ? 1.1 : 1;
+        navyPower *= conscription ? 1.05 : 1;
+        airPower *= conscription ? 1.05 : 1;
+
         efficiency *= generalBudget / generalBudgetNeed;
-        efficiency *= conscription ? 0.95 : 1.05;
+        efficiency *= conscription ? 0.85 : 1.05;
     }
 
     @Override
@@ -284,14 +469,11 @@ public class MinistryOfDefense extends Ministry {
 
         conscription = random.nextBoolean();
 
-        armyPowerLimit = (int) ((economy.getLabor_force() / (conscription ? 450f : 650f)) * (modifierArmy + random.nextFloat() * (0.03 - (-0.03)) + (-0.03)));
-        armyPower = armyPowerLimit;
+        armyPower = (int) ((economy.getLabor_force() / (conscription ? 450f : 650f)) * (modifierArmy + random.nextFloat() * (0.03 - (-0.03)) + (-0.03)));
 
-        navyPowerLimit = (int) ((economy.getLabor_force() / (conscription ? 1050f : 1350f)) * (modifierNavy + random.nextFloat() * (0.03 - (-0.03)) + (-0.03)) * (economy.isLandlocked() ? 0 : 1));
-        navyPower = navyPowerLimit;
+        navyPower = (int) ((economy.getLabor_force() / (conscription ? 1050f : 1350f)) * (modifierNavy + random.nextFloat() * (0.03 - (-0.03)) + (-0.03)) * (economy.isLandlocked() ? 0 : 1));
 
-        airPowerLimit = (int) ((economy.getLabor_force() / (conscription ? 1450f : 1850f)) * (modifierAir + random.nextFloat() * (0.03 - (-0.03)) + (-0.03)));
-        airPower = airPowerLimit;
+        airPower = (int) ((economy.getLabor_force() / (conscription ? 1450f : 1850f)) * (modifierAir + random.nextFloat() * (0.03 - (-0.03)) + (-0.03)));
 
         generalsNeed = armyPower / 100;
         admiralsNeed = navyPower / 80;

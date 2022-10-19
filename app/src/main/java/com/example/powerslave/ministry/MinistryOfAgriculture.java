@@ -23,7 +23,6 @@ public class MinistryOfAgriculture extends Ministry {
     private float rawFoodOutput;
     private float rawOutput;
 
-
     private MinistryOfEconomy economy;
 
 
@@ -60,26 +59,97 @@ public class MinistryOfAgriculture extends Ministry {
         return farmers;
     }
 
+    public void setFarmers(int farmers) {
+        this.farmers = farmers;
+    }
+
+    public int getFarmersLimit() {
+        return farmersLimit;
+    }
+
+    public void setFarmersLimit(int farmersLimit) {
+        this.farmersLimit = farmersLimit;
+    }
+
+    public int getMaximumFarmersLimit() {
+        return maximumFarmersLimit;
+    }
+
+    public void setMaximumFarmersLimit(int maximumFarmersLimit) {
+        this.maximumFarmersLimit = maximumFarmersLimit;
+    }
+
     public float getFarmersSalary() {
         return farmersSalary;
+    }
+
+    public void setFarmersSalary(float farmersSalary) {
+        this.farmersSalary = farmersSalary;
+    }
+
+    public float getFarmersSalaryNeed() {
+        return farmersSalaryNeed;
+    }
+
+    public void setFarmersSalaryNeed(float farmersSalaryNeed) {
+        this.farmersSalaryNeed = farmersSalaryNeed;
     }
 
     public int getMiners() {
         return miners;
     }
 
+    public void setMiners(int miners) {
+        this.miners = miners;
+    }
+
+    public int getMinersLimit() {
+        return minersLimit;
+    }
+
+    public void setMinersLimit(int minersLimit) {
+        this.minersLimit = minersLimit;
+    }
+
+    public int getMaximumMinersLimit() {
+        return maximumMinersLimit;
+    }
+
+    public void setMaximumMinersLimit(int maximumMinersLimit) {
+        this.maximumMinersLimit = maximumMinersLimit;
+    }
+
     public float getMinersSalary() {
         return minersSalary;
+    }
+
+    public void setMinersSalary(float minersSalary) {
+        this.minersSalary = minersSalary;
+    }
+
+    public float getMinersSalaryNeed() {
+        return minersSalaryNeed;
+    }
+
+    public void setMinersSalaryNeed(float minersSalaryNeed) {
+        this.minersSalaryNeed = minersSalaryNeed;
     }
 
     public float getRawFoodOutput() {
         return rawFoodOutput;
     }
 
+    public void setRawFoodOutput(float rawFoodOutput) {
+        this.rawFoodOutput = rawFoodOutput;
+    }
+
     public float getRawOutput() {
         return rawOutput;
     }
 
+    public void setRawOutput(float rawOutput) {
+        this.rawOutput = rawOutput;
+    }
 
     @Override
     public void updateMinistry() {
