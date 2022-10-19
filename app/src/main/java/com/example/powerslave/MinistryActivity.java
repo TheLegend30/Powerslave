@@ -30,6 +30,7 @@ import com.example.powerslave.ministry.MinistryOfForeignAffairs;
 import com.example.powerslave.ministry.MinistryOfHealthcare;
 import com.example.powerslave.ministry.MinistryOfJustice;
 import com.example.powerslave.ministry.NationalIntelligence;
+import com.example.powerslave.ministry.Parliament;
 import com.example.powerslave.person.Minister;
 import com.example.powerslave.person.Sex;
 import com.google.android.material.slider.Slider;
@@ -415,6 +416,29 @@ public class MinistryActivity extends AppCompatActivity implements View.OnClickL
                 }
             });
 
+            TextView libertyText = new TextView(this);
+            libertyText.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+            libertyText.setText("Level of judges liberty");
+
+
+            Slider libertySlider = new Slider(this);
+            libertySlider.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+            libertySlider.setValueFrom(0);
+            libertySlider.setValueTo(6);
+            libertySlider.setStepSize(1);
+
+            Button libertyButton = new Button(this);
+            libertySlider.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+            libertyButton.setText("Confirm liberty level");
+            libertyButton.setOnClickListener(view -> {
+                if (libertySlider.getValue() > 0f) {
+                    justice.setLevelOfJudgesLiberty((int) libertySlider.getValue());
+                    MinistryActivity.this.recreate();
+                } else {
+                    Toast.makeText(MinistryActivity.this, "Level cannot be 0", Toast.LENGTH_SHORT).show();
+                }
+
+            });
 
             buttonLayout.addView(judgesLimitEdit);
             buttonLayout.addView(buttonConfirmJudgesLimitEdit);
@@ -425,6 +449,10 @@ public class MinistryActivity extends AppCompatActivity implements View.OnClickL
             buttonLayout.addView(buttonBuildPrison);
 
             buttonLayout.addView(deathPenalty);
+
+            buttonLayout.addView(libertyText);
+            buttonLayout.addView(libertySlider);
+            buttonLayout.addView(libertyButton);
         } else if (MainGameMenuActivity.selectedMinistry == 11) {
             ministry = country.getParliament();
         } else if (MainGameMenuActivity.selectedMinistry == 12) {
