@@ -61,7 +61,8 @@ public class MinistryOfTransportation extends Ministry {
     private enum Building {
         HOSPITAL,
         SCHOOL,
-        COLLEGE;
+        COLLEGE,
+        PRISON;
 
         @Override
         public String toString() {
@@ -72,6 +73,8 @@ public class MinistryOfTransportation extends Ministry {
                     return "School";
                 case COLLEGE:
                     return "College";
+                case PRISON:
+                    return "Prison";
                 default:
                     return "Not existing building";
             }
@@ -115,6 +118,12 @@ public class MinistryOfTransportation extends Ministry {
             freeBuilders -= 2000;
         }
     }
+    public void buildPrison() {
+        if (freeBuilders >= 2500) {
+            queue.add(new BuildingQueue(Building.PRISON, 2500, 8));
+            freeBuilders -= 2500;
+        }
+    }
 
     public void checkIfFinished() {
         for (Iterator<BuildingQueue> iterator = queue.iterator(); iterator.hasNext(); ) {
@@ -129,6 +138,9 @@ public class MinistryOfTransportation extends Ministry {
                         break;
                     case COLLEGE:
                         country.getMinistryOfEducation().setColleges(country.getMinistryOfEducation().getColleges() + 1);
+                        break;
+                    case PRISON:
+                        country.getMinistryOfJustice().setPrisons(country.getMinistryOfJustice().getPrisons() + 1);
                         break;
                 }
                 freeBuilders += b.workers;

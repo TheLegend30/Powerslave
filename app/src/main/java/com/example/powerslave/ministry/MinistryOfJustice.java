@@ -17,7 +17,6 @@ public class MinistryOfJustice extends Ministry {
     private float judgesSalaryNeed;
 
     private int prisons;
-    private int prisonsLimit;
     private int prisonsNeed;
 
     private int levelOfJudgesLiberty;
@@ -47,6 +46,58 @@ public class MinistryOfJustice extends Ministry {
 
     public void setDeathPenalty(boolean deathPenalty) {
         this.deathPenalty = deathPenalty;
+    }
+
+    public int getJudgesLimit() {
+        return judgesLimit;
+    }
+
+    public void setJudgesLimit(int judgesLimit) {
+        this.judgesLimit = judgesLimit;
+    }
+
+    public int getMaximumJudgesLimit() {
+        return maximumJudgesLimit;
+    }
+
+    public void setMaximumJudgesLimit(int maximumJudgesLimit) {
+        this.maximumJudgesLimit = maximumJudgesLimit;
+    }
+
+    public float getJudgesSalary() {
+        return judgesSalary;
+    }
+
+    public void setJudgesSalary(float judgesSalary) {
+        this.judgesSalary = judgesSalary;
+    }
+
+    public float getJudgesSalaryNeed() {
+        return judgesSalaryNeed;
+    }
+
+    public void setJudgesSalaryNeed(float judgesSalaryNeed) {
+        this.judgesSalaryNeed = judgesSalaryNeed;
+    }
+
+    public int getPrisons() {
+        return prisons;
+    }
+
+    public void setPrisons(int prisons) {
+        this.prisons = prisons;
+    }
+
+    public int getPrisonsNeed() {
+        return prisonsNeed;
+    }
+
+    public void setPrisonsNeed(int prisonsNeed) {
+        this.prisonsNeed = prisonsNeed;
+    }
+
+    public void setLevelOfJudgesLiberty(int levelOfJudgesLiberty) {
+        this.levelOfJudgesLiberty = levelOfJudgesLiberty;
     }
 
     @Override
@@ -194,8 +245,7 @@ public class MinistryOfJustice extends Ministry {
 
         judgesSalary = (float) (economy.getGdpPerPerson() * (modifierJudgesSalary + (random.nextFloat() * (0.05 - (-0.05)) + (-0.05))));
 
-        prisonsLimit = (int) (prisonsNeed * (modifierPrisons + (random.nextFloat() * (0.05 - (-0.05)) + (-0.05))));
-        prisons = prisonsLimit;
+        prisons = (int) (prisonsNeed * (modifierPrisons + (random.nextFloat() * (0.05 - (-0.05)) + (-0.05))));
 
         levelOfJudgesLiberty = (modifierLevelOfJudgesLiberty + (random.nextInt((1 - (-1))) + (-1)));
 

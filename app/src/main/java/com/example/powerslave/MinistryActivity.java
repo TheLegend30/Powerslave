@@ -12,6 +12,8 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -26,6 +28,7 @@ import com.example.powerslave.ministry.Ministry;
 import com.example.powerslave.ministry.MinistryOfEducation;
 import com.example.powerslave.ministry.MinistryOfForeignAffairs;
 import com.example.powerslave.ministry.MinistryOfHealthcare;
+import com.example.powerslave.ministry.MinistryOfJustice;
 import com.example.powerslave.ministry.NationalIntelligence;
 import com.example.powerslave.person.Minister;
 import com.example.powerslave.person.Sex;
@@ -326,6 +329,102 @@ public class MinistryActivity extends AppCompatActivity implements View.OnClickL
             ministry = country.getMinistryOfInternalAffairs();
         } else if (MainGameMenuActivity.selectedMinistry == 10) {
             ministry = country.getMinistryOfJustice();
+
+            MinistryOfJustice justice = (MinistryOfJustice) ministry;
+
+            EditText judgesLimitEdit = new EditText(this);
+            judgesLimitEdit.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+            judgesLimitEdit.setInputType(InputType.TYPE_CLASS_NUMBER);
+            judgesLimitEdit.setHint("Enter limit of judges");
+
+            Button buttonConfirmJudgesLimitEdit = new Button(this);
+            buttonConfirmJudgesLimitEdit.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+            buttonConfirmJudgesLimitEdit.setText("Confirm limit");
+            buttonConfirmJudgesLimitEdit.setOnClickListener(view -> {
+                if (TextUtils.isEmpty(judgesLimitEdit.getText())) {
+                    Toast.makeText(MinistryActivity.this, "You need to enter something", Toast.LENGTH_SHORT).show();
+                } else {
+                    Integer limit = Integer.parseInt(String.valueOf(judgesLimitEdit.getText()));
+                    if (limit > justice.getMaximumJudgesLimit() || limit < 0) {
+                        Toast.makeText(MinistryActivity.this, ("Have you lost your mind, " + (country.getRuler().getSex() == Sex.MALE ? "sir?" : "ma'am?")), Toast.LENGTH_SHORT).show();
+                    } else {
+                        justice.setJudgesLimit(limit);
+                        MinistryActivity.this.recreate();
+                    }
+                }
+            });
+
+            EditText judgesSalaryEdit = new EditText(this);
+            judgesSalaryEdit.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+            judgesSalaryEdit.setInputType(InputType.TYPE_CLASS_NUMBER);
+            judgesSalaryEdit.setHint("Enter salary of judges");
+
+            Button buttonConfirmJudgesSalaryEdit = new Button(this);
+            buttonConfirmJudgesSalaryEdit.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+            buttonConfirmJudgesSalaryEdit.setText("Confirm salary");
+            buttonConfirmJudgesSalaryEdit.setOnClickListener(view -> {
+                if (TextUtils.isEmpty(judgesSalaryEdit.getText())) {
+                    Toast.makeText(MinistryActivity.this, "You need to enter something", Toast.LENGTH_SHORT).show();
+                } else {
+                    Float salary = Float.parseFloat(String.valueOf(judgesSalaryEdit.getText()));
+                    if (salary > (justice.getJudgesSalaryNeed() * 10) || salary < 0) {
+                        Toast.makeText(MinistryActivity.this, ("Have you lost your mind, " + (country.getRuler().getSex() == Sex.MALE ? "sir?" : "ma'am?")), Toast.LENGTH_SHORT).show();
+                    } else {
+                        justice.setJudgesSalary(salary);
+                        MinistryActivity.this.recreate();
+                    }
+                }
+            });
+
+
+            EditText wantToBuildPrionsEdit = new EditText(this);
+            wantToBuildPrionsEdit.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+            wantToBuildPrionsEdit.setInputType(InputType.TYPE_CLASS_NUMBER);
+            wantToBuildPrionsEdit.setHint("How much prisons want to build?");
+
+            Button buttonBuildPrison = new Button(this);
+            buttonBuildPrison.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+            buttonBuildPrison.setText("Build prison");
+            buttonBuildPrison.setOnClickListener(view -> {
+                if (TextUtils.isEmpty(wantToBuildPrionsEdit.getText())) {
+                    Toast.makeText(MinistryActivity.this, "You need to enter something", Toast.LENGTH_SHORT).show();
+                } else {
+                    boolean showSecondMessage = true;
+                    for (int i = 0; i < Integer.parseInt(String.valueOf(wantToBuildPrionsEdit.getText())); i++) {
+                        if (country.getMinistryOfTransportation().getFreeBuilders() < 2500) {
+                            Toast.makeText(MinistryActivity.this, "We'll build only " + i + " prisons", Toast.LENGTH_SHORT).show();
+                            showSecondMessage = false;
+                            break;
+                        }
+                        country.getMinistryOfTransportation().buildPrison();
+                    }
+                    if (showSecondMessage)
+                        Toast.makeText(MinistryActivity.this, "We'll build " + Integer.parseInt(String.valueOf(wantToBuildPrionsEdit.getText())) + " prisons", Toast.LENGTH_SHORT).show();
+                }
+
+            });
+
+            CheckBox deathPenalty = new CheckBox(this);
+            deathPenalty.setText("Death Penalty");
+            deathPenalty.setChecked(justice.isDeathPenalty());
+            deathPenalty.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                    justice.setDeathPenalty(b);
+                    MinistryActivity.this.recreate();
+                }
+            });
+
+
+            buttonLayout.addView(judgesLimitEdit);
+            buttonLayout.addView(buttonConfirmJudgesLimitEdit);
+            buttonLayout.addView(judgesSalaryEdit);
+            buttonLayout.addView(buttonConfirmJudgesSalaryEdit);
+
+            buttonLayout.addView(wantToBuildPrionsEdit);
+            buttonLayout.addView(buttonBuildPrison);
+
+            buttonLayout.addView(deathPenalty);
         } else if (MainGameMenuActivity.selectedMinistry == 11) {
             ministry = country.getParliament();
         } else if (MainGameMenuActivity.selectedMinistry == 12) {
