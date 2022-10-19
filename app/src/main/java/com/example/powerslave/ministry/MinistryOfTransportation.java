@@ -63,6 +63,7 @@ public class MinistryOfTransportation extends Ministry {
         SCHOOL,
         COLLEGE,
         MONUMENT,
+        DEPARTMENT,
         PRISON;
 
         @Override
@@ -76,6 +77,8 @@ public class MinistryOfTransportation extends Ministry {
                     return "College";
                 case MONUMENT:
                     return "Monument";
+                case DEPARTMENT:
+                    return "Department";
                 case PRISON:
                     return "Prison";
                 default:
@@ -129,6 +132,13 @@ public class MinistryOfTransportation extends Ministry {
         }
     }
 
+    public void buildDepartment() {
+        if (freeBuilders >= 1700) {
+            queue.add(new BuildingQueue(Building.DEPARTMENT, 1700, 9));
+            freeBuilders -= 1700;
+        }
+    }
+
     public void buildPrison() {
         if (freeBuilders >= 2500) {
             queue.add(new BuildingQueue(Building.PRISON, 2500, 10));
@@ -152,6 +162,9 @@ public class MinistryOfTransportation extends Ministry {
                         break;
                     case MONUMENT:
                         country.getMinistryOfCulture().setMonuments(country.getMinistryOfCulture().getMonuments() + 1);
+                        break;
+                    case DEPARTMENT:
+                        country.getMinistryOfInternalAffairs().setDepartments(country.getMinistryOfInternalAffairs().getDepartments() + 1);
                         break;
                     case PRISON:
                         country.getMinistryOfJustice().setPrisons(country.getMinistryOfJustice().getPrisons() + 1);

@@ -38,6 +38,86 @@ public class MinistryOfInternalAffairs extends Ministry {
         return levelOfSecurity;
     }
 
+    public int getPolicemen() {
+        return policemen;
+    }
+
+    public void setPolicemen(int policemen) {
+        this.policemen = policemen;
+    }
+
+    public int getPolicemenLimit() {
+        return policemenLimit;
+    }
+
+    public void setPolicemenLimit(int policemenLimit) {
+        this.policemenLimit = policemenLimit;
+    }
+
+    public int getMaximumPolicemenLimit() {
+        return maximumPolicemenLimit;
+    }
+
+    public void setMaximumPolicemenLimit(int maximumPolicemenLimit) {
+        this.maximumPolicemenLimit = maximumPolicemenLimit;
+    }
+
+    public int getPolicemenNeed() {
+        return policemenNeed;
+    }
+
+    public void setPolicemenNeed(int policemenNeed) {
+        this.policemenNeed = policemenNeed;
+    }
+
+    public float getPolicemenSalary() {
+        return policemenSalary;
+    }
+
+    public void setPolicemenSalary(float policemenSalary) {
+        this.policemenSalary = policemenSalary;
+    }
+
+    public float getPolicemenSalaryNeed() {
+        return policemenSalaryNeed;
+    }
+
+    public void setPolicemenSalaryNeed(float policemenSalaryNeed) {
+        this.policemenSalaryNeed = policemenSalaryNeed;
+    }
+
+    public int getDepartments() {
+        return departments;
+    }
+
+    public void setDepartments(int departments) {
+        this.departments = departments;
+    }
+
+    public int getDepartmentsLimit() {
+        return departmentsLimit;
+    }
+
+    public void setDepartmentsLimit(int departmentsLimit) {
+        this.departmentsLimit = departmentsLimit;
+    }
+
+    public int getDepartmentsNeed() {
+        return departmentsNeed;
+    }
+
+    public void setDepartmentsNeed(int departmentsNeed) {
+        this.departmentsNeed = departmentsNeed;
+    }
+
+    public void setCrime(int crime) {
+        this.crime = crime;
+    }
+
+    public void setLevelOfSecurity(int levelOfSecurity) {
+        this.levelOfSecurity = levelOfSecurity;
+    }
+
     @Override
     public String toString() {
         String string;

@@ -29,6 +29,7 @@ import com.example.powerslave.ministry.MinistryOfCulture;
 import com.example.powerslave.ministry.MinistryOfEducation;
 import com.example.powerslave.ministry.MinistryOfForeignAffairs;
 import com.example.powerslave.ministry.MinistryOfHealthcare;
+import com.example.powerslave.ministry.MinistryOfInternalAffairs;
 import com.example.powerslave.ministry.MinistryOfJustice;
 import com.example.powerslave.ministry.NationalIntelligence;
 import com.example.powerslave.ministry.Parliament;
@@ -413,6 +414,110 @@ public class MinistryActivity extends AppCompatActivity implements View.OnClickL
 
         } else if (MainGameMenuActivity.selectedMinistry == 9) {
             ministry = country.getMinistryOfInternalAffairs();
+
+            MinistryOfInternalAffairs internalAffairs = (MinistryOfInternalAffairs) ministry;
+
+            EditText policemenLimitEdit = new EditText(this);
+            policemenLimitEdit.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+            policemenLimitEdit.setInputType(InputType.TYPE_CLASS_NUMBER);
+            policemenLimitEdit.setHint("Enter limit of policemen");
+
+            Button buttonConfirmPolicemenLimitEdit = new Button(this);
+            buttonConfirmPolicemenLimitEdit.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+            buttonConfirmPolicemenLimitEdit.setText("Confirm limit");
+            buttonConfirmPolicemenLimitEdit.setOnClickListener(view -> {
+                if (TextUtils.isEmpty(policemenLimitEdit.getText())) {
+                    Toast.makeText(MinistryActivity.this, "You need to enter something", Toast.LENGTH_SHORT).show();
+                } else {
+                    Integer limit = Integer.parseInt(String.valueOf(policemenLimitEdit.getText()));
+                    if (limit > internalAffairs.getMaximumPolicemenLimit() || limit < 0) {
+                        Toast.makeText(MinistryActivity.this, ("Have you lost your mind, " + (country.getRuler().getSex() == Sex.MALE ? "sir?" : "ma'am?")), Toast.LENGTH_SHORT).show();
+                    } else {
+                        internalAffairs.setPolicemenLimit(limit);
+                        MinistryActivity.this.recreate();
+                    }
+                }
+            });
+
+            EditText policemenSalaryEdit = new EditText(this);
+            policemenSalaryEdit.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+            policemenSalaryEdit.setInputType(InputType.TYPE_CLASS_NUMBER);
+            policemenSalaryEdit.setHint("Enter salary of policemen");
+
+            Button buttonConfirmPolicemenSalaryEdit = new Button(this);
+            buttonConfirmPolicemenSalaryEdit.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+            buttonConfirmPolicemenSalaryEdit.setText("Confirm salary");
+            buttonConfirmPolicemenSalaryEdit.setOnClickListener(view -> {
+                if (TextUtils.isEmpty(policemenSalaryEdit.getText())) {
+                    Toast.makeText(MinistryActivity.this, "You need to enter something", Toast.LENGTH_SHORT).show();
+                } else {
+                    Float salary = Float.parseFloat(String.valueOf(policemenSalaryEdit.getText()));
+                    if (salary > (internalAffairs.getPolicemenSalaryNeed() * 10) || salary < 0) {
+                        Toast.makeText(MinistryActivity.this, ("Have you lost your mind, " + (country.getRuler().getSex() == Sex.MALE ? "sir?" : "ma'am?")), Toast.LENGTH_SHORT).show();
+                    } else {
+                        internalAffairs.setPolicemenSalary(salary);
+                        MinistryActivity.this.recreate();
+                    }
+                }
+            });
+
+            EditText wantToBuildDepartmentsEdit = new EditText(this);
+            wantToBuildDepartmentsEdit.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+            wantToBuildDepartmentsEdit.setInputType(InputType.TYPE_CLASS_NUMBER);
+            wantToBuildDepartmentsEdit.setHint("How much departments want to build?");
+
+            Button buttonBuildDepartment = new Button(this);
+            buttonBuildDepartment.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+            buttonBuildDepartment.setText("Build monument");
+            buttonBuildDepartment.setOnClickListener(view -> {
+                if (TextUtils.isEmpty(wantToBuildDepartmentsEdit.getText())) {
+                    Toast.makeText(MinistryActivity.this, "You need to enter something", Toast.LENGTH_SHORT).show();
+                } else {
+                    boolean showSecondMessage = true;
+                    for (int i = 0; i < Integer.parseInt(String.valueOf(wantToBuildDepartmentsEdit.getText())); i++) {
+                        if (country.getMinistryOfTransportation().getFreeBuilders() < 1700) {
+                            Toast.makeText(MinistryActivity.this, "We'll build only " + i + " departments", Toast.LENGTH_SHORT).show();
+                            showSecondMessage = false;
+                            break;
+                        }
+                        country.getMinistryOfTransportation().buildDepartment();
+                    }
+                    if (showSecondMessage)
+                        Toast.makeText(MinistryActivity.this, "We'll build " + Integer.parseInt(String.valueOf(wantToBuildDepartmentsEdit.getText())) + " departments", Toast.LENGTH_SHORT).show();
+                }
+
+            });
+
+            TextView securityText = new TextView(this);
+            securityText.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+            securityText.setText("Level of security");
+
+
+            Slider securitySlider = new Slider(this);
+            securitySlider.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+            securitySlider.setValueFrom(1);
+            securitySlider.setValue(1);
+            securitySlider.setValueTo(6);
+            securitySlider.setStepSize(1);
+
+            Button securityButton = new Button(this);
+            securitySlider.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+            securityButton.setText("Confirm security level");
+            securityButton.setOnClickListener(view -> {
+                internalAffairs.setLevelOfSecurity((int) securitySlider.getValue());
+                MinistryActivity.this.recreate();
+            });
+
+            buttonLayout.addView(policemenLimitEdit);
+            buttonLayout.addView(buttonConfirmPolicemenLimitEdit);
+            buttonLayout.addView(policemenSalaryEdit);
+            buttonLayout.addView(buttonConfirmPolicemenSalaryEdit);
+            buttonLayout.addView(wantToBuildDepartmentsEdit);
+            buttonLayout.addView(buttonBuildDepartment);
+
+            buttonLayout.addView(securityText);
+            buttonLayout.addView(securitySlider);
+            buttonLayout.addView(securityButton);
         } else if (MainGameMenuActivity.selectedMinistry == 10) {
             ministry = country.getMinistryOfJustice();
 
