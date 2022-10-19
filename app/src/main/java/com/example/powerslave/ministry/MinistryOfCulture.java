@@ -112,6 +112,12 @@ public class MinistryOfCulture extends Ministry{
     @Override
     public void updateMinistry() {
         super.updateMinistry();
+        culturalWorkersNeed = monuments * 150;
+        culturalWorkersSalaryNeed = economy.getGdpPerPerson() * 0.55f;
+        maximumCulturalWorkersLimit = culturalWorkersNeed * 10;
+
+        generalBudgetNeed = (culturalWorkers * 0.2f) + (culturalWorkers * culturalWorkersSalaryNeed) + (monuments * 3000f);
+        generalBudget += (culturalWorkers * culturalWorkersSalary);
 
         efficiency *= (float) culturalWorkers / culturalWorkersNeed;
         efficiency *= generalBudget / generalBudgetNeed;
@@ -181,19 +187,13 @@ public class MinistryOfCulture extends Ministry{
                 break;
         }
 
-        culturalWorkersSalaryNeed = economy.getGdpPerPerson() * 0.45f;
+
 
         culturalWorkersLimit = (int) (economy.getLabor_force() * (modifierCulturalWorkers + (random.nextFloat() * (0.00005f - (-0.00005f)) + (-0.00005f))));
         culturalWorkers = culturalWorkersLimit;
         culturalWorkersSalary = economy.getGdpPerPerson() * (modifierCulturalWorkersSalary + (random.nextFloat() * (0.05f - (-0.05f)) + (-0.05f)));
 
         monuments = (int) ((economy.getArea() / 1000) * (modifierMonuments + (random.nextFloat() * (0.005f - (-0.005f)) + (-0.005f))));
-        generalBudgetNeed = (culturalWorkers * 0.2f) + (culturalWorkers * culturalWorkersSalary) + (monuments * 3000f);
-        generalBudget = generalBudgetNeed * (random.nextFloat() * (0.8f - (0.2f)) + (0.f));
-
-        culturalWorkersNeed = monuments * 150;
-
-        maximumCulturalWorkersLimit = culturalWorkersNeed * 10;
     }
 
     @Override

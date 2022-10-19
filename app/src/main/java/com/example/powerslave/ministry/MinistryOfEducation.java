@@ -165,8 +165,16 @@ public class MinistryOfEducation extends Ministry {
     public void updateMinistry() {
         super.updateMinistry();
         liberty = ((2.5f / country.getMinistryOfInternalAffairs().getLevelOfSecurity()) * (4.5f / country.getMinistryOfJustice().getLevelOfJudgesLiberty())) * (degree * 25f) * (literacy / 25f) * (efficiency * 1.25f) * (country.getMinistryOfJustice().isDeathPenalty() ? 0.95f : 1.05f);
+
+        teachersSalaryNeed = (float) (economy.getGdpPerPerson() / 1.5);
+        schoolsNeed = (int) Math.ceil(children / 500);
+        collegesNeed = (int) Math.ceil(students / 1250);
+        teachersNeed = (children + students) / 35;
+
         generalBudgetNeed = (teachers * 0.45f) + (teachers * teachersSalaryNeed) + (schools * 230f) + (colleges * 1025f);
-        generalBudget = (teachers * teachersSalary) + ministryFunding;
+        generalBudget += (teachers * teachersSalary);
+        maximumTeachersLimit = teachersNeed * 9;
+
         efficiency *= generalBudget / generalBudgetNeed;
         efficiency *= ((float) (schools + colleges) / (float) (schoolsNeed + collegesNeed));
         efficiency *= ((float) teachers / (float) teachersNeed);
@@ -189,8 +197,6 @@ public class MinistryOfEducation extends Ministry {
         float modifierLiteracy = 0f;
         float modifierDegree = 0f;
 
-        float modifierGeneralBudget = 0f;
-
         switch (country.getContinent()) {
             case EY:
                 modifierTeachers = 0.013f;
@@ -204,7 +210,6 @@ public class MinistryOfEducation extends Ministry {
                 modifierLiteracy = 0.8f;
                 modifierDegree = 0.08f;
 
-                modifierGeneralBudget = 0.65f;
                 break;
             case NY:
                 modifierTeachers = 0.017f;
@@ -218,7 +223,6 @@ public class MinistryOfEducation extends Ministry {
                 modifierLiteracy = 0.9f;
                 modifierDegree = 0.11f;
 
-                modifierGeneralBudget = 0.85f;
                 break;
             case SY:
                 modifierTeachers = 0.01f;
@@ -232,7 +236,6 @@ public class MinistryOfEducation extends Ministry {
                 modifierLiteracy = 0.65f;
                 modifierDegree = 0.07f;
 
-                modifierGeneralBudget = 0.6f;
                 break;
             case WY:
                 modifierTeachers = 0.02f;
@@ -246,7 +249,6 @@ public class MinistryOfEducation extends Ministry {
                 modifierLiteracy = 0.95f;
                 modifierDegree = 0.14f;
 
-                modifierGeneralBudget = 0.9f;
                 break;
             case IB:
                 modifierTeachers = 0.008f;
@@ -260,7 +262,6 @@ public class MinistryOfEducation extends Ministry {
                 modifierLiteracy = 0.5f;
                 modifierDegree = 0.025f;
 
-                modifierGeneralBudget = 0.55f;
                 break;
             case OB:
                 modifierTeachers = 0.009f;
@@ -274,7 +275,6 @@ public class MinistryOfEducation extends Ministry {
                 modifierLiteracy = 0.6f;
                 modifierDegree = 0.02f;
 
-                modifierGeneralBudget = 0.5f;
                 break;
             case CA:
                 modifierTeachers = 0.0095f;
@@ -288,7 +288,6 @@ public class MinistryOfEducation extends Ministry {
                 modifierLiteracy = 0.4f;
                 modifierDegree = 0.01f;
 
-                modifierGeneralBudget = 0.45f;
                 break;
             case FA:
                 modifierTeachers = 0.008f;
@@ -302,7 +301,6 @@ public class MinistryOfEducation extends Ministry {
                 modifierLiteracy = 0.42f;
                 modifierDegree = 0.015f;
 
-                modifierGeneralBudget = 0.4f;
                 break;
             case ME:
                 modifierTeachers = 0.0075f;
@@ -316,7 +314,6 @@ public class MinistryOfEducation extends Ministry {
                 modifierLiteracy = 0.25f;
                 modifierDegree = 0.01f;
 
-                modifierGeneralBudget = 0.3f;
                 break;
             case GE:
                 modifierTeachers = 0.018f;
@@ -330,7 +327,6 @@ public class MinistryOfEducation extends Ministry {
                 modifierLiteracy = 0.85f;
                 modifierDegree = 0.09f;
 
-                modifierGeneralBudget = 0.8f;
                 break;
         }
 
@@ -352,10 +348,6 @@ public class MinistryOfEducation extends Ministry {
 
         literacy = (float) (modifierLiteracy + (random.nextFloat() * (0.01 - (-0.01)) + (-0.01)));
         degree = (float) (modifierDegree + (random.nextFloat() * (0.01 - (-0.01)) + (-0.01)));
-
-        generalBudgetNeed = (teachers * 0.45f) + (teachers * teachersSalary) + (schools * 230f) + (colleges * 1025f);
-        generalBudget = generalBudgetNeed * (modifierGeneralBudget + (random.nextFloat() * (0.05f - (-0.05f)) + (-0.05f)));
-        maximumTeachersLimit = teachersNeed * 9;
     }
 
     @Override

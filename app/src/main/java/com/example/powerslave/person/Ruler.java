@@ -39,6 +39,7 @@ public class Ruler extends Person {
     }
 
     public void changeRating() {
+//       TODO: Rating will be change by social ministries
         float rating = 1f;
         rating *= (country.getMinistryOfHealthcare().getEfficiency() / 0.5f);
         rating *= (country.getMinistryOfEducation().getEfficiency() / 0.5f);

@@ -95,6 +95,11 @@ public class MinistryOfDevelopment extends Ministry {
     @Override
     public void updateMinistry() {
         super.updateMinistry();
+        clerksSalaryNeed = economy.getGdpPerPerson() * 0.75f;
+
+        generalBudgetNeed = (clerks * 0.2f) + (clerks * clerksSalaryNeed);
+        generalBudget += (clerks * clerksSalary);
+        maximumClerksLimit = (int) (economy.getLabor_force() * 0.2f);
 
         efficiency *= generalBudget / generalBudgetNeed;
 
@@ -115,78 +120,66 @@ public class MinistryOfDevelopment extends Ministry {
         float modifierClerksSalary = 0f;
         float modifierEntrepreneurs = 0f;
 
-        float modifierGeneralBudget = 0f;
-
         switch (country.getContinent()) {
             case EY:
                 modifierClerks = 0.1f;
                 modifierClerksSalary = 0.75f;
                 modifierEntrepreneurs = 0.02f;
 
-                modifierGeneralBudget = 0.64f;
                 break;
             case NY:
                 modifierClerks = 0.13f;
                 modifierClerksSalary = 0.8f;
                 modifierEntrepreneurs = 0.04f;
 
-                modifierGeneralBudget = 0.85f;
                 break;
             case SY:
                 modifierClerks = 0.1f;
                 modifierClerksSalary = 0.72f;
                 modifierEntrepreneurs = 0.025f;
 
-                modifierGeneralBudget = 0.69f;
                 break;
             case WY:
                 modifierClerks = 0.18f;
                 modifierClerksSalary = 0.85f;
                 modifierEntrepreneurs = 0.08f;
 
-                modifierGeneralBudget = 0.97f;
                 break;
             case IB:
                 modifierClerks = 0.09f;
                 modifierClerksSalary = 0.7f;
                 modifierEntrepreneurs = 0.025f;
 
-                modifierGeneralBudget = 0.72f;
                 break;
             case OB:
                 modifierClerks = 0.085f;
                 modifierClerksSalary = 0.68f;
                 modifierEntrepreneurs = 0.023f;
 
-                modifierGeneralBudget = 0.61f;
                 break;
             case CA:
                 modifierClerks = 0.08f;
                 modifierClerksSalary = 0.63f;
                 modifierEntrepreneurs = 0.02f;
 
-                modifierGeneralBudget = 0.65f;
                 break;
             case FA:
                 modifierClerks = 0.075f;
                 modifierClerksSalary = 0.6f;
                 modifierEntrepreneurs = 0.02f;
 
-                modifierGeneralBudget = 0.6f;
                 break;
             case ME:
                 modifierClerks = 0.065f;
                 modifierClerksSalary = 0.55f;
                 modifierEntrepreneurs = 0.015f;
 
-                modifierGeneralBudget = 0.55f;
                 break;
             case GE:
                 modifierClerks = 0.16f;
                 modifierClerksSalary = 0.83f;
                 modifierEntrepreneurs = 0.45f;
 
-                modifierGeneralBudget = 0.825f;
                 break;
         }
 
@@ -195,9 +188,5 @@ public class MinistryOfDevelopment extends Ministry {
         clerksSalary = economy.getGdpPerPerson() * (modifierClerksSalary + (random.nextFloat() * (0.01f - (-0.01f)) + (-0.01f)));
 
         entrepreneurs = (int) (economy.getLabor_force() * (modifierEntrepreneurs + (random.nextFloat() * (0.0005f - (-0.0005f)) + (-0.0005f))));
-
-        generalBudgetNeed = (clerks * 0.2f) + (clerks * clerksSalary);
-        generalBudget = (float) (generalBudgetNeed * (modifierGeneralBudget + (random.nextFloat() * (0.05f - (-0.05f)) + (-0.05f))));
-        maximumClerksLimit = (int) (economy.getLabor_force() * 0.2f);
     }
 }

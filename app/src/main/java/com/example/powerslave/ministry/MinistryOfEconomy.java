@@ -7,6 +7,7 @@ import com.example.powerslave.government.Country;
 import com.example.powerslave.person.Minister;
 
 public class MinistryOfEconomy extends Ministry {
+//    TODO: Make taxmans
     private long population;
     private long area;
     private float density;

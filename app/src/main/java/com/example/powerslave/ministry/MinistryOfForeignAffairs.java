@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class MinistryOfForeignAffairs extends Ministry {
-
+    // TODO: Foreign affairs rework
     private int diplomats = 0;
     private int diplomatsFree = 0;
     private int diplomatsLimit = 0;

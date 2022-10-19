@@ -120,6 +120,14 @@ public class MinistryOfJustice extends Ministry {
     @Override
     public void updateMinistry() {
         super.updateMinistry();
+        judgesNeed = (int) (economy.getPopulation() / 1050);
+        judgesSalaryNeed = (int) (economy.getGdpPerPerson() * 1.25);
+        prisonsNeed = (int) ((internalAffairs.getCrime() * (economy.getPopulation() / 100000)) / 2500);
+
+        generalBudgetNeed = (judges * 1.85f) + (judges * judgesSalaryNeed) + (prisons * 850f);
+        generalBudget += (judges * judgesSalary);
+        maximumJudgesLimit = judgesNeed * 9;
+
         efficiency *= generalBudget / generalBudgetNeed;
         efficiency *= (float) judges / (float) judgesNeed;
         efficiency *= (float) prisons / (float) prisonsNeed;
@@ -139,8 +147,6 @@ public class MinistryOfJustice extends Ministry {
 
         int modifierLevelOfJudgesLiberty = 0;
 
-        float modifierGeneralBudget = 0f;
-
         switch (country.getContinent()) {
             case EY:
                 modifierJudges = 0.0015f;
@@ -150,7 +156,6 @@ public class MinistryOfJustice extends Ministry {
 
                 modifierLevelOfJudgesLiberty = 2;
 
-                modifierGeneralBudget = 0.55f;
                 break;
             case NY:
                 modifierJudges = 0.002f;
@@ -160,7 +165,6 @@ public class MinistryOfJustice extends Ministry {
 
                 modifierLevelOfJudgesLiberty = 4;
 
-                modifierGeneralBudget = 0.75f;
                 break;
             case SY:
                 modifierJudges = 0.0013f;
@@ -169,7 +173,6 @@ public class MinistryOfJustice extends Ministry {
                 modifierPrisons = 0.55f;
                 modifierLevelOfJudgesLiberty = 2;
 
-                modifierGeneralBudget = 0.5f;
                 break;
             case WY:
                 modifierJudges = 0.0021f;
@@ -178,7 +181,6 @@ public class MinistryOfJustice extends Ministry {
                 modifierPrisons = 0.75f;
                 modifierLevelOfJudgesLiberty = 5;
 
-                modifierGeneralBudget = 0.8f;
                 break;
             case IB:
                 modifierJudges = 0.001f;
@@ -187,7 +189,6 @@ public class MinistryOfJustice extends Ministry {
                 modifierPrisons = 0.5f;
                 modifierLevelOfJudgesLiberty = 2;
 
-                modifierGeneralBudget = 0.45f;
                 break;
             case OB:
                 modifierJudges = 0.0011f;
@@ -196,7 +197,6 @@ public class MinistryOfJustice extends Ministry {
                 modifierPrisons = 0.45f;
                 modifierLevelOfJudgesLiberty = 3;
 
-                modifierGeneralBudget = 0.4f;
                 break;
             case CA:
                 modifierJudges = 0.00105f;
@@ -205,7 +205,6 @@ public class MinistryOfJustice extends Ministry {
                 modifierPrisons = 0.4f;
                 modifierLevelOfJudgesLiberty = 3;
 
-                modifierGeneralBudget = 0.4f;
                 break;
             case FA:
                 modifierJudges = 0.0009f;
@@ -214,7 +213,6 @@ public class MinistryOfJustice extends Ministry {
                 modifierPrisons = 0.35f;
                 modifierLevelOfJudgesLiberty = 2;
 
-                modifierGeneralBudget = 0.35f;
                 break;
             case ME:
                 modifierJudges = 0.0007f;
@@ -223,7 +221,6 @@ public class MinistryOfJustice extends Ministry {
                 modifierPrisons = 0.25f;
                 modifierLevelOfJudgesLiberty = 2;
 
-                modifierGeneralBudget = 0.25f;
                 break;
             case GE:
                 modifierJudges = 0.0018f;
@@ -232,7 +229,6 @@ public class MinistryOfJustice extends Ministry {
                 modifierPrisons = 0.8f;
                 modifierLevelOfJudgesLiberty = 2;
 
-                modifierGeneralBudget = 0.7f;
                 break;
         }
 
@@ -250,9 +246,5 @@ public class MinistryOfJustice extends Ministry {
         levelOfJudgesLiberty = (modifierLevelOfJudgesLiberty + (random.nextInt((1 - (-1))) + (-1)));
 
         deathPenalty = random.nextBoolean();
-
-        generalBudgetNeed = (judges * 1.85f) + (judges * judgesSalary) + (prisons * 850f);
-        generalBudget = generalBudgetNeed * (modifierGeneralBudget + (random.nextFloat() * (0.05f - (-0.05f)) + (-0.05f)));
-        maximumJudgesLimit = judgesNeed * 9;
     }
 }

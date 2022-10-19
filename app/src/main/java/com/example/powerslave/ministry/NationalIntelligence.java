@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class NationalIntelligence extends Ministry {
-
+    // TODO: Rework NationalIntelligence
     private int agents = 0;
     private int agentsFree = 0;
     private int agentsLimit = 0;

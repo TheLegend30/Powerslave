@@ -10,7 +10,7 @@ import java.util.Iterator;
 import java.util.Random;
 
 public class MinistryOfTransportation extends Ministry {
-
+// TODO: Rework MinistryOfTransportation
     private int builders;
     private int freeBuilders;
     private int buildersLimit;

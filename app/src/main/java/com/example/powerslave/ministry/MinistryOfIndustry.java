@@ -179,9 +179,16 @@ public class MinistryOfIndustry extends Ministry {
     @Override
     public void updateMinistry() {
         super.updateMinistry();
-        this.lowWorkersSalaryNeed = this.economy.getGdpPerPerson() / 2.05f;
-        this.middleWorkersSalaryNeed = this.economy.getGdpPerPerson() / 1.25f;
-        this.highWorkersSalaryNeed = this.economy.getGdpPerPerson() / 1.05f;
+        this.lowWorkersSalaryNeed = this.economy.getGdpPerPerson() * 0.6f;
+        this.middleWorkersSalaryNeed = this.economy.getGdpPerPerson() * 0.85f;
+        this.highWorkersSalaryNeed = this.economy.getGdpPerPerson() * 1.15f;
+
+        maximumLowWorkersLimit = (int) (economy.getLabor_force() * 0.45);
+        maximumMiddleWorkersLimit = (int) (economy.getLabor_force() * 0.45);
+        maximumHighWorkersLimit = (int) (economy.getLabor_force() * 0.45);
+
+        generalBudgetNeed = (lowWorkers * 0.05f) + (middleWorkers * 0.07f) + (highWorkers * 0.1f) + (lowWorkers * lowWorkersSalaryNeed) + (middleWorkers * middleWorkersSalaryNeed) + (highWorkers * highWorkersSalaryNeed);
+        generalBudget += (lowWorkers * lowWorkersSalary) + (middleWorkers * middleWorkersSalary) + (highWorkers * highWorkersSalary);
 
         efficiency *= generalBudget / generalBudgetNeed;
 
@@ -220,8 +227,6 @@ public class MinistryOfIndustry extends Ministry {
         float modifierHighWorkers = 0f;
         float modifierHighWorkersSalary = 0f;
 
-        float modifierGeneralBudget = 0f;
-
         switch (country.getContinent()) {
             case EY:
                 modifierLowWorkers = 0.3f;
@@ -233,7 +238,6 @@ public class MinistryOfIndustry extends Ministry {
                 modifierHighWorkers = 0.05f;
                 modifierHighWorkersSalary = 0.95f;
 
-                modifierGeneralBudget = 0.65f;
                 break;
             case NY:
                 modifierLowWorkers = 0.2f;
@@ -245,7 +249,6 @@ public class MinistryOfIndustry extends Ministry {
                 modifierHighWorkers = 0.1f;
                 modifierHighWorkersSalary = 1.25f;
 
-                modifierGeneralBudget = 0.75f;
                 break;
             case SY:
                 modifierLowWorkers = 0.35f;
@@ -257,7 +260,6 @@ public class MinistryOfIndustry extends Ministry {
                 modifierHighWorkers = 0.05f;
                 modifierHighWorkersSalary = 0.85f;
 
-                modifierGeneralBudget = 0.63f;
                 break;
             case WY:
                 modifierLowWorkers = 0.1f;
@@ -269,7 +271,6 @@ public class MinistryOfIndustry extends Ministry {
                 modifierHighWorkers = 0.15f;
                 modifierHighWorkersSalary = 1.3f;
 
-                modifierGeneralBudget = 0.88f;
                 break;
             case IB:
                 modifierLowWorkers = 0.25f;
@@ -281,7 +282,6 @@ public class MinistryOfIndustry extends Ministry {
                 modifierHighWorkers = 0.04f;
                 modifierHighWorkersSalary = 0.85f;
 
-                modifierGeneralBudget = 0.46f;
                 break;
             case OB:
                 modifierLowWorkers = 0.2f;
@@ -293,7 +293,6 @@ public class MinistryOfIndustry extends Ministry {
                 modifierHighWorkers = 0.03f;
                 modifierHighWorkersSalary = 0.8f;
 
-                modifierGeneralBudget = 0.45f;
                 break;
             case CA:
                 modifierLowWorkers = 0.15f;
@@ -305,7 +304,6 @@ public class MinistryOfIndustry extends Ministry {
                 modifierHighWorkers = 0.02f;
                 modifierHighWorkersSalary = 0.8f;
 
-                modifierGeneralBudget = 0.35f;
                 break;
             case FA:
                 modifierLowWorkers = 0.12f;
@@ -317,7 +315,6 @@ public class MinistryOfIndustry extends Ministry {
                 modifierHighWorkers = 0.02f;
                 modifierHighWorkersSalary = 0.75f;
 
-                modifierGeneralBudget = 0.48f;
                 break;
             case ME:
                 modifierLowWorkers = 0.1f;
@@ -329,7 +326,6 @@ public class MinistryOfIndustry extends Ministry {
                 modifierHighWorkers = 0.01f;
                 modifierHighWorkersSalary = 0.7f;
 
-                modifierGeneralBudget = 0.37f;
                 break;
             case GE:
                 modifierLowWorkers = 0.1f;
@@ -341,7 +337,6 @@ public class MinistryOfIndustry extends Ministry {
                 modifierHighWorkers = 0.2f;
                 modifierHighWorkersSalary = 1.2f;
 
-                modifierGeneralBudget = 0.87f;
                 break;
         }
         lowWorkersLimit = (int) (economy.getLabor_force() * (modifierLowWorkers + ((random.nextFloat() * (0.005 - (-0.005)) + (-0.005)))));
@@ -356,12 +351,7 @@ public class MinistryOfIndustry extends Ministry {
         highWorkers = highWorkersLimit;
         highWorkersSalary = (float) (economy.getGdpPerPerson() * (modifierHighWorkersSalary + (random.nextFloat() * (0.01 - (-0.01)) + (-0.01))));
 
-        generalBudgetNeed = (lowWorkers * 0.05f) + (middleWorkers * 0.07f) + (highWorkers * 0.1f) + (lowWorkers * lowWorkersSalary) + (middleWorkers * middleWorkersSalary) + (highWorkers * highWorkersSalary);
-        generalBudget = (float) (generalBudgetNeed * (modifierGeneralBudget + (random.nextFloat() * (0.05 - (-0.05)) + (-0.05))));
 
-        maximumLowWorkersLimit = (int) (economy.getLabor_force() * 0.45);
-        maximumMiddleWorkersLimit = (int) (economy.getLabor_force() * 0.45);
-        maximumHighWorkersLimit = (int) (economy.getLabor_force() * 0.45);
     }
 
 }

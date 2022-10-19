@@ -279,10 +279,23 @@ public class MinistryOfDefense extends Ministry {
     @Override
     public void updateMinistry() {
         super.updateMinistry();
-
         armyPower *= conscription ? 1.1 : 1;
         navyPower *= conscription ? 1.05 : 1;
         airPower *= conscription ? 1.05 : 1;
+
+        generalsNeed = armyPower / 100;
+        admiralsNeed = navyPower / 80;
+        airForceOfficersNeed = airPower / 50;
+
+        fuelNeed = armyPower * 1.3f + navyPower * 2.9f + airPower * 3.8f;
+        militaryIndustryNeed = armyPower * 0.3f + navyPower * 1.3f + airPower * 1.8f;
+
+        maximumGeneralsLimit = generalsNeed * 10;
+        maximumAdmiralsLimit = admiralsNeed * 10;
+        maximumAirForceOfficersLimit = airForceOfficersNeed * 10;
+
+        generalBudgetNeed = (armyPower * 100f) + (navyPower * 500f) + (airPower * 800f) + (generals * generalsSalaryNeed) + (admirals * admiralsSalaryNeed) + (airForceOfficers * airForceOfficersSalaryNeed);
+        generalBudget += (generals * generalsSalary) + (admirals * admiralsSalary) + (airForceOfficers * airForceOfficersSalary);
 
         efficiency *= generalBudget / generalBudgetNeed;
         efficiency *= conscription ? 0.85 : 1.05;
@@ -306,8 +319,6 @@ public class MinistryOfDefense extends Ministry {
         float modifierNavy = 0f;
         float modifierAir = 0f;
 
-        float modifierGeneralBudget = 0f;
-
         switch (country.getContinent()) {
             case EY:
                 modifierGenerals = 0.65f;
@@ -323,7 +334,6 @@ public class MinistryOfDefense extends Ministry {
                 modifierNavy = 0.5f;
                 modifierAir = 0.3f;
 
-                modifierGeneralBudget = 0.93f;
                 break;
             case NY:
                 modifierGenerals = 0.75f;
@@ -339,7 +349,6 @@ public class MinistryOfDefense extends Ministry {
                 modifierNavy = 0.6f;
                 modifierAir = 0.4f;
 
-                modifierGeneralBudget = 0.81f;
                 break;
             case SY:
                 modifierGenerals = 0.55f;
@@ -355,7 +364,6 @@ public class MinistryOfDefense extends Ministry {
                 modifierNavy = 0.4f;
                 modifierAir = 0.2f;
 
-                modifierGeneralBudget = 0.70f;
                 break;
             case WY:
                 modifierGenerals = 0.8f;
@@ -371,7 +379,6 @@ public class MinistryOfDefense extends Ministry {
                 modifierNavy = 0.6f;
                 modifierAir = 0.4f;
 
-                modifierGeneralBudget = 0.85f;
                 break;
             case IB:
                 modifierGenerals = 0.6f;
@@ -387,7 +394,6 @@ public class MinistryOfDefense extends Ministry {
                 modifierNavy = 0.25f;
                 modifierAir = 0.15f;
 
-                modifierGeneralBudget = 0.66f;
                 break;
             case OB:
                 modifierGenerals = 0.55f;
@@ -403,7 +409,6 @@ public class MinistryOfDefense extends Ministry {
                 modifierNavy = 0.2f;
                 modifierAir = 0.1f;
 
-                modifierGeneralBudget = 0.58f;
                 break;
             case CA:
                 modifierGenerals = 0.5f;
@@ -415,7 +420,6 @@ public class MinistryOfDefense extends Ministry {
                 modifierAirForceOfficers = 0.1f;
                 modifierAirForceOfficersSalary = 2.75f;
 
-                modifierGeneralBudget = 0.52f;
                 break;
             case FA:
                 modifierGenerals = 0.45f;
@@ -431,7 +435,6 @@ public class MinistryOfDefense extends Ministry {
                 modifierNavy = 0.2f;
                 modifierAir = 0.1f;
 
-                modifierGeneralBudget = 0.6f;
                 break;
             case ME:
                 modifierGenerals = 0.35f;
@@ -447,7 +450,6 @@ public class MinistryOfDefense extends Ministry {
                 modifierNavy = 0.1f;
                 modifierAir = 0.05f;
 
-                modifierGeneralBudget = 0.58f;
                 break;
             case GE:
                 modifierGenerals = 0.85f;
@@ -463,7 +465,6 @@ public class MinistryOfDefense extends Ministry {
                 modifierNavy = 0.7f;
                 modifierAir = 0.65f;
 
-                modifierGeneralBudget = 0.7f;
                 break;
         }
 
@@ -495,13 +496,5 @@ public class MinistryOfDefense extends Ministry {
         airForceOfficers = airForceOfficersLimit;
         airForceOfficersSalary = (float) (economy.getGdpPerPerson() * (modifierAirForceOfficersSalary + (random.nextFloat() * (0.01 - (-0.01)) + (-0.01))));
 
-        generalBudgetNeed = (armyPower * 100f) + (navyPower * 500f) + (airPower * 800f) + (generals * generalsSalary) + (admirals * admiralsSalary) + (airForceOfficers * airForceOfficersSalary);
-        generalBudget = (float) (generalBudgetNeed * (modifierGeneralBudget + (random.nextFloat() * (0.01 - (-0.01)) + (-0.01))));
-        fuelNeed = armyPower * 1.3f + navyPower * 2.9f + airPower * 3.8f;
-        militaryIndustryNeed = armyPower * 0.3f + navyPower * 1.3f + airPower * 1.8f;
-
-        maximumGeneralsLimit = generalsNeed * 10;
-        maximumAdmiralsLimit = admiralsNeed * 10;
-        maximumAirForceOfficersLimit = airForceOfficersNeed * 10;
     }
 }

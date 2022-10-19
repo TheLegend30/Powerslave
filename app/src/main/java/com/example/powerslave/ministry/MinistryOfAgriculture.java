@@ -31,9 +31,6 @@ public class MinistryOfAgriculture extends Ministry {
         this.name = "Ministry of Agriculture and Mining";
         this.economy = country.getMinistryOfEconomy();
 
-        this.maximumFarmersLimit = (int) (economy.getLabor_force() * 0.55);
-        this.maximumMinersLimit = (int) (economy.getLabor_force() * 0.4);
-
         statsRandomizer();
     }
 
@@ -154,8 +151,10 @@ public class MinistryOfAgriculture extends Ministry {
     @Override
     public void updateMinistry() {
         super.updateMinistry();
-        farmersSalaryNeed = economy.getGdpPerPerson() / 4;
-        minersSalaryNeed = economy.getGdpPerPerson() / 3.5f;
+        farmersSalaryNeed = economy.getGdpPerPerson() * 0.25f;
+        minersSalaryNeed = economy.getGdpPerPerson() * 0.29f;
+        maximumFarmersLimit = (int) (economy.getLabor_force() * 0.55);
+        maximumMinersLimit = (int) (economy.getLabor_force() * 0.4);
 
         generalBudgetNeed = (miners * 0.015f) + (farmers * 0.01f) + (miners * minersSalary) + (farmers * farmersSalary);
         generalBudget += (miners * minersSalary) + (farmers * farmersSalary);
@@ -176,8 +175,6 @@ public class MinistryOfAgriculture extends Ministry {
         float modifierMiners = 0f;
         float modifierMinersSalary = 0f;
 
-        float modifierGeneralBudget = 0f;
-
         switch (country.getContinent()) {
             case EY:
                 modifierFarmers = 0.15f;
@@ -186,7 +183,6 @@ public class MinistryOfAgriculture extends Ministry {
                 modifierMiners = 0.15f;
                 modifierMinersSalary = 0.12f;
 
-                modifierGeneralBudget = 0.65f;
                 break;
             case NY:
                 modifierFarmers = 0.055f;
@@ -195,7 +191,6 @@ public class MinistryOfAgriculture extends Ministry {
                 modifierMiners = 0.06f;
                 modifierMinersSalary = 0.28f;
 
-                modifierGeneralBudget = 0.75f;
                 break;
             case SY:
                 modifierFarmers = 0.13f;
@@ -204,7 +199,6 @@ public class MinistryOfAgriculture extends Ministry {
                 modifierMiners = 0.12f;
                 modifierMinersSalary = 0.14f;
 
-                modifierGeneralBudget = 0.68f;
                 break;
             case WY:
                 modifierFarmers = 0.05f;
@@ -213,7 +207,6 @@ public class MinistryOfAgriculture extends Ministry {
                 modifierMiners = 0.045f;
                 modifierMinersSalary = 0.30f;
 
-                modifierGeneralBudget = 0.8f;
                 break;
             case IB:
                 modifierFarmers = 0.25f;
@@ -222,7 +215,6 @@ public class MinistryOfAgriculture extends Ministry {
                 modifierMiners = 0.20f;
                 modifierMinersSalary = 0.11f;
 
-                modifierGeneralBudget = 0.50f;
                 break;
             case OB:
                 modifierFarmers = 0.26f;
@@ -231,7 +223,6 @@ public class MinistryOfAgriculture extends Ministry {
                 modifierMiners = 0.18f;
                 modifierMinersSalary = 0.10f;
 
-                modifierGeneralBudget = 0.42f;
                 break;
             case CA:
                 modifierFarmers = 0.20f;
@@ -240,7 +231,6 @@ public class MinistryOfAgriculture extends Ministry {
                 modifierMiners = 0.18f;
                 modifierMinersSalary = 0.09f;
 
-                modifierGeneralBudget = 0.48f;
                 break;
             case FA:
                 modifierFarmers = 0.35f;
@@ -249,7 +239,6 @@ public class MinistryOfAgriculture extends Ministry {
                 modifierMiners = 0.30f;
                 modifierMinersSalary = 0.8f;
 
-                modifierGeneralBudget = 0.49f;
                 break;
             case ME:
                 modifierFarmers = 0.45f;
@@ -258,7 +247,6 @@ public class MinistryOfAgriculture extends Ministry {
                 modifierMiners = 0.32f;
                 modifierMinersSalary = 0.075f;
 
-                modifierGeneralBudget = 0.35f;
                 break;
             case GE:
                 modifierFarmers = 0.08f;
@@ -267,7 +255,6 @@ public class MinistryOfAgriculture extends Ministry {
                 modifierMiners = 0.15f;
                 modifierMinersSalary = 0.23f;
 
-                modifierGeneralBudget = 0.75f;
                 break;
         }
 
@@ -280,8 +267,6 @@ public class MinistryOfAgriculture extends Ministry {
         miners = minersLimit;
         minersSalary = (float) (economy.getGdpPerPerson() * (modifierMinersSalary + (random.nextFloat() * (0.01 - (-0.01)) + (-0.01))));
 
-        generalBudgetNeed = (miners * 0.015f) + (farmers * 0.01f) + (miners * minersSalary) + (farmers * farmersSalary);
-        generalBudget = (float) (generalBudgetNeed * (modifierGeneralBudget + (random.nextFloat() * (0.04 - (-0.04)) + (-0.04))));
     }
 
     @Override

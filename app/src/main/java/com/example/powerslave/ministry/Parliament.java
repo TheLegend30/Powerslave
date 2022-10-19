@@ -10,7 +10,7 @@ import java.util.HashMap;
 import java.util.Random;
 
 public class Parliament extends Ministry {
-
+    // TODO: Rework Parliament
     private Ideology yourIdeology;
     private int parliamentCount;
     private int parliamentCountMax;
