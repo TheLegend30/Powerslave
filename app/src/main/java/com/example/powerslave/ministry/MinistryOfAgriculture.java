@@ -52,7 +52,7 @@ public class MinistryOfAgriculture extends Ministry {
         string += "General budget need : " + String.format("%.2f", generalBudgetNeed) + " ƒ" + "\n";
         string += "Raw food output: " + rawFoodOutput + " units" + "\n";
         string += "Raw output: " + rawOutput + " units" + "\n";
-        return super.toString() + "\n" + string;
+        return super.toString() + string;
     }
 
     public int getFarmers() {
@@ -156,6 +156,9 @@ public class MinistryOfAgriculture extends Ministry {
         super.updateMinistry();
         farmersSalaryNeed = economy.getGdpPerPerson() / 4;
         minersSalaryNeed = economy.getGdpPerPerson() / 3.5f;
+
+        generalBudgetNeed = (miners * 0.015f) + (farmers * 0.01f) + (miners * minersSalary) + (farmers * farmersSalary);
+        generalBudget += (miners * minersSalary) + (farmers * farmersSalary);
 
         efficiency *= generalBudget / generalBudgetNeed;
         rawFoodOutput = efficiency * farmers * 2.35f;
@@ -279,6 +282,16 @@ public class MinistryOfAgriculture extends Ministry {
 
         generalBudgetNeed = (miners * 0.015f) + (farmers * 0.01f) + (miners * minersSalary) + (farmers * farmersSalary);
         generalBudget = (float) (generalBudgetNeed * (modifierGeneralBudget + (random.nextFloat() * (0.04 - (-0.04)) + (-0.04))));
+    }
+
+    @Override
+    public void workersIncreasing() {
+        super.workersIncreasing();
+        // TODO: Make if else statement
+        farmers += farmersLimit * 0.7 * country.getMinistryOfEducation().efficiency * efficiency;
+        if (farmers > farmersLimit) farmers = farmersLimit;
+        miners += minersLimit * 0.7 * country.getMinistryOfEducation().efficiency * efficiency;
+        if (miners > minersLimit) miners = minersLimit;
     }
 }
 

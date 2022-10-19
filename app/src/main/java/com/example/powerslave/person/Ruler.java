@@ -42,6 +42,6 @@ public class Ruler extends Person {
         float rating = 1f;
         rating *= (country.getMinistryOfHealthcare().getEfficiency() / 0.5f);
         rating *= (country.getMinistryOfEducation().getEfficiency() / 0.5f);
-        setRating(getRating() + (rating - 10));
+        setRating(getRating() + (rating - 1));
     }
 }

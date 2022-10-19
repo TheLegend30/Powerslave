@@ -1,16 +1,11 @@
 package com.example.powerslave.ministry;
 
 import android.content.Context;
-import android.content.res.Resources;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.powerslave.MainActivity;
 import com.example.powerslave.government.Country;
 import com.example.powerslave.person.Minister;
-
-import java.util.Random;
 
 public abstract class Ministry {
     protected int countryKey;
@@ -20,6 +15,7 @@ public abstract class Ministry {
     protected Country country;
 
     protected float generalBudget;
+    protected float ministryFunding = 0f;
     protected float generalBudgetNeed;
 
     protected float efficiency;
@@ -33,7 +29,7 @@ public abstract class Ministry {
 
     @Override
     public String toString() {
-        return name + "\n" + "Efficiency of the ministry: " + String.format("%.2f", efficiency * 100) + "%\n\n";
+        return name + "\n" + "Efficiency of the ministry: " + String.format("%.2f", efficiency * 100) + "%\n" + "Funding of the ministry: " + String.format("%.2f", ministryFunding) + " ƒ" + "\n\n";
     }
 
     @NonNull
@@ -62,7 +58,20 @@ public abstract class Ministry {
         this.efficiency = efficiency;
     }
 
+    public float getMinistryFunding() {
+        return ministryFunding;
+    }
+
+    public void setMinistryFunding(float ministryFunding) {
+        this.ministryFunding = ministryFunding;
+    }
+
+    public float getGeneralBudgetNeed() {
+        return generalBudgetNeed;
+    }
+
     public void updateMinistry() {
+        this.generalBudget = ministryFunding;
         this.efficiency = (((minister.getCompetency() / 1.25f) + (minister.getLoyalty() / 4f)) / 100f);
     }
 

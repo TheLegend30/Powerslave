@@ -164,7 +164,9 @@ public class MinistryOfEducation extends Ministry {
     @Override
     public void updateMinistry() {
         super.updateMinistry();
-        liberty = (float) (((2.5f / country.getMinistryOfInternalAffairs().getLevelOfSecurity()) * (4.5f / country.getMinistryOfJustice().getLevelOfJudgesLiberty())) * (degree * 25f) * (literacy / 25f) * (efficiency * 1.25f) * (country.getMinistryOfJustice().isDeathPenalty() ? 0.95f : 1.05f));
+        liberty = ((2.5f / country.getMinistryOfInternalAffairs().getLevelOfSecurity()) * (4.5f / country.getMinistryOfJustice().getLevelOfJudgesLiberty())) * (degree * 25f) * (literacy / 25f) * (efficiency * 1.25f) * (country.getMinistryOfJustice().isDeathPenalty() ? 0.95f : 1.05f);
+        generalBudgetNeed = (teachers * 0.45f) + (teachers * teachersSalaryNeed) + (schools * 230f) + (colleges * 1025f);
+        generalBudget = (teachers * teachersSalary) + ministryFunding;
         efficiency *= generalBudget / generalBudgetNeed;
         efficiency *= ((float) (schools + colleges) / (float) (schoolsNeed + collegesNeed));
         efficiency *= ((float) teachers / (float) teachersNeed);

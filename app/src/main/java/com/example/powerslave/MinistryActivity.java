@@ -25,6 +25,7 @@ import android.widget.Toast;
 
 import com.example.powerslave.government.Country;
 import com.example.powerslave.ministry.Ministry;
+import com.example.powerslave.ministry.MinistryOfAgriculture;
 import com.example.powerslave.ministry.MinistryOfCulture;
 import com.example.powerslave.ministry.MinistryOfDefense;
 import com.example.powerslave.ministry.MinistryOfEducation;
@@ -69,6 +70,8 @@ public class MinistryActivity extends AppCompatActivity implements View.OnClickL
 
         if (MainGameMenuActivity.selectedMinistry == 0) {
             ministry = country.getMinistryOfHealthcare();
+
+            ministryFunding();
 
             MinistryOfHealthcare healthcare = (MinistryOfHealthcare) ministry;
 
@@ -202,6 +205,8 @@ public class MinistryActivity extends AppCompatActivity implements View.OnClickL
         } else if (MainGameMenuActivity.selectedMinistry == 1) {
             ministry = country.getMinistryOfEducation();
 
+            ministryFunding();
+
             MinistryOfEducation education = (MinistryOfEducation) ministry;
 
             EditText teachersLimitEdit = new EditText(this);
@@ -320,6 +325,8 @@ public class MinistryActivity extends AppCompatActivity implements View.OnClickL
         } else if (MainGameMenuActivity.selectedMinistry == 3) {
             ministry = country.getMinistryOfDefense();
 
+            ministryFunding();
+
             MinistryOfDefense defense = (MinistryOfDefense) ministry;
 
             EditText generalsLimitEdit = new EditText(this);
@@ -360,7 +367,7 @@ public class MinistryActivity extends AppCompatActivity implements View.OnClickL
                     if (salary > (defense.getGeneralsSalaryNeed() * 10) || salary < 0) {
                         Toast.makeText(MinistryActivity.this, ("Have you lost your mind, " + (country.getRuler().getSex() == Sex.MALE ? "sir?" : "ma'am?")), Toast.LENGTH_SHORT).show();
                     } else {
-                        defense.setGeneralsSalaryNeed(salary);
+                        defense.setGeneralsSalary(salary);
                         MinistryActivity.this.recreate();
                     }
                 }
@@ -404,7 +411,7 @@ public class MinistryActivity extends AppCompatActivity implements View.OnClickL
                     if (salary > (defense.getAdmiralsSalaryNeed() * 10) || salary < 0) {
                         Toast.makeText(MinistryActivity.this, ("Have you lost your mind, " + (country.getRuler().getSex() == Sex.MALE ? "sir?" : "ma'am?")), Toast.LENGTH_SHORT).show();
                     } else {
-                        defense.setAdmiralsSalaryNeed(salary);
+                        defense.setAdmiralsSalary(salary);
                         MinistryActivity.this.recreate();
                     }
                 }
@@ -448,7 +455,7 @@ public class MinistryActivity extends AppCompatActivity implements View.OnClickL
                     if (salary > (defense.getAirForceOfficersSalaryNeed() * 10) || salary < 0) {
                         Toast.makeText(MinistryActivity.this, ("Have you lost your mind, " + (country.getRuler().getSex() == Sex.MALE ? "sir?" : "ma'am?")), Toast.LENGTH_SHORT).show();
                     } else {
-                        defense.setAirForceOfficersSalaryNeed(salary);
+                        defense.setAirForceOfficersSalary(salary);
                         MinistryActivity.this.recreate();
                     }
                 }
@@ -456,7 +463,7 @@ public class MinistryActivity extends AppCompatActivity implements View.OnClickL
 
             // TODO: Special process to buy army, navy, air powers
             // TODO: Conscription checkBox
-            
+
 
             buttonLayout.addView(generalsLimitEdit);
             buttonLayout.addView(buttonConfirmGeneralsLimitEdit);
@@ -472,9 +479,113 @@ public class MinistryActivity extends AppCompatActivity implements View.OnClickL
             buttonLayout.addView(buttonConfirmAirForceOfficersLimitEdit);
             buttonLayout.addView(airForceOfficersSalaryEdit);
             buttonLayout.addView(buttonConfirmAirForceOfficersSalaryEdit);
-            
+
         } else if (MainGameMenuActivity.selectedMinistry == 4) {
             ministry = country.getMinistryOfAgriculture();
+
+            ministryFunding();
+
+            MinistryOfAgriculture agriculture = (MinistryOfAgriculture) ministry;
+
+
+            EditText farmersLimitEdit = new EditText(this);
+            farmersLimitEdit.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+            farmersLimitEdit.setInputType(InputType.TYPE_CLASS_NUMBER);
+            farmersLimitEdit.setHint("Enter limit of farmers");
+
+            Button buttonConfirmFarmersLimitEdit = new Button(this);
+            buttonConfirmFarmersLimitEdit.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+            buttonConfirmFarmersLimitEdit.setText("Confirm limit");
+            buttonConfirmFarmersLimitEdit.setOnClickListener(view -> {
+                if (TextUtils.isEmpty(farmersLimitEdit.getText())) {
+                    Toast.makeText(MinistryActivity.this, "You need to enter something", Toast.LENGTH_SHORT).show();
+                } else {
+                    Integer limit = Integer.parseInt(String.valueOf(farmersLimitEdit.getText()));
+                    if (limit > agriculture.getMaximumFarmersLimit() || limit < 0) {
+                        Toast.makeText(MinistryActivity.this, ("Have you lost your mind, " + (country.getRuler().getSex() == Sex.MALE ? "sir?" : "ma'am?")), Toast.LENGTH_SHORT).show();
+                    } else {
+                        agriculture.setFarmersLimit(limit);
+                        MinistryActivity.this.recreate();
+                    }
+                }
+            });
+
+            EditText farmersSalaryEdit = new EditText(this);
+            farmersSalaryEdit.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+            farmersSalaryEdit.setInputType(InputType.TYPE_CLASS_NUMBER);
+            farmersSalaryEdit.setHint("Enter salary of farmers");
+
+            Button buttonConfirmFarmersSalaryEdit = new Button(this);
+            buttonConfirmFarmersSalaryEdit.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+            buttonConfirmFarmersSalaryEdit.setText("Confirm salary");
+            buttonConfirmFarmersSalaryEdit.setOnClickListener(view -> {
+                if (TextUtils.isEmpty(farmersSalaryEdit.getText())) {
+                    Toast.makeText(MinistryActivity.this, "You need to enter something", Toast.LENGTH_SHORT).show();
+                } else {
+                    Float salary = Float.parseFloat(String.valueOf(farmersSalaryEdit.getText()));
+                    if (salary > (agriculture.getFarmersSalaryNeed() * 10) || salary < 0) {
+                        Toast.makeText(MinistryActivity.this, ("Have you lost your mind, " + (country.getRuler().getSex() == Sex.MALE ? "sir?" : "ma'am?")), Toast.LENGTH_SHORT).show();
+                    } else {
+                        agriculture.setFarmersSalary(salary);
+                        MinistryActivity.this.recreate();
+                    }
+                }
+            });
+
+            EditText minersLimitEdit = new EditText(this);
+            minersLimitEdit.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+            minersLimitEdit.setInputType(InputType.TYPE_CLASS_NUMBER);
+            minersLimitEdit.setHint("Enter limit of miners");
+
+            Button buttonConfirmMinersLimitEdit = new Button(this);
+            buttonConfirmMinersLimitEdit.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+            buttonConfirmMinersLimitEdit.setText("Confirm limit");
+            buttonConfirmMinersLimitEdit.setOnClickListener(view -> {
+                if (TextUtils.isEmpty(minersLimitEdit.getText())) {
+                    Toast.makeText(MinistryActivity.this, "You need to enter something", Toast.LENGTH_SHORT).show();
+                } else {
+                    Integer limit = Integer.parseInt(String.valueOf(minersLimitEdit.getText()));
+                    if (limit > agriculture.getMaximumMinersLimit() || limit < 0) {
+                        Toast.makeText(MinistryActivity.this, ("Have you lost your mind, " + (country.getRuler().getSex() == Sex.MALE ? "sir?" : "ma'am?")), Toast.LENGTH_SHORT).show();
+                    } else {
+                        agriculture.setMinersLimit(limit);
+                        MinistryActivity.this.recreate();
+                    }
+                }
+            });
+
+            EditText minersSalaryEdit = new EditText(this);
+            minersSalaryEdit.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+            minersSalaryEdit.setInputType(InputType.TYPE_CLASS_NUMBER);
+            minersSalaryEdit.setHint("Enter salary of miners");
+
+            Button buttonConfirmMinersSalaryEdit = new Button(this);
+            buttonConfirmMinersSalaryEdit.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+            buttonConfirmMinersSalaryEdit.setText("Confirm salary");
+            buttonConfirmMinersSalaryEdit.setOnClickListener(view -> {
+                if (TextUtils.isEmpty(minersSalaryEdit.getText())) {
+                    Toast.makeText(MinistryActivity.this, "You need to enter something", Toast.LENGTH_SHORT).show();
+                } else {
+                    Float salary = Float.parseFloat(String.valueOf(minersSalaryEdit.getText()));
+                    if (salary > (agriculture.getMinersSalaryNeed() * 10) || salary < 0) {
+                        Toast.makeText(MinistryActivity.this, ("Have you lost your mind, " + (country.getRuler().getSex() == Sex.MALE ? "sir?" : "ma'am?")), Toast.LENGTH_SHORT).show();
+                    } else {
+                        agriculture.setMinersSalary(salary);
+                        MinistryActivity.this.recreate();
+                    }
+                }
+            });
+            
+            buttonLayout.addView(farmersLimitEdit);
+            buttonLayout.addView(buttonConfirmFarmersLimitEdit);
+            buttonLayout.addView(farmersSalaryEdit);
+            buttonLayout.addView(buttonConfirmFarmersSalaryEdit);
+            buttonLayout.addView(minersLimitEdit);
+            buttonLayout.addView(buttonConfirmMinersLimitEdit);
+            buttonLayout.addView(minersSalaryEdit);
+            buttonLayout.addView(buttonConfirmMinersSalaryEdit);
+
+
         } else if (MainGameMenuActivity.selectedMinistry == 5) {
             ministry = country.getMinistryOfDevelopment();
         } else if (MainGameMenuActivity.selectedMinistry == 6) {
@@ -483,6 +594,8 @@ public class MinistryActivity extends AppCompatActivity implements View.OnClickL
             ministry = country.getMinistryOfTransportation();
         } else if (MainGameMenuActivity.selectedMinistry == 8) {
             ministry = country.getMinistryOfCulture();
+
+            ministryFunding();
 
             MinistryOfCulture culture = (MinistryOfCulture) ministry;
 
@@ -569,6 +682,8 @@ public class MinistryActivity extends AppCompatActivity implements View.OnClickL
 
         } else if (MainGameMenuActivity.selectedMinistry == 9) {
             ministry = country.getMinistryOfInternalAffairs();
+
+            ministryFunding();
 
             MinistryOfInternalAffairs internalAffairs = (MinistryOfInternalAffairs) ministry;
 
@@ -676,6 +791,8 @@ public class MinistryActivity extends AppCompatActivity implements View.OnClickL
         } else if (MainGameMenuActivity.selectedMinistry == 10) {
             ministry = country.getMinistryOfJustice();
 
+            ministryFunding();
+
             MinistryOfJustice justice = (MinistryOfJustice) ministry;
 
             EditText judgesLimitEdit = new EditText(this);
@@ -753,12 +870,9 @@ public class MinistryActivity extends AppCompatActivity implements View.OnClickL
             CheckBox deathPenalty = new CheckBox(this);
             deathPenalty.setText("Death Penalty");
             deathPenalty.setChecked(justice.isDeathPenalty());
-            deathPenalty.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                @Override
-                public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                    justice.setDeathPenalty(b);
-                    MinistryActivity.this.recreate();
-                }
+            deathPenalty.setOnCheckedChangeListener((compoundButton, b) -> {
+                justice.setDeathPenalty(b);
+                MinistryActivity.this.recreate();
             });
 
             TextView libertyText = new TextView(this);
@@ -798,6 +912,8 @@ public class MinistryActivity extends AppCompatActivity implements View.OnClickL
             ministry = country.getParliament();
         } else if (MainGameMenuActivity.selectedMinistry == 12) {
             ministry = country.getNationalIntelligence();
+
+            ministryFunding();
 
             NationalIntelligence intelligence = (NationalIntelligence) ministry;
 
@@ -936,6 +1052,8 @@ public class MinistryActivity extends AppCompatActivity implements View.OnClickL
             }
         } else if (MainGameMenuActivity.selectedMinistry == 13) {
             ministry = country.getMinistryOfForeignAffairs();
+
+            ministryFunding();
 
             MinistryOfForeignAffairs foreignAffairs = (MinistryOfForeignAffairs) ministry;
 
@@ -1102,6 +1220,33 @@ public class MinistryActivity extends AppCompatActivity implements View.OnClickL
             public void onNothingSelected(AdapterView<?> adapterView) {
             }
         });
+    }
+
+    private void ministryFunding() {
+        EditText ministryFundingEdit = new EditText(this);
+        ministryFundingEdit.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+        ministryFundingEdit.setInputType(InputType.TYPE_CLASS_NUMBER);
+        ministryFundingEdit.setHint("Enter funding of the ministry");
+
+        Button buttonConfirmMinistryFundingEdit = new Button(this);
+        buttonConfirmMinistryFundingEdit.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+        buttonConfirmMinistryFundingEdit.setText("Confirm funding");
+        buttonConfirmMinistryFundingEdit.setOnClickListener(view -> {
+            if (TextUtils.isEmpty(ministryFundingEdit.getText())) {
+                Toast.makeText(MinistryActivity.this, "You need to enter something", Toast.LENGTH_SHORT).show();
+            } else {
+                Float funding = Float.parseFloat(String.valueOf(ministryFundingEdit.getText()));
+                if (funding > (ministry.getGeneralBudgetNeed() * 2) || funding < 0) {
+                    Toast.makeText(MinistryActivity.this, ("Have you lost your mind, " + (country.getRuler().getSex() == Sex.MALE ? "sir?" : "ma'am?")), Toast.LENGTH_SHORT).show();
+                } else {
+                    ministry.setMinistryFunding(funding);
+                    MinistryActivity.this.recreate();
+                }
+            }
+        });
+
+        buttonLayout.addView(ministryFundingEdit);
+        buttonLayout.addView(buttonConfirmMinistryFundingEdit);
     }
 
 
