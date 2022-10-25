@@ -7,6 +7,7 @@ import com.example.powerslave.person.Minister;
 
 import java.util.Random;
 
+// TODO: economic policies
 public class MinistryOfDevelopment extends Ministry {
     private int clerks;
     private int clerksLimit;
@@ -69,6 +70,66 @@ public class MinistryOfDevelopment extends Ministry {
 
     public float getServicesNeed() {
         return servicesNeed;
+    }
+
+    public int getClerksLimit() {
+        return clerksLimit;
+    }
+
+    public int getMaximumClerksLimit() {
+        return maximumClerksLimit;
+    }
+
+    public float getClerksSalaryNeed() {
+        return clerksSalaryNeed;
+    }
+
+    public void setClerks(int clerks) {
+        this.clerks = clerks;
+    }
+
+    public void setClerksLimit(int clerksLimit) {
+        this.clerksLimit = clerksLimit;
+    }
+
+    public void setMaximumClerksLimit(int maximumClerksLimit) {
+        this.maximumClerksLimit = maximumClerksLimit;
+    }
+
+    public void setClerksSalary(float clerksSalary) {
+        this.clerksSalary = clerksSalary;
+    }
+
+    public void setClerksSalaryNeed(float clerksSalaryNeed) {
+        this.clerksSalaryNeed = clerksSalaryNeed;
+    }
+
+    public void setEntrepreneurs(int entrepreneurs) {
+        this.entrepreneurs = entrepreneurs;
+    }
+
+    public void setServicesOutput(float servicesOutput) {
+        this.servicesOutput = servicesOutput;
+    }
+
+    public void setTradeOutput(float tradeOutput) {
+        this.tradeOutput = tradeOutput;
+    }
+
+    public void setElectricsNeed(float electricsNeed) {
+        this.electricsNeed = electricsNeed;
+    }
+
+    public void setLightIndustryNeed(float lightIndustryNeed) {
+        this.lightIndustryNeed = lightIndustryNeed;
+    }
+
+    public void setFoodNeed(float foodNeed) {
+        this.foodNeed = foodNeed;
+    }
+
+    public void setServicesNeed(float servicesNeed) {
+        this.servicesNeed = servicesNeed;
     }
 
     @Override
@@ -178,7 +239,7 @@ public class MinistryOfDevelopment extends Ministry {
             case GE:
                 modifierClerks = 0.16f;
                 modifierClerksSalary = 0.83f;
-                modifierEntrepreneurs = 0.45f;
+                modifierEntrepreneurs = 0.025f;
 
                 break;
         }
@@ -188,5 +249,13 @@ public class MinistryOfDevelopment extends Ministry {
         clerksSalary = economy.getGdpPerPerson() * (modifierClerksSalary + (random.nextFloat() * (0.01f - (-0.01f)) + (-0.01f)));
 
         entrepreneurs = (int) (economy.getLabor_force() * (modifierEntrepreneurs + (random.nextFloat() * (0.0005f - (-0.0005f)) + (-0.0005f))));
+    }
+
+    @Override
+    public void workersIncreasing() {
+        super.workersIncreasing();
+        clerks += clerksLimit * 0.3 * country.getMinistryOfEducation().efficiency * efficiency;
+        if (clerks > clerksLimit) clerks = clerksLimit;
+        entrepreneurs += 0.0001 * economy.getLabor_force() * country.getMinistryOfEducation().getLiberty() * (0.15f / economy.getHigh_taxes_modifier()) * (0.05f / economy.getTariffs());
     }
 }

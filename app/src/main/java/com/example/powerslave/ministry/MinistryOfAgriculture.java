@@ -272,7 +272,7 @@ public class MinistryOfAgriculture extends Ministry {
     @Override
     public void workersIncreasing() {
         super.workersIncreasing();
-        // TODO: Make if else statement
+        // TODO: Make if else statement ?
         farmers += farmersLimit * 0.7 * country.getMinistryOfEducation().efficiency * efficiency;
         if (farmers > farmersLimit) farmers = farmersLimit;
         miners += minersLimit * 0.7 * country.getMinistryOfEducation().efficiency * efficiency;

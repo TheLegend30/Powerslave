@@ -6,7 +6,7 @@ import androidx.annotation.NonNull;
 
 import com.example.powerslave.government.Country;
 import com.example.powerslave.person.Minister;
-
+// TODO: WorkerIncreasing works with free labour force
 public abstract class Ministry {
     protected int countryKey;
     protected String name;

@@ -174,6 +174,14 @@ public class MinistryOfEconomy extends Ministry {
         this.currencyToGulden = currencyToGulden;
     }
 
+    public float getHigh_taxes_modifier() {
+        return high_taxes_modifier;
+    }
+
+    public float getTariffs() {
+        return tariffs;
+    }
+
     @Override
     public String toString() {
         String string;

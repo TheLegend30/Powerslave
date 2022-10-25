@@ -41,7 +41,6 @@ public class MinistryOfIndustry extends Ministry {
     private float militaryIndustryOutput;
     private float electricsOutput;
 
-
     //For ministry
     private float rawFoodNeed;
     private float rawNeed;
@@ -140,15 +139,165 @@ public class MinistryOfIndustry extends Ministry {
         return mechanicsNeed;
     }
 
+    public int getLowWorkersLimit() {
+        return lowWorkersLimit;
+    }
 
+    public int getMaximumLowWorkersLimit() {
+        return maximumLowWorkersLimit;
+    }
+
+    public float getLowWorkersSalaryNeed() {
+        return lowWorkersSalaryNeed;
+    }
+
+    public int getMiddleWorkersLimit() {
+        return middleWorkersLimit;
+    }
+
+    public int getMaximumMiddleWorkersLimit() {
+        return maximumMiddleWorkersLimit;
+    }
+
+    public float getMiddleWorkersSalaryNeed() {
+        return middleWorkersSalaryNeed;
+    }
+
+    public int getHighWorkersLimit() {
+        return highWorkersLimit;
+    }
+
+    public int getMaximumHighWorkersLimit() {
+        return maximumHighWorkersLimit;
+    }
+
+    public float getHighWorkersSalaryNeed() {
+        return highWorkersSalaryNeed;
+    }
+
+    public void setLowWorkers(int lowWorkers) {
+        this.lowWorkers = lowWorkers;
+    }
+
+    public void setLowWorkersLimit(int lowWorkersLimit) {
+        this.lowWorkersLimit = lowWorkersLimit;
+    }
+
+    public void setMaximumLowWorkersLimit(int maximumLowWorkersLimit) {
+        this.maximumLowWorkersLimit = maximumLowWorkersLimit;
+    }
+
+    public void setLowWorkersSalary(float lowWorkersSalary) {
+        this.lowWorkersSalary = lowWorkersSalary;
+    }
+
+    public void setLowWorkersSalaryNeed(float lowWorkersSalaryNeed) {
+        this.lowWorkersSalaryNeed = lowWorkersSalaryNeed;
+    }
+
+    public void setMiddleWorkers(int middleWorkers) {
+        this.middleWorkers = middleWorkers;
+    }
+
+    public void setMiddleWorkersLimit(int middleWorkersLimit) {
+        this.middleWorkersLimit = middleWorkersLimit;
+    }
+
+    public void setMaximumMiddleWorkersLimit(int maximumMiddleWorkersLimit) {
+        this.maximumMiddleWorkersLimit = maximumMiddleWorkersLimit;
+    }
+
+    public void setMiddleWorkersSalary(float middleWorkersSalary) {
+        this.middleWorkersSalary = middleWorkersSalary;
+    }
+
+    public void setMiddleWorkersSalaryNeed(float middleWorkersSalaryNeed) {
+        this.middleWorkersSalaryNeed = middleWorkersSalaryNeed;
+    }
+
+    public void setHighWorkers(int highWorkers) {
+        this.highWorkers = highWorkers;
+    }
+
+    public void setHighWorkersLimit(int highWorkersLimit) {
+        this.highWorkersLimit = highWorkersLimit;
+    }
+
+    public void setMaximumHighWorkersLimit(int maximumHighWorkersLimit) {
+        this.maximumHighWorkersLimit = maximumHighWorkersLimit;
+    }
+
+    public void setHighWorkersSalary(float highWorkersSalary) {
+        this.highWorkersSalary = highWorkersSalary;
+    }
+
+    public void setHighWorkersSalaryNeed(float highWorkersSalaryNeed) {
+        this.highWorkersSalaryNeed = highWorkersSalaryNeed;
+    }
+
+    public void setAlloysOutput(float alloysOutput) {
+        this.alloysOutput = alloysOutput;
+    }
+
+    public void setChemicalsOutput(float chemicalsOutput) {
+        this.chemicalsOutput = chemicalsOutput;
+    }
+
+    public void setBuildingMaterialsOutput(float buildingMaterialsOutput) {
+        this.buildingMaterialsOutput = buildingMaterialsOutput;
+    }
+
+    public void setFoodOutput(float foodOutput) {
+        this.foodOutput = foodOutput;
+    }
+
+    public void setMechanicsOutput(float mechanicsOutput) {
+        this.mechanicsOutput = mechanicsOutput;
+    }
+
+    public void setFuelOutput(float fuelOutput) {
+        this.fuelOutput = fuelOutput;
+    }
+
+    public void setLightIndustryOutput(float lightIndustryOutput) {
+        this.lightIndustryOutput = lightIndustryOutput;
+    }
+
+    public void setMilitaryIndustryOutput(float militaryIndustryOutput) {
+        this.militaryIndustryOutput = militaryIndustryOutput;
+    }
+
+    public void setElectricsOutput(float electricsOutput) {
+        this.electricsOutput = electricsOutput;
+    }
+
+    public void setRawFoodNeed(float rawFoodNeed) {
+        this.rawFoodNeed = rawFoodNeed;
+    }
+
+    public void setRawNeed(float rawNeed) {
+        this.rawNeed = rawNeed;
+    }
+
+    public void setAlloysNeed(float alloysNeed) {
+        this.alloysNeed = alloysNeed;
+    }
+
+    public void setChemicalsNeed(float chemicalsNeed) {
+        this.chemicalsNeed = chemicalsNeed;
+    }
+
+    public void setMechanicsNeed(float mechanicsNeed) {
+        this.mechanicsNeed = mechanicsNeed;
+    }
 
     @Override
     public String toString() {
         String string;
         string = "Low-level workers: " + lowWorkers + "\n";
         string += "Low-level workers limit: " + lowWorkersLimit + " (Maximum - " + maximumLowWorkersLimit + ")" + "\n";
-        string += "Low-level workers salary: "  + String.format("%.2f", lowWorkersSalary) + " ƒ" + "\n";
-        string += "Low-level workers salary need: "  + String.format("%.2f", lowWorkersSalaryNeed) + " ƒ" + "\n";
+        string += "Low-level workers salary: " + String.format("%.2f", lowWorkersSalary) + " ƒ" + "\n";
+        string += "Low-level workers salary need: " + String.format("%.2f", lowWorkersSalaryNeed) + " ƒ" + "\n";
         string += "Middle-level workers: " + middleWorkers + " (Maximum - " + maximumMiddleWorkersLimit + ")" + "\n";
         string += "Middle-level workers limit: " + middleWorkersLimit + "\n";
         string += "Middle-level workers salary: " + String.format("%.2f", middleWorkersSalary) + " ƒ" + "\n";
@@ -350,8 +499,16 @@ public class MinistryOfIndustry extends Ministry {
         highWorkersLimit = (int) (economy.getLabor_force() * (modifierHighWorkers + ((random.nextFloat() * (0.005 - (-0.005)) + (-0.005)))));
         highWorkers = highWorkersLimit;
         highWorkersSalary = (float) (economy.getGdpPerPerson() * (modifierHighWorkersSalary + (random.nextFloat() * (0.01 - (-0.01)) + (-0.01))));
-
-
     }
 
+    @Override
+    public void workersIncreasing() {
+        super.workersIncreasing();
+        lowWorkers += lowWorkersLimit * 0.7 * country.getMinistryOfEducation().efficiency * efficiency;
+        if (lowWorkers > lowWorkersLimit) lowWorkers = lowWorkersLimit;
+        middleWorkers += middleWorkersLimit * 0.4 * country.getMinistryOfEducation().efficiency * efficiency;
+        if (middleWorkers > middleWorkersLimit) middleWorkers = middleWorkersLimit;
+        highWorkers += highWorkersLimit * 0.15 * country.getMinistryOfEducation().efficiency * efficiency;
+        if (highWorkers > highWorkersLimit) highWorkers = highWorkersLimit;
+    }
 }
