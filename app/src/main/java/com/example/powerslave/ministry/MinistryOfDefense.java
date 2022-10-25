@@ -470,11 +470,11 @@ public class MinistryOfDefense extends Ministry {
 
         conscription = random.nextBoolean();
 
-        armyPower = (int) ((economy.getLabor_force() / (conscription ? 450f : 650f)) * (modifierArmy + random.nextFloat() * (0.03 - (-0.03)) + (-0.03)));
+        armyPower = (int) ((economy.getLaborForce() / (conscription ? 450f : 650f)) * (modifierArmy + random.nextFloat() * (0.03 - (-0.03)) + (-0.03)));
 
-        navyPower = (int) ((economy.getLabor_force() / (conscription ? 1050f : 1350f)) * (modifierNavy + random.nextFloat() * (0.03 - (-0.03)) + (-0.03)) * (economy.isLandlocked() ? 0 : 1));
+        navyPower = (int) ((economy.getLaborForce() / (conscription ? 1050f : 1350f)) * (modifierNavy + random.nextFloat() * (0.03 - (-0.03)) + (-0.03)) * (economy.isLandlocked() ? 0 : 1));
 
-        airPower = (int) ((economy.getLabor_force() / (conscription ? 1450f : 1850f)) * (modifierAir + random.nextFloat() * (0.03 - (-0.03)) + (-0.03)));
+        airPower = (int) ((economy.getLaborForce() / (conscription ? 1450f : 1850f)) * (modifierAir + random.nextFloat() * (0.03 - (-0.03)) + (-0.03)));
 
         generalsNeed = armyPower / 100;
         admiralsNeed = navyPower / 80;

@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string-array name="event">
-        <item>Your minister is doing fine</item>
+    <string-array name="event_titles">
+        <item>Minister is dead</item>
+        <item>Minister is doing excellent job</item>
+        <item>Minister is slacking</item>
+    </string-array>
+
+    <string-array name="event_texts">
+        <item>Minister %s %s of %s has passed away</item>
+        <item>Minister %s %s of %s is managing %s work extremely well. His competency became higher</item>
+        <item>Minister %s %s of %s doesn't even try to do %s job normally. His competency became lower</item>
     </string-array>
 </resources>

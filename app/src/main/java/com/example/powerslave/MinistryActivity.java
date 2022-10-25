@@ -452,9 +452,15 @@ public class MinistryActivity extends AppCompatActivity implements View.OnClickL
                 }
             });
 
-            // TODO: Special process to buy army, navy, air powers
-            // TODO: Conscription checkBox
+            CheckBox conscriptionPenalty = new CheckBox(this);
+            conscriptionPenalty.setText("Conscription");
+            conscriptionPenalty.setChecked(defense.isConscription());
+            conscriptionPenalty.setOnCheckedChangeListener((compoundButton, b) -> {
+                defense.setConscription(b);
+                MinistryActivity.this.recreate();
+            });
 
+            // TODO: Special process to buy army, navy, air powers
 
             buttonLayout.addView(generalsLimitEdit);
             buttonLayout.addView(buttonConfirmGeneralsLimitEdit);
@@ -470,6 +476,8 @@ public class MinistryActivity extends AppCompatActivity implements View.OnClickL
             buttonLayout.addView(buttonConfirmAirForceOfficersLimitEdit);
             buttonLayout.addView(airForceOfficersSalaryEdit);
             buttonLayout.addView(buttonConfirmAirForceOfficersSalaryEdit);
+
+            buttonLayout.addView(conscriptionPenalty);
 
         } else if (MainGameMenuActivity.selectedMinistry == 4) {
             ministry = country.getMinistryOfAgriculture();
@@ -787,7 +795,6 @@ public class MinistryActivity extends AppCompatActivity implements View.OnClickL
 
 
         } else if (MainGameMenuActivity.selectedMinistry == 7) {
-            // TODO : Add pseudolimits to all ministries, where need
             ministry = country.getMinistryOfTransportation();
 
             ministryFunding();

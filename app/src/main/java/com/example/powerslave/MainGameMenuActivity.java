@@ -18,10 +18,12 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.powerslave.government.Country;
+import com.example.powerslave.government.Event;
 import com.example.powerslave.person.Ruler;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Random;
 
 // Change updates
 public class MainGameMenuActivity extends AppCompatActivity implements View.OnClickListener {
@@ -189,8 +191,11 @@ public class MainGameMenuActivity extends AppCompatActivity implements View.OnCl
             if (total_weeks % 52 == 0) {
                 country.updateMinisters();
             }
+            if (new Random().nextInt(15) == 1) {
+                showEvent();
+                return;
+            }
             country.oneMove();
-            //  showEvent();
             MainGameMenuActivity.this.recreate();
         } else {
             Intent intent = new Intent(MainGameMenuActivity.this, MinistryActivity.class);
@@ -255,17 +260,19 @@ public class MainGameMenuActivity extends AppCompatActivity implements View.OnCl
         alert.show();
     }
 
-//    private void showEvent() {
-//        Event event = new Event(this);
-//        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-//        builder.setTitle(event.getEventText());
-//
-//        builder.setItems(event.getEventChoices(), (dialogInterface, i) -> {
-//            switch (i) {
-//                default:
-//                    MainGameMenuActivity.this.recreate();
-//            }
-//        });
-//        builder.create().show();
-//    }
+    private void showEvent() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        Event event = new Event(this, country);
+        builder.setTitle(event.getEventTitle());
+        builder.setMessage(event.getEventText());
+        builder.setCancelable(false);
+        builder.setPositiveButton("Ok", (dialogInterface, i) -> {
+            country.oneMove();
+            MainGameMenuActivity.this.recreate();
+        });
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
+
+    }
 }

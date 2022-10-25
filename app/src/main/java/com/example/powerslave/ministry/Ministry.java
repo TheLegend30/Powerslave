@@ -50,6 +50,14 @@ public abstract class Ministry {
         this.minister = minister;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public float getEfficiency() {
         return efficiency;
     }

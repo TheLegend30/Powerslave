@@ -38,7 +38,7 @@ public class MinistryOfEducation extends Ministry {
 
         this.economy = country.getMinistryOfEconomy();
 
-        this.children = (int) (this.economy.getPopulation() - this.economy.getLabor_force() - country.getMinistryOfHealthcare().getPensioners());
+        this.children = (int) (this.economy.getPopulation() - this.economy.getLaborForce() - country.getMinistryOfHealthcare().getPensioners());
 
         statsRandomizer();
     }
@@ -330,12 +330,12 @@ public class MinistryOfEducation extends Ministry {
                 break;
         }
 
-        teachersLimit = (int) (economy.getLabor_force() * (modifierTeachers + (random.nextFloat() * (0.003 - (-0.003)) + (-0.003))));
+        teachersLimit = (int) (economy.getLaborForce() * (modifierTeachers + (random.nextFloat() * (0.003 - (-0.003)) + (-0.003))));
         teachers = teachersLimit;
 
         teachersSalary = (float) (economy.getGdpPerPerson() * (modifierTeachersSalary + (random.nextFloat() * (0.01 - (-0.01)) + (-0.01))));
 
-        students = (int) (economy.getLabor_force() * (modifierStudents + (random.nextFloat() * (0.005 - (-0.005)) + (-0.005))));
+        students = (int) (economy.getLaborForce() * (modifierStudents + (random.nextFloat() * (0.005 - (-0.005)) + (-0.005))));
 
         teachersSalaryNeed = (float) (economy.getGdpPerPerson() / 1.5);
         schoolsNeed = (int) Math.ceil(children / 500);

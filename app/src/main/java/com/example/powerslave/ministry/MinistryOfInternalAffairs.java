@@ -269,7 +269,7 @@ public class MinistryOfInternalAffairs extends Ministry {
                 break;
         }
 
-        policemenLimit = (int) (economy.getLabor_force() * (modifierPolicemen + (random.nextFloat() * (0.002f - (-0.002f)) + (-0.02f))));
+        policemenLimit = (int) (economy.getLaborForce() * (modifierPolicemen + (random.nextFloat() * (0.002f - (-0.002f)) + (-0.02f))));
         policemen = policemenLimit;
         policemenSalary = economy.getGdpPerPerson() * (modifierPolicemenSalary + (random.nextFloat() * (0.01f - (-0.01f)) + (-0.01f)));
 

@@ -31,7 +31,7 @@ public class MinistryOfForeignAffairs extends Ministry {
 
         this.countriesRelations = new ArrayList<>();
         this.diplomatsSalaryNeed = this.economy.getGdpPerPerson() * 4.5f;
-        this.maximumDiplomatsLimit = (int) (economy.getLabor_force() * 0.002);
+        this.maximumDiplomatsLimit = (int) (economy.getLaborForce() * 0.002);
     }
 
     public class Relation implements Comparable<Relation> {

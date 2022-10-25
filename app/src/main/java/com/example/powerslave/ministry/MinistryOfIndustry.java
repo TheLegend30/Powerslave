@@ -332,9 +332,9 @@ public class MinistryOfIndustry extends Ministry {
         this.middleWorkersSalaryNeed = this.economy.getGdpPerPerson() * 0.85f;
         this.highWorkersSalaryNeed = this.economy.getGdpPerPerson() * 1.15f;
 
-        maximumLowWorkersLimit = (int) (economy.getLabor_force() * 0.45);
-        maximumMiddleWorkersLimit = (int) (economy.getLabor_force() * 0.45);
-        maximumHighWorkersLimit = (int) (economy.getLabor_force() * 0.45);
+        maximumLowWorkersLimit = (int) (economy.getLaborForce() * 0.45);
+        maximumMiddleWorkersLimit = (int) (economy.getLaborForce() * 0.45);
+        maximumHighWorkersLimit = (int) (economy.getLaborForce() * 0.45);
 
         generalBudgetNeed = (lowWorkers * 0.05f) + (middleWorkers * 0.07f) + (highWorkers * 0.1f) + (lowWorkers * lowWorkersSalaryNeed) + (middleWorkers * middleWorkersSalaryNeed) + (highWorkers * highWorkersSalaryNeed);
         generalBudget += (lowWorkers * lowWorkersSalary) + (middleWorkers * middleWorkersSalary) + (highWorkers * highWorkersSalary);
@@ -488,15 +488,15 @@ public class MinistryOfIndustry extends Ministry {
 
                 break;
         }
-        lowWorkersLimit = (int) (economy.getLabor_force() * (modifierLowWorkers + ((random.nextFloat() * (0.005 - (-0.005)) + (-0.005)))));
+        lowWorkersLimit = (int) (economy.getLaborForce() * (modifierLowWorkers + ((random.nextFloat() * (0.005 - (-0.005)) + (-0.005)))));
         lowWorkers = lowWorkersLimit;
         lowWorkersSalary = (float) (economy.getGdpPerPerson() * (modifierLowWorkersSalary + (random.nextFloat() * (0.01 - (-0.01)) + (-0.01))));
 
-        middleWorkersLimit = (int) (economy.getLabor_force() * (modifierMiddleWorkers + ((random.nextFloat() * (0.005 - (-0.005)) + (-0.005)))));
+        middleWorkersLimit = (int) (economy.getLaborForce() * (modifierMiddleWorkers + ((random.nextFloat() * (0.005 - (-0.005)) + (-0.005)))));
         middleWorkers = middleWorkersLimit;
         middleWorkersSalary = (float) (economy.getGdpPerPerson() * (modifierMiddleWorkersSalary + (random.nextFloat() * (0.01 - (-0.01)) + (-0.01))));
 
-        highWorkersLimit = (int) (economy.getLabor_force() * (modifierHighWorkers + ((random.nextFloat() * (0.005 - (-0.005)) + (-0.005)))));
+        highWorkersLimit = (int) (economy.getLaborForce() * (modifierHighWorkers + ((random.nextFloat() * (0.005 - (-0.005)) + (-0.005)))));
         highWorkers = highWorkersLimit;
         highWorkersSalary = (float) (economy.getGdpPerPerson() * (modifierHighWorkersSalary + (random.nextFloat() * (0.01 - (-0.01)) + (-0.01))));
     }

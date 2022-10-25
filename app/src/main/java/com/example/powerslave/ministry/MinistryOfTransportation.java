@@ -564,7 +564,7 @@ public class MinistryOfTransportation extends Ministry {
         buildingMaterialsNeed = (builders - freeBuilders) * 4.5f;
 
         buildersSalaryNeed = economy.getGdpPerPerson() * 0.4f;
-        maximumBuildersLimit = (int) (economy.getLabor_force() * 0.1);
+        maximumBuildersLimit = (int) (economy.getLaborForce() * 0.1);
 
         generalBudgetNeed = (builders * 0.35f) + (builders * buildersSalaryNeed) + (airports * 1800f) + (ports * 1400f) + (railroadKms * 0.09f) + (roadKms * 0.05f);
         generalBudget += (builders * buildersSalaryNeed);
@@ -699,7 +699,7 @@ public class MinistryOfTransportation extends Ministry {
         railroadKmsNeed = (int) (economy.getPopulation() / 1500 + economy.getArea() / 2500);
         roadKmsNeed = (int) (economy.getPopulation() / 350 + economy.getArea() / 1500);
 
-        buildersLimit = (int) (economy.getLabor_force() * (modifierBuilders + (random.nextFloat() * (0.005 - (-0.005)) + (-0.005))));
+        buildersLimit = (int) (economy.getLaborForce() * (modifierBuilders + (random.nextFloat() * (0.005 - (-0.005)) + (-0.005))));
         builders = buildersLimit;
         freeBuilders = builders;
         buildersSalary = economy.getGdpPerPerson() * (modifierBuildersSalary + (random.nextFloat() * (0.01f - (-0.01f)) + (-0.01f)));

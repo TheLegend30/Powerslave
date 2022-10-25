@@ -342,7 +342,7 @@ public class MinistryOfHealthcare extends Ministry {
         lifeExpectancy = modifierLifeExpectancy + (random.nextFloat() * (3f - (-3f)) + (-3f));
         retirementAge = (int) (modifierRetirementAge + (random.nextInt((2 - (-2))) + (-2)));
 
-        doctorsLimit = (int) (economy.getLabor_force() * (modifierDoctors + (random.nextFloat() * (0.0005f - (-0.0005f)) + (-0.0005f))));
+        doctorsLimit = (int) (economy.getLaborForce() * (modifierDoctors + (random.nextFloat() * (0.0005f - (-0.0005f)) + (-0.0005f))));
         doctors = doctorsLimit;
         doctorsSalary = economy.getGdpPerPerson() * (modifierDoctorsSalary + (random.nextFloat() * (0.005f - (-0.005f)) + (-0.005f)));
 
@@ -351,7 +351,7 @@ public class MinistryOfHealthcare extends Ministry {
         hospitalsNeed = (int) (Math.ceil(doctors / 500f));
         ////////
 
-        pensioners = (int) (economy.getPopulation() - ((economy.getLabor_force() * (lifeExpectancy / retirementAge)) * 1.15f));
+        pensioners = (int) (economy.getPopulation() - ((economy.getLaborForce() * (lifeExpectancy / retirementAge)) * 1.15f));
 
         pension = economy.getGdpPerPerson() * (modifierPension + (random.nextFloat() * (0.005f - (-0.005f)) + (-0.005f)));
 

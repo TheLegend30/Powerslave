@@ -74,7 +74,7 @@ public class Country implements Comparable<Country> {
         this.adjective = context.getResources().getStringArray(R.array.adjectives)[key];
         this.ruler = randomRuler();
 
-        vacant = new Minister("Vacant", "position", Sex.MALE, this, Ideology.PLYCISM, 0, 0, Uri.parse(context.getResources().getString(R.string.anon)));
+        vacant = new Minister("Vacant", "position", Sex.MALE, this, Ideology.NONPARTISAN, 0, 0, Uri.parse(context.getResources().getString(R.string.anon)));
         ministries.put("m_economy", new MinistryOfEconomy(key, vacant, context, this));
         ministries.put("m_health", new MinistryOfHealthcare(key, vacant, context, this));
         ministries.put("m_education", new MinistryOfEducation(key, vacant, context, this));

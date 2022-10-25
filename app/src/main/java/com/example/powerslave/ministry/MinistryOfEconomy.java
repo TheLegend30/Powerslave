@@ -19,26 +19,26 @@ public class MinistryOfEconomy extends Ministry {
     private float inflation;
     private String currency;
     private float currencyToGulden;
-    private float interest_rate;
+    private float interestRate;
 
-    private long labor_force;
+    private long laborForce;
     private long unemployment;
     private long poverty;
 
     private boolean landlocked;
 
-    private float low_taxes;
-    private float low_taxes_modifier = 0.2f;
-    private float middle_taxes;
-    private float middle_taxes_modifier = 0.3f;
-    private float high_taxes;
-    private float high_taxes_modifier = 0.25f;
-    private float total_taxes = 0;
+    private float lowTaxes;
+    private float lowTaxesModifier = 0.2f;
+    private float middleTaxes;
+    private float middleTaxesModifier = 0.3f;
+    private float highTaxes;
+    private float highTaxesModifier = 0.25f;
+    private float totalTaxes = 0;
 
     private long exportsAndImport = 0;
 
     private float tariffs = 0.03f;
-    private float total_tariffs;
+    private float totalTariffs;
 
     private float budget = 0;
 
@@ -62,10 +62,10 @@ public class MinistryOfEconomy extends Ministry {
         this.inflation = Float.parseFloat(context.getResources().getStringArray(R.array.inflation)[countryKey]);
         this.currency = context.getResources().getStringArray(R.array.currency)[countryKey];
         this.currencyToGulden = Float.parseFloat(context.getResources().getStringArray(R.array.currency_to_gulden)[countryKey]);
-        this.interest_rate = Float.parseFloat(context.getResources().getStringArray(R.array.interest_rate)[countryKey]);
+        this.interestRate = Float.parseFloat(context.getResources().getStringArray(R.array.interest_rate)[countryKey]);
 
-        this.labor_force = (long) (population * (Float.parseFloat(context.getResources().getStringArray(R.array.labor_force)[countryKey]) / 100));
-        this.unemployment = labor_force;
+        this.laborForce = (long) (population * (Float.parseFloat(context.getResources().getStringArray(R.array.labor_force)[countryKey]) / 100));
+        this.unemployment = laborForce;
         this.poverty = population;
 
         this.landlocked = Boolean.parseBoolean(context.getResources().getStringArray(R.array.landlocked)[countryKey]);
@@ -87,12 +87,12 @@ public class MinistryOfEconomy extends Ministry {
         this.currency = currency;
     }
 
-    public long getLabor_force() {
-        return labor_force;
+    public long getLaborForce() {
+        return laborForce;
     }
 
-    public void setLabor_force(long labor_force) {
-        this.labor_force = labor_force;
+    public void setLaborForce(long laborForce) {
+        this.laborForce = laborForce;
     }
 
     public float getBudget() {
@@ -174,8 +174,8 @@ public class MinistryOfEconomy extends Ministry {
         this.currencyToGulden = currencyToGulden;
     }
 
-    public float getHigh_taxes_modifier() {
-        return high_taxes_modifier;
+    public float getHighTaxesModifier() {
+        return highTaxesModifier;
     }
 
     public float getTariffs() {
@@ -195,8 +195,8 @@ public class MinistryOfEconomy extends Ministry {
         string += "Inflation: " + String.format("%.2f", inflation) + " %" + "\n";
         string += "Currency: " + country.getAdjective() + " " + currency + "\n";
         string += "1 " + currency + " is " + String.format("%.5f", currencyToGulden) + " of Golden Florin (ƒ)" + "\n";
-        string += "Interest Rate: " + interest_rate + " %" + "\n";
-        string += "Labor Force: " + labor_force + " (" + String.format("%.1f", (float) labor_force / population * 100.0) + " %)" + "\n";
+        string += "Interest Rate: " + interestRate + " %" + "\n";
+        string += "Labor Force: " + laborForce + " (" + String.format("%.1f", (float) laborForce / population * 100.0) + " %)" + "\n";
         string += "Unemployment Rate: " + unemployment + " (" + String.format("%.1f", (float) unemployment / population * 100.0) + " %)" + "\n";
         string += "Poverty Rate: " + poverty + " (" + String.format("%.1f", (float) poverty / population * 100.0) + " %)" + "\n";
         string += "Landlocked: " + (this.landlocked ? "Yes" : "No") + "\n";
@@ -213,10 +213,10 @@ public class MinistryOfEconomy extends Ministry {
         MinistryOfDevelopment development = country.getMinistryOfDevelopment();
         MinistryOfDefense defense = country.getMinistryOfDefense();
 
-        low_taxes = low_taxes_modifier * ((agriculture.getMiners() * agriculture.getMinersSalary()) + (agriculture.getFarmers() * agriculture.getFarmersSalary()) + (industry.getLowWorkers() * industry.getLowWorkersSalary()));
-        middle_taxes = middle_taxes_modifier * ((industry.getMiddleWorkers() * industry.getMiddleWorkersSalary()) + (development.getClerks() * development.getClerksSalary()));
-        high_taxes = high_taxes_modifier * ((industry.getHighWorkers() * industry.getHighWorkersSalary()) + (development.getTradeOutput() * 1.5f));
-        total_taxes += low_taxes + middle_taxes + high_taxes;
+        lowTaxes = lowTaxesModifier * ((agriculture.getMiners() * agriculture.getMinersSalary()) + (agriculture.getFarmers() * agriculture.getFarmersSalary()) + (industry.getLowWorkers() * industry.getLowWorkersSalary()));
+        middleTaxes = middleTaxesModifier * ((industry.getMiddleWorkers() * industry.getMiddleWorkersSalary()) + (development.getClerks() * development.getClerksSalary()));
+        highTaxes = highTaxesModifier * ((industry.getHighWorkers() * industry.getHighWorkersSalary()) + (development.getTradeOutput() * 1.5f));
+        totalTaxes += lowTaxes + middleTaxes + highTaxes;
 
         exportsAndImport += 0.3f * (agriculture.getRawOutput() - industry.getRawNeed());
         exportsAndImport += 0.35f * ( agriculture.getRawFoodOutput() - industry.getRawFoodNeed());
@@ -237,9 +237,9 @@ public class MinistryOfEconomy extends Ministry {
 
         exportsAndImport *= country.getMinistryOfTransportation().efficiency * 75f;
 
-        total_tariffs = exportsAndImport * tariffs * country.getMinistryOfTransportation().efficiency;
+        totalTariffs = exportsAndImport * tariffs * country.getMinistryOfTransportation().efficiency;
 
-        budget = exportsAndImport + total_tariffs + total_taxes;
+        budget = exportsAndImport + totalTariffs + totalTaxes;
 
         budget -= country.getMinistryOfAgriculture().generalBudget;
         budget -= country.getMinistryOfCulture().generalBudget;

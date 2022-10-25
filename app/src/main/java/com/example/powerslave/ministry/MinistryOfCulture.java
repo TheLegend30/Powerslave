@@ -189,7 +189,7 @@ public class MinistryOfCulture extends Ministry{
 
 
 
-        culturalWorkersLimit = (int) (economy.getLabor_force() * (modifierCulturalWorkers + (random.nextFloat() * (0.00005f - (-0.00005f)) + (-0.00005f))));
+        culturalWorkersLimit = (int) (economy.getLaborForce() * (modifierCulturalWorkers + (random.nextFloat() * (0.00005f - (-0.00005f)) + (-0.00005f))));
         culturalWorkers = culturalWorkersLimit;
         culturalWorkersSalary = economy.getGdpPerPerson() * (modifierCulturalWorkersSalary + (random.nextFloat() * (0.05f - (-0.05f)) + (-0.05f)));
 

@@ -28,7 +28,7 @@ public class NationalIntelligence extends Ministry {
 
         this.countriesMissions = new ArrayList<>();
         this.agentsSalaryNeed = this.economy.getGdpPerPerson() * 6.5f;
-        this.maximumAgentsLimit = (int) (economy.getLabor_force() * 0.001);
+        this.maximumAgentsLimit = (int) (economy.getLaborForce() * 0.001);
     }
 
     public class Mission implements Comparable<Mission> {

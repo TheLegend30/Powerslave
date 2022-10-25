@@ -153,8 +153,8 @@ public class MinistryOfAgriculture extends Ministry {
         super.updateMinistry();
         farmersSalaryNeed = economy.getGdpPerPerson() * 0.25f;
         minersSalaryNeed = economy.getGdpPerPerson() * 0.29f;
-        maximumFarmersLimit = (int) (economy.getLabor_force() * 0.55);
-        maximumMinersLimit = (int) (economy.getLabor_force() * 0.4);
+        maximumFarmersLimit = (int) (economy.getLaborForce() * 0.55);
+        maximumMinersLimit = (int) (economy.getLaborForce() * 0.4);
 
         generalBudgetNeed = (miners * 0.015f) + (farmers * 0.01f) + (miners * minersSalary) + (farmers * farmersSalary);
         generalBudget += (miners * minersSalary) + (farmers * farmersSalary);
@@ -259,11 +259,11 @@ public class MinistryOfAgriculture extends Ministry {
         }
 
 
-        farmersLimit = (int) (economy.getLabor_force() * (modifierFarmers + (random.nextFloat() * (0.01 - (-0.01)) + (-0.01))));
+        farmersLimit = (int) (economy.getLaborForce() * (modifierFarmers + (random.nextFloat() * (0.01 - (-0.01)) + (-0.01))));
         farmers = farmersLimit;
         farmersSalary = (float) (economy.getGdpPerPerson() * (modifierFarmersSalary + (random.nextFloat() * (0.01 - (-0.01)) + (-0.01))));
 
-        minersLimit = (int) (economy.getLabor_force() * (modifierMiners + (random.nextFloat() * (0.01 - (-0.01)) + (-0.01))));
+        minersLimit = (int) (economy.getLaborForce() * (modifierMiners + (random.nextFloat() * (0.01 - (-0.01)) + (-0.01))));
         miners = minersLimit;
         minersSalary = (float) (economy.getGdpPerPerson() * (modifierMinersSalary + (random.nextFloat() * (0.01 - (-0.01)) + (-0.01))));
 

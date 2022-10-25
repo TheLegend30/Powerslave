@@ -236,7 +236,7 @@ public class MinistryOfJustice extends Ministry {
         judgesSalaryNeed = (int) (economy.getGdpPerPerson() * 1.25);
         prisonsNeed = (int) ((internalAffairs.getCrime() * (economy.getPopulation() / 100000)) / 2500);
 
-        judgesLimit = (int) (economy.getLabor_force() * (modifierJudges + (random.nextFloat() * (0.0003 - (-0.0003)) + (-0.0003))));
+        judgesLimit = (int) (economy.getLaborForce() * (modifierJudges + (random.nextFloat() * (0.0003 - (-0.0003)) + (-0.0003))));
         judges = judgesLimit;
 
         judgesSalary = (float) (economy.getGdpPerPerson() * (modifierJudgesSalary + (random.nextFloat() * (0.05 - (-0.05)) + (-0.05))));

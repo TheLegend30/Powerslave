@@ -12,8 +12,6 @@ public class Minister extends Person {
     private float loyalty;
     private float competency;
 
-
-
     public Minister(String name, String surname, Sex sex, Country country, Ideology ideology, float loyalty, float competency, Uri portrait) {
         super(name, surname, sex, country, ideology, portrait);
         this.loyalty = loyalty;
@@ -26,7 +24,13 @@ public class Minister extends Person {
     }
 
     public void setLoyalty(float loyalty) {
-        this.loyalty = loyalty;
+        if (loyalty >= 100) {
+            this.loyalty = 100;
+        } else if (loyalty < 0) {
+            this.loyalty = 0;
+        } else {
+            this.loyalty = loyalty;
+        }
     }
 
     public float getCompetency() {
@@ -34,7 +38,13 @@ public class Minister extends Person {
     }
 
     public void setCompetency(float competency) {
-        this.competency = competency;
+        if (competency >= 100) {
+            this.competency = 100;
+        } else if (competency < 0) {
+            this.competency = 0;
+        } else {
+            this.competency = competency;
+        }
     }
 
     public Uri getPortrait() {

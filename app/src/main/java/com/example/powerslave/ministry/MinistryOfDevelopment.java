@@ -160,7 +160,7 @@ public class MinistryOfDevelopment extends Ministry {
 
         generalBudgetNeed = (clerks * 0.2f) + (clerks * clerksSalaryNeed);
         generalBudget += (clerks * clerksSalary);
-        maximumClerksLimit = (int) (economy.getLabor_force() * 0.2f);
+        maximumClerksLimit = (int) (economy.getLaborForce() * 0.2f);
 
         efficiency *= generalBudget / generalBudgetNeed;
 
@@ -244,11 +244,11 @@ public class MinistryOfDevelopment extends Ministry {
                 break;
         }
 
-        clerksLimit = (int) (economy.getLabor_force() * (modifierClerks + (random.nextFloat() * (0.01f - (-0.01f)) + (-0.01f))));
+        clerksLimit = (int) (economy.getLaborForce() * (modifierClerks + (random.nextFloat() * (0.01f - (-0.01f)) + (-0.01f))));
         clerks = clerksLimit;
         clerksSalary = economy.getGdpPerPerson() * (modifierClerksSalary + (random.nextFloat() * (0.01f - (-0.01f)) + (-0.01f)));
 
-        entrepreneurs = (int) (economy.getLabor_force() * (modifierEntrepreneurs + (random.nextFloat() * (0.0005f - (-0.0005f)) + (-0.0005f))));
+        entrepreneurs = (int) (economy.getLaborForce() * (modifierEntrepreneurs + (random.nextFloat() * (0.0005f - (-0.0005f)) + (-0.0005f))));
     }
 
     @Override
@@ -256,6 +256,6 @@ public class MinistryOfDevelopment extends Ministry {
         super.workersIncreasing();
         clerks += clerksLimit * 0.3 * country.getMinistryOfEducation().efficiency * efficiency;
         if (clerks > clerksLimit) clerks = clerksLimit;
-        entrepreneurs += 0.0001 * economy.getLabor_force() * country.getMinistryOfEducation().getLiberty() * (0.15f / economy.getHigh_taxes_modifier()) * (0.05f / economy.getTariffs());
+        entrepreneurs += 0.0001 * economy.getLaborForce() * country.getMinistryOfEducation().getLiberty() * (0.15f / economy.getHighTaxesModifier()) * (0.05f / economy.getTariffs());
     }
 }
