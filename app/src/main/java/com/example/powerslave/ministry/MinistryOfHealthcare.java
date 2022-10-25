@@ -154,7 +154,7 @@ public class MinistryOfHealthcare extends Ministry {
         doctorsSalaryNeed = economy.getGdpPerPerson() * 1.15f;
         pensionNeed = economy.getGdpPerPerson() * 0.35f;
 
-        popGrowth = (int) ((economy.getPopulation() / 100) * (natality - mortality));
+        popGrowth = (int) ((economy.getPopulation() / 1000) * (natality - mortality));
 
         doctorsNeed = (int) economy.getPopulation() / 350;
         hospitalsNeed = (int) (Math.ceil(doctors / 500f));

@@ -33,6 +33,7 @@ import com.example.powerslave.ministry.MinistryOfForeignAffairs;
 import com.example.powerslave.ministry.MinistryOfHealthcare;
 import com.example.powerslave.ministry.MinistryOfInternalAffairs;
 import com.example.powerslave.ministry.MinistryOfJustice;
+import com.example.powerslave.ministry.MinistryOfTransportation;
 import com.example.powerslave.ministry.NationalIntelligence;
 import com.example.powerslave.ministry.Parliament;
 import com.example.powerslave.person.Minister;
@@ -175,17 +176,13 @@ public class MinistryActivity extends AppCompatActivity implements View.OnClickL
                 if (TextUtils.isEmpty(wantToBuildHospitalsEdit.getText())) {
                     Toast.makeText(MinistryActivity.this, "You need to enter something", Toast.LENGTH_SHORT).show();
                 } else {
-                    boolean showSecondMessage = true;
-                    for (int i = 0; i < Integer.parseInt(String.valueOf(wantToBuildHospitalsEdit.getText())); i++) {
-                        if (country.getMinistryOfTransportation().getFreeBuilders() < 1000) {
-                            Toast.makeText(MinistryActivity.this, "We'll build only " + i + " hospitals", Toast.LENGTH_SHORT).show();
-                            showSecondMessage = false;
-                            break;
-                        }
-                        country.getMinistryOfTransportation().buildHospital();
+                    int count  = Integer.parseInt(String.valueOf(wantToBuildHospitalsEdit.getText()));
+                    if (country.getMinistryOfTransportation().getFreeBuilders() >= MinistryOfTransportation.getHospitalBuildersNeed() * count) {
+                        Toast.makeText(MinistryActivity.this, "We'll build " + count + " hospitals", Toast.LENGTH_SHORT).show();
+                        country.getMinistryOfTransportation().buildHospital(count);
+                    } else {
+                        Toast.makeText(MinistryActivity.this, "That is too much building", Toast.LENGTH_SHORT).show();
                     }
-                    if (showSecondMessage)
-                        Toast.makeText(MinistryActivity.this, "We'll build " + Integer.parseInt(String.valueOf(wantToBuildHospitalsEdit.getText())) + " hospitals", Toast.LENGTH_SHORT).show();
                 }
 
             });
@@ -266,17 +263,13 @@ public class MinistryActivity extends AppCompatActivity implements View.OnClickL
                 if (TextUtils.isEmpty(wantToBuildSchoolsEdit.getText())) {
                     Toast.makeText(MinistryActivity.this, "You need to enter something", Toast.LENGTH_SHORT).show();
                 } else {
-                    boolean showSecondMessage = true;
-                    for (int i = 0; i < Integer.parseInt(String.valueOf(wantToBuildSchoolsEdit.getText())); i++) {
-                        if (country.getMinistryOfTransportation().getFreeBuilders() < 900) {
-                            Toast.makeText(MinistryActivity.this, "We'll build only " + i + " schools", Toast.LENGTH_SHORT).show();
-                            showSecondMessage = false;
-                            break;
-                        }
-                        country.getMinistryOfTransportation().buildSchool();
+                    int count  = Integer.parseInt(String.valueOf(wantToBuildSchoolsEdit.getText()));
+                    if (country.getMinistryOfTransportation().getFreeBuilders() >= MinistryOfTransportation.getSchoolBuildersNeed() * count) {
+                        Toast.makeText(MinistryActivity.this, "We'll build " + count + " schools", Toast.LENGTH_SHORT).show();
+                        country.getMinistryOfTransportation().buildSchool(count);
+                    } else {
+                        Toast.makeText(MinistryActivity.this, "That is too much building", Toast.LENGTH_SHORT).show();
                     }
-                    if (showSecondMessage)
-                        Toast.makeText(MinistryActivity.this, "We'll build " + Integer.parseInt(String.valueOf(wantToBuildSchoolsEdit.getText())) + " schools", Toast.LENGTH_SHORT).show();
                 }
 
             });
@@ -293,17 +286,13 @@ public class MinistryActivity extends AppCompatActivity implements View.OnClickL
                 if (TextUtils.isEmpty(wantToBuildCollegesEdit.getText())) {
                     Toast.makeText(MinistryActivity.this, "You need to enter something", Toast.LENGTH_SHORT).show();
                 } else {
-                    boolean showSecondMessage = true;
-                    for (int i = 0; i < Integer.parseInt(String.valueOf(wantToBuildCollegesEdit.getText())); i++) {
-                        if (country.getMinistryOfTransportation().getFreeBuilders() < 2000) {
-                            Toast.makeText(MinistryActivity.this, "We'll build only " + i + " colleges", Toast.LENGTH_SHORT).show();
-                            showSecondMessage = false;
-                            break;
-                        }
-                        country.getMinistryOfTransportation().buildCollege();
+                    int count  = Integer.parseInt(String.valueOf(wantToBuildCollegesEdit.getText()));
+                    if (country.getMinistryOfTransportation().getFreeBuilders() >= MinistryOfTransportation.getCollegeBuildersNeed() * count) {
+                        Toast.makeText(MinistryActivity.this, "We'll build " + count + " colleges", Toast.LENGTH_SHORT).show();
+                        country.getMinistryOfTransportation().buildCollege(count);
+                    } else {
+                        Toast.makeText(MinistryActivity.this, "That is too much building", Toast.LENGTH_SHORT).show();
                     }
-                    if (showSecondMessage)
-                        Toast.makeText(MinistryActivity.this, "We'll build " + Integer.parseInt(String.valueOf(wantToBuildCollegesEdit.getText())) + " colleges", Toast.LENGTH_SHORT).show();
                 }
 
             });
@@ -575,7 +564,7 @@ public class MinistryActivity extends AppCompatActivity implements View.OnClickL
                     }
                 }
             });
-            
+
             buttonLayout.addView(farmersLimitEdit);
             buttonLayout.addView(buttonConfirmFarmersLimitEdit);
             buttonLayout.addView(farmersSalaryEdit);
@@ -588,10 +577,175 @@ public class MinistryActivity extends AppCompatActivity implements View.OnClickL
 
         } else if (MainGameMenuActivity.selectedMinistry == 5) {
             ministry = country.getMinistryOfDevelopment();
+            // TODO : Development
         } else if (MainGameMenuActivity.selectedMinistry == 6) {
             ministry = country.getMinistryOfIndustry();
+            // TODO: Industry
         } else if (MainGameMenuActivity.selectedMinistry == 7) {
+            // TODO : Add pseudolimits to all ministries, where need
             ministry = country.getMinistryOfTransportation();
+
+            ministryFunding();
+
+            MinistryOfTransportation transportation = (MinistryOfTransportation) ministry;
+
+            EditText buildersLimitEdit = new EditText(this);
+            buildersLimitEdit.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+            buildersLimitEdit.setInputType(InputType.TYPE_CLASS_NUMBER);
+            buildersLimitEdit.setHint("Enter limit of builders");
+
+            Button buttonConfirmBuildersLimitEdit = new Button(this);
+            buttonConfirmBuildersLimitEdit.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+            buttonConfirmBuildersLimitEdit.setText("Confirm limit");
+            buttonConfirmBuildersLimitEdit.setOnClickListener(view -> {
+                if (TextUtils.isEmpty(buildersLimitEdit.getText())) {
+                    Toast.makeText(MinistryActivity.this, "You need to enter something", Toast.LENGTH_SHORT).show();
+                } else {
+                    Integer limit = Integer.parseInt(String.valueOf(buildersLimitEdit.getText()));
+                    if (limit > transportation.getMaximumBuildersLimit() || limit < 0) {
+                        Toast.makeText(MinistryActivity.this, ("Have you lost your mind, " + (country.getRuler().getSex() == Sex.MALE ? "sir?" : "ma'am?")), Toast.LENGTH_SHORT).show();
+                    } else {
+                        transportation.setBuildersLimit(limit);
+                        MinistryActivity.this.recreate();
+                    }
+                }
+            });
+
+            EditText buildersSalaryEdit = new EditText(this);
+            buildersSalaryEdit.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+            buildersSalaryEdit.setInputType(InputType.TYPE_CLASS_NUMBER);
+            buildersSalaryEdit.setHint("Enter salary of builders");
+
+            Button buttonConfirmBuildersSalaryEdit = new Button(this);
+            buttonConfirmBuildersSalaryEdit.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+            buttonConfirmBuildersSalaryEdit.setText("Confirm salary");
+            buttonConfirmBuildersSalaryEdit.setOnClickListener(view -> {
+                if (TextUtils.isEmpty(buildersSalaryEdit.getText())) {
+                    Toast.makeText(MinistryActivity.this, "You need to enter something", Toast.LENGTH_SHORT).show();
+                } else {
+                    Float salary = Float.parseFloat(String.valueOf(buildersSalaryEdit.getText()));
+                    if (salary > (transportation.getBuildersSalaryNeed() * 10) || salary < 0) {
+                        Toast.makeText(MinistryActivity.this, ("Have you lost your mind, " + (country.getRuler().getSex() == Sex.MALE ? "sir?" : "ma'am?")), Toast.LENGTH_SHORT).show();
+                    } else {
+                        transportation.setBuildersSalary(salary);
+                        MinistryActivity.this.recreate();
+                    }
+                }
+            });
+
+            EditText wantToBuildAirportsEdit = new EditText(this);
+            wantToBuildAirportsEdit.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+            wantToBuildAirportsEdit.setInputType(InputType.TYPE_CLASS_NUMBER);
+            wantToBuildAirportsEdit.setHint("How much airports want to build?");
+
+            Button buttonBuildAirport = new Button(this);
+            buttonBuildAirport.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+            buttonBuildAirport.setText("Build airport");
+            buttonBuildAirport.setOnClickListener(view -> {
+                if (TextUtils.isEmpty(wantToBuildAirportsEdit.getText())) {
+                    Toast.makeText(MinistryActivity.this, "You need to enter something", Toast.LENGTH_SHORT).show();
+                } else {
+                    int count  = Integer.parseInt(String.valueOf(wantToBuildAirportsEdit.getText()));
+                    if (country.getMinistryOfTransportation().getFreeBuilders() >= MinistryOfTransportation.getAirportsBuildersNeed() * count) {
+                        Toast.makeText(MinistryActivity.this, "We'll build " + count + " airports", Toast.LENGTH_SHORT).show();
+                        country.getMinistryOfTransportation().buildAirport(count);
+                    } else {
+                        Toast.makeText(MinistryActivity.this, "That is too much building", Toast.LENGTH_SHORT).show();
+                    }
+                }
+                MinistryActivity.this.recreate();
+            });
+
+            EditText wantToBuildPortsEdit = new EditText(this);
+            wantToBuildPortsEdit.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+            wantToBuildPortsEdit.setInputType(InputType.TYPE_CLASS_NUMBER);
+            wantToBuildPortsEdit.setHint("How much ports want to build?");
+
+            Button buttonBuildPort = new Button(this);
+            buttonBuildPort.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+            buttonBuildPort.setText("Build port");
+            buttonBuildPort.setOnClickListener(view -> {
+                if (TextUtils.isEmpty(wantToBuildPortsEdit.getText())) {
+                    Toast.makeText(MinistryActivity.this, "You need to enter something", Toast.LENGTH_SHORT).show();
+                } else {
+                    int count  = Integer.parseInt(String.valueOf(wantToBuildPortsEdit.getText()));
+                    if (country.getMinistryOfTransportation().getFreeBuilders() >= MinistryOfTransportation.getPortsBuildersNeed() * count) {
+                        Toast.makeText(MinistryActivity.this, "We'll build " + count + " ports", Toast.LENGTH_SHORT).show();
+                        country.getMinistryOfTransportation().buildPorts(count);
+                    } else {
+                        Toast.makeText(MinistryActivity.this, "That is too much building", Toast.LENGTH_SHORT).show();
+                    }
+                }
+                MinistryActivity.this.recreate();
+            });
+
+            EditText wantToBuildRailroadEdit = new EditText(this);
+            wantToBuildRailroadEdit.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+            wantToBuildRailroadEdit.setInputType(InputType.TYPE_CLASS_NUMBER);
+            wantToBuildRailroadEdit.setHint("How much kms of railroad want to build?");
+
+            Button buttonBuildRailroad = new Button(this);
+            buttonBuildRailroad.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+            buttonBuildRailroad.setText("Build railroad");
+            buttonBuildRailroad.setOnClickListener(view -> {
+                if (TextUtils.isEmpty(wantToBuildRailroadEdit.getText())) {
+                    Toast.makeText(MinistryActivity.this, "You need to enter something", Toast.LENGTH_SHORT).show();
+                } else {
+                    int count  = Integer.parseInt(String.valueOf(wantToBuildRailroadEdit.getText()));
+                    if (country.getMinistryOfTransportation().getFreeBuilders() >= MinistryOfTransportation.getRailroadBuildersNeed() * count) {
+                        Toast.makeText(MinistryActivity.this, "We'll build " + count + " kms of railroad", Toast.LENGTH_SHORT).show();
+                        country.getMinistryOfTransportation().buildRailroad(count);
+                    } else {
+                        Toast.makeText(MinistryActivity.this, "That is too much building", Toast.LENGTH_SHORT).show();
+                    }
+                }
+                MinistryActivity.this.recreate();
+            });
+
+            EditText wantToBuildRoadEdit = new EditText(this);
+            wantToBuildRoadEdit.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+            wantToBuildRoadEdit.setInputType(InputType.TYPE_CLASS_NUMBER);
+            wantToBuildRoadEdit.setHint("How much kms of road want to build?");
+
+            Button buttonBuildRoad = new Button(this);
+            buttonBuildRoad.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+            buttonBuildRoad.setText("Build road");
+            buttonBuildRoad.setOnClickListener(view -> {
+                if (TextUtils.isEmpty(wantToBuildRailroadEdit.getText())) {
+                    Toast.makeText(MinistryActivity.this, "You need to enter something", Toast.LENGTH_SHORT).show();
+                } else {
+                    int count  = Integer.parseInt(String.valueOf(wantToBuildRailroadEdit.getText()));
+                    if (country.getMinistryOfTransportation().getFreeBuilders() >= MinistryOfTransportation.getRoadBuildersNeed() * count) {
+                        Toast.makeText(MinistryActivity.this, "We'll build " + count + " kms of road", Toast.LENGTH_SHORT).show();
+                        country.getMinistryOfTransportation().buildRoad(count);
+                    } else {
+                        Toast.makeText(MinistryActivity.this, "That is too much building", Toast.LENGTH_SHORT).show();
+                    }
+                }
+                MinistryActivity.this.recreate();
+            });
+
+
+            TextView buildingQueue = new TextView(this);
+            buildingQueue.setText("Building queue: \n" + transportation.queueToString());
+
+            buttonLayout.addView(buildersLimitEdit);
+            buttonLayout.addView(buttonConfirmBuildersLimitEdit);
+            buttonLayout.addView(buildersSalaryEdit);
+            buttonLayout.addView(buttonConfirmBuildersSalaryEdit);
+
+            buttonLayout.addView(wantToBuildAirportsEdit);
+            buttonLayout.addView(buttonBuildAirport);
+            buttonLayout.addView(wantToBuildPortsEdit);
+            buttonLayout.addView(buttonBuildPort);
+            buttonLayout.addView(wantToBuildRailroadEdit);
+            buttonLayout.addView(buttonBuildRailroad);
+            buttonLayout.addView(wantToBuildRoadEdit);
+            buttonLayout.addView(buttonBuildRoad);
+
+            buttonLayout.addView(buildingQueue);
+
+
         } else if (MainGameMenuActivity.selectedMinistry == 8) {
             ministry = country.getMinistryOfCulture();
 
@@ -643,8 +797,6 @@ public class MinistryActivity extends AppCompatActivity implements View.OnClickL
                 }
             });
 
-
-            // TODO: Workers need change to dynamic
             EditText wantToBuildMonumentsEdit = new EditText(this);
             wantToBuildMonumentsEdit.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
             wantToBuildMonumentsEdit.setInputType(InputType.TYPE_CLASS_NUMBER);
@@ -657,17 +809,13 @@ public class MinistryActivity extends AppCompatActivity implements View.OnClickL
                 if (TextUtils.isEmpty(wantToBuildMonumentsEdit.getText())) {
                     Toast.makeText(MinistryActivity.this, "You need to enter something", Toast.LENGTH_SHORT).show();
                 } else {
-                    boolean showSecondMessage = true;
-                    for (int i = 0; i < Integer.parseInt(String.valueOf(wantToBuildMonumentsEdit.getText())); i++) {
-                        if (country.getMinistryOfTransportation().getFreeBuilders() < 1500) {
-                            Toast.makeText(MinistryActivity.this, "We'll build only " + i + " monuments", Toast.LENGTH_SHORT).show();
-                            showSecondMessage = false;
-                            break;
-                        }
-                        country.getMinistryOfTransportation().buildMonument();
+                    int count  = Integer.parseInt(String.valueOf(wantToBuildMonumentsEdit.getText()));
+                    if (country.getMinistryOfTransportation().getFreeBuilders() >= MinistryOfTransportation.getMonumentBuildersNeed() * count) {
+                        Toast.makeText(MinistryActivity.this, "We'll build " + count + " monuments", Toast.LENGTH_SHORT).show();
+                        country.getMinistryOfTransportation().buildMonument(count);
+                    } else {
+                        Toast.makeText(MinistryActivity.this, "That is too much building", Toast.LENGTH_SHORT).show();
                     }
-                    if (showSecondMessage)
-                        Toast.makeText(MinistryActivity.this, "We'll build " + Integer.parseInt(String.valueOf(wantToBuildMonumentsEdit.getText())) + " monuments", Toast.LENGTH_SHORT).show();
                 }
 
             });
@@ -743,19 +891,14 @@ public class MinistryActivity extends AppCompatActivity implements View.OnClickL
                 if (TextUtils.isEmpty(wantToBuildDepartmentsEdit.getText())) {
                     Toast.makeText(MinistryActivity.this, "You need to enter something", Toast.LENGTH_SHORT).show();
                 } else {
-                    boolean showSecondMessage = true;
-                    for (int i = 0; i < Integer.parseInt(String.valueOf(wantToBuildDepartmentsEdit.getText())); i++) {
-                        if (country.getMinistryOfTransportation().getFreeBuilders() < 1700) {
-                            Toast.makeText(MinistryActivity.this, "We'll build only " + i + " departments", Toast.LENGTH_SHORT).show();
-                            showSecondMessage = false;
-                            break;
-                        }
-                        country.getMinistryOfTransportation().buildDepartment();
+                    int count  = Integer.parseInt(String.valueOf(wantToBuildDepartmentsEdit.getText()));
+                    if (country.getMinistryOfTransportation().getFreeBuilders() >= MinistryOfTransportation.getDepartmentBuildersNeed() * count) {
+                        Toast.makeText(MinistryActivity.this, "We'll build " + count + " monuments", Toast.LENGTH_SHORT).show();
+                        country.getMinistryOfTransportation().buildDepartment(count);
+                    } else {
+                        Toast.makeText(MinistryActivity.this, "That is too much building", Toast.LENGTH_SHORT).show();
                     }
-                    if (showSecondMessage)
-                        Toast.makeText(MinistryActivity.this, "We'll build " + Integer.parseInt(String.valueOf(wantToBuildDepartmentsEdit.getText())) + " departments", Toast.LENGTH_SHORT).show();
                 }
-
             });
 
             TextView securityText = new TextView(this);
@@ -852,19 +995,14 @@ public class MinistryActivity extends AppCompatActivity implements View.OnClickL
                 if (TextUtils.isEmpty(wantToBuildPrionsEdit.getText())) {
                     Toast.makeText(MinistryActivity.this, "You need to enter something", Toast.LENGTH_SHORT).show();
                 } else {
-                    boolean showSecondMessage = true;
-                    for (int i = 0; i < Integer.parseInt(String.valueOf(wantToBuildPrionsEdit.getText())); i++) {
-                        if (country.getMinistryOfTransportation().getFreeBuilders() < 2500) {
-                            Toast.makeText(MinistryActivity.this, "We'll build only " + i + " prisons", Toast.LENGTH_SHORT).show();
-                            showSecondMessage = false;
-                            break;
-                        }
-                        country.getMinistryOfTransportation().buildPrison();
+                    int count  = Integer.parseInt(String.valueOf(wantToBuildPrionsEdit.getText()));
+                    if (country.getMinistryOfTransportation().getFreeBuilders() >= MinistryOfTransportation.getPrisonsBuildersNeed() * count) {
+                        Toast.makeText(MinistryActivity.this, "We'll build " + count + " prisons", Toast.LENGTH_SHORT).show();
+                        country.getMinistryOfTransportation().buildPrison(count);
+                    } else {
+                        Toast.makeText(MinistryActivity.this, "That is too much building", Toast.LENGTH_SHORT).show();
                     }
-                    if (showSecondMessage)
-                        Toast.makeText(MinistryActivity.this, "We'll build " + Integer.parseInt(String.valueOf(wantToBuildPrionsEdit.getText())) + " prisons", Toast.LENGTH_SHORT).show();
                 }
-
             });
 
             CheckBox deathPenalty = new CheckBox(this);
@@ -910,6 +1048,8 @@ public class MinistryActivity extends AppCompatActivity implements View.OnClickL
             buttonLayout.addView(libertyButton);
         } else if (MainGameMenuActivity.selectedMinistry == 11) {
             ministry = country.getParliament();
+
+            // TODO: Parliament
         } else if (MainGameMenuActivity.selectedMinistry == 12) {
             ministry = country.getNationalIntelligence();
 

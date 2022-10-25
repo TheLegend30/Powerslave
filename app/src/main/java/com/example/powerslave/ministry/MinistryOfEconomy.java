@@ -44,6 +44,9 @@ public class MinistryOfEconomy extends Ministry {
 
     private float developmentIndex;
 
+    // TODO : Rework this ministry
+    // TODO : Budget is parameter which updates every month
+
     public MinistryOfEconomy(int countryKey, Minister minister, Context context, Country country) {
         super(countryKey, minister, context, country);
         this.name = "Ministry of Economy and Finances";
